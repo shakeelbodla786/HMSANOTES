@@ -1,1 +1,325 @@
 
+
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMSA Learning Academy - Grade 3 Tests</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;padding:15px;background:#eef2f7;
+ font-family:"Jameel Noori Nastaleeq","Noto Nastaliq Urdu",Tahoma,Arial,sans-serif;
+ color:#172b4d
+}
+.container{
+ max-width:700px;margin:20px auto;background:white;
+ border-radius:16px;overflow:hidden;
+ box-shadow:0 5px 20px rgba(0,0,0,.12)
+}
+.header{
+ background:#102b50;color:white;text-align:center;
+ padding:25px 15px;border-bottom:5px solid #d5a52a
+}
+.header h1{margin:0 0 8px;font-size:27px}
+.header p{margin:5px 0;color:#f5d77b}
+.content{padding:22px}
+h2{text-align:center;color:#102b50}
+.subject-btn,.option-btn,.main-btn{
+ width:100%;padding:13px;margin:8px 0;border:none;
+ border-radius:9px;font-size:19px;font-family:inherit;cursor:pointer
+}
+.subject-btn{
+ background:#e9f0fa;color:#102b50;border:1px solid #c7d6e9
+}
+.option-btn{
+ background:#f2f5f9;color:#172b4d;
+ border:1px solid #d5deea;text-align:right
+}
+.option-btn:disabled{cursor:default;opacity:1}
+.option-btn.correct{background:#d8f3df;border:2px solid #16833b;color:#12652f}
+.option-btn.wrong{background:#ffe0e0;border:2px solid #d52b2b;color:#a51e1e}
+.main-btn{background:#087c59;color:white;margin-top:15px}
+.info{
+ display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+ background:#edf3fa;padding:12px;border-radius:8px;
+ font-size:17px;margin-bottom:18px
+}
+.question{font-size:22px;line-height:1.8;margin:15px 0;font-weight:bold}
+.feedback{padding:12px;border-radius:8px;margin-top:12px;font-size:18px;display:none}
+.good{display:block;background:#d8f3df;color:#12652f}
+.bad{display:block;background:#ffe0e0;color:#a51e1e}
+#quizScreen,#resultScreen{display:none}
+.result{text-align:center;padding:20px}
+.score{font-size:38px;color:#087c59;font-weight:bold}
+.review-item{background:#f3f6fa;padding:12px;margin:10px 0;border-radius:8px;line-height:1.8}
+.footer{text-align:center;background:#102b50;color:white;padding:14px;font-size:15px}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="header">
+<h1>HMSA Learning Academy</h1>
+<p>جماعت سوم — آن لائن ٹیسٹ</p>
+<p>اردو | ریاضی | انگریزی</p>
+</div>
+
+<div class="content" id="homeScreen">
+<h2>اپنا مضمون منتخب کریں</h2>
+<button class="subject-btn" onclick="startQuiz('urdu')">اردو قواعد و انشاء</button>
+<button class="subject-btn" onclick="startQuiz('math')">بنیادی ریاضی</button>
+<button class="subject-btn" onclick="startQuiz('english')">English Grammar</button>
+<p style="text-align:center;color:#666">ہر ٹیسٹ میں 10 سوالات ہیں اور وقت 5 منٹ ہے۔</p>
+</div>
+
+<div class="content" id="quizScreen">
+<div class="info">
+<span id="subjectName"></span>
+<span>سوال: <b id="questionNumber"></b></span>
+<span>وقت: <b id="timer">05:00</b></span>
+</div>
+<div class="question" id="questionText"></div>
+<div id="options"></div>
+<div id="feedback" class="feedback"></div>
+<button class="main-btn" id="nextBtn" onclick="nextQuestion()" style="display:none">اگلا سوال</button>
+</div>
+
+<div class="content" id="resultScreen">
+<div class="result">
+<h2>ٹیسٹ مکمل ہوگیا!</h2>
+<p>آپ کے حاصل کردہ نمبر:</p>
+<div class="score" id="finalScore"></div>
+<p id="resultMessage"></p>
+</div>
+<h3>جوابات کا جائزہ</h3>
+<div id="review"></div>
+<button class="main-btn" onclick="restartQuiz()">دوبارہ ٹیسٹ دیں</button>
+<button class="subject-btn" onclick="goHome()">مضامین کی فہرست پر واپس جائیں</button>
+</div>
+
+<div class="footer">
+HMSA Learning Academy
+<br>علم حاصل کرنا ہر بچے کا حق ہے
+</div>
+</div>
+
+<script>
+const quizData = {
+urdu:{
+name:"اردو قواعد و انشاء",
+questions:[
+{q:"اردو حروفِ تہجی میں 'ب' کے بعد کون سا حرف آتا ہے؟",options:["پ","ت","ٹ","ث"],answer:0,explain:"ب کے بعد پ آتا ہے۔"},
+{q:"الفاظ مل کر کیا بناتے ہیں؟",options:["حروف","جملہ","آواز","نقطہ"],answer:1,explain:"الفاظ مل کر جملہ بناتے ہیں۔"},
+{q:"کسی شخص، جگہ یا چیز کے نام کو کیا کہتے ہیں؟",options:["فعل","صفت","اسم","ضمیر"],answer:2,explain:"نام کو اسم کہتے ہیں۔"},
+{q:"اسم کی جگہ استعمال ہونے والے لفظ کو کیا کہتے ہیں؟",options:["ضمیر","فعل","صفت","حرف"],answer:0,explain:"اسم کی جگہ استعمال ہونے والا لفظ ضمیر ہے۔"},
+{q:"ان میں سے فعل کون سا ہے؟",options:["کتاب","خوبصورت","دوڑنا","بچہ"],answer:2,explain:"دوڑنا ایک کام ہے، اس لیے یہ فعل ہے۔"},
+{q:"لفظ 'خوبصورت' کیا ہے؟",options:["اسم","صفت","فعل","ضمیر"],answer:1,explain:"خوبصورت کسی چیز کی خوبی بتاتا ہے۔"},
+{q:"لفظ 'کتاب' کی جمع کیا ہے؟",options:["کتابوں","کتابیں","کتابی","کتابا"],answer:1,explain:"کتاب کی جمع کتابیں ہے۔"},
+{q:"لفظ 'لڑکا' کا مؤنث کیا ہے؟",options:["بچہ","لڑکی","آدمی","بھائی"],answer:1,explain:"لڑکا کا مؤنث لڑکی ہے۔"},
+{q:"لفظ 'استاد' کا مؤنث کیا ہے؟",options:["طالب علم","استادنی","استانی","معلم"],answer:2,explain:"استاد کا مؤنث استانی ہے۔"},
+{q:"جملے 'علی اسکول جاتا ہے' میں فعل کون سا ہے؟",options:["علی","اسکول","جاتا ہے","کوئی نہیں"],answer:2,explain:"جاتا ہے کام کو ظاہر کرتا ہے۔"}
+]},
+math:{
+name:"بنیادی ریاضی",
+questions:[
+{q:"25 + 15 کتنے ہوتے ہیں؟",options:["30","35","40","45"],answer:2,explain:"25 جمع 15 برابر 40 ہے۔"},
+{q:"80 - 35 کتنے ہوتے ہیں؟",options:["35","40","45","55"],answer:2,explain:"80 میں سے 35 نکالیں تو 45 بچتے ہیں۔"},
+{q:"7 × 6 کا جواب کیا ہے؟",options:["36","40","42","48"],answer:2,explain:"7 ضرب 6 برابر 42 ہے۔"},
+{q:"48 ÷ 6 کتنے ہوتے ہیں؟",options:["6","7","8","9"],answer:2,explain:"48 کو 6 پر تقسیم کریں تو 8 آتا ہے۔"},
+{q:"100 روپے میں سے 35 روپے خرچ کیے۔ کتنے روپے باقی بچے؟",options:["55","60","65","75"],answer:2,explain:"100 میں سے 35 نکالنے پر 65 روپے باقی ہیں۔"},
+{q:"ایک ٹوکری میں 25 اور دوسری میں 18 سیب ہیں۔ کل کتنے سیب ہیں؟",options:["33","40","43","45"],answer:2,explain:"25 جمع 18 برابر 43 ہے۔"},
+{q:"روزانہ 5 صفحات پڑھنے سے 6 دن میں کتنے صفحات ہوں گے؟",options:["25","30","35","40"],answer:1,explain:"5 ضرب 6 برابر 30 صفحات ہیں۔"},
+{q:"60 پنسلوں میں سے 24 دے دیں تو کتنی باقی ہیں؟",options:["24","30","36","40"],answer:2,explain:"60 میں سے 24 نکالیں تو 36 باقی ہیں۔"},
+{q:"ایک درجن میں کتنی چیزیں ہوتی ہیں؟",options:["10","11","12","15"],answer:2,explain:"ایک درجن میں 12 چیزیں ہوتی ہیں۔"},
+{q:"آدھے کو کسر میں کیسے لکھتے ہیں؟",options:["1/3","1/2","1/4","2/3"],answer:1,explain:"آدھے کو 1/2 لکھتے ہیں۔"}
+]},
+english:{
+name:"English Grammar",
+questions:[
+{q:"How many letters are there in the English alphabet?",options:["24","25","26","27"],answer:2,explain:"There are 26 letters in the English alphabet."},
+{q:"Which one is a vowel?",options:["B","E","T","M"],answer:1,explain:"E is a vowel."},
+{q:"Which one is a word?",options:["Cat","C","T","A"],answer:0,explain:"Cat is a word."},
+{q:"Which one is a noun?",options:["Run","Beautiful","School","Quickly"],answer:2,explain:"School is the name of a place, so it is a noun."},
+{q:"Ali is a boy. ___ is happy.",options:["She","He","It","They"],answer:1,explain:"He is used for a boy."},
+{q:"Which one is a verb?",options:["Book","Play","Red","Table"],answer:1,explain:"Play is an action word."},
+{q:"What is the plural of Book?",options:["Bookes","Bookies","Books","Book"],answer:2,explain:"The plural of Book is Books."},
+{q:"What is the opposite of Big?",options:["Tall","Small","Long","Good"],answer:1,explain:"The opposite of Big is Small."},
+{q:"The cat is ___ the table.",options:["On","At","By","To"],answer:0,explain:"On is the correct preposition here."},
+{q:"Choose the correct article: ___ apple.",options:["A","An","The","No article"],answer:1,explain:"We use An before a vowel sound."}
+]}
+};
+
+let currentSubject="";
+let currentIndex=0;
+let score=0;
+let timeLeft=300;
+let timerInterval;
+let userAnswers=[];
+let answered=false;
+
+function startQuiz(subject){
+currentSubject=subject;
+currentIndex=0;
+score=0;
+timeLeft=300;
+userAnswers=[];
+answered=false;
+
+document.getElementById("homeScreen").style.display="none";
+document.getElementById("resultScreen").style.display="none";
+document.getElementById("quizScreen").style.display="block";
+document.getElementById("subjectName").textContent=quizData[subject].name;
+
+startTimer();
+loadQuestion();
+}
+
+function startTimer(){
+clearInterval(timerInterval);
+updateTimer();
+
+timerInterval=setInterval(function(){
+timeLeft--;
+updateTimer();
+
+if(timeLeft<=0){
+clearInterval(timerInterval);
+showScore();
+}
+},1000);
+}
+
+function updateTimer(){
+let minutes=Math.floor(timeLeft/60);
+let seconds=timeLeft%60;
+document.getElementById("timer").textContent=
+String(minutes).padStart(2,"0")+":"+String(seconds).padStart(2,"0");
+}
+
+function loadQuestion(){
+answered=false;
+const question=quizData[currentSubject].questions[currentIndex];
+
+document.getElementById("questionNumber").textContent=(currentIndex+1)+" / 10";
+document.getElementById("questionText").textContent=question.q;
+document.getElementById("feedback").className="feedback";
+document.getElementById("feedback").textContent="";
+document.getElementById("nextBtn").style.display="none";
+
+const optionsDiv=document.getElementById("options");
+optionsDiv.innerHTML="";
+
+question.options.forEach(function(option,index){
+const button=document.createElement("button");
+button.className="option-btn";
+button.textContent=option;
+button.onclick=function(){checkAnswer(index);};
+optionsDiv.appendChild(button);
+});
+}
+
+function checkAnswer(selected){
+if(answered)return;
+answered=true;
+
+const question=quizData[currentSubject].questions[currentIndex];
+const buttons=document.querySelectorAll(".option-btn");
+
+buttons.forEach(function(button,index){
+button.disabled=true;
+if(index===question.answer)button.classList.add("correct");
+if(index===selected && selected!==question.answer)button.classList.add("wrong");
+});
+
+const feedback=document.getElementById("feedback");
+
+if(selected===question.answer){
+score++;
+feedback.textContent="درست جواب! "+question.explain;
+feedback.className="feedback good";
+}else{
+feedback.textContent="غلط جواب۔ درست جواب: "+question.options[question.answer]+"۔ "+question.explain;
+feedback.className="feedback bad";
+}
+
+userAnswers.push({
+question:question.q,
+selected:question.options[selected],
+correct:question.options[question.answer],
+isCorrect:selected===question.answer
+});
+
+document.getElementById("nextBtn").style.display="block";
+document.getElementById("nextBtn").textContent=
+currentIndex===9?"نتیجہ دیکھیں":"اگلا سوال";
+}
+
+function nextQuestion(){
+if(!answered)return;
+currentIndex++;
+if(currentIndex>=10)showScore();
+else loadQuestion();
+}
+
+function showScore(){
+clearInterval(timerInterval);
+document.getElementById("quizScreen").style.display="none";
+document.getElementById("resultScreen").style.display="block";
+
+document.getElementById("finalScore").textContent=score+" / 10";
+
+let message="";
+if(score>=9)message="ماشاءاللہ! بہترین کارکردگی۔";
+else if(score>=7)message="بہت اچھے! مزید محنت جاری رکھیں۔";
+else if(score>=5)message="اچھی کوشش! مزید مشق کریں۔";
+else message="دوبارہ کوشش کریں، آپ بہتر کر سکتے ہیں۔";
+
+document.getElementById("resultMessage").textContent=message;
+
+const review=document.getElementById("review");
+review.innerHTML="";
+
+userAnswers.forEach(function(item,index){
+const div=document.createElement("div");
+div.className="review-item";
+
+const title=document.createElement("b");
+title.textContent="سوال "+(index+1)+": "+item.question;
+
+const yourAnswer=document.createElement("div");
+yourAnswer.textContent="آپ کا جواب: "+item.selected;
+
+const correctAnswer=document.createElement("div");
+correctAnswer.textContent="درست جواب: "+item.correct;
+
+const status=document.createElement("div");
+status.textContent=item.isCorrect?"درست جواب":"غلط جواب";
+
+div.append(title,yourAnswer,correctAnswer,status);
+review.appendChild(div);
+});
+
+if(timeLeft<=0){
+const note=document.createElement("p");
+note.textContent="وقت ختم ہونے پر ٹیسٹ مکمل کر دیا گیا۔";
+review.prepend(note);
+}
+}
+
+function restartQuiz(){
+startQuiz(currentSubject);
+}
+
+function goHome(){
+clearInterval(timerInterval);
+document.getElementById("resultScreen").style.display="none";
+document.getElementById("quizScreen").style.display="none";
+document.getElementById("homeScreen").style.display="block";
+}
+</script>
+</body>
+</html>
