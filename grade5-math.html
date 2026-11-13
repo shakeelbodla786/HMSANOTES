@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 5 Mathematics Online Test | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-right:4px solid var(--green);text-align:right;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:right;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.next-btn{display:none;background:var(--navy);color:white;border:none;padding:10px 20px;font-size:16px;border-radius:8px;cursor:pointer;margin:10px auto;}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت پنجم — ریاضی آن لائن ٹیسٹ</h2>
+    <p class="subtitle">Grade 5 Mathematics (Bilingual) — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">سوال 1 از 20</span>
+        </div>
+        <div id="question-text" class="question">سوال یہاں ظاہر ہوگا</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+        <button id="next-btn" class="next-btn" onclick="nextQuestion()">اگلا سوال ➔</button>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>ریاضی کا ٹیسٹ مکمل ہو گیا!</h3>
+        <p style="font-size: 18px; margin: 15px 0;">آپ نے جماعت پنجم کا ریاضی کا ٹیسٹ کامیابی سے مکمل کر لیا ہے۔</p>
+        <button class="restart-btn" onclick="startTest()">دوبارہ ٹیسٹ شروع کریں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const grade5MathData = [
+    // Unit 1: Whole Numbers and Operations
+    { q: "1. How many zeros are there in 1 Million?<br>ایک ملین (1 Million) میں کتنے صفر ہوتے ہیں؟", options: ["الف) 5", "ب) 6", "ج) 7", "د) 8"], answer: 1 },
+    { q: "2. Multiply 450 by 100:<br>450 کو 100 سے ضرب دیں:", options: ["الف) 4,500", "ب) 45,000", "ج) 450,000", "د) 45"], answer: 1 },
+
+    // Unit 2: HCF and LCM
+    { q: "3. What is the HCF of 12 and 18?<br>12 اور 18 کا عادِ اعظم (HCF) کیا ہے؟", options: ["الف) 3", "ب) 6", "ج) 9", "د) 12"], answer: 1 },
+    { q: "4. What is the LCM of 4 and 6?<br>4 اور 6 کا ذواضعافِ اقل (LCM) کیا ہے؟", options: ["الف) 12", "ب) 18", "ج) 24", "د) 2"], answer: 0 },
+
+    // Unit 3: Fractions
+    { q: "5. Multiply the fractions: 1/2 × 1/3 = ?<br>کسروں کو ضرب دیں: 1/2 × 1/3 = ؟", options: ["الف) 1/5", "ب) 1/6", "ج) 2/5", "د) 2/3"], answer: 1 },
+    { q: "6. What is the reciprocal of 3/5?<br>کسر 3/5 کا معکوس (Reciprocal) کیا ہے؟", options: ["الف) 5/3", "ب) 3/5", "ج) 1/3", "د) 1/5"], answer: 0 },
+
+    // Unit 4: Decimals and Percentage
+    { q: "7. Convert 25% into a fraction in simplest form:<br>25% کو سادہ ترین کسر میں تبدیل کریں:", options: ["الف) 1/2", "ب) 1/4", "ج) 1/5", "د) 3/4"], answer: 1 },
+    { q: "8. Write 3/4 as a percentage:<br>کسر 3/4 کو فیصد (Percentage) میں لکھیں:", options: ["الف) 25%", "ب) 50%", "ج) 75%", "د) 80%"], answer: 2 },
+    { q: "9. Multiply decimal: 1.5 × 10 = ?<br>عشاریہ کو ضرب دیں: 1.5 × 10 = ؟", options: ["الف) 0.15", "ب) 15", "ج) 150", "د) 1.50"], answer: 1 },
+
+    // Unit 5: Distance and Time
+    { q: "10. How many metres are there in 2.5 kilometres?<br>2.5 کلومیٹر میں کتنے میٹر ہوتے ہیں؟", options: ["الف) 250 میٹر", "ب) 2,500 میٹر", "ج) 25,000 میٹر", "د) 25 میٹر"], answer: 1 },
+    { q: "11. How many seconds are there in 5 minutes?<br>5 منٹ میں کتنے سیکنڈ ہوتے ہیں؟", options: ["الف) 150 سیکنڈ", "ب) 300 سیکنڈ", "ج) 250 سیکنڈ", "د) 500 سیکنڈ"], answer: 1 },
+
+    // Unit 6: Unitary Method
+    { q: "12. If 1 pen costs Rs. 20, what is the cost of 6 pens?<br>اگر 1 قلم کی قیمت 20 روپے ہو تو 6 قلموں کی قیمت کیا ہوگی؟", options: ["الف) 100 روپے", "ب) 120 روپے", "ج) 140 روپے", "د) 80 روپے"], answer: 1 },
+    { q: "13. If 5 notebooks cost Rs. 250, what is the cost of 1 notebook?<br>اگر 5 کاپیوں کی قیمت 250 روپے ہو تو 1 کاپی کی قیمت کیا ہوگی؟", options: ["الف) 40 روپے", "ب) 50 روپے", "ج) 60 روپے", "د) 25 روپے"], answer: 1 },
+
+    // Unit 7: Geometry
+    { q: "14. What is the sum of all angles in a triangle?<br>ایک مثلث کے تینوں زاویوں کا مجموعہ کتنا ہوتا ہے؟", options: ["الف) 90 ڈگری", "ب) 180 ڈگری", "ج) 270 ڈگری", "د) 360 ڈگری"], answer: 1 },
+    { q: "15. An angle greater than 90° and less than 180° is called:<br>90 ڈگری سے بڑا اور 180 ڈگری سے چھوٹا زاویہ کیا کہلاتا ہے؟", options: ["الف) حادہ زاویہ (Acute)", "ب) قائمہ زاویہ (Right)", "ج) منفرجہ زاویہ (Obtuse)", "د) مستقیم زاویہ"], answer: 2 },
+    { q: "16. A triangle with all three sides equal is called:<br>ایسی مثلث جس کے تینوں اضلاع برابر ہوں، کہلاتی ہے:", options: ["الف) متساوی الاضلاع (Equilateral)", "ب) متساوی الساقین", "ج) مختلف الاضلاع", "د) قائمہ الزاویہ"], answer: 0 },
+
+    // Unit 8: Perimeter and Area
+    { q: "17. Find the perimeter of a square whose one side is 5 cm:<br>ایک مربع کا احاطہ (Perimeter) معلوم کریں جس کا ایک ضلع 5 سینٹی میٹر ہو:", options: ["الف) 10 سینٹی میٹر", "ب) 20 سینٹی میٹر", "ج) 25 سینٹی میٹر", "د) 15 سینٹی میٹر"], answer: 1 },
+    { q: "18. Find the area of a rectangle with length 6 cm and width 4 cm:<br>ایک مستطیل کا رقبہ (Area) معلوم کریں جس کی لمبائی 6 سم اور چوڑائی 4 سم ہو:", options: ["الف) 10 مربع سم", "ب) 20 مربع سم", "ج) 24 مربع سم", "د) 12 مربع سم"], answer: 2 },
+
+    // Unit 9: Data Handling
+    { q: "19. What is the average (mean) of 10, 20, and 30?<br>10، 20 اور 30 کی اوسط (Average) کیا ہے؟", options: ["الف) 15", "ب) 20", "ج) 25", "د) 60"], answer: 1 },
+    { q: "20. A graph that uses rectangular bars to represent data is called:<br>ایسا گراف جس میں معلومات کو مستطیل پٹیوں سے ظاہر کیا جائے، کہلاتا ہے:", options: ["الف) لائن گراف", "ب) بار گراف (Bar Graph)", "ج) پائی چارٹ", "د) نقشہ"], answer: 1 }
+];
+
+let currentQuestionIndex = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = grade5MathData[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `سوال ${currentQuestionIndex + 1} از ${grade5MathData.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+    document.getElementById('next-btn').style.display = 'none';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = grade5MathData[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ درست جواب! (Correct Answer)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ غلط جواب! (Incorrect Answer)</span>';
+    }
+    
+    document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < grade5MathData.length) {
+        loadQuestion();
+    } else {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('score-screen').style.display = 'block';
+    }
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
