@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جماعت پنجم - اردو آن لائن ٹیسٹ | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-right:4px solid var(--green);text-align:right;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:right;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.next-btn{display:none;background:var(--navy);color:white;border:none;padding:10px 20px;font-size:16px;border-radius:8px;cursor:pointer;margin:10px auto;}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت پنجم — اردو آن لائن ٹیسٹ</h2>
+    <p class="subtitle">Grade 5 Urdu Online Quiz — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">سوال 1 از 20</span>
+        </div>
+        <div id="question-text" class="question">سوال یہاں ظاہر ہوگا</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+        <button id="next-btn" class="next-btn" onclick="nextQuestion()">اگلا سوال ➔</button>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>اردو کا ٹیسٹ مکمل ہو گیا!</h3>
+        <p style="font-size: 18px; margin: 15px 0;">آپ نے جماعت پنجم کا اردو ٹیسٹ کامیابی سے مکمل کر لیا ہے۔</p>
+        <button class="restart-btn" onclick="startTest()">دوبارہ ٹیسٹ شروع کریں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const grade5UrduData = [
+    { q: "1. ہم آواز الفاظ جو شعر کے آخر میں آتے ہیں، کیا کہلاتے ہیں؟", options: ["الف) ردیف", "ب) قافیہ", "ج) مطلع", "د) مقطع"], answer: 1 },
+    { q: "2. قافیہ کے بعد بار بار دہرائے جانے والے لفظ یا الفاظ کو کیا کہتے ہیں؟", options: ["الف) ردیف", "ب) تشبیہ", "ج) تخلص", "د) مصرع"], answer: 0 },
+    { q: "3. دو مختلف الفاظ کو ملا کر ایک نیا بامعنی لفظ بنانا کیا کہلاتا ہے؟", options: ["الف) مترادف لفظ", "ب) مرکب لفظ", "ج) متضاد لفظ", "د) واحد لفظ"], answer: 1 },
+    { q: "4. 'کاش! میں بھی امتحان میں اول آتا' یہ جملہ کون سی قسم سے تعلق رکھتا ہے؟", options: ["الف) شرطیہ جملہ", "ب) تمنائی جملہ", "ج) شکیہ جملہ", "د) سوالیہ جملہ"], answer: 1 },
+    { q: "5. 'اگر تم محنت کرو گے تو کامیاب ہو جاؤ گے' یہ جملہ کیا کہلاتا ہے؟", options: ["الف) تمنائی جملہ", "ب) شرطیہ جملہ", "ج) بیانیہ جملہ", "د) حکمیہ جملہ"], answer: 1 },
+    { q: "6. 'شاید آج بارش ہو' یہ جملہ قواعد کی رو سے کیا ہے؟", options: ["الف) شکیہ جملہ", "ب) شرطیہ جملہ", "ج) سوالیہ جملہ", "د) فجائیہ جملہ"], answer: 0 },
+    { q: "7. ایسے الفاظ جو پکارنے کے لیے استعمال ہوں (جیسے: ارے!، او!) کیا کہلاتے ہیں؟", options: ["الف) حروفِ ندا", "ب) حروفِ استعجاب", "ج) حروفِ افسوس", "د) حروفِ جار"], answer: 0 },
+    { q: "8. حیرت اور تعجب کے اظہار کے لیے بولے جانے والے حروف (جیسے: واہ!، سبحان اللہ!) کیا ہیں؟", options: ["الف) حروفِ افسوس", "ب) حروفِ استعجاب", "ج) حروفِ استفہام", "د) حروفِ عطف"], answer: 1 },
+    { q: "9. دکھ اور غم کے اظہار کے لیے بولے جانے والے الفاظ (جیسے: ہائے!، افسوس!) کیا کہلاتے ہیں؟", options: ["الف) حروفِ ندا", "ب) حروفِ افسوس", "ج) حروفِ شرط", "د) حروفِ جار"], answer: 1 },
+    { q: "10. سوال پوچھنے کے لیے استعمال ہونے والے الفاظ (کب، کہاں، کیوں، کیسے) کیا ہیں؟", options: ["الف) حروفِ استفہام", "ب) حروفِ عطف", "ج) حروفِ ندا", "د) حروفِ علت"], answer: 0 },
+    { q: "11. دو اسموں یا جملوں کو آپس میں ملانے والے حروف (جیسے: اور، یا، لیکن) کیا کہلاتے ہیں؟", options: ["الف) حروفِ جار", "ب) حروفِ عطف", "ج) حروفِ ندا", "د) حروفِ تہجی"], answer: 1 },
+    { q: "12. 'لڑکیاں کتابیں پڑھ رہی ہیں' اس جملے میں فعل کی مطابقت کس کے مطابق ہے؟", options: ["الف) واحد مذکر", "ب) جمع مونث", "ج) واحد مونث", "د) جمع مذکر"], answer: 1 },
+    { q: "13. لفظ 'شاعر' کی جمع کیا ہوگی؟", options: ["الف) شاعروں", "ب) شعراء", "ج) اشعار", "د) شاعری"], answer: 1 },
+    { q: "14. لفظ 'حق' کی درست جمع کیا ہے؟", options: ["الف) حقائق", "ب) حقوق", "ج) حقیں", "د) حقدار"], answer: 1 },
+    { q: "15. محاورہ 'آسمان سر پر اٹھانا' کا کیا مطلب ہے؟", options: ["الف) بہت محنت کرنا", "ب) بہت شور مچانا", "ج) بہت خوش ہونا", "د) آسمان کی طرف دیکھنا"], answer: 1 },
+    { q: "16. حضرت عثمان غنی رضی اللہ تعالیٰ عنہ کا لقب کیا تھا؟", options: ["الف) ذوالنورین", "ب) فاروقِ اعظم", "ج) صدیقِ اکبر", "د) اسد اللہ"], answer: 0 },
+    { q: "17. 'میری پہچان ہے تو' نظم میں شاعر نے کس سے محبت کا اظہار کیا ہے؟", options: ["الف) پھولوں سے", "ب) اپنے پیارے وطن پاکستان سے", "ج) دریاؤں سے", "د) ستاروں سے"], answer: 1 },
+    { q: "18. لفظ 'سخاوت' کا متضاد (الٹ) کیا ہے؟", options: ["الف) دریا دلی", "ب) کنجوسی (بخل)", "ج) مہربانی", "د) بہادری"], answer: 1 },
+    { q: "19. وہ اسم جو کسی خاص شخص، جگہ یا چیز کا نام ہو، کیا کہلاتا ہے؟", options: ["الف) اسمِ نکرہ", "ب) اسمِ معرفہ", "ج) اسمِ ضمیر", "د) اسمِ صفت"], answer: 1 },
+    { q: "20. 'قومی ترانہ' کس شاعر نے لکھا ہے؟", options: ["الف) علامہ اقبال", "ب) حفیظ جالندھری", "ج) الطاف حسین حالی", "د) جوش ملیح آبادی"], answer: 1 }
+];
+
+let currentQuestionIndex = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = grade5UrduData[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `سوال ${currentQuestionIndex + 1} از ${grade5UrduData.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+    document.getElementById('next-btn').style.display = 'none';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = grade5UrduData[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ درست جواب! (Correct Answer)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ غلط جواب! (Incorrect Answer)</span>';
+    }
+    
+    document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < grade5UrduData.length) {
+        loadQuestion();
+    } else {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('score-screen').style.display = 'block';
+    }
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
