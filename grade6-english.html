@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 6 English Online Test | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:12px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.next-btn{display:none;background:var(--navy);color:white;border:none;padding:10px 20px;font-size:16px;border-radius:8px;cursor:pointer;margin:10px auto;display:block;}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 6 — English Online Test</h2>
+    <p class="subtitle">HMSA Learning Academy — Elementary Grammar Guide[cite: 22]</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+        <button id="next-btn" class="next-btn" onclick="nextQuestion()" style="display:none;">Next Question ➔</button>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test Completed Successfully!</h3>
+        <p style="font-size: 18px; margin: 15px 0; font-family: Tahoma, sans-serif;" dir="rtl">آپ نے جماعت چھٹی کا انگریزی ٹیسٹ کامیابی سے مکمل کر لیا ہے۔</p>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const grade6QuizData = [
+    { q: "1. How many syllables are present in the word 'Education'[cite: 23]?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 3 },
+    { q: "2. Which of the following is a monosyllabic word[cite: 23]?", options: ["A) Water", "B) Cat", "C) Teacher", "D) Apple"], answer: 1 },
+    { q: "3. Words that have identical pronunciation but different spellings are called[cite: 23]:", options: ["A) Homographs", "B) Homophones", "C) Antonyms", "D) Acronyms"], answer: 1 },
+    { q: "4. What prefix added to 'happy' forms its opposite[cite: 23]?", options: ["A) Dis-", "B) Un-", "C) In-", "D) Mis-"], answer: 1 },
+    { q: "5. Which of the following is a Proper Noun[cite: 24]?", options: ["A) city", "B) country", "C) Lahore", "D) boy"], answer: 2 },
+    { q: "6. Which of the following is an Uncountable Noun[cite: 24]?", options: ["A) Book", "B) Water", "C) Chair", "D) Apple"], answer: 1 },
+    { q: "7. Which of the following is an Abstract Noun[cite: 24]?", options: ["A) Gold", "B) Honesty", "C) Teacher", "D) Flock"], answer: 1 },
+    { q: "8. A group of wolves or dogs is referred to as a[cite: 24]:", options: ["A) Flock", "B) Pack", "C) Herd", "D) Team"], answer: 1 },
+    { q: "9. Plural form of the irregular noun 'Child'[cite: 25]:", options: ["A) Childs", "B) Children", "C) Childrens", "D) Childes"], answer: 1 },
+    { q: "10. Subjective pronoun for singular male[cite: 25]:", options: ["A) She", "B) He", "C) It", "D) They"], answer: 1 },
+    { q: "11. Complete: 'Ali ___ while playing football[cite: 25].'", options: ["A) herself", "B) himself", "C) myself", "D) itself"], answer: 1 },
+    { q: "12. What is the comparative degree of 'Good'[cite: 26]?", options: ["A) Gooder", "B) Better", "C) Best", "D) More good"], answer: 1 },
+    { q: "13. Verb requiring direct object to complete sense ('He kicked the ball')[cite: 27]:", options: ["A) Transitive Verb", "B) Intransitive Verb", "C) Linking Verb", "D) Modal Verb"], answer: 0 },
+    { q: "14. Modal verb expressing physical ability or capacity[cite: 27]:", options: ["A) Can", "B) Must", "C) Should", "D) May"], answer: 0 },
+    { q: "15. 2nd form (Past Simple) of irregular verb 'Write'[cite: 27]:", options: ["A) Writed", "B) Wrote", "C) Written", "D) Writing"], answer: 1 },
+    { q: "16. Adverb answering HOW action is performed ('bravely')[cite: 28]:", options: ["A) Adverb of Manner", "B) Adverb of Time", "C) Adverb of Place", "D) Degree"], answer: 0 },
+    { q: "17. Preposition used for specific days/dates ('Monday')[cite: 29]:", options: ["A) In", "B) On", "C) At", "D) For"], answer: 1 },
+    { q: "18. Sentence containing one single independent clause[cite: 30]:", options: ["A) Simple Sentence", "B) Compound Sentence", "C) Complex", "D) Compound-Complex"], answer: 0 },
+    { q: "19. Complete Simple Present: 'She ___ to school every morning[cite: 31].'", options: ["A) go", "B) goes", "C) going", "D) went"], answer: 1 },
+    { q: "20. What is past simple (V2) of 'Break'[cite: 33]?", options: ["A) Broke", "B) Broken", "C) Breaks", "D) Breaking"], answer: 0 }
+];
+
+let currentQuestionIndex = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = grade6QuizData[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${grade6QuizData.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+    document.getElementById('next-btn').style.display = 'none';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = grade6QuizData[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ درست جواب! (Correct Answer)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ غلط جواب! (Incorrect Answer)</span>';
+    }
+    
+    document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < grade6QuizData.length) {
+        loadQuestion();
+    } else {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('score-screen').style.display = 'block';
+    }
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
