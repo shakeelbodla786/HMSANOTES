@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 7 English Online Test | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:12px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.next-btn{display:none;background:var(--navy);color:white;border:none;padding:10px 20px;font-size:16px;border-radius:8px;cursor:pointer;margin:10px auto;display:block;}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 7 — English Online Test</h2>
+    <p class="subtitle">HMSA Learning Academy — Elementary Grammar Guide[cite: 22]</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+        <button id="next-btn" class="next-btn" onclick="nextQuestion()" style="display:none;">Next Question ➔</button>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test Completed Successfully!</h3>
+        <p style="font-size: 18px; margin: 15px 0; font-family: Tahoma, sans-serif;" dir="rtl">آپ نے جماعت ساتویں کا انگریزی ٹیسٹ کامیابی سے مکمل कर لیا ہے۔</p>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const grade7QuizData = [
+    { q: "1. Two letters coming together to produce a single speech sound ('sh', 'ch')[cite: 23]:", options: ["A) Digraph", "B) Trigraph", "C) Diphthong", "D) Blend"], answer: 0 },
+    { q: "2. Which pair consists of exact homophones[cite: 23]?", options: ["A) Accept/Except", "B) Sun / Son", "C) Lead / Lead", "D) Desert / Dessert"], answer: 1 },
+    { q: "3. Traditional concise saying offering wisdom ('Honesty is the best policy')[cite: 24]:", options: ["A) Idiom", "B) Proverb", "C) Homograph", "D) Clause"], answer: 1 },
+    { q: "4. Pronouns replacing specific persons/things (I, We, You, He, She, It)[cite: 25]:", options: ["A) Personal Pronouns", "B) Reflexive Pronouns", "C) Possessive Pronouns", "D) Demonstrative"], answer: 0 },
+    { q: "5. In 'This book is mine', 'mine' is a[cite: 25]:", options: ["A) Possessive Pronoun", "B) Possessive Adjective", "C) Personal Pronoun", "D) Demonstrative"], answer: 0 },
+    { q: "6. Verb NOT requiring direct object to give complete sense ('Baby sleeps')[cite: 27]:", options: ["A) Transitive Verb", "B) Intransitive Verb", "C) Auxiliary Verb", "D) Modal Verb"], answer: 1 },
+    { q: "7. Modal verb expressing strong obligation or necessity[cite: 27]:", options: ["A) Can", "B) May", "C) Must", "D) Might"], answer: 2 },
+    { q: "8. 3rd form (Past Participle) of 'Go'[cite: 27]:", options: ["A) Went", "B) Gone", "C) Goes", "D) Going"], answer: 1 },
+    { q: "9. Adverb answering WHEN action takes place ('today', 'soon')[cite: 28]:", options: ["A) Adverb of Time", "B) Adverb of Manner", "C) Adverb of Place", "D) Frequency"], answer: 0 },
+    { q: "10. Preposition used for specific exact clock times ('5:00 PM')[cite: 29]:", options: ["A) In", "B) On", "C) At", "D) By"], answer: 2 },
+    { q: "11. Preposition for SPECIFIC starting point in time in Perfect Continuous[cite: 29]:", options: ["A) For", "B) Since", "C) From", "D) In"], answer: 1 },
+    { q: "12. Conjunctions connecting elements of equal rank (FANBOYS)[cite: 29]:", options: ["A) Coordinating Conjunctions", "B) Subordinating", "C) Correlative", "D) Transitional"], answer: 0 },
+    { q: "13. Interjection expressing sudden joy or victory[cite: 30]:", options: ["A) Alas!", "B) Hurrah!", "C) Ouch!", "D) Oh!"], answer: 1 },
+    { q: "14. Sentence made of two independent clauses joined by FANBOYS[cite: 30]:", options: ["A) Simple", "B) Compound Sentence", "C) Complex", "D) Optative"], answer: 1 },
+    { q: "15. Helping verbs for Present Continuous Tense[cite: 31]:", options: ["A) was / were", "B) is/am/are", "C) has/have", "D) will/shall"], answer: 1 },
+    { q: "16. Helping verbs for Present Perfect Tense[cite: 31]:", options: ["A) is/am/are", "B) has/have", "C) was/were", "D) had"], answer: 1 },
+    { q: "17. Helping verb used for negative/interrogative Simple Past sentences[cite: 31]:", options: ["A) do", "B) does", "C) did", "D) had"], answer: 2 },
+    { q: "18. Helping verb for Past Perfect Tense[cite: 32]:", options: ["A) has/have", "B) had", "C) was / were", "D) would have"], answer: 1 },
+    { q: "19. In Passive Voice, main verb MUST ALWAYS be in[cite: 33]:", options: ["A) V1", "B) V2", "C) 3rd form / Past Participle (V3)", "D) V-ing"], answer: 2 },
+    { q: "20. What is an Antonym for the word 'Hot'[cite: 36]?", options: ["A) Cold", "B) Warm", "C) Boiling", "D) Heat"], answer: 0 }
+];
+
+let currentQuestionIndex = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = grade7QuizData[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${grade7QuizData.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+    document.getElementById('next-btn').style.display = 'none';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = grade7QuizData[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ درست جواب! (Correct Answer)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ غلط جواب! (Incorrect Answer)</span>';
+    }
+    
+    document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < grade7QuizData.length) {
+        loadQuestion();
+    } else {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('score-screen').style.display = 'block';
+    }
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
