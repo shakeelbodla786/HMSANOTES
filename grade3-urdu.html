@@ -1,1 +1,165 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جماعت سوم - اردو آن لائن ٹیسٹ | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{color:var(--red);font-size:16px}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-right:4px solid var(--green);text-align:right;}
+.options{display:grid;gap:10px;margin-bottom:20px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:right;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
 
+<div class="container">
+    <h2>جماعت سوم — اردو آن لائن ٹیسٹ</h2>
+    <p class="subtitle">Grade 3 Urdu Online Quiz — HMSA Learning Academy</p>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">سوال 1 از 20</span>
+            <span class="timer" id="timer-display">باقی وقت: 05:00</span>
+        </div>
+        <div id="question-text" class="question">سوال یہاں ظاہر ہوگا</div>
+        <div id="options-box" class="options"></div>
+    </div>
+
+    <!-- Score Screen -->
+    <div id="score-screen" class="score-box">
+        <h3>اردو کا ٹیسٹ مکمل ہو گیا!</h3>
+        <p id="final-score" style="font-size: 20px; font-weight: bold; margin: 15px 0;"></p>
+        <p id="time-taken" style="color: #666; font-size: 14px;"></p>
+        <button class="restart-btn" onclick="restartTest()">دوبارہ ٹیسٹ شروع کریں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const urduQuizData = [
+    { q: "حمد کس نظم کو کہتے ہیں جس میں تعریف بیان کی جائے؟", options: ["اللہ تعالی کی", "حضرت محمد ﷺ کی", "پانی اور پھولوں کی", "وطن کی"], answer: 0 },
+    { q: "نعت میں کس کی تعریف بیان کی جاتی ہے؟", options: ["فرشتوں کی", "انبیاء کرام کی", "حضرت محمد ﷺ کی", "صحابہ کرام کی"], answer: 2 },
+    { q: "لفظ 'کتاب' کی جمع کیا ہوگی؟", options: ["کتب خانوں", "کتابیں", "کتبہ", "کتابچہ"], answer: 1 },
+    { q: "ذیل میں سے کون سا اسم نکرہ (عام اسم) ہے؟", options: ["قائد اعظم", "لاہور", "دریائے سندھ", "پہاڑ"], answer: 3 },
+    { q: "اچھا لڑکا اس فقرے میں 'اچھا' کیا کہلاتا ہے؟", options: ["فعل", "صفت", "فاعل", "مفعول"], answer: 1 },
+    { q: "لفظ 'صاف' کا متضاد (الٹ) کیا ہے؟", options: ["گندا", "نیا", "سفید", "اچھا"], answer: 0 },
+    { q: "سورج کس سمت سے نکلتا ہے؟", options: ["مغرب", "مشرق", "شمال", "جنوب"], answer: 1 },
+    { q: "ایک ہفتے میں کل کتنے دن ہوتے ہیں؟", options: ["پانچ", "چھ", "سات", "آٹھ"], answer: 2 },
+    { q: "لفظ 'رات' کا متضاد کیا ہے؟", options: ["صبح", "دن", "شام", "دوپہر"], answer: 1 },
+    { q: "قائد اعظم رحمتہ اللہ علیہ کا مزار کہاں واقع ہے؟", options: ["لاہور", "اسلام آباد", "کراچی", "پشاور"], answer: 2 },
+    { q: "ہمیں ہمیشہ کون سا بولنا چاہیے؟", options: ["جھوٹ", "سچ", "اونچی آواز", "غلط بات"], answer: 1 },
+    { q: "پودے لگانے سے ماحول پر کیا اثر پڑता ہے؟", options: ["آلودگی بڑھتی ہے", "ہوا صاف ہوتی ہے", "اندھیرا ہوتا ہے", "کچھ نہیں ہوتا"], answer: 1 },
+    { q: "جس فقرے کے آخر میں سوالیہ نشان (?) ہو، اسے کیا کہتے ہیں؟", options: ["بیانیہ فقرہ", "سوالیہ فقرہ", "حکمی فقرہ", "فجائیہ فقرہ"], answer: 1 },
+    { q: "لفظ 'محنت' کا مترادف (مفہوم) کیا ہے؟", options: ["سستی", "کوشش و مشقت", "آرام", "سونا"], answer: 1 },
+    { q: "ہمیں اپنے بڑوں کا کیا کرنا چاہیے؟", options: ["ادب و احترام", "نظر انداز", "شور شرابا", "غصہ"], answer: 0 },
+    { q: "پاکستان کا قومی پرچم کن رنگوں پر مشتمل ہے؟", options: ["سرح اور پیلا", "سبز اور سفید", "نیلا اور پیلا", "کالا اور سفید"], answer: 1 },
+    { q: "درخت ہمیں کیا عطا کرتے ہیں؟", options: ["دھواں", "آکسیجن اور چھاؤں", "پتھر", "پلاسٹک"], answer: 1 },
+    { q: "لفظ 'سکول' کا اردو میں کیا مفہوم ہے؟", options: ["مدرسہ / مکتب", "ہسپتال", "بازار", "باغ"], answer: 0 },
+    { q: "صفائی کس کا حصہ ہے؟", options: ["بیماری کا", "نصف ایمان کا", "تھکاوٹ کا", "سستی کا"], answer: 1 },
+    { q: "صبح کی سیر کس کے لیے اچھی ہوتی ہے؟",options: ["صحت کے لیے", "سونے کے لیے", "شور کے لیے", "بیماری کے لیے"], answer: 0 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+let timer;
+let timeLeft = 300; // 5 minutes
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    timeLeft = 300;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    startTimer();
+    loadQuestion();
+}
+
+function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            showScore();
+        } else {
+            timeLeft--;
+            let mins = Math.floor(timeLeft / 60);
+            let secs = timeLeft % 60;
+            document.getElementById('timer-display').innerText = `باقی وقت: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
+}
+
+function loadQuestion() {
+    const qData = urduQuizData[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = (currentQuestionIndex + 1) + ". " + qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = opt;
+        btn.onclick = () => checkAnswer(index);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `سوال ${currentQuestionIndex + 1} از ${urduQuizData.length}`;
+}
+
+function checkAnswer(selectedIndex) {
+    const qData = urduQuizData[currentQuestionIndex];
+    if (selectedIndex === qData.answer) {
+        score++;
+    }
+    
+    currentQuestionIndex++;
+    if (currentQuestionIndex < urduQuizData.length) {
+        loadQuestion();
+    } else {
+        clearInterval(timer);
+        showScore();
+    }
+}
+
+function showScore() {
+    clearInterval(timer);
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = urduQuizData.length;
+    const percentage = Math.round((score / total) * 100);
+    document.getElementById('final-score').innerText = `آپ کا اسکور: ${score} / ${total} (${percentage}%)`;
+    
+    let timeSpent = 300 - timeLeft;
+    let spentMins = Math.floor(timeSpent / 60);
+    let spentSecs = timeSpent % 60;
+    document.getElementById('time-taken').innerText = `لیا گیا وقت: ${spentMins} منٹ اور ${spentSecs} سیکنڈ`;
+}
+
+function restartTest() {
+    startTest();
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
