@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 3 English Online Test | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-box{}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{color:var(--red);font-size:16px}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:12px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:20px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 3 - English Online Test</h2>
+    <p class="subtitle">HMSA Learning Academy — Free Education & Testing Portal</p>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer-display">Time Left: 05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+    </div>
+
+    <!-- Score Screen -->
+    <div id="score-screen" class="score-box">
+        <h3>Test Completed Successfully!</h3>
+        <p id="final-score" style="font-size: 20px; font-weight: bold; margin: 15px 0;"></p>
+        <p id="time-taken" style="color: #666; font-size: 14px;"></p>
+        <button class="restart-btn" onclick="restartTest()">Restart Test / دوبارہ شروع کریں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const englishQuizData = [
+    { q: "Which of the following is a Noun?", options: ["Run", "Book", "Quickly", "Happy"], answer: 1 },
+    { q: "Choose the correct Pronoun: 'Ali is a boy. ___ likes to play cricket.'", options: ["She", "He", "It", "They"], answer: 1 },
+    { q: "What is the plural of 'Apple'?", options: ["Apples", "Appple", "Applees", "Appls"], answer: 0 },
+    { q: "Identify the Adjective in the sentence: 'The red rose is beautiful.'", options: ["Rose", "Red", "Is", "The"], answer: 1 },
+    { q: "Choose the correct spelling:", options: ["Elephant", "Elefant", "Elifant", "Elifent"], answer: 0 },
+    { q: "What is the past tense of the verb 'Eat'?", options: ["Eaten", "Eating", "Ate", "Eats"], answer: 2 },
+    { q: "Fill in the blank with a, an, or the: 'This is ___ umbrella.'", options: ["a", "an", "the", "none"], answer: 1 },
+    { q: "Which word rhymes with 'Cat'?", options: ["Dog", "Hat", "Cup", "Pen"], answer: 1 },
+    { q: "What is the feminine gender of 'Boy'?", options: ["Man", "Girl", "Mother", "Sister"], answer: 1 },
+    { q: "Which letter is a Vowel?", options: ["B", "M", "E", "T"], answer: 2 },
+    { q: "Choose the correct Position word (Preposition): 'The cat is ___ the table.'", options: ["on", "under", "in", "all of these"], answer: 3 },
+    { q: "What is the plural of 'Bus'?", options: ["Buses", "Buss", "Bux", "Busies"], answer: 0 },
+    { q: "Identify the Action word (Verb) in: 'Sara is writing a letter.'", options: ["Sara", "Writing", "Letter", "Is"], answer: 1 },
+    { q: "Which punctuation mark is used at the end of a question?", options: ["Full stop (.)", "Question mark (?)", "Comma (,)", "Exclamation (!)"], answer: 1 },
+    { q: "Choose the correct spelling of the number 10:", options: ["Ten", "Tene", "Tain", "Tin"], answer: 0 },
+    { q: "Complete the sentence: 'He ___ to school every day.'", options: ["go", "goes", "gone", "going"], answer: 1 },
+    { q: "Which one is a fruit name?", options: ["Carrot", "Banana", "Potato", "Onion"], answer: 1 },
+    { q: "What is the opposite (antonym) of 'Hot'?", options: ["Cold", "Warm", "Big", "Fast"], answer: 0 },
+    { q: "Choose the correct pronoun for plural: '___ are playing football.'", options: ["He", "She", "They", "It"], answer: 2 },
+    { q: "Select the correct article: 'Sun rises in ___ east.'", options: ["a", "an", "the", "none"], answer: 2 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+let timer;
+let timeLeft = 300; // 5 minutes
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    timeLeft = 300;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    startTimer();
+    loadQuestion();
+}
+
+function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            showScore();
+        } else {
+            timeLeft--;
+            let mins = Math.floor(timeLeft / 60);
+            let secs = timeLeft % 60;
+            document.getElementById('timer-display').innerText = `Time Left: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
+}
+
+function loadQuestion() {
+    const qData = englishQuizData[currentQuestionIndex];
+    document.getElementById('question-text').innerText = (currentQuestionIndex + 1) + ". " + qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${englishQuizData.length}`;
+}
+
+function checkAnswer(selectedIndex) {
+    const qData = englishQuizData[currentQuestionIndex];
+    if (selectedIndex === qData.answer) {
+        score++;
+    }
+    
+    currentQuestionIndex++;
+    if (currentQuestionIndex < englishQuizData.length) {
+        loadQuestion();
+    } else {
+        clearInterval(timer);
+        showScore();
+    }
+}
+
+function showScore() {
+    clearInterval(timer);
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = englishQuizData.length;
+    const percentage = Math.round((score / total) * 100);
+    document.getElementById('final-score').innerText = `Your Score: ${score} / ${total} (${percentage}%)`;
+    
+    let timeSpent = 300 - timeLeft;
+    let spentMins = Math.floor(timeSpent / 60);
+    let spentSecs = timeSpent % 60;
+    document.getElementById('time-taken').innerText = `Time Taken: ${spentMins} minutes and ${spentSecs} seconds`;
+}
+
+function restartTest() {
+    startTest();
+}
+
+// Auto start when page loads
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
