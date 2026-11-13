@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 3 Mathematics Online Test | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{color:var(--red);font-size:16px}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-right:4px solid var(--green);text-align:right;}
+.options{display:grid;gap:10px;margin-bottom:20px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:right;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت سوم — ریاضی آن لائن ٹیسٹ</h2>
+    <p class="subtitle">Grade 3 Mathematics (Bilingual Test) — HMSA Learning Academy</p>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">سوال 1 از 20</span>
+            <span class="timer" id="timer-display">باقی وقت: 05:00</span>
+        </div>
+        <div id="question-text" class="question">سوال یہاں ظاہر ہوگا</div>
+        <div id="options-box" class="options"></div>
+    </div>
+
+    <!-- Score Screen -->
+    <div id="score-screen" class="score-box">
+        <h3>ریاضی کا ٹیسٹ مکمل ہو گیا!</h3>
+        <p id="final-score" style="font-size: 20px; font-weight: bold; margin: 15px 0;"></p>
+        <p id="time-taken" style="color: #666; font-size: 14px;"></p>
+        <button class="restart-btn" onclick="restartTest()">دوبارہ ٹیسٹ شروع کریں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const mathQuizData = [
+    { 
+        q: "What is the place value of digit 5 in the number 5,432?<br>عدد 5,432 میں ہندسے 5 کی مقامی قیمت (Place Value) کیا ہے؟", 
+        options: ["50 / پچاس", "500 / پانچ سو", "5,000 / پانچ ہزار", "5 / پانچ"], 
+        answer: 2 
+    },
+    { 
+        q: "Which of the following is an even number?<br>ذیل میں سے کون سا جفت عدد (Even Number) ہے؟", 
+        options: ["13 / تیرہ", "17 / سترہ", "24 / চব্বিশ (چوبیس)", "21 / اکیس"], 
+        answer: 2 
+    },
+    { 
+        q: "Add 456 and 231: (456 + 231 = ?)<br>456 اور 231 کو جمع کریں:", 
+        options: ["687", "678", "786", "587"], 
+        answer: 0 
+    },
+    { 
+        q: "Subtract 145 from 389: (389 - 145 = ?)<br>389 میں سے 145 تفریق کریں:", 
+        options: ["244", "234", "144", "254"], 
+        answer: 0 
+    },
+    { 
+        q: "Multiply 12 by 5: (12 × 5 = ?)<br>12 کو 5 سے ضرب دیں:", 
+        options: ["50", "60", "55", "65"], 
+        answer: 1 
+    },
+    { 
+        q: "Divide 36 by 4: (36 ÷ 4 = ?)<br>36 کو 4 پر تقسیم کریں:", 
+        options: ["8", "7", "9", "6"], 
+        answer: 2 
+    },
+    { 
+        q: "What fraction of the shape is shaded if 3 parts out of 4 are colored?<br>اگر ایک شکل کے 4 میں سے 3 حصے رنگے ہوئے ہوں تو کسر (Fraction) کیا ہوگی؟", 
+        options: ["1/4", "3/4", "2/4", "4/3"], 
+        answer: 1 
+    },
+    { 
+        q: "Which unit is best to measure the weight of a school bag?<br>سکول کے بستے کا وزن ناپنے کے لیے کون سا یونٹ بہترین ہے؟", 
+        options: ["Gram / گرام", "Kilogram / کلوگرام", "Litre / لیٹر", "Metre / میٹر"], 
+        answer: 1 
+    },
+    { 
+        q: "How many hours are there in 1 day?<br>ایک دن میں کتنے گھنٹے ہوتے ہیں؟", 
+        options: ["12 hours / 12 گھنٹے", "24 hours / 24 گھنٹے", "60 hours / 60 گھنٹے", "7 days / 7 دن"], 
+        answer: 1 
+    },
+    { 
+        q: "A triangle has how many sides?<br>ایک مثلث (Triangle) کے کتنے اضلاع (Sides) ہوتے ہیں؟", 
+        options: ["2", "3", "4", "5"], 
+        answer: 1 
+    },
+    { 
+        q: "What comes next in the pattern: 5, 10, 15, 20, ?<br>پیٹرن میں اگلا عدد کیا ہوگا: 5, 10, 15, 20, ؟", 
+        options: ["22", "25", "30", "35"], 
+        answer: 1 
+    },
+    { 
+        q: "Write the number name for 789:<br>عدد 789 کو الفاظ میں کیا کہیں گے؟", 
+        options: ["Seven hundred eighty-nine / سات سو اٹھاسی", "Seven hundred ninety-eight / سات سو اٹھانوے", "Seven hundred eighty-nine / سات سو انانوے", "Seven hundred eighty-nine / سات سو پچاسی"], 
+        answer: 0 
+    },
+    { 
+        q: "Which shape has 4 equal sides and 4 right angles?<br>کس شکل کے چاروں اضلاع برابر اور چاروں زاویے 90 درجے کے ہوتے ہیں؟", 
+        options: ["Triangle / مثلث", "Square / مربع", "Circle / دائرہ", "Rectangle / مستطیل"], 
+        answer: 1 
+    },
+    { 
+        q: "If you have 3 fifty-rupee notes, how much total money do you have?<br>اگر آپ کے پاس پچاس پچاس روپے کے 3 نوٹ ہوں تو کل کتنے روپے ہوں گے؟", 
+        options: ["100", "150", "200", "250"], 
+        answer: 1 
+    },
+    { 
+        q: "Which is greater: 452 or 425?<br>کون سا عدد بڑا ہے: 452 یا 425؟", 
+        options: ["425", "452", "Both are equal / دونوں برابر ہیں", "None / کوئی نہیں"], 
+        answer: 1 
+    },
+    { 
+        q: "How many centimetres are in 1 metre?<br>1 میٹر میں کتنے سینٹی میٹر ہوتے ہیں؟", 
+        options: ["10 cm", "100 cm", "1,000 cm", "50 cm"], 
+        answer: 1 
+    },
+    { 
+        q: "What is half of 50? (50 ka adha kitna hai?)<br>50 کا آدھا کتنا ہوتا ہے؟", 
+        options: ["20", "25", "30", "15"], 
+        answer: 1 
+    },
+    { 
+        q: "In the fraction 3/5, what is the numerator (اوپر والا عدد)?<br>کسر 3/5 میں شمارکنندہ (Numerator) کیا ہے؟", 
+        options: ["3", "5", "8", "2"], 
+        answer: 0 
+    },
+    { 
+        q: "How many months are in a year?<br>ایک سال میں کتنے مہینے ہوتے ہیں؟", 
+        options: ["4", "6", "10", "12"], 
+        answer: 3 
+    },
+    { 
+        q: "Ali bought a pen for Rs. 45 and a notebook for Rs. 35. How much total did he spend?<br>علی نے 45 روپے کا قلم اور 35 روپے کی کاپی خریدی۔ اس نے کل کتنے روپے خرچ کیے؟", 
+        options: ["70", "80", "90", "75"], 
+        answer: 1 
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+let timer;
+let timeLeft = 300; // 5 minutes
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    timeLeft = 300;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    startTimer();
+    loadQuestion();
+}
+
+function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            showScore();
+        } else {
+            timeLeft--;
+            let mins = Math.floor(timeLeft / 60);
+            let secs = timeLeft % 60;
+            document.getElementById('timer-display').innerText = `باقی وقت: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
+}
+
+function loadQuestion() {
+    const qData = mathQuizData[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = (currentQuestionIndex + 1) + ". " + qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = opt;
+        btn.onclick = () => checkAnswer(index);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `سوال ${currentQuestionIndex + 1} از ${mathQuizData.length}`;
+}
+
+function checkAnswer(selectedIndex) {
+    const qData = mathQuizData[currentQuestionIndex];
+    if (selectedIndex === qData.answer) {
+        score++;
+    }
+    
+    currentQuestionIndex++;
+    if (currentQuestionIndex < mathQuizData.length) {
+        loadQuestion();
+    } else {
+        clearInterval(timer);
+        showScore();
+    }
+}
+
+function showScore() {
+    clearInterval(timer);
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = mathQuizData.length;
+    const percentage = Math.round((score / total) * 100);
+    document.getElementById('final-score').innerText = `آپ کا اسکور: ${score} / ${total} (${percentage}%)`;
+    
+    let timeSpent = 300 - timeLeft;
+    let spentMins = Math.floor(timeSpent / 60);
+    let spentSecs = timeSpent % 60;
+    document.getElementById('time-taken').innerText = `لیا گیا وقت: ${spentMins} منٹ اور ${spentSecs} سیکنڈ`;
+}
+
+function restartTest() {
+    startTest();
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
