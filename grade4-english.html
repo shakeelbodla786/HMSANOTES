@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 4 English Online Test | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:12px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:15px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 4 — English Online Test</h2>
+    <p class="subtitle">HMSA Learning Academy — Based on Master English Grammar Guide[cite: 6]</p>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div id="score-screen" class="score-box">
+        <h3>Test Completed Successfully!</h3>
+        <p style="font-size: 18px; margin: 15px 0;">آپ نے جماعت چہارم کا انگریزی ٹیسٹ کامیابی سے مکمل کر لیا ہے۔</p>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const grade4QuizData = [
+    { q: "1. Ali called ___ yesterday evening.", options: ["A) he", "B) him", "C) his", "D) himself"], answer: 1 },
+    { q: "2. This coat belongs to Usman; it is ___.", options: ["A) him", "B) his", "C) he's", "D) his own"], answer: 1 },
+    { q: "3. Plural form of 'Child' is:", options: ["A) Childs", "B) Children", "C) Childrens", "D) Childes"], answer: 1 },
+    { q: "4. Plural form of 'Box' is:", options: ["A) Boxs", "B) Boxes", "C) Boxies", "D) Boxen"], answer: 1 },
+    { q: "5. Plural form of 'City' is:", options: ["A) Citys", "B) Cities", "C) Cityes", "D) Cites"], answer: 1 },
+    { q: "6. 'Honesty' is an example of ___ noun.", options: ["A) Proper", "B) Common", "C) Abstract", "D) Collective"], answer: 2 },
+    { q: "7. 'Army' is an example of ___ noun.", options: ["A) Proper", "B) Common", "C) Collective", "D) Material"], answer: 2 },
+    { q: "8. Which of the following is Uncountable?", options: ["A) Pen", "B) Milk", "C) Book", "D) Chair"], answer: 1 },
+    { q: "9. Feminine gender of 'King' is:", options: ["A) Princess", "B) Queen", "C) Lady", "D) Woman"], answer: 1 },
+    { q: "10. Identify Adjective: 'He is a brave boy.'", options: ["A) He", "B) is", "C) brave", "D) boy"], answer: 2 },
+    { q: "11. Identify Adverb: 'She ran quickly.'", options: ["A) She", "B) ran", "C) quickly", "D) fastly"], answer: 2 },
+    { q: "12. Preposition in: 'The book is on the table.'", options: ["A) The", "B) book", "C) is", "D) on"], answer: 3 },
+    { q: "13. Conjunction in: 'Ali and Ahmad are friends.'", options: ["A) Ali", "B) and", "C) Ahmad", "D) friends"], answer: 1 },
+    { q: "14. Interjection in: 'Hurrah! We won.'", options: ["A) Hurrah", "B) We", "C) won", "D) match"], answer: 0 },
+    { q: "15. Choose correct Spelling:", options: ["A) Beautifull", "B) Beautiful", "C) Beutiful", "D) Beautifal"], answer: 1 },
+    { q: "16. Choose correct Sentence:", options: ["A) She go to school", "B) She goes to school", "C) She going school", "D) She gone school"], answer: 1 },
+    { q: "17. Opposite of 'HOT' is:", options: ["A) Warm", "B) Cold", "C) Cool", "D) Freeze"], answer: 1 },
+    { q: "18. Opposite of 'FAST' is:", options: ["A) Quick", "B) Slow", "C) Rapid", "D) Late"], answer: 1 },
+    { q: "19. Opposite of 'HAPPY' is:", options: ["A) Joy", "B) Sad", "C) Glad", "D) Smile"], answer: 1 },
+    { q: "20. Opposite of 'BIG' is:", options: ["A) Huge", "B) Small", "C) Large", "D) Tall"], answer: 1 }
+];
+
+let currentQuestionIndex = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = grade4QuizData[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${grade4QuizData.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = grade4QuizData[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ درست جواب! (Correct Answer)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ غلط جواب! (Incorrect Answer)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < grade4QuizData.length) {
+            loadQuestion();
+        } else {
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('score-screen').style.display = 'block';
+        }
+    }, 1500);
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
