@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 4 Mathematics Online Test | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-right:4px solid var(--green);text-align:right;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:right;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover{background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.next-btn{display:none;background:var(--navy);color:white;border:none;padding:10px 20px;font-size:16px;border-radius:8px;cursor:pointer;margin:10px auto;display:block;}
+.score-box{text-align:center;display:none}
+.score-box h3{color:var(--navy);font-size:26px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت چہارم — ریاضی آن لائن ٹیسٹ</h2>
+    <p class="subtitle">Grade 4 Mathematics (Bilingual) — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">سوال 1 از 20</span>
+        </div>
+        <div id="question-text" class="question">سوال یہاں ظاہر ہوگا</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+        <button id="next-btn" class="next-btn" onclick="nextQuestion()">اگلا سوال ➔</button>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>ریاضی کا ٹیسٹ مکمل ہو گیا!</h3>
+        <p style="font-size: 18px; margin: 15px 0;">آپ نے جماعت چہارم کا ریاضی کا ٹیسٹ کامیابی سے مکمل کر لیا ہے۔</p>
+        <button class="restart-btn" onclick="startTest()">دوبارہ ٹیسٹ شروع کریں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const grade4MathData = [
+    // Unit 1: Whole Numbers (Addition, Subtraction, Multiplication, Division)
+    { q: "1. What is the place value of digit 7 in 74,321?<br>عدد 74,321 میں ہندسے 7 کی مقامی قیمت کیا ہے؟", options: ["الف) 7,000", "ب) 70,000", "ج) 700", "د) 70"], answer: 1 },
+    { q: "2. Add 3,425 and 1,234: (3,425 + 1,234 = ?)<br>3,425 اور 1,234 کو جمع کریں:", options: ["الف) 4,659", "ب) 4,559", "ج) 4,649", "د) 5,659"], answer: 0 },
+    { q: "3. Multiply 25 by 4: (25 × 4 = ?)<br>25 کو 4 سے ضرب دیں:", options: ["الف) 80", "ب) 90", "ج) 100", "د) 120"], answer: 2 },
+    
+    // Unit 2: Factors and Multiples
+    { q: "4. Which of the following is a factor of 18?<br>ذیل میں سے کون سا عدد 18 کا جزو ضربی (Factor) ہے؟", options: ["الف) 5", "ب) 6", "ج) 7", "د) 8"], answer: 1 },
+    { q: "5. What is the first common multiple of 3 and 4?<br>3 اور 4 کا پہلا مشترکہ معضف (Common Multiple) کیا ہے؟", options: ["الف) 6", "ب) 12", "ج) 18", "د) 24"], answer: 1 },
+    { q: "6. Which of the following is a prime number?<br>ذیل میں سے کون سا مفرد عدد (Prime Number) ہے؟", options: ["الف) 9", "ب) 11", "ج) 15", "د) 21"], answer: 1 },
+
+    // Unit 3: Fractions
+    { q: "7. In the fraction 3/4, what is the denominator (نیچے والا ہندسہ)?<br>کسر 3/4 میں مخرج (Denominator) کیا ہے؟", options: ["الف) 3", "ب) 4", "ج) 7", "د) 1"], answer: 1 },
+    { q: "8. Which fraction is equivalent to 1/2?<br>کون سی کسر 1/2 کے برابر (Equivalent) ہے؟", options: ["الف) 2/4", "ب) 1/3", "ج) 3/4", "د) 2/3"], answer: 0 },
+    { q: "9. Add the fractions: 1/4 + 2/4 = ?<br>کسروں کو جمع کریں: 1/4 + 2/4 = ؟", options: ["الف) 1/4", "ب) 2/4", "ج) 3/4", "د) 3/8"], answer: 2 },
+
+    // Unit 4: Decimals
+    { q: "10. Write 0.5 as a fraction in its simplest form:<br>اس عشاریہ 0.5 کو کسر کی شکل میں لکھیں:", options: ["الف) 1/2", "ب) 1/4", "ج) 3/4", "د) 1/5"], answer: 0 },
+    { q: "11. Which decimal is greater: 0.4 or 0.25?<br>کون سا عشاریہ بڑا ہے: 0.4 یا 0.25؟", options: ["الف) 0.25", "ب) 0.4", "ج) دونوں برابر ہیں", "د) کوئی نہیں"], answer: 1 },
+    { q: "12. Add decimals: 2.3 + 1.2 = ?<br>عشاریہ جمع کریں: 2.3 + 1.2 = ؟", options: ["الف) 3.5", "ب) 3.4", "ج) 2.5", "د) 4.5"], answer: 0 },
+
+    // Unit 5: Measurements & Time
+    { q: "13. How many grams are in 3 kilograms?<br>3 کلوگرام میں کتنے گرام ہوتے ہیں؟", options: ["الف) 300 گرام", "ب) 3,000 گرام", "ج) 30 گرام", "د) 30,000 گرام"], answer: 1 },
+    { q: "14. How many minutes are in 2 hours?<br>2 گھنٹے میں کتنے منٹ ہوتے ہیں؟", options: ["الف) 60 منٹ", "ب) 90 منٹ", "ج) 120 منٹ", "د) 180 منٹ"], answer: 2 },
+    { q: "15. Convert 5 litres into millilitres:<br>5 لیٹر کو ملی لیٹر میں تبدیل کریں:", options: ["الف) 500 ملی لیٹر", "ب) 5,000 ملی لیٹر", "ج) 50 ملی لیٹر", "د) 50,000 ملی لیٹر"], answer: 1 },
+
+    // Unit 6: Geometry
+    { q: "16. A triangle has how many corners (vertices)?<br>ایک مثلث (Triangle) کے کتنے راس یا کونے ہوتے ہیں؟", options: ["الف) 2", "ب) 3", "ج) 4", "د) 5"], answer: 1 },
+    { q: "17. What is the angle of a right angle (قائمہ زاویہ)?<br>قائمہ زاویہ کتنے درجے کا ہوتا ہے؟", options: ["الف) 45 ڈگری", "ب) 90 ڈگری", "ج) 180 ڈگری", "د) 360 ڈگری"], answer: 1 },
+    { q: "18. A shape with 4 equal sides is called:<br>ایسی شکل جس کے چاروں اضلاع برابر ہوں، کہلاتی ہے:", options: ["الف) دائرہ", "ب) مثلث", "ج) مربع (Square)", "د) مستطیل"], answer: 2 },
+
+    // Unit 7: Data Handling
+    { q: "19. Information collected in the form of numbers is called:<br>اعداد و شمار کی شکل میں اکٹھی کی گئی معلومات کہلاتی ہے:", options: ["الف) ڈیٹا (Data)", "ب) کسر", "ج) زاویہ", "د) پیمائش"], answer: 0 },
+    { q: "20. In a tally chart, a bundle of 5 tally marks is represented by:<br>ٹیلی چارٹ میں 5 لائنوں کا بنڈل کیسے ظاہر کیا جاتا ہے؟", options: ["الف) سیدھی 5 لکیریں", "ب) 4 سیدھی اور 1 ترچھی لکیر", "ج) گول دائرہ", "د) کوئی نہیں"], answer: 1 }
+];
+
+let currentQuestionIndex = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = grade4MathData[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `سوال ${currentQuestionIndex + 1} از ${grade4MathData.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+    document.getElementById('next-btn').style.display = 'none';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = grade4MathData[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ درست جواب! (Correct Answer)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ غلط جواب! (Incorrect Answer)</span>';
+    }
+    
+    document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < grade4MathData.length) {
+        loadQuestion();
+    } else {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('score-screen').style.display = 'block';
+    }
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
