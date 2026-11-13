@@ -20,76 +20,165 @@ gtag('config','G-MXSHM29ECE');
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
- margin:0;background:#f2f6f7;color:#263746;
- font-family:Arial,sans-serif;line-height:1.8
+ margin:0;
+ background:#f2f6f7;
+ color:#263746;
+ font-family:Arial,sans-serif;
+ line-height:1.8
 }
 header{
  background:linear-gradient(135deg,#102b4c,#087b59);
- color:white;text-align:center;padding:25px 12px
+ color:white;
+ text-align:center;
+ padding:25px 12px
 }
 .logo{
- width:112px;height:112px;margin:auto;
- border:3px solid #e8c66b;border-radius:50%;
- display:flex;align-items:center;justify-content:center;
+ width:112px;
+ height:112px;
+ margin:auto;
+ border:3px solid #e8c66b;
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
  background:#102b4c
 }
 .logo svg{width:100px;height:100px}
 header h1{margin:8px 0 0;font-size:27px}
 header p{margin:2px;color:#f6e9c6}
+
 nav{
- background:white;padding:10px 5px;text-align:center;
- position:sticky;top:0;z-index:5;
+ background:white;
+ padding:10px 5px;
+ text-align:center;
+ position:sticky;
+ top:0;
+ z-index:5;
  box-shadow:0 2px 8px #0001
 }
 nav a{
- display:inline-block;color:#123b65;
- text-decoration:none;font-weight:bold;
- padding:5px 9px;font-size:14px
+ display:inline-block;
+ color:#123b65;
+ text-decoration:none;
+ font-weight:bold;
+ padding:5px 9px;
+ font-size:14px
 }
+
 .hero{
- text-align:center;padding:35px 15px;
+ text-align:center;
+ padding:35px 15px;
  background:linear-gradient(135deg,#e3f2e9,#fff8e8)
 }
 .hero h2{color:#123b65;margin:0 0 8px}
 .hero p{max-width:650px;margin:8px auto}
+
 .container{max-width:950px;margin:auto;padding:15px}
-.heading{text-align:center;color:#123b65;margin:28px 0 15px}
+.heading{
+ text-align:center;
+ color:#123b65;
+ margin:28px 0 15px
+}
 .card{
- background:white;padding:18px;margin:15px 0;
- border-radius:13px;border-right:5px solid #087c59;
+ background:white;
+ padding:18px;
+ margin:15px 0;
+ border-radius:13px;
+ border-right:5px solid #087c59;
  box-shadow:0 3px 12px #123b6510
 }
 .card h3{color:#123b65;margin-top:0}
+
 .grid{
- display:grid;grid-template-columns:repeat(3,1fr);gap:11px
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:11px
 }
-.grade{
- display:block;text-align:center;padding:13px 5px;
- border:1px solid #d7e5df;border-radius:10px;
- background:#f8fcfa;color:#123b65;
- text-decoration:none;font-weight:bold
+
+.grade-box{
+ background:white;
+ border-radius:12px;
+ margin:12px 0;
+ overflow:hidden;
+ box-shadow:0 3px 12px #123b6510;
+ scroll-margin-top:65px
 }
-.grade:hover{background:#e5f3ec}
+.grade-box summary{
+ cursor:pointer;
+ list-style:none;
+ background:linear-gradient(120deg,#087c59,#123b65);
+ color:white;
+ padding:15px;
+ font-weight:bold;
+ font-size:18px;
+ text-align:center
+}
+.grade-box summary::-webkit-details-marker{display:none}
+.grade-box summary:after{
+ content:"＋";
+ float:left;
+ font-size:20px
+}
+.grade-box[open] summary:after{content:"−"}
+
+.subjects{padding:15px}
+.subjects p{
+ text-align:center;
+ color:#526575;
+ margin:0 0 10px
+}
+.subject-grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px
+}
+
 .btn{
- display:inline-block;padding:9px 15px;margin:5px 3px;
- border-radius:7px;background:#087c59;color:white;
- text-decoration:none;font-size:14px
+ display:block;
+ text-align:center;
+ padding:11px 8px;
+ border-radius:8px;
+ background:#087c59;
+ color:white;
+ text-decoration:none;
+ font-size:14px;
+ font-weight:bold;
+ margin:4px 0
 }
 .btn.blue{background:#123b65}
 .btn.gold{background:#a77b22}
-.note{background:#fff5d9;padding:12px;border-radius:8px}
-.social{
- display:flex;justify-content:center;gap:10px;flex-wrap:wrap
+.btn.pending{
+ background:#e9edf0;
+ color:#65727c;
+ border:1px dashed #aab5bc;
+ cursor:default
 }
+.note{
+ background:#fff5d9;
+ padding:12px;
+ border-radius:8px
+}
+.social{
+ display:flex;
+ justify-content:center;
+ gap:10px;
+ flex-wrap:wrap
+}
+
 footer{
- background:#102b4c;color:white;text-align:center;
- padding:22px 10px;margin-top:30px
+ background:#102b4c;
+ color:white;
+ text-align:center;
+ padding:22px 10px;
+ margin-top:30px
 }
 footer p{margin:4px}
+
 @media(max-width:450px){
  header h1{font-size:23px}
  .grid{grid-template-columns:repeat(2,1fr)}
  nav a{font-size:12px;padding:4px 6px}
+ .subjects{padding:10px}
 }
 </style>
 </head>
@@ -97,47 +186,43 @@ footer p{margin:4px}
 <body>
 
 <header>
- <div class="logo">
-  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-   <circle cx="60" cy="60" r="54" fill="none" stroke="#e8c66b" stroke-width="2"/>
-   <path id="circleText" d="M 16,60 A 44,44 0 1,1 104,60"
-    fill="none"/>
-   <text fill="#f4d77e" font-size="10" text-anchor="middle">
-    <textPath href="#circleText" startOffset="50%">
-     رَبِّ زِدْنِي عِلْمًا
-    </textPath>
-   </text>
-   <path d="M25 77 Q42 65 60 78 Q78 65 95 77 L95 94 Q77 83 60 97 Q43 83 25 94Z"
-    fill="#f5f0dc" stroke="#e8c66b" stroke-width="2"/>
-   <path d="M60 78 V96" stroke="#b58a35" stroke-width="2"/>
-   <path d="M40 68 L60 52 L80 68 L75 72 L60 61 L45 72Z"
-    fill="#e8c66b"/>
-   <path d="M49 67 V73 Q60 80 71 73 V67"
-    fill="#e8c66b"/>
-  </svg>
- </div>
- <h1>HMSA Learning Academy</h1>
- <p>Learn • Prepare • Excel</p>
- <p>مفت تعلیم — روشن مستقبل</p>
+<div class="logo">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<circle cx="60" cy="60" r="54" fill="none" stroke="#e8c66b" stroke-width="2"/>
+<path id="circleText" d="M 16,60 A 44,44 0 1,1 104,60" fill="none"/>
+<text fill="#f4d77e" font-size="10" text-anchor="middle">
+<textPath href="#circleText" startOffset="50%">رَبِّ زِدْنِي عِلْمًا</textPath>
+</text>
+<path d="M25 77 Q42 65 60 78 Q78 65 95 77 L95 94 Q77 83 60 97 Q43 83 25 94Z"
+fill="#f5f0dc" stroke="#e8c66b" stroke-width="2"/>
+<path d="M60 78 V96" stroke="#b58a35" stroke-width="2"/>
+<path d="M40 68 L60 52 L80 68 L75 72 L60 61 L45 72Z" fill="#e8c66b"/>
+<path d="M49 67 V73 Q60 80 71 73 V67" fill="#e8c66b"/>
+</svg>
+</div>
+
+<h1>HMSA Learning Academy</h1>
+<p>Learn • Prepare • Excel</p>
+<p>مفت تعلیم — روشن مستقبل</p>
 </header>
 
 <nav>
- <a href="#home">ہوم</a>
- <a href="#classes">جماعتیں</a>
- <a href="#practice">آن لائن ٹیسٹ</a>
- <a href="#notes">نوٹس</a>
- <a href="#about">تعارف</a>
+<a href="#home">ہوم</a>
+<a href="#classes">جماعتیں</a>
+<a href="#practice">آن لائن ٹیسٹ</a>
+<a href="#notes">نوٹس</a>
+<a href="#about">تعارف</a>
 </nav>
 
 <section class="hero" id="home">
- <h2>علم سب کے لیے، تعلیم سب کے لیے</h2>
- <p>
- HMSA Learning Academy میں خوش آمدید!
- یہاں طلبہ کے لیے مفت تعلیمی نوٹس،
- مشقیں، ٹیسٹ اور PDF مواد فراہم کیا جائے گا۔
- </p>
- <p><strong>آئیے سیکھیں، آگے بڑھیں اور کامیاب ہوں!</strong></p>
- <a class="btn" href="#classes">اپنی جماعت منتخب کریں</a>
+<h2>علم سب کے لیے، تعلیم سب کے لیے</h2>
+<p>
+HMSA Learning Academy میں خوش آمدید!
+یہاں طلبہ کے لیے مفت تعلیمی نوٹس،
+مشقیں، ٹیسٹ اور PDF مواد فراہم کیا جائے گا۔
+</p>
+<p><strong>آئیے سیکھیں، آگے بڑھیں اور کامیاب ہوں!</strong></p>
+<a class="btn" href="#classes">اپنی جماعت منتخب کریں</a>
 </section>
 
 <main class="container">
@@ -145,117 +230,175 @@ footer p{margin:4px}
 <h2 class="heading" id="classes">اپنی جماعت منتخب کریں</h2>
 
 <div class="card">
- <h3>جماعت 3 تا 8 — پریکٹس اور ٹیسٹ</h3>
- <p>اپنی جماعت منتخب کرکے مشق اور ٹیسٹ کے حصے میں جائیں۔</p>
- <div class="grid">
-  <a class="grade" href="#grade3">جماعت 3</a>
-  <a class="grade" href="#grade4">جماعت 4</a>
-  <a class="grade" href="#grade5">جماعت 5</a>
-  <a class="grade" href="#grade6">جماعت 6</a>
-  <a class="grade" href="#grade7">جماعت 7</a>
-  <a class="grade" href="#grade8">جماعت 8</a>
- </div>
+<h3>جماعت 3 تا 8</h3>
+<p>اپنی جماعت منتخب کریں۔ ایک بٹن دبانے سے تمام مضامین سامنے آجائیں گے۔</p>
+
+<div class="grid">
+<a class="btn blue" href="#grade3">جماعت 3</a>
+<a class="btn blue" href="#grade4">جماعت 4</a>
+<a class="btn blue" href="#grade5">جماعت 5</a>
+<a class="btn blue" href="#grade6">جماعت 6</a>
+<a class="btn blue" href="#grade7">جماعت 7</a>
+<a class="btn blue" href="#grade8">جماعت 8</a>
+</div>
 </div>
 
 <h2 class="heading" id="practice">آن لائن پریکٹس اور ٹیسٹ</h2>
 
-<div class="card" id="grade3">
- <h3>جماعت 3</h3>
- <a class="btn" href="#test-system">پریکٹس اور ٹیسٹ</a>
- <a class="btn" href="grade3-english.html">انگریزی ٹیسٹ (English Test)</a>
- <a class="btn" href="grade3-math.html">ریاضی ٹیسٹ (Math Test)</a>
- <a class="btn" href="grade3-urdu.html">اردو ٹیسٹ (Urdu Test)</a>
+<!-- CLASS 3 -->
+<details class="grade-box" id="grade3">
+<summary>جماعت 3 — تمام مضامین</summary>
+<div class="subjects">
+<p>اپنا مضمون منتخب کریں</p>
+<div class="subject-grid">
+<a class="btn" href="grade3-english.html">English — انگلش</a>
+<a class="btn" href="grade3-urdu.html">Urdu — اردو</a>
+<a class="btn" href="grade3-math.html">Mathematics — میتھ</a>
 </div>
-<div class="card" id="grade4">
- <h3>جماعت 4</h3>
- <a class="btn" href="#test-system">پریکٹس اور ٹیسٹ</a>
- <a class="btn" href="grade4-english.html">جماعت 4 انگلش ٹیسٹ</a>
 </div>
-<div class="card" id="grade5">
- <h3>جماعت 5</h3>
- <a class="btn" href="#test-system">پریکٹس اور ٹیسٹ</a>
- <a class="btn" href="grade5-english.html">جماعت 5 انگلش ٹیسٹ</a>
+</details>
+
+<!-- CLASS 4 -->
+<details class="grade-box" id="grade4">
+<summary>جماعت 4 — تمام مضامین</summary>
+<div class="subjects">
+<p>اپنا مضمون منتخب کریں</p>
+<div class="subject-grid">
+<a class="btn" href="grade4-english.html">English — انگلش</a>
+<span class="btn pending">Urdu — جلد شامل ہوگا</span>
+<span class="btn pending">Mathematics — جلد شامل ہوگا</span>
 </div>
-<div class="card" id="grade6">
- <h3>جماعت 6</h3>
- <a class="btn" href="#test-system">پریکٹس اور ٹیسٹ</a>
- <a class="btn" href="grade6-english.html">جماعت 6 انگلش ٹیسٹ</a>
 </div>
-<div class="card" id="grade7">
- <h3>جماعت 7</h3>
- <a class="btn" href="#test-system">پریکٹس اور ٹیسٹ</a>
- <a class="btn" href="grade7-english.html">جماعت 7 انگلش ٹیسٹ</a>
+</details>
+
+<!-- CLASS 5 -->
+<details class="grade-box" id="grade5">
+<summary>جماعت 5 — تمام مضامین</summary>
+<div class="subjects">
+<p>اپنا مضمون منتخب کریں</p>
+<div class="subject-grid">
+<a class="btn" href="grade5-english.html">English — انگلش</a>
+<span class="btn pending">Urdu — جلد شامل ہوگا</span>
+<span class="btn pending">Mathematics — جلد شامل ہوگا</span>
 </div>
-<div class="card" id="grade8">
- <h3>جماعت 8</h3>
- <a class="btn" href="#test-system">پریکٹس اور ٹیسٹ</a>
- <a class="btn" href="grade8-english.html">جماعت 8 انگلش ٹیسٹ</a>
 </div>
+</details>
+
+<!-- CLASS 6 -->
+<details class="grade-box" id="grade6">
+<summary>جماعت 6 — تمام مضامین</summary>
+<div class="subjects">
+<p>اپنا مضمون منتخب کریں</p>
+<div class="subject-grid">
+<a class="btn" href="grade6-english.html">English — انگلش</a>
+<span class="btn pending">Urdu — جلد شامل ہوگا</span>
+<span class="btn pending">Mathematics — جلد شامل ہوگا</span>
+<span class="btn pending">General Science — جلد شامل ہوگا</span>
+</div>
+</div>
+</details>
+
+<!-- CLASS 7 -->
+<details class="grade-box" id="grade7">
+<summary>جماعت 7 — تمام مضامین</summary>
+<div class="subjects">
+<p>اپنا مضمون منتخب کریں</p>
+<div class="subject-grid">
+<a class="btn" href="grade7-english.html">English — انگلش</a>
+<span class="btn pending">Urdu — جلد شامل ہوگا</span>
+<span class="btn pending">Mathematics — جلد شامل ہوگا</span>
+<span class="btn pending">General Science — جلد شامل ہوگا</span>
+</div>
+</div>
+</details>
+
+<!-- CLASS 8 -->
+<details class="grade-box" id="grade8">
+<summary>جماعت 8 — تمام مضامین</summary>
+<div class="subjects">
+<p>اپنا مضمون منتخب کریں</p>
+<div class="subject-grid">
+<a class="btn" href="grade8-english.html">English — انگلش</a>
+<span class="btn pending">Urdu — جلد شامل ہوگا</span>
+<span class="btn pending">Mathematics — جلد شامل ہوگا</span>
+<span class="btn pending">General Science — جلد شامل ہوگا</span>
+</div>
+</div>
+</details>
 
 <div class="card" id="test-system">
- <h3>آن لائن ٹیسٹ سسٹم</h3>
- <p class="note">
- ٹائمر، MCQs، خودکار مارکنگ اور فوری نتائج کا نظام
- اگلے مرحلے میں شامل کیا جائے گا۔
- </p>
+<h3>آن لائن ٹیسٹ سسٹم</h3>
+<p class="note">
+ٹائمر، MCQs، خودکار مارکنگ اور فوری نتائج کا نظام
+مرحلہ وار شامل کیا جائے گا۔
+</p>
 </div>
 
 <h2 class="heading" id="notes">تعلیمی نوٹس اور PDF ڈاؤن لوڈ</h2>
 
 <div class="card">
- <h3>جماعت نہم — کمپیوٹر سائنس</h3>
+<h3>جماعت نہم — کمپیوٹر سائنس</h3>
 
- <h4>یونٹ 1: کمپیوٹر کا تعارف</h4>
- <a class="btn" href="./unit1.pdf">انگلش میڈیم</a>
- <a class="btn" href="./Unit1-Urdu.pdf">اردو میڈیم</a>
+<h4>یونٹ 1: کمپیوٹر کا تعارف</h4>
+<a class="btn" href="./unit1.pdf">انگلش میڈیم</a>
+<a class="btn" href="./Unit1-Urdu.pdf">اردو میڈیم</a>
 
- <h4>یونٹ 2: سسٹم ڈیزائن اینڈ ٹربل شوٹنگ</h4>
- <a class="btn" href="./Unit2.pdf">اردو میڈیم</a>
- <a class="btn" href="./Unit2-%20English.pdf">انگلش میڈیم</a>
+<h4>یونٹ 2: سسٹم ڈیزائن اینڈ ٹربل شوٹنگ</h4>
+<a class="btn" href="./Unit2.pdf">اردو میڈیم</a>
+<a class="btn" href="./Unit2-%20English.pdf">انگلش میڈیم</a>
 
- <h4>یونٹ 3: کمپیوٹر نیٹ ورکس</h4>
- <a class="btn" href="./Unit3-Urdu.pdf">اردو میڈیم</a>
- <a class="btn" href="./Unit3-English.pdf">انگلش میڈیم</a>
+<h4>یونٹ 3: کمپیوٹر نیٹ ورکس</h4>
+<a class="btn" href="./Unit3-Urdu.pdf">اردو میڈیم</a>
+<a class="btn" href="./Unit3-English.pdf">انگلش میڈیم</a>
 
- <h4>یونٹ 4: کمپیوٹیشنل تھنکنگ</h4>
- <a class="btn" href="./Unit4.pdf">اردو میڈیم</a>
- <a class="btn" href="./Unit4-English.pdf">انگلش میڈیم</a>
+<h4>یونٹ 4: کمپیوٹیشنل تھنکنگ</h4>
+<a class="btn" href="./Unit4.pdf">اردو میڈیم</a>
+<a class="btn" href="./Unit4-English.pdf">انگلش میڈیم</a>
 </div>
 
 <div class="card">
- <h3>جماعت دہم — تعلیمی نوٹس</h3>
- <p class="note">جماعت دہم کے نوٹس جلد شامل کیے جائیں گے۔</p>
+<h3>جماعت دہم — تعلیمی نوٹس</h3>
+<p class="note">جماعت دہم کے نوٹس جلد شامل کیے جائیں گے۔</p>
 </div>
 
 <div class="card" id="about">
- <h3>ہمارا مقصد</h3>
- <p>
- HMSA Learning Academy کا مقصد ہر بچے تک معیاری
- تعلیمی مواد مفت اور آسان طریقے سے پہنچانا ہے۔
- ہم چاہتے ہیں کہ ہر طالب علم اپنی رفتار سے سیکھے،
- مشق کرے اور اپنی صلاحیتوں کو بہتر بنائے۔
- </p>
- <p><strong>مفت تعلیم، آسان رسائی، روشن مستقبل!</strong></p>
+<h3>ہمارا مقصد</h3>
+<p>
+HMSA Learning Academy کا مقصد ہر بچے تک معیاری
+تعلیمی مواد مفت اور آسان طریقے سے پہنچانا ہے۔
+ہم چاہتے ہیں کہ ہر طالب علم اپنی رفتار سے سیکھے،
+مشق کرے اور اپنی صلاحیتوں کو بہتر بنائے۔
+</p>
+<p><strong>مفت تعلیم، آسان رسائی، روشن مستقبل!</strong></p>
 </div>
 
 <div class="card">
- <h3>ہم سے رابطہ</h3>
- <p>واٹس ایپ، فیس بک اور انسٹاگرام کے روابط یہاں شامل کیے جا سکتے ہیں۔</p>
- <div class="social">
-  <span class="btn">WhatsApp — لنک بعد میں</span>
-  <span class="btn blue">Facebook — لنک بعد میں</span>
-  <span class="btn gold">Instagram — لنک بعد میں</span>
- </div>
+<h3>ہم سے رابطہ</h3>
+<p>واٹس ایپ، فیس بک اور انسٹاگرام کے روابط یہاں شامل کیے جا سکتے ہیں۔</p>
+<div class="social">
+<span class="btn">WhatsApp — لنک بعد میں</span>
+<span class="btn blue">Facebook — لنک بعد میں</span>
+<span class="btn gold">Instagram — لنک بعد میں</span>
+</div>
 </div>
 
 </main>
 
 <footer>
- <p><strong>HMSA Learning Academy</strong></p>
- <p>Knowledge Today • Success Tomorrow</p>
- <p>Learn • Prepare • Excel</p>
- <p>تمام طلبہ کے لیے مفت تعلیمی سہولیات</p>
+<p><strong>HMSA Learning Academy</strong></p>
+<p>Knowledge Today • Success Tomorrow</p>
+<p>Learn • Prepare • Excel</p>
+<p>تمام طلبہ کے لیے مفت تعلیمی سہولیات</p>
 </footer>
+
+<script>
+document.querySelectorAll('a[href^="#grade"]').forEach(link=>{
+ link.addEventListener('click',()=>{
+  const target=document.querySelector(link.getAttribute('href'));
+  if(target) target.open=true;
+ });
+});
+</script>
 
 </body>
 </html>
