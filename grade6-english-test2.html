@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 6 English Grammar Online Test 2 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 6 — English Grammar Online Test (Test 2)</h2>
+    <p class="subtitle">HMSA Learning Academy — Grade 6 Assessment 2</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const grade6EnglishTest2Data = [
+    { q: "1. Which of the following is a Collective Noun?", options: ["A) Ali", "B) Team", "C) Water", "D) Honesty"], answer: 1 },
+    { q: "2. Which of the following is an example of a Material Noun?", options: ["A) Gold", "B) Happiness", "C) Student", "D) City"], answer: 0 },
+    { q: "3. What is the plural form of the noun 'City'?", options: ["A) Citys", "B) Cites", "C) Cities", "D) Cityes"], answer: 2 },
+    { q: "4. What is the feminine gender of the noun 'King'?", options: ["A) Prince", "B) Queen", "C) Princess", "D) Woman"], answer: 1 },
+    { q: "5. Which pronoun is used to show possession without repeating the noun (e.g., 'This book is ___')?", options: ["A) Mine", "B) My", "C) Me", "D) I"], answer: 0 },
+    { q: "6. Complete the sentence: 'She completed her project by ___.'", options: ["A) himself", "B) herself", "C) myself", "D) yourself"], answer: 1 },
+    { q: "7. What is the superlative degree of the adjective 'Tall'?", options: ["A) Taller", "B) Tallest", "C) More tall", "D) Most tall"], answer: 1 },
+    { q: "8. A verb that does NOT require a direct object to make complete sense is called:", options: ["A) Transitive Verb", "B) Intransitive Verb", "C) Helping Verb", "D) Modal Verb"], answer: 1 },
+    { q: "9. Which modal verb is used to express polite permission or possibility?", options: ["A) Must", "B) May", "C) Should", "D) Shall"], answer: 1 },
+    { q: "10. What is the past simple (V2) form of the verb 'Buy'?", options: ["A) Buyed", "B) Bought", "C) Buying", "D) Buys"], answer: 1 },
+    { q: "11. An adverb that tells WHEN an action takes place is called an Adverb of:", options: ["A) Manner", "B) Time", "C) Place", "D) Frequency"], answer: 1 },
+    { q: "12. Which preposition is used for specific exact clock times (e.g., 5:00 PM)?", options: ["A) In", "B) On", "C) At", "D) By"], answer: 2 },
+    { q: "13. Which conjunction connects words or clauses of equal rank (e.g., FANBOYS)?", options: ["A) Coordinating Conjunction", "B) Subordinating Conjunction", "C) Preposition", "D) Interjection"], answer: 0 },
+    { q: "14. Which punctuation mark is used to introduce a list or an explanation?", options: ["A) Colon (:)", "B) Semicolon (;)", "C) Comma (,)", "D) Period (.)"], answer: 0 },
+    { q: "15. A sentence made of two independent clauses joined by a coordinating conjunction is a:", options: ["A) Simple Sentence", "B) Compound Sentence", "C) Complex Sentence", "D) Imperative Sentence"], answer: 1 },
+    { q: "16. Complete the Present Perfect sentence: 'They ___ won the match.'", options: ["A) has", "B) have", "C) had", "D) is"], answer: 1 },
+    { q: "17. What is the helping verb used for negative and interrogative sentences in Past Simple Tense?", options: ["A) Do", "B) Does", "C) Did", "D) Had"], answer: 2 },
+    { q: "18. In Passive Voice, the main verb must always be in which form?", options: ["A) V1", "B) V2", "C) V3 (Past Participle)", "D) V-ing"], answer: 2 },
+    { q: "19. What is the synonym (similar meaning) of the word 'Big'?", options: ["A) Small", "B) Tiny", "C) Huge", "D) Short"], answer: 2 },
+    { q: "20. What is the antonym (opposite) of the word 'Happy'?", options: ["A) Sad", "B) Joy", "C) Smile", "D) Glad"], answer: 0 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = grade6EnglishTest2Data[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${grade6EnglishTest2Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = grade6EnglishTest2Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < grade6EnglishTest2Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = grade6EnglishTest2Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
