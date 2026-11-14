@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 English Online Test 2 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:#102b4c;color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 8 — English Online Test 2</h2>
+    <p class="subtitle">HMSA Learning Academy — Grade 8 Assessment 2</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const englishTest2Data = [
+    { q: "1. Which type of noun represents a group of individuals (e.g., team, herd)?", options: ["A) Proper Noun", "B) Collective Noun", "C) Abstract Noun", "D) Material Noun"], answer: 1 },
+    { q: "2. Identify the pronoun in the sentence: 'She gave him a beautiful gift.'", options: ["A) gave", "B) beautiful", "C) She", "D) gift"], answer: 2 },
+    { q: "3. What is the past participle form of the verb 'eat'?", options: ["A) ate", "B) eaten", "C) eating", "D) eats"], answer: 1 },
+    { q: "4. Which article is used before a singular countable noun starting with a consonant sound?", options: ["A) An", "B) The", "C) A", "D) None"], answer: 2 },
+    { q: "5. Identify the adjective in the sentence: 'The clever fox outsmarted the dog.'", options: ["A) fox", "B) outsmarted", "C) clever", "D) dog"], answer: 2 },
+    { q: "6. Which adverb tells us 'how' an action is performed?", options: ["A) Adverb of Time", "B) Adverb of Place", "C) Adverb of Manner", "D) Adverb of Frequency"], answer: 2 },
+    { q: "7. What is the correct plural form of the noun 'Child'?", options: ["A) Childs", "B) Children", "C) Childern", "D) Childses"], answer: 1 },
+    { q: "8. Which preposition is used for precise time (e.g., at 5 o'clock)?", options: ["A) In", "B) On", "C) At", "D) By"], answer: 2 },
+    { q: "9. Complete the sentence with the correct conjunction: 'He worked hard, ___ he failed.'", options: ["A) and", "B) but", "C) so", "D) or"], answer: 1 },
+    { q: "10. What is the synonym of the word 'Ancient'?", options: ["A) Modern", "B) Old", "C) New", "D) Fast"], answer: 1 },
+    { q: "11. What is the antonym of the word 'Courage'?", options: ["A) Bravery", "B) Cowardice", "C) Boldness", "D) Fearless"], answer: 1 },
+    { q: "12. Which tense is used in the sentence: 'They have finished their project.'", options: ["A) Present Indefinite", "B) Present Continuous", "C) Present Perfect", "D) Past Simple"], answer: 2 },
+    { q: "13. Which sentence is in the Passive Voice?", options: ["A) Ali paints a picture.", "B) A picture is painted by Ali.", "C) Ali is painting a picture.", "D) Ali painted a picture."], answer: 1 },
+    { q: "14. What type of sentence expresses a strong emotion or surprise?", options: ["A) Declarative", "B) Interrogative", "C) Imperative", "D) Exclamatory"], answer: 3 },
+    { q: "15. Which punctuation mark is used to indicate direct speech or quotation?", options: ["A) Comma", "B) Quotation Marks", "C) Colon", "D) Hyphen"], answer: 1 },
+    { q: "16. What is the superlative degree of the adjective 'good'?", options: ["A) gooder", "B) goodest", "C) better", "D) best"], answer: 3 },
+    { q: "17. Words that have the same pronunciation but different spellings and meanings are called:", options: ["A) Synonyms", "B) Antonyms", "C) Homophones", "D) Homographs"], answer: 2 },
+    { q: "18. Identify the modal verb used to express polite request or permission:", options: ["A) Must", "B) May", "C) Should", "D) Will"], answer: 1 },
+    { q: "19. Which of the following is an example of an abstract noun?", options: ["A) Table", "B) Honesty", "C) Lahore", "D) River"], answer: 1 },
+    { q: "20. What is the feminine gender of the noun 'Author'?", options: ["A) Authoress", "B) Authoress", "C) Woman author", "D) Lady author"], answer: 0 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = englishTest2Data[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${englishTest2Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = englishTest2Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer!</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer!</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < englishTest2Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = englishTest2Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
