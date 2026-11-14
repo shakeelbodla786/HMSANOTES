@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 Urdu Online Test 1 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Nastaliq Urdu', Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:2.2}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy);direction:ltr;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-right:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:right;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت ہشتم — اردو آن لائن ٹیسٹ 1</h2>
+    <p class="subtitle">Grade 8 Urdu Test 1 — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span>کل نمبر: 20</span>
+            <span id="progress-text">سوال 1 از 20</span>
+        </div>
+        <div id="question-text" class="question">سوال یہاں ظاہر ہوگا</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>ٹیسٹ کامیابی سے مکمل ہو گیا!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">کل سوالات: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">درست جوابات: 0</div>
+            <div class="result-item" id="obtained-marks">حاصل کردہ نمبر: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">فیصد: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const urduTest1Data = [
+    {
+        q: "1. وہ صفت جو کسی اسم کی مقدار، ناپ یا تول کو ظاہر کرے، کیا کہلاتی ہے؟",
+        options: ["الف) صفتِ ذاتی", "ب) صفتِ نسبتی", "ج) صفتِ مقداری", "د) صفتِ عددی"],
+        answer: 2
+    },
+    {
+        q: "2. 'پانچ کلو چینی' میں 'پانچ کلو' کون سی صفت کی مثال ہے؟",
+        options: ["الف) صفتِ عددی", "ب) صفتِ مقداری", "ج) صفتِ ذاتی", "د) صفتِ ضمیری"],
+        answer: 1
+    },
+    {
+        q: "3. لفظ 'بہادر' کس قسم کی صفت ہے؟",
+        options: ["الف) صفتِ مقداری", "ب) صفتِ عددی", "ج) صفتِ ذاتی", "د) صفتِ نسبتی"],
+        answer: 2
+    },
+    {
+        q: "4. لفظ 'پاکستانی' کون سی صفت کی مثال ہے؟",
+        options: ["الف) صفتِ نسبتی", "ب) صفتِ مقداری", "ج) صفتِ عددی", "د) صفتِ ذاتی"],
+        answer: 0
+    },
+    {
+        q: "5. 'قحط' کا متضاد لفظ کیا ہے؟",
+        options: ["الف) تنگی", "ب) ارزانی (فراوانی)", "ج) ویرانی", "د) نقصان"],
+        answer: 1
+    },
+    {
+        q: "6. لفظ 'مستقل' کا متضاد درج ذیل میں سے کون سا ہے؟",
+        options: ["الف) پائیدار", "ب) عارضی", "ج) مضبوط", "د) متواتر"],
+        answer: 1
+    },
+    {
+        q: "7. لفظ 'جنگ' کا متضاد کیا ہے؟",
+        options: ["الف) صلح", "ب) فساد", "ج) دشمنی", "د) مقابلہ"],
+        answer: 0
+    },
+    {
+        q: "8. لفظ 'نفع' کا متضاد کیا ہے؟",
+        options: ["الف) فائدہ", "ب) نقصان", "ج) آمدنی", "د) ترقی"],
+        answer: 1
+    },
+    {
+        q: "9. لفظ 'تحسین' کا مترادف (ہم معنی) لفظ کیا ہے؟",
+        options: ["الف) تعریف", "ب) تنقید", "ج) مذمت", "د) غصہ"],
+        answer: 0
+    },
+    {
+        q: "10. لفظ 'آغاز' کا متضاد کیا ہے؟",
+        options: ["الف) ابتدا", "ب) انجام", "ج) شروع", "د) بنیاد"],
+        answer: 1
+    },
+    {
+        q: "11. لفظ 'بہار' کا واحد کیا ہے؟",
+        options: ["الف) بہاریں", "ب) بہار", "ج) باہر", "د) بہاروں"],
+        answer: 1
+    },
+    {
+        q: "12. لفظ 'تدبیر' کی جمع کیا ہے؟",
+        options: ["الف) تدابیر", "ب) ادبار", "ج) مدبر", "د) دبر"],
+        answer: 0
+    },
+    {
+        q: "13. لفظ 'عقل' کی جمع کیا ہے؟",
+        options: ["الف) معقول", "ب) عقول", "ج) عقلاء", "د) عقائد"],
+        answer: 1
+    },
+    {
+        q: "14. لفظ 'قاعدہ' کی جمع کیا ہے؟",
+        options: ["الف) مقاصد", "ب) قواعد", "ج) قیوڈ", "د) مقاعد"],
+        answer: 1
+    },
+    {
+        q: "15. درست تلفظ اور اعراب والا لفظ چنیں:",
+        options: ["الف) مُتَفَقِّر", "ب) مُتَفَرِّق", "ج) مَتْفَرَق", "د) مُتَفْرِق"],
+        answer: 1
+    },
+    {
+        q: "16. پاکستان کا قومی ترانہ کس نے لکھا تھا؟",
+        options: ["الف) علامہ اقبال", "ب) حفیظ جالندھری", "ج) احمد ندیم قاسمی", "د) صوفی تبسم"],
+        answer: 1
+    },
+    {
+        q: "17. پاکستان کا رقبہ تقریباً کتنے مربع کلومیٹر ہے؟",
+        options: ["الف) 796,095 مربع کلومیٹر", "ب) 800,000 مربع کلومیٹر", "ج) 750,000 مربع کلومیٹر", "د) 880,000 مربع کلومیٹر"],
+        answer: 0
+    },
+    {
+        q: "18. پاکستان میں سالانہ اوسط بارش کا تناسب یا بنیادی جغرافیائی لحاظ سے اہم ترین ذریعہ کیا ہے؟",
+        options: ["الف) دریا اور نہریں", "ب) سمندر", "ج) جھیلیں", "د) بارش اور ندیاں"],
+        answer: 0
+    },
+    {
+        q: "19. صفتِ عددی کی کون سی قسم ہے جس میں گنتی یا تعداد واضح ہو؟",
+        options: ["الف) صفتِ عددی معین", "ب) صفتِ عددی غیر معین", "ج) صفتِ مقداری", "د) صفتِ نسبتی"],
+        answer: 0
+    },
+    {
+        q: "20. جملے میں کسی اسم کی اچھائی یا برائی بیان کرنے والے لفظ کو کیا کہتے ہیں؟",
+        options: ["الف) ضمیر", "ب) فعل", "ج) صفتِ ذاتی", "د) حرف"],
+        answer: 2
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = urduTest1Data[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `سوال ${currentQuestionIndex + 1} از ${urduTest1Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = urduTest1Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ درست جواب! (Correct Answer)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ غلط جواب! (Incorrect Answer)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < urduTest1Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = urduTest1Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `کل سوالات: ${total}`;
+    document.getElementById('correct-q').innerText = `درست جوابات: ${score}`;
+    document.getElementById('obtained-marks').innerText = `حاصل کردہ نمبر: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `فیصد: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
