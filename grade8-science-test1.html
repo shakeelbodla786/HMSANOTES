@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 General Science Test 1 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:8px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:16px;line-height:2.2;border-top:1px dashed #d7e5df;padding-top:8px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;display:flex;justify-content:space-between;align-items:center;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-eng{direction:ltr;text-align:left;font-family:Arial, sans-serif;}
+.opt-urdu{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;font-size:14px;color:#555;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت ہشتم — جنرل سائنس آن لائن ٹیسٹ 1</h2>
+    <p class="subtitle">Grade 8 General Science Test 1 — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 1 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const scienceTest1Data = [
+    {
+        eng: "1. The study of relationship between living organisms and their environment is called:",
+        urdu: "1. جانداروں اور ان کے ماحول کے درمیان تعلقات کے مطالعہ کو کیا کہتے ہیں؟",
+        options: [
+            { eng: "A) Biology", urdu: "الف) بائیالوجی" },
+            { eng: "B) Ecology", urdu: "ب) ایکولوجی (ماحولیات)" },
+            { eng: "C) Anatomy", urdu: "ج) اناٹومی" },
+            { eng: "D) Physiology", urdu: "د) فزیالوجی" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "2. Which system controls all voluntary and involuntary actions in the human body?",
+        urdu: "2. انسانی جسم میں تمام ارادی اور غیر ارادی افعال کو کون سا نظام کنٹرول کرتا ہے؟",
+        options: [
+            { eng: "A) Digestive System", urdu: "الف) نظامِ ہضم" },
+            { eng: "B) Nervous System", urdu: "ب) نظامِ عصبانی (Nervous System)" },
+            { eng: "C) Respiratory System", urdu: "ج) نظامِ تنفس" },
+            { eng: "D) Circulatory System", urdu: "د) نظامِ دورانِ خون" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "3. What is the basic functional unit of the nervous system?",
+        urdu: "3. عصبانی نظام (Nervous System) کی بنیادی اکائی کیا ہے؟",
+        options: [
+            { eng: "A) Nephron", urdu: "الف) نیفرون" },
+            { eng: "B) Neuron (Nerve Cell)", urdu: "ب) نیوران (عصبانی خلیہ)" },
+            { eng: "C) Alveoli", urdu: "ج) ایلویولی" },
+            { eng: "D) Cell", urdu: "د) خلیہ" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "4. The transmission of characters from parents to offspring is called:",
+        urdu: "4. والدین سے بچوں میں خصوصیات کی منتقلی کیا کہلاتی ہے؟",
+        options: [
+            { eng: "A) Variation", urdu: "الف) ویریشن (تنوع)" },
+            { eng: "B) Heredity (Genetics)", urdu: "ب) ہیریڈیٹی (وراثت)" },
+            { eng: "C) Evolution", urdu: "ج) ارتقاء" },
+            { eng: "D) Adaptation", urdu: "د) موافقت" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "5. The process of cell division in which body cells divide for growth and repair is:",
+        urd: "5. خلیے کی تقسیم کا وہ عمل جس سے جسم کے خلیات بڑھوتری اور مرمت کرتے ہیں، کہلاتا ہے:",
+        options: [
+            { eng: "A) Meiosis", urdu: "الف) مییاسس" },
+            { eng: "B) Mitosis", urdu: "ب) مائٹوسس" },
+            { eng: "C) Budding", urdu: "ج) بڈنگ" },
+            { eng: "D) Fission", urdu: "د) فشن" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "6. The use of living organisms or biological systems to make useful products is called:",
+        urdu: "6. مفید اشیاء بنانے کے لیے جانداروں یا حیاتیاتی نظاموں کا استعمال کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Biotechnology", urdu: "الف) بائیو ٹیکنالوجی" },
+            { eng: "B) Chemistry", urdu: "ب) کیمسٹری" },
+            { eng: "C) Physics", urdu: "ج) فزکس" },
+            { eng: "D) Geology", urdu: "د) جیالوجی" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "7. Who arranged elements in the Periodic Table in order of increasing atomic number?",
+        urdu: "7. عناصر کو دوری جدول (Periodic Table) میں بڑھتے ہوئے ایٹمی نمبر کی ترتیب سے کس نے رکھا؟",
+        options: [
+            { eng: "A) Dmitri Mendeleev", urdu: "الف) دمتری مینڈلیف" },
+            { eng: "B) Henry Moseley", urdu: "ب) ہنری موزلے" },
+            { eng: "C) Isaac Newton", urdu: "ج) آئزک نیوٹن" },
+            { eng: "D) John Dalton", urdu: "د) جان ڈائٹن" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "8. Vertical columns in the Periodic Table are called:",
+        urdu: "8. دوری جدول (Periodic Table) کے عمودی ستون (Columns) کیا کہلاتے ہیں؟",
+        options: [
+            { eng: "A) Periods", urdu: "الف) پیریڈز (دور)" },
+            { eng: "B) Groups", urdu: "ب) گروپس (خاندان)" },
+            { eng: "C) Shells", urdu: "ج) شیلز" },
+            { eng: "D) Blocks", urdu: "د) بلاکس" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "9. Horizontal rows in the Periodic Table are called:",
+        urdu: "9. دوری جدول کی افقی قطاریں (Rows) کیا کہلاتی ہیں؟",
+        options: [
+            { eng: "A) Groups", urdu: "الف) گروپس" },
+            { eng: "B) Periods", urdu: "ب) پیریڈز" },
+            { eng: "C) Families", urdu: "ج) فیملیز" },
+            { eng: "D) Metals", urdu: "د) میٹلز" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "10. A reaction in which heat is released is called an:",
+        urdu: "10. وہ کیمیائی عمل جس میں حرارت خارج ہوتی ہے، کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Endothermic Reaction", urdu: "الف) اینڈوتھرمک ری ایکشن" },
+            { eng: "B) Exothermic Reaction", urdu: "ب) ایگزوتھرمک ری ایکشن (حرارت زا)" },
+            { eng: "C) Neutralization", urdu: "ج) نیوٹرلائزیشن" },
+            { eng: "D) Physical Change", urdu: "د) طبعی تبدیلی" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. Substances that turn blue litmus paper red are:",
+        urdu: "11. وہ اشیاء جو نیلے لٹمس پیپر کو سرخ کر دیتی ہیں، کہلاتی ہیں:",
+        options: [
+            { eng: "A) Bases", urdu: "الف) بیس (اساس)" },
+            { eng: "B) Acids", urdu: "ب) تیزاب (Acids)" },
+            { eng: "C) Salts", urdu: "ج) نمکیات" },
+            { eng: "D) Water", urdu: "د) پانی" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "12. What is the pH value of a neutral solution (like pure water)?",
+        urdu: "12. ایک غیر جانبدار محلول (جیسے خالص پانی) کی pH قیمت کتنی ہوتی ہے؟",
+        options: [
+            { eng: "A) 0", urdu: "الف) 0" },
+            { eng: "B) 7", urdu: "ب) 7" },
+            { eng: "C) 14", urdu: "ج) 14" },
+            { eng: "D) 5", urdu: "د) 5" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "13. What is the SI unit of Pressure?",
+        urdu: "13. دباؤ (Pressure) کا ایس آئی (SI) یونٹ کیا ہے؟",
+        options: [
+            { eng: "A) Newton", urdu: "الف) نیوٹن" },
+            { eng: "B) Pascal (N/m²)", urdu: "ب) پاسکل" },
+            { eng: "C) Joule", urdu: "ج) جول" },
+            { eng: "D) Watt", urdu: "د) واٹ" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "14. The bouncing back of light from a polished surface is called:",
+        urdu: "14. کسی چکنی سطح سے روشنی کا ٹکرا کر واپس پلٹنے کا عمل کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Refraction", urdu: "الف) انعطاف (Refraction)" },
+            { eng: "B) Reflection", urdu: "ب) انعکاس (Reflection)" },
+            { eng: "C) Dispersion", urdu: "ج) پھیلاؤ" },
+            { eng: "D) Absorption", urdu: "د) جذب ہونا" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. The bending of light as it passes from one medium to another is called:",
+        urdu: "15. روشنی کا ایک واسطے سے دوسرے واسطے میں جاتے ہوئے مڑ جانا کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Reflection", urdu: "الف) انعکاس" },
+            { eng: "B) Refraction", urdu: "ب) انعطاف (Refraction)" },
+            { eng: "C) Diffraction", urdu: "ج) ڈفریکشن" },
+            { eng: "D) Scattering", urdu: "د) انتشار" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "16. The flow of electric charges through a conductor is called:",
+        urdu: "16. موصل (Conductor) میں سے برقی چارجز کے بہاؤ کو کیا کہتے ہیں؟",
+        options: [
+            { eng: "A) Electric Current", urdu: "الف) برقی رو (Electric Current)" },
+            { eng: "B) Voltage", urdu: "ب) وولٹیج" },
+            { eng: "C) Resistance", urdu: "ج) ریزسٹنس" },
+            { eng: "D) Power", urdu: "د) پاور" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "17. Which material is a good conductor of electricity?",
+        urdu: "17. کون سا مادہ بجلی کا اچھا موصل (Conductor) ہے؟",
+        options: [
+            { eng: "A) Wood", urdu: "الف) لکڑی" },
+            { eng: "B) Copper", urdu: "ب) تانبا (Copper)" },
+            { eng: "C) Plastic", urdu: "ج) پلاسٹک" },
+            { eng: "D) Rubber", urdu: "د) ربڑ" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "18. What is the name of our galaxy in the Universe?",
+        urdu: "18. کائنات میں ہماری کہکشاں (Galaxy) کا نام کیا ہے؟",
+        options: [
+            { eng: "A) Andromeda", urdu: "الف) اینڈرویمیڈا" },
+            { eng: "B) Milky Way (کشکہ کہکشاں)", urdu: "ب) ملکی وے (Milky Way)" },
+            { eng: "C) Sombrero", urdu: "ج) سومبریرو" },
+            { eng: "D) Whirlpool", urdu: "د) ورل پول" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "19. Which instrument is used to view distant stars and planets?",
+        urdu: "19. دور دراز ستاروں اور سیاروں کو دیکھنے کے لیے کون سا آلہ استعمال ہوتا ہے؟",
+        options: [
+            { eng: "A) Microscope", urdu: "الف) مائیکرو اسکوپ" },
+            { eng: "B) Telescope", urdu: "ب) ٹیلی سکوپ" },
+            { eng: "C) Periscope", urdu: "ج) پیرسکوپ" },
+            { eng: "D) Thermometer", urdu: "د) تھرمامیٹر" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "20. The force that pulls objects towards the center of the Earth is:",
+        urdu: "20. وہ قوت جو چیزوں کو زمین کے مرکز کی طرف کھینچتی ہے، کہلاتی ہے:",
+        options: [
+            { eng: "A) Friction", urdu: "الف) رگڑ" },
+            { eng: "B) Gravity", urdu: "ب) کششِ ثقل (Gravity)" },
+            { eng: "C) Magnetic force", urdu: "ج) مقناطیسی قوت" },
+            { eng: "D) Tension", urdu: "د) ٹینشن" }
+        ],
+        answer: 1
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = scienceTest1Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = `
+        <div class="eng-stmt">${qData.eng}</div>
+        <div class="urdu-stmt">${qData.urdu}</div>
+    `;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `
+            <span class="opt-eng">${opt.eng}</span>
+            <span class="opt-urdu">${opt.urdu}</span>
+        `;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${scienceTest1Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = scienceTest1Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < scienceTest1Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = scienceTest1Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
