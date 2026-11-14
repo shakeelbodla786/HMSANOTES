@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جماعت ششم - اردو گرامر آن لائن ٹیسٹ 2 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:2.2}
+.container{max-width:780px;margin:auto;background:white;padding:25px 30px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin:0 0 5px 0;font-size:24px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px;font-family:Arial, sans-serif}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:8px 18px;border-radius:8px;margin-bottom:18px;font-weight:bold;color:var(--navy);font-size:16px}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:18px;background:#f8fcfa;padding:15px 18px;border-radius:8px;border-right:4px solid var(--green);text-align:right;}
+.options{display:grid;gap:12px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:10px 18px;text-align:right;font-size:17px;font-family:'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, sans-serif;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;line-height:2}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:12px 0;font-size:18px;font-weight:bold;min-height:38px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:450px}
+.result-item{font-size:19px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:10px 28px;font-size:17px;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:22px;color:var(--green);text-decoration:none;font-weight:bold;font-size:16px}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت ششم — اردو گرامر آن لائن ٹیسٹ (ٹیسٹ 2)</h2>
+    <p class="subtitle">Grade 6 Urdu Grammar Online Test 2 — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">سوال 1 از 20</span>
+            <span>کل نمبر: 20</span>
+        </div>
+        <div id="question-text" class="question">سوال یہاں ظاہر ہوگا</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>ٹیسٹ 2 مکمل ہو گیا!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">کل سوالات: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">درست جوابات: 0</div>
+            <div class="result-item" id="obtained-marks">حاصل کردہ نمبر: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 22px;">فیصد (Percentage): 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">دوبارہ ٹیسٹ شروع کریں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const grade6UrduTest2Data = [
+    { q: "1. کسی چیز کو کسی خاص خوبی کی وجہ سے دوسری چیز کی مانند قرار دینا کیا کہلاتا ہے؟", options: ["الف) استعارہ", "ب) تشبیہ", "ج) کنایہ", "د) مجاز مرسل"], answer: 1 },
+    { q: "2. جب کسی چیز کو ہو بہو وہی چیز مان لیا جائے (بغیر تشبیہ کے حروف کے)، تو اسے کیا کہتے ہیں؟", options: ["الف) تشبیہ", "ب) استعارہ", "ج) تلمیح", "د) مبالغہ"], answer: 1 },
+    { q: "3. خطوط کی بنیادی طور پر کتنی اقسام ہیں؟", options: ["الف) دو (رسمی اور غیر رسمی)", "ب) تین", "ج) چار", "د) پانچ"], answer: 0 },
+    { q: "4. ایسا اسم جو نہ تو کسی کلمہ سے بنا ہو اور نہ اس سے کوئی دوسرا کلمہ بنے (جیسے: میز، کرسی)، کیا کہلاتا ہے؟", options: ["الف) اسمِ مصدر", "ب) اسمِ مشتق", "ج) اسمِ جامد", "د) اسمِ نکرہ"], answer: 2 },
+    { q: "5. وہ اسم جو خود تو کسی کلمہ سے نہ نکلا ہو لیکن اس سے دوسرے الفاظ بنائے جا سکیں (جیسے: لکھنا سے لکھائی)، کیا کہلاتا ہے؟", options: ["الف) اسمِ جامد", "ب) اسمِ مصدر", "ج) اسمِ مشتق", "د) اسمِ معرفہ"], answer: 1 },
+    { q: "6. وہ اسم جو مصدر سے بنایا گیا ہو (جیسے: لکھنے والا، لکھا ہوا)، کیا کہلاتا ہے؟", options: ["الف) اسمِ مشتق", "ب) اسمِ مصدر", "ج) اسمِ جامد", "د) اسمِ ظرف"], answer: 0 },
+    { q: "7. ایسا فعل جو اپنا مفہوم پورا کرنے کے لیے صرف فاعل کا محتاج ہو (مفعول کی ضرورت نہ ہو)، کیا کہلاتا ہے؟", options: ["الف) فعلِ متعدی", "ب) فعلِ لازم", "ج) فعلِ امر", "د) فعلِ نہیں"], answer: 1 },
+    { q: "8. ایسا فعل جسے مکمل معنی دینے کے لیے فاعل کے ساتھ مفعول کی بھی ضرورت پڑے، کیا کہلاتا ہے؟", options: ["الف) فعلِ لازم", "ب) فعلِ متعدی", "ج) فعلِ ناقص", "د) فعلِ معکوس"], answer: 1 },
+    { q: "9. وہ حروف جو اسموں یا افعال کو آپس میں ملاتے ہیں (جیسے: پر، میں، تک، سے)، کیا کہلاتے ہیں؟", options: ["الف) حروفِ جار", "ب) حروفِ عطف", "ج) حروفِ ندا", "د) حروفِ فجائیہ"], answer: 0 },
+    { q: "10. خط کے شروع میں دائیں طرف سب سے پہلے کیا لکھا جاتا ہے؟", options: ["الف) السلام علیکم", "ب) کاتَب کا نام", "ج) مقام اور تاریخ", "د) اختتام"], answer: 2 },
+    { q: "11. غیر رسمی خطوط (ذاتی خطوط) کس کو لکھے جاتے ہیں؟", options: ["الف) دفتری حکام کو", "ب) اخبار کے ایڈیٹر کو", "ج) رشتہ داروں اور دوستوں کو", "د) ہیڈ ماسٹر صاحب کو"], answer: 2 },
+    { q: "12. رسمي خطوط (مکتوباتِ رسمی) کس قسم کے لوگوں کو لکھے جاتے ہیں؟", options: ["الف) دوستوں کو", "ب) والدین کو", "ج) دفتری افسران، ایڈیٹرز اور اداروں کو", "د) بھائی کو"], answer: 2 },
+    { q: "13. خط کے آخر میں بائیں طرف لکھنے والے کے لیے کیا کلمات استعمال ہوتے ہیں؟", options: ["الف) آپ کا مخلص / والسلام", "ب) ڈیئر فرینڈ", "ج) محترم جناب", "د) ہوم ورک"], answer: 0 },
+    { q: "14. جملے میں جس شخص یا چیز پر کام واقع ہو، اسے کیا کہتے ہیں؟", options: ["الف) فاعل", "ب) مفعول", "ج) فعل", "د) صفت"], answer: 1 },
+    { q: "15. جملے میں جو شخص کام کرنے والا ہو، اسے کیا کہا جاتا ہے؟", options: ["الف) مفعول", "ب) فاعل", "ج) مصدر", "د) مجرور"], answer: 1 },
+    { q: "16. 'احمد نے کتاب پڑھی' اس جملے میں 'کتاب' کیا ہے؟", options: ["الف) فاعل", "ب) مفعول", "ج) فعل", "د) حرفِ جار"], answer: 1 },
+    { q: "17. 'پرندہ اڑا' اس جملے میں 'اڑا' کون سا فعل ہے؟", options: ["الف) فعلِ متعدی", "ب) فعلِ لازم", "ج) فعلِ امر", "د) فعلِ نہیں"], answer: 1 },
+    { q: "18. 'علی نے خط لکھا' اس جملے میں 'لکھا' کون سا فعل ہے؟", options: ["الف) فعلِ لازم", "ب) فعلِ متعدی", "ج) فعلِ ماضی مطلق", "د) فعلِ حال"], answer: 1 },
+    { q: "19. اردو زبان میں صفت کی کتنی بنیادی اقسام یا درجات مانے گئے ہیں؟", options: ["الف) دو", "ب) تین (تفصیلی، نسبتی وغیرہ)", "ج) چار", "د) پانچ"], answer: 1 },
+    { q: "20. کسی شعر میں کسی تاریخی واقعہ یا روایت کی طرف اشارہ کرنے کو کیا کہتے ہیں؟", options: ["الف) تشبیہ", "ب) استعارہ", "ج) تلمیح", "د) مبالغہ"], answer: 2 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = grade6UrduTest2Data[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `سوال ${currentQuestionIndex + 1} از ${grade6UrduTest2Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = grade6UrduTest2Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ درست جواب!</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ غلط جواب!</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < grade6UrduTest2Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = grade6UrduTest2Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `کل سوالات: ${total}`;
+    document.getElementById('correct-q').innerText = `درست جوابات: ${score}`;
+    document.getElementById('obtained-marks').innerText = `حاصل کردہ نمبر: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `فیصد (Percentage): ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
