@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics Online Test 1 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.urdu-text{font-family:Tahoma, Arial, sans-serif;direction:rtl;text-align:right;margin-top:8px;color:#102b4c;font-size:16px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Mathematics Online Test 1</h2>
+    <p class="subtitle">HMSA Learning Academy — Bilingual Math Assessment 1</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 1 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const mathTest1Data = [
+    { q: "1. Which of the following is a prime number?<br><span class='urdu-text'>ذیل میں سے کون سا مفرد عدد (Prime Number) ہے؟</span>", options: ["A) 9", "B) 11", "C) 15", "D) 21"], answer: 1 },
+    { q: "2. What is the HCF of 12 and 18?<br><span class='urdu-text'>12 اور 18 کا عادِ اعظم (HCF) کیا ہے؟</span>", options: ["A) 3", "B) 6", "C) 9", "D) 12"], answer: 1 },
+    { q: "3. What is the LCM of 4 and 6?<br><span class='urdu-text'>4 اور 6 کا ذواضعافِ اقل (LCM) کیا ہے؟</span>", options: ["A) 12", "B) 18", "C) 24", "D) 2"], answer: 0 },
+    { q: "4. What is the additive inverse of -5?<br><span class='urdu-text'>-5 کا جمعی معکوس (Additive Inverse) کیا ہے؟</span>", options: ["A) -5", "B) 5", "C) 0", "D) 1/5"], answer: 1 },
+    { q: "5. Evaluate: (+8) + (-3) = ?<br><span class='urdu-text'>حاصل معلوم کریں: (+8) + (-3) = ؟</span>", options: ["A) +5", "B) -5", "C) +11", "D) -11"], answer: 0 },
+    { q: "6. Evaluate: (-4) × (-2) = ?<br><span class='urdu-text'>حاصل معلوم کریں: (-4) × (-2) = ؟</span>", options: ["A) -8", "B) +8", "C) -6", "D) +6"], answer: 1 },
+    { q: "7. Express 3:5 as a percentage:<br><span class='urdu-text'>نسبت 3:5 کو فیصد میں تبدیل کریں:</span>", options: ["A) 30%", "B) 50%", "C) 60%", "D) 75%"], answer: 2 },
+    { q: "8. Find the value of x if 2x = 10:<br><span class='urdu-text'>اگر 2x = 10 ہو تو x کی قیمت معلوم کریں:</span>", options: ["A) 2", "B) 5", "C) 10", "D) 20"], answer: 1 },
+    { q: "9. Which of the following is a linear equation?<br><span class='urdu-text'>ذیل میں سے کون سا خطی مساوات (Linear Equation) ہے؟</span>", options: ["A) x² + 2 = 0", "B) x + 5 = 10", "C) x³ = 8", "D) xy = 4"], answer: 1 },
+    { q: "10. A set containing no elements is called:<br><span class='urdu-text'>ایسا سیٹ جس میں کوئی عنصر نہ ہو، کہلاتا ہے:</span>", options: ["A) Equal Set", "B) Empty Set (Null Set)", "C) Subset", "D) Universal Set"], answer: 1 },
+    { q: "11. If A = {1, 2, 3} and B = {3, 4, 5}, what is A ∩ B?<br><span class='urdu-text'>اگر A = {1, 2, 3} اور B = {3, 4, 5} ہوں تو A ∩ B کیا ہوگا؟</span>", options: ["A) {1, 2}", "B) {3}", "C) {1, 2, 3, 4, 5}", "D) {}"], answer: 1 },
+    { q: "12. What is the sum of angles in a triangle?<br><span class='urdu-text'>ایک مثلث (Triangle) کے تینوں زاویوں کا مجموعہ کتنا ہوتا ہے؟</span>", options: ["A) 90°", "B) 180°", "C) 270°", "D) 360°"], answer: 1 },
+    { q: "13. Find the area of a square with side length 5 cm:<br><span class='urdu-text'>اس مربع کا رقبہ معلوم کریں جس کے ایک ضلع کی لمبائی 5 سینٹی میٹر ہو:</span>", options: ["A) 10 cm²", "B) 20 cm²", "C) 25 cm²", "D) 15 cm²"], answer: 2 },
+    { q: "14. Find the perimeter of a rectangle with length 6 cm and width 4 cm:<br><span class='urdu-text'>اس مستطیل کا احاطہ معلوم کریں جس کی لمبائی 6 سم اور چوڑائی 4 سم ہو:</span>", options: ["A) 20 cm", "B) 24 cm", "C) 10 cm", "D) 12 cm"], answer: 0 },
+    { q: "15. What is the mean (average) of 10, 20, and 30?<br><span class='urdu-text'>10، 20 اور 30 کا اوسط (Mean) کیا ہے؟</span>", options: ["A) 15", "B) 20", "C) 25", "D) 30"], answer: 1 },
+    { q: "16. What is the reciprocal of 7/9?<br><span class='urdu-text'>7/9 کا معکوس (Reciprocal) کیا ہے؟</span>", options: ["A) 7/9", "B) 9/7", "C) 1/7", "D) 1/9"], answer: 1 },
+    { q: "17. Convert 45% into a fraction in lowest form:<br><span class='urdu-text'>45% کو کسر کی آسان ترین شکل میں تبدیل کریں:</span>", options: ["A) 9/20", "B) 1/2", "C) 3/4", "D) 4/5"], answer: 0 },
+    { q: "18. What is 20% of 150?<br><span class='urdu-text'>150 کا 20 فیصد کتنا ہوتا ہے؟</span>", options: ["A) 20", "B) 30", "C) 40", "D) 50"], answer: 1 },
+    { q: "19. An angle measuring exactly 90 degrees is called:<br><span class='urdu-text'>ایسا زاویہ جو بالکل 90 درجے کا ہو، کہلاتا ہے:</span>", options: ["A) Acute Angle", "B) Right Angle", "C) Obtuse Angle", "D) Straight Angle"], answer: 1 },
+    { q: "20. How many lines of symmetry does a regular square have?<br><span class='urdu-text'>ایک باقاعدہ مربع (Square) کے کتنے تظاہر خطوط (Lines of Symmetry) ہوتے ہیں؟</span>", options: ["A) 2", "B) 4", "C) 6", "D) 8"], answer: 1 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = mathTest1Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${mathTest1Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = mathTest1Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < mathTest1Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = mathTest1Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
