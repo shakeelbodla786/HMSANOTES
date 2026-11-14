@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 English Online Test 3 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:#102b4c;color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 8 — English Online Test 3</h2>
+    <p class="subtitle">HMSA Learning Academy — Grade 8 Assessment 3</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 3 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const englishTest3Data = [
+    { q: "1. Which type of pronoun points to specific things (e.g., this, that, these)?", options: ["A) Personal Pronoun", "B) Demonstrative Pronoun", "C) Reflexive Pronoun", "D) Relative Pronoun"], answer: 1 },
+    { q: "2. Identify the verb in the sentence: 'The sun shines brightly in the sky.'", options: ["A) sun", "B) brightly", "C) shines", "D) sky"], answer: 2 },
+    { q: "3. What is the past simple form of the verb 'begin'?", options: ["A) begun", "B) began", "C) beginned", "D) beginning"], answer: 1 },
+    { q: "4. Which preposition indicates movement from inside to outside?", options: ["A) Into", "B) Out of", "C) Through", "D) Across"], answer: 1 },
+    { q: "5. Identify the adverb in the sentence: 'She sings very sweetly.'", options: ["A) She", "B) sings", "C) very", "D) sweetly"], answer: 3 },
+    { q: "6. What is the correct plural form of the noun 'Tooth'?", options: ["A) Tooths", "B) Toothses", "C) Teeth", "D) Teethes"], answer: 2 },
+    { q: "7. Which modal verb expresses duty or obligation?", options: ["A) Can", "B) May", "C) Must", "D) Might"], answer: 2 },
+    { q: "8. Complete the sentence: 'Prevention is better ___ cure.'", options: ["A) then", "B) than", "C) to", "D) from"], answer: 1 },
+    { q: "9. What is the synonym of the word 'Eager'?", options: ["A) Lazy", "B) Excited / Keen", "C) Tired", "D) Sad"], answer: 1 },
+    { q: "10. What is the antonym of the word 'Accept'?", options: ["A) Agree", "B) Refuse / Reject", "C) Receive", "D) Take"], answer: 1 },
+    { q: "11. Which tense is used in the sentence: 'By next year, they will have built the house.'", options: ["A) Future Simple", "B) Future Continuous", "C) Future Perfect", "D) Future Perfect Continuous"], answer: 2 },
+    { q: "12. Change into Indirect Speech: He said, 'I am reading a book.'", options: ["A) He said that he is reading a book.", "B) He said that he was reading a book.", "C) He says that he is reading a book.", "D) He asked if he was reading a book."], answer: 1 },
+    { q: "13. What type of sentence makes a statement or expresses an opinion?", options: ["A) Interrogative", "B) Imperative", "C) Declarative (Assertive)", "D) Exclamatory"], answer: 2 },
+    { q: "14. Which punctuation mark is used to separate items in a list?", options: ["A) Full stop", "B) Comma", "C) Colon", "D) Question mark"], answer: 1 },
+    { q: "15. What is the comparative degree of the adjective 'bad'?", options: ["A) badder", "B) baddest", "C) worse", "D) worst"], answer: 2 },
+    { q: "16. Which of the following is a compound word?", options: ["A) Run", "B) Sunflower", "C) Beautiful", "D) Fast"], answer: 1 },
+    { q: "17. Identify the subject in the sentence: 'On the hill stood an old castle.'", options: ["A) hill", "B) stood", "C) an old castle", "D) On the hill"], answer: 2 },
+    { q: "18. Which prefix means 'not' or 'opposite of' in the word 'Unhappy'?", options: ["A) Un-", "B) Dis-", "C) Mis-", "D) Re-"], answer: 0 },
+    { q: "19. What is the masculine gender of the noun 'Duck'?", options: ["A) Goose", "B) Drake", "C) Gander", "D) Hen"], answer: 1 },
+    { q: "20. Which sentence is grammatically correct?", options: ["A) He don't like apples.", "B) He doesn't likes apples.", "C) He doesn't like apples.", "D) He not like apples."], answer: 2 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = englishTest3Data[currentQuestionIndex];
+    document.getElementById('question-text').innerText = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${englishTest3Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = englishTest3Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer!</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer!</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < englishTest3Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = englishTest3Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
