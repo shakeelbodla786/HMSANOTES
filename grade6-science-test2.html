@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>General Science Online Test 2 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.urdu-text{font-family:Tahoma, Arial, sans-serif;direction:rtl;text-align:right;margin-top:8px;color:#102b4c;font-size:16px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>General Science Online Test 2</h2>
+    <p class="subtitle">HMSA Learning Academy — Grade 6 Science Assessment 2</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const scienceTest2Data = [
+    { q: "1. What is the jelly-like substance inside a cell where chemical reactions take place?<br><span class='urdu-text'>خلیے کے اندر موجود جیلی جیسی مادہ نما چیز کیا کہلاتی ہے جہاں کیمیائی تعاملات ہوتے ہیں؟</span>", options: ["A) Nucleus", "B) Cytoplasm", "C) Cell Wall", "D) Vacuole"], answer: 1 },
+    { q: "2. The control center of a cell is the:<br><span class='urdu-text'>خلیے کا کنٹرول سینٹر (مرکز) کون سا حصہ کہلاتا ہے؟</span>", options: ["A) Nucleus", "B) Mitochondria", "C) Ribosome", "D) Cell Membrane"], answer: 0 },
+    { q: "3. What is the male reproductive part of a flower called?<br><span class='urdu-text'>پھول کا نر تولیدی حصہ کیا کہلاتا ہے؟</span>", options: ["A) Pistil", "B) Stamen", "C) Petal", "D) Sepal"], answer: 1 },
+    { q: "4. The transfer of pollen grains from anther to stigma is called:<br><span class='urdu-text'>پراگ دانے سے زرد رقعہ کا استیگما تک منتقل ہونا کیا کہلاتا ہے؟</span>", options: ["A) Germination", "B) Pollination", "C) Fertilization", "D) Photosynthesis"], answer: 1 },
+    { q: "5. Which vitamin is known as the 'Sunshine Vitamin' because our body makes it in sunlight?<br><span class='urdu-text'>کون سا وٹامن 'سن شائن وٹامن' کہلاتا ہے کیونکہ ہمارا جسم سورج کی روشنی میں اسے بناتا ہے؟</span>", options: ["A) Vitamin A", "B) Vitamin B", "C) Vitamin C", "D) Vitamin D"], answer: 3 },
+    { q: "6. Lack of iron in our diet causes a disease known as:<br><span class='urdu-text'>غذا میں آئرن کی کمی سے کون سی بیماری ہوتی ہے؟</span>", options: ["A) Rickets", "B) Anemia", "C) Scurvy", "D) Goitre"], answer: 1 },
+    { q: "7. Where does the digestion of food finally complete in the human body?<br><span class='urdu-text'>انسانی جسم میں خوراک کے ہضم ہونے کا عمل کہاں مکمل ہوتا ہے؟</span>", options: ["A) Stomach", "B) Small Intestine", "C) Mouth", "D) Food Pipe (Oesophagus)"], answer: 1 },
+    { q: "8. In which state of matter are the particles tightly packed together?<br><span class='urdu-text'>مادے کی کس حالت میں ذرات آپس میں بہت مضبوطی سے جڑے ہوتے ہیں؟</span>", options: ["A) Solid", "B) Liquid", "C) Gas", "D) Plasma"], answer: 0 },
+    { q: "9. The process of changing liquid into gas by heating is called:<br><span class='urdu-text'>حرارت دینے پر مائع کا گیس میں تبدیل ہونے کا عمل کیا کہلاتا ہے؟</span>", options: ["A) Freezing", "B) Melting", "C) Evaporation", "D) Condensation"], answer: 2 },
+    { q: "10. The chemical symbol for Water is:<br><span class='urdu-text'>پانی کی کیمیائی علامت (Chemical Formula) کیا ہے؟</span>", options: ["A) CO2", "B) H2O", "C) NaCl", "D) O2"], answer: 1 },
+    { q: "11. Salt (Sodium Chloride) dissolved in water forms a:<br><span class='urdu-text'>پانی میں نمک کا حل ہو جانا کیا کہلاتا ہے؟</span>", options: ["A) Suspension", "B) Solution", "C) Pure Element", "D) Solid"], answer: 1 },
+    { q: "12. Energy stored in a stretched rubber band or a spring is called:<br><span class='urdu-text'>کھنچے ہوئے ربڑ یا سپرنگ میں موجود توانائی کیا کہلاتی ہے؟</span>", options: ["A) Kinetic Energy", "B) Potential Energy", "C) Electrical Energy", "D) Sound Energy"], answer: 1 },
+    { q: "13. Energy possessed by a moving object is called:<br><span class='urdu-text'>حرکت کرتی ہوئی چیز میں موجود توانائی کیا کہلاتی ہے؟</span>", options: ["A) Potential Energy", "B) Kinetic Energy", "C) Chemical Energy", "D) Heat Energy"], answer: 1 },
+    { q: "14. A complete path for the flow of electric current is called an electric:<br><span class='urdu-text'>برقی رو کے بہنے کا مکمل راستہ کیا کہلاتا ہے؟</span>", options: ["A) Circuit", "B) Switch", "C) Battery", "D) Wire"], answer: 0 },
+    { q: "15. Materials that do not allow electricity to pass through them are called:<br><span class='urdu-text'>وہ اشیاء جن میں سے بجلی نہیں گزر سکتی، کہلاتی ہیں:</span>", options: ["A) Conductors", "B) Insulators", "C) Metals", "D) Magnets"], answer: 1 },
+    { q: "16. Which of the following is a natural magnet?<br><span class='urdu-text'>ذیل میں سے کون سا قدرتی مقناطیس ہے؟</span>", options: ["A) Iron Bar", "B) Lodestone (Magnetite)", "C) Copper Wire", "D) Steel Ring"], answer: 1 },
+    { q: "17. A magnet has how many poles?<br><span class='urdu-text'>ایک مقناطیس کے کتنے قطب (Poles) ہوتے ہیں؟</span>", options: ["A) One", "B) Two (North and South)", "C) Three", "D) Four"], answer: 1 },
+    { q: "18. Which planet is known as the Red Planet?<br><span class='urdu-text'>کون سا سیارہ 'سرخ سیارہ' (Red Planet) کہلاتا ہے؟</span>", options: ["A) Venus", "B) Mars", "C) Jupiter", "D) Saturn"], answer: 1 },
+    { q: "19. Which is the largest planet in our Solar System?<br><span class='urdu-text'>ہمارے نظامِ شمسی کا سب سے بڑا سیارہ کون سا ہے؟</span>", options: ["A) Earth", "B) Saturn", "C) Jupiter", "D) Neptune"], answer: 2 },
+    { q: "20. Tools and machines used in our daily life to make work easier are part of:<br><span class='urdu-text'>روزمرہ زندگی میں کام کو آسان بنانے والے آلات اور ٹیکنالوجی کا تعلق کس سے ہے؟</span>", options: ["A) Technology", "B) History", "C) Geography", "D) Literature"], answer: 0 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = scienceTest2Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${scienceTest2Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = scienceTest2Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < scienceTest2Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = scienceTest2Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
