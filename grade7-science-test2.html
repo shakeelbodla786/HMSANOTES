@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 7 General Science Online Test 2 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.urdu-text{font-family:Tahoma, Arial, sans-serif;direction:rtl;text-align:right;margin-top:8px;color:#102b4c;font-size:16px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:#102b4c;color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 7 — General Science Online Test 2</h2>
+    <p class="subtitle">HMSA Learning Academy — Grade 7 Science Assessment 2</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const scienceTest2Data = [
+    { q: "1. What is the process of water loss from plant leaves through evaporation called?<br><span class='urdu-text'>پتوں سے پانی کا بخارات بن کر اڑنے کا عمل کیا کہلاتا ہے؟</span>", options: ["A) Photosynthesis", "B) Transpiration", "C) Respiration", "D) Germination"], answer: 1 },
+    { q: "2. Which blood cells fight against germs and diseases in our body?<br><span class='urdu-text'>خون کے کون سے خلیے ہمارے جسم میں جراثیم اور بیماریوں سے لڑتے ہیں؟</span>", options: ["A) Red Blood Cells", "B) White Blood Cells", "C) Platelets", "D) Plasma"], answer: 1 },
+    { q: "3. What is the function of platelets in human blood?<br><span class='urdu-text'>انسانی خون میں پلیٹلیٹس کا کیا کام ہوتا ہے؟</span>", options: ["A) Carry oxygen", "B) Fight infection", "C) Help in blood clotting", "D) Digest food"], answer: 2 },
+    { q: "4. Substances used to develop immunity against specific diseases are called:<br><span class='urdu-text'>مخصوص بیماریوں کے خلاف قوتِ مدافعت پیدا کرنے کے لیے استعمال ہونے والی ادویات کیا کہلاتی ہیں؟</span>", options: ["A) Antibiotics", "B) Vaccines", "C) Painkillers", "D) Vitamins"], answer: 1 },
+    { q: "5. What is the atomic number of an element based on?<br><span class='urdu-text'>کسی عنصر کا ایٹمی نمبر کس کی تعداد پر منحصر ہوتا ہے؟</span>", options: ["A) Number of electrons", "B) Number of protons", "C) Number of neutrons", "D) Total mass"], answer: 1 },
+    { q: "6. A chemical bond formed by sharing of electrons between atoms is called:<br><span class='urdu-text'>ایٹموں کے درمیان الیکٹرانوں کے اشتراک سے بننے والا بانڈ کیا کہلاتا ہے؟</span>", options: ["A) Ionic Bond", "B) Covalent Bond", "C) Metallic Bond", "D) Hydrogen Bond"], answer: 1 },
+    { q: "7. A solution in which no more solute can dissolve at a given temperature is called:<br><span class='urdu-text'>ایسا محلول جس میں مزید حل پذیر مادہ حل نہ ہو سکے، کیا کہلاتا ہے؟</span>", options: ["A) Unsaturated Solution", "B) Saturated Solution", "C) Dilute Solution", "D) Concentrated Solution"], answer: 1 },
+    { q: "8. What is the unit of Force in the International System of Units (SI)?<br><span class='urdu-text'>بین الاقوامی نظام (SI) میں قوت (Force) کا یونٹ کیا ہے؟</span>", options: ["A) Joule", "B) Newton", "C) Watt", "D) Pascal"], answer: 1 },
+    { q: "9. Energy possessed by an object due to its motion is called:<br><span class='urdu-text'>کسی چیز میں اس کی حرکت کی وجہ سے موجود توانائی کیا کہلاتا ہے؟</span>", options: ["A) Potential Energy", "B) Kinetic Energy", "C) Chemical Energy", "D) Solar Energy"], answer: 1 },
+    { q: "10. Which type of waves do not require a medium to travel (e.g., light waves)?<br><span class='urdu-text'>کون سی لہروں کو سفر کرنے کے لیے کسی واسطے کی ضرورت نہیں ہوتی (مثلاً روشنی کی لہریں)؟</span>", options: ["A) Mechanical Waves", "B) Electromagnetic Waves", "C) Sound Waves", "D) Water Waves"], answer: 1 },
+    { q: "11. What is the instrument used to measure temperature?<br><span class='urdu-text'>درجہ حرارت ناپنے کے آلے کو کیا کہتے ہیں؟</span>", options: ["A) Barometer", "B) Thermometer", "C) Ammeter", "D) Speedometer"], answer: 1 },
+    { q: "12. The transfer of heat through direct contact in solids is called:<br><span class='urdu-text'>ٹھوس چیزوں میں براہ راست رابطے کے ذریعے حرارت کی منتقلی کیا کہلاتی ہے؟</span>", options: ["A) Conduction", "B) Convection", "C) Radiation", "D) Evaporation"], answer: 0 },
+    { q: "13. The transfer of heat through fluids (liquids and gases) is called:<br><span class='urdu-text'>مائع اور گیسوں میں حرارت کی منتقلی کا طریقہ کیا کہلاتا ہے؟</span>", options: ["A) Conduction", "B) Convection", "C) Radiation", "D) Insulation"], answer: 1 },
+    { q: "14. The transfer of heat through empty space in the form of waves is called:<br><span class='urdu-text'>خلاء میں لہروں کے ذریعے حرارت کی منتقلی کیا کہلاتی ہے؟</span>", options: ["A) Conduction", "B) Convection", "C) Radiation", "D) Absorption"], answer: 2 },
+    { q: "15. The path of the Earth around the Sun is called its:<br><span class='urdu-text'>سورج کے گرد زمین کا راستہ کیا کہلاتا ہے؟</span>", options: ["A) Axis", "B) Orbit", "C) Equator", "D) Hemisphere"], answer: 1 },
+    { q: "16. Day and night on Earth are caused by the Earth's:<br><span class='urdu-text'>زمین پر دن اور رات کس وجہ سے بنتے ہیں؟</span>", options: ["A) Revolution around the Sun", "B) Rotation on its axis", "C) Tilt of the Earth", "D) Distance from the Sun"], answer: 1 },
+    { q: "17. Seasons on Earth are caused by the Earth's:<br><span class='urdu-text'>زمین پر موسم کس وجہ سے تبدیل ہوتے ہیں؟</span>", options: ["A) Rotation on its axis", "B) Revolution around the Sun and its tilt", "C) Shape of the Earth", "D) Wind speed"], answer: 1 },
+    { q: "18. What is the name of our galaxy?<br><span class='urdu-text'>ہمارے کہکشاں (Galaxy) کا نام کیا ہے؟</span>", options: ["A) Andromeda", "B) Milky Way", "C) Sombrero", "D) Whirlpool"], answer: 1 },
+    { q: "19. The second layer of the Earth located beneath the crust is called:<br><span class='urdu-text'>زمین کی کرسٹ (Crust) کے نیچے واقع دوسری تہہ کیا کہلاتی ہے؟</span>", options: ["A) Core", "B) Mantle", "C) Atmosphere", "D) Lithosphere"], answer: 1 },
+    { q: "20. The innermost dense part of the Earth is called the:<br><span class='urdu-text'>زمین کا سب سے اندرونی اور گنجان حصہ کیا کہلاتا ہے؟</span>", options: ["A) Crust", "B) Mantle", "C) Core", "D) Crust-mantle boundary"], answer: 2 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = scienceTest2Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${scienceTest2Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = scienceTest2Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < scienceTest2Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = scienceTest2Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
