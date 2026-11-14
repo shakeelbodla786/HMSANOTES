@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 7 General Science Online Test 1 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.urdu-text{font-family:Tahoma, Arial, sans-serif;direction:rtl;text-align:right;margin-top:8px;color:#102b4c;font-size:16px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:#102b4c;color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade 7 — General Science Online Test 1</h2>
+    <p class="subtitle">HMSA Learning Academy — Grade 7 Science Assessment 1</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 1 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const scienceTest1Data = [
+    { q: "1. Which tissue in plants transports water and minerals from roots to leaves?<br><span class='urdu-text'>پودوں میں کون سا ٹشو پانی اور معدنیات جڑوں سے پتوں تک پہنچاتا ہے؟</span>", options: ["A) Phloem", "B) Xylem", "C) Cortex", "D) Epidermis"], answer: 1 },
+    { q: "2. Which tissue transports prepared food from leaves to other parts of the plant?<br><span class='urdu-text'>پتوں سے تیار شدہ خوراک پودے کے دوسرے حصوں تک کون سا ٹشو لے جاتا ہے؟</span>", options: ["A) Xylem", "B) Phloem", "C) Cambium", "D) Pith"], answer: 1 },
+    { q: "3. What is the main organ of the human respiratory system?<br><span class='urdu-text'>انسانی نظامِ تنفس کا سب سے اہم عضو کون سا ہے؟</span>", options: ["A) Heart", "B) Lungs", "C) Kidneys", "D) Liver"], answer: 1 },
+    { q: "4. Which blood vessels carry oxygenated blood from the heart to the body parts?<br><span class='urdu-text'>کون سی خون کی نالیاں آکسیجن والا خون دل سے جسم کے باقی حصوں تک لے جاتی ہیں؟</span>", options: ["A) Veins", "B) Arteries", "C) Capillaries", "D) Nerves"], answer: 1 },
+    { q: "5. The ability of the body to resist and fight against diseases is called:<br><span class='urdu-text'>جسم کی بیماریوں کے خلاف مزاحمت کرنے کی صلاحیت کیا کہلاتی ہے؟</span>", options: ["A) Allergy", "B) Immunity", "C) Infection", "D) Respiration"], answer: 1 },
+    { q: "6. Diseases that can spread from one person to another are called:<br><span class='urdu-text'>وہ بیماریاں جو ایک شخص سے دوسرے شخص میں منتقل ہو سکتی ہیں، کیا کہلاتی ہیں؟</span>", options: ["A) Non-infectious diseases", "B) Infectious (Contagious) diseases", "C) Genetic diseases", "D) Deficiency diseases"], answer: 1 },
+    { q: "7. What is the center of an atom called?<br><span class='urdu-text'>ایٹم کا مرکز کیا کہلاتا ہے؟</span>", options: ["A) Electron", "B) Nucleus", "C) Orbit", "D) Shell"], answer: 1 },
+    { q: "8. Which subatomic particles have a positive charge?<br><span class='urdu-text'>کون سے ذرات پر مثبت چارج (Positive charge) ہوتا ہے؟</span>", options: ["A) Electrons", "B) Protons", "C) Neutrons", "D) Photons"], answer: 1 },
+    { q: "9. Which subatomic particles have no charge (neutral)?<br><span class='urdu-text'>کون سے ذرات پر کوئی چارج نہیں ہوتا (غیر جانبدار ہوتے ہیں)؟</span>", options: ["A) Protons", "B) Electrons", "C) Neutrons", "D) Ions"], answer: 2 },
+    { q: "10. Melting of ice is an example of which type of change?<br><span class='urdu-text'>برف کا پگھلنا کس قسم کی تبدیلی کی مثال ہے؟</span>", options: ["A) Chemical change", "B) Physical change", "C) Permanent change", "D) Biological change"], answer: 1 },
+    { q: "11. Burning of paper is an example of which type of change?<br><span class='urdu-text'>کاغذ کا جلنا کس قسم کی تبدیلی کی مثال ہے؟</span>", options: ["A) Physical change", "B) Chemical change", "C) Temporary change", "D) Reversible change"], answer: 1 },
+    { q: "12. A chemical bond formed by the transfer of electrons between atoms is called:<br><span class='urdu-text'>ایٹموں کے درمیان الیکٹرانوں کے تبادلے سے بننے والا کیمیائی بانڈ کیا کہلاتا ہے؟</span>", options: ["A) Covalent Bond", "B) Ionic Bond", "C) Hydrogen Bond", "D) Metallic Bond"], answer: 1 },
+    { q: "13. A homogeneous mixture of two or more substances is called:<br><span class='urdu-text'>دو یا دو سے زیادہ چیزوں کا یکساں آمیزہ (Homogeneous mixture) کیا کہلاتا ہے؟</span>", options: ["A) Solution", "B) Suspension", "C) Element", "D) Compound"], answer: 0 },
+    { q: "14. In a salt solution, water acts as the:<br><span class='urdu-text'>نمک کے محلول میں پانی کس طور پر کام کرتا ہے؟</span>", options: ["A) Solute", "B) Solvent", "C) Solution", "D) Sediment"], answer: 1 },
+    { q: "15. A push or pull on an object is called:<br><span class='urdu-text'>کسی چیز پر دھکا دینے یا کھینچنے کے عمل کو کیا کہتے ہیں؟</span>", options: ["A) Energy", "B) Force", "C) Pressure", "D) Friction"], answer: 1 },
+    { q: "16. The force that opposes the motion of sliding objects is called:<br><span class='urdu-text'>وہ قوت جو حرکت کرتی ہوئی چیز کی مخالفت کرتی ہے، کیا کہلاتی ہے؟</span>", options: ["A) Gravity", "B) Friction", "C) Magnetism", "D) Tension"], answer: 1 },
+    { q: "17. Disturbances that transfer energy from one place to another are called:<br><span class='urdu-text'>ایسی لہریں یا خلل جو توانائی کو ایک جگہ سے دوسری جگہ منتقل کریں، کیا کہلاتے ہیں؟</span>", options: ["A) Waves", "B) Forces", "C) Masses", "D) Speeds"], answer: 0 },
+    { q: "18. Sound waves travel fastest in which medium?<br><span class='urdu-text'>آواز کی لہریں کس واسطے (Medium) میں سب سے تیز سفر کرتی ہیں؟</span>", options: ["A) Gases", "B) Liquids", "C) Solids", "D) Vacuum"], answer: 2 },
+    { q: "19. Heat always flows from a body of:<br><span class='urdu-text'>حرارت ہمیشہ کس جسم سے بہتی ہے؟</span>", options: ["A) Lower temperature to higher temperature", "B) Higher temperature to lower temperature", "C) Equal temperature", "D) Cold to hot body"], answer: 1 },
+    { q: "20. The outermost layer of the Earth is called:<br><span class='urdu-text'>زمین کی سب سے بیرونی تہہ کیا کہلاتی ہے؟</span>", options: ["A) Mantle", "B) Core", "C) Crust", "D) Magma"], answer: 2 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = scienceTest1Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${scienceTest1Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = scienceTest1Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < scienceTest1Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = scienceTest1Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
