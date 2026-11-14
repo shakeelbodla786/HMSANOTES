@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>General Science Online Test 1 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.urdu-text{font-family:Tahoma, Arial, sans-serif;direction:rtl;text-align:right;margin-top:8px;color:#102b4c;font-size:16px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>General Science Online Test 1</h2>
+    <p class="subtitle">HMSA Learning Academy — Grade 6 Science Assessment 1</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 1 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const scienceTest1Data = [
+    { q: "1. What is the basic structural and functional unit of life?<br><span class='urdu-text'>زندگی کی بنیادی اور ساختی اکائی کیا ہے؟</span>", options: ["A) Tissue", "B) Cell", "C) Organ", "D) Organ System"], answer: 1 },
+    { q: "2. Which part of the plant cell provides rigidity and a fixed shape?<br><span class='urdu-text'>پودے کے خلیے کا کون سا حصہ اسے سختی اور مخصوص شکل دیتا ہے؟</span>", options: ["A) Cell Membrane", "B) Cell Wall", "C) Cytoplasm", "D) Nucleus"], answer: 1 },
+    { q: "3. What is the process by which plants make their own food?<br><span class='urdu-textချက်'>وہ عمل جس کے ذریعے پودے اپنی خوراک خود بناتے ہیں، کیا کہلاتا ہے؟</span>", options: ["A) Respiration", "B) Photosynthesis", "C) Transpiration", "D) Germination"], answer: 1 },
+    { q: "4. Which gas is absorbed by plants during photosynthesis?<br><span class='urdu-text'>فوٹوسنتھسس (ترکیب ضیائی) کے دوران پودے کون سی گیس جذب کرتے ہیں؟</span>", options: ["A) Oxygen", "B) Carbon Dioxide", "C) Nitrogen", "D) Hydrogen"], answer: 1 },
+    { q: "5. A diet that contains all essential nutrients in correct amounts is called:<br><span class='urdu-text'>ایسی غذا جس میں تمام ضروری غذائی اجزاء مناسب مقدار میں ہوں، کہلاتی ہے:</span>", options: ["A) Fast Food", "B) Balanced Diet", "C) Junk Food", "D) Roughage"], answer: 1 },
+    { q: "6. Which nutrient provides the maximum energy to our body?<br><span class='urdu-text'>کون سا غذائی جزو ہمارے جسم کو سب سے زیادہ توانائی فراہم کرتا ہے؟</span>", options: ["A) Vitamins", "B) Minerals", "C) Carbohydrates and Fats", "D) Water"], answer: 2 },
+    { q: "7. Which organ in the human digestive system absorbs water from undigested food?<br><span class='urdu-text'>انسانی نظامِ ہضم کا کون سا حصہ بغیر ہضم شدہ خوراک سے پانی جذب کرتا ہے؟</span>", options: ["A) Stomach", "B) Small Intestine", "C) Large Intestine", "D) Liver"], answer: 2 },
+    { q: "8. Anything that has mass and occupies space is called:<br><span class='urdu-text'>ہر وہ چیز جو وزن رکھتی ہو اور جگہ گھیرتی ہو، کیا کہلا تی ہے؟</span>", options: ["A) Energy", "B) Matter", "C) Force", "D) Light"], answer: 1 },
+    { q: "9. What are the three states of matter?<br><span class='urdu-text'>مادے کی تین بنیادی حالتیں کون سی ہیں؟</span>", options: ["A) Solid, Liquid, Gas", "B) Hard, Soft, Wet", "C) Hot, Cold, Warm", "D) Heavy, Light, Fast"], answer: 0 },
+    { q: "10. A pure substance made up of only one kind of atoms is called:<br><span class='urdu-text'>ایک ہی قسم کے ایٹموں سے مل کر بننے والا خالص مادہ کیا کہلاتا ہے؟</span>", options: ["A) Compound", "B) Element", "C) Mixture", "D) Solution"], answer: 1 },
+    { q: "11. Water (H2O) is an example of an:<br><span class='urdu-text'>پانی (H2O) کس کی ایک مثال ہے؟</span>", options: ["A) Element", "B) Compound", "C) Mixture", "D) Metal"], answer: 1 },
+    { q: "12. A combination of two or more substances in which they do not chemically combine is:<br><span class='urdu-text'>دو یا دو سے زیادہ چیزوں کا ایسا ملاپ جس میں وہ کیمیائی طور پر نہ ملیں، کہلاتا ہے:</span>", options: ["A) Compound", "B) Mixture", "C) Element", "D) Atom"], answer: 1 },
+    { q: "13. The ability to do work is called:<br><span class='urdu-text'>کام کرنے کی صلاحیت کو کیا کہتے ہیں؟</span>", options: ["A) Force", "B) Energy", "C) Power", "D) Speed"], answer: 1 },
+    { q: "14. Which form of energy do we get from the Sun?<br><span class='urdu-text'>سورج سے ہمیں کون سی توانائی ملتی ہے؟</span>", options: ["A) Sound Energy", "B) Light and Heat Energy", "C) Magnetic Energy", "D) Chemical Energy"], answer: 1 },
+    { q: "15. The flow of electric charges is called:<br><span class='urdu-text'>برقی چارجز کے بہاؤ کو کیا کہتے ہیں؟</span>", options: ["A) Electric Current", "B) Magnetism", "C) Friction", "D) Gravity"], answer: 0 },
+    { q: "16. Materials that allow electricity to pass through them easily are called:<br><span class='urdu-text'>وہ اشیاء جن میں سے بجلی آسانی سے گزر سکتی ہے، کہلاتی ہیں:</span>", options: ["A) Insulators", "B) Conductors", "C) Non-metals", "D) Plastics"], answer: 1 },
+    { q: "17. A material that is attracted to a magnet is:<br><span class='urdu-text'>کون سا مادہ مقناطیس کی طرف کھنچتا ہے؟</span>", options: ["A) Wood", "B) Iron", "C) Plastic", "D) Glass"], answer: 1 },
+    { q: "18. How many planets are there in our Solar System?<br><span class='urdu-text'>ہمارے نظامِ شمسی (Solar System) میں کتنے سیارے ہیں؟</span>", options: ["A) 7", "B) 8", "C) 9", "D) 10"], answer: 1 },
+    { q: "19. Which planet is closest to the Sun?<br><span class='urdu-text'>سورج کے سب سے قریب کون سا سیارہ ہے؟</span>", options: ["A) Earth", "B) Mercury", "C) Mars", "D) Venus"], answer: 1 },
+    { q: "20. Which natural satellite revolves around the Earth?<br><span class='urdu-text'>زمین کے گرد کون سا قدرتی سیارہ (چاند) چکر لگاتا ہے؟</span>", options: ["A) Sun", "B) Moon", "C) Star", "D) Comet"], answer: 1 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = scienceTest1Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${scienceTest1Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = scienceTest1Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < scienceTest1Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = scienceTest1Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
