@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics Online Test 2 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green);direction:ltr;text-align:left;}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.urdu-text{font-family:Tahoma, Arial, sans-serif;direction:rtl;text-align:right;margin-top:8px;color:#102b4c;font-size:16px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Mathematics Online Test 2</h2>
+    <p class="subtitle">HMSA Learning Academy — Bilingual Math Assessment 2</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const mathTest2Data = [
+    { q: "1. Which of the following is a composite number?<br><span class='urdu-text'>ذیل میں سے کون سا مرکب عدد (Composite Number) ہے؟</span>", options: ["A) 7", "B) 13", "C) 15", "D) 19"], answer: 2 },
+    { q: "2. What is the product of two numbers equal to?<br><span class='urdu-text'>دو اعداد کا حاصلِ ضرب کس کے برابر ہوتا ہے؟</span>", options: ["A) HCF + LCM", "B) HCF × LCM", "C) HCF - LCM", "D) HCF ÷ LCM"], answer: 1 },
+    { q: "3. Which integer is smaller: -3 or -7?<br><span class='urdu-text'>کون سا صحیح عدد چھوٹا ہے: -3 یا -7؟</span>", options: ["A) -3", "B) -7", "C) Both are equal", "D) None"], answer: 1 },
+    { q: "4. Evaluate: (-15) ÷ (+3) = ?<br><span class='urdu-text'>حاصل معلوم کریں: (-15) ÷ (+3) = ؟</span>", options: ["A) +5", "B) -5", "C) +12", "D) -12"], answer: 1 },
+    { q: "5. What is the absolute value of -25?<br><span class='urdu-text'>-25 کی مطلق قیمت (Absolute Value) کیا ہے؟</span>", options: ["A) -25", "B) 25", "C) 0", "D) 5"], answer: 1 },
+    { q: "6. Simplify the ratio 15:25 in its lowest form:<br><span class='urdu-text'>نسبت 15:25 کو مختصر ترین شکل میں لکھیں:</span>", options: ["A) 3:5", "B) 5:3", "C) 1:2", "D) 3:4"], answer: 0 },
+    { q: "7. If 4 pens cost Rs. 100, what is the cost of 1 pen?<br><span class='urdu-text'>اگر 4 قلموں کی قیمت 100 روپے ہو تو 1 قلم کی قیمت کیا ہوگی؟</span>", options: ["A) Rs. 20", "B) Rs. 25", "C) Rs. 30", "D) Rs. 50"], answer: 1 },
+    { q: "8. Solve for x: x + 7 = 15<br><span class='urdu-text'>مسوات حل کریں: x + 7 = 15</span>", options: ["A) 7", "B) 8", "C) 22", "D) 15"], answer: 1 },
+    { q: "9. What is the coefficient of x in the algebraic expression 7x - 4?<br><span class='urdu-text'>جبراتی جملے 7x - 4 میں x کا ضریب (Coefficient) کیا ہے؟</span>", options: ["A) 7", "B) -4", "C) x", "D) 4"], answer: 0 },
+    { q: "10. If set P = {a, b, c} and set Q = {b, c, d}, what is P ∪ Q?<br><span class='urdu-text'>اگر P = {a, b, c} اور Q = {b, c, d} ہوں تو P ∪ Q کیا ہوگا؟</span>", options: ["A) {b, c}", "B) {a, b, c, d}", "C) {a, d}", "D) {}"], answer: 1 },
+    { q: "11. The number of subsets for a set with 2 elements is:<br><span class='urdu-text'>ایسا سیٹ جس میں 2 ارکان ہوں، اس کے کل ذیلی سیٹوں (Subsets) کی تعداد کتنی ہوگی؟</span>", options: ["A) 2", "B) 4", "C) 8", "D) 16"], answer: 1 },
+    { q: "12. An angle measuring 120° is called:<br><span class='urdu-text'>120 درجے کا زاویہ کیا کہلاتا ہے؟</span>", options: ["A) Acute Angle", "B) Right Angle", "C) Obtuse Angle", "D) Straight Angle"], answer: 2 },
+    { q: "13. What is the circumference formula of a circle?<br><span class='urdu-text'>دائرے کے محیط (Circumference) کا فارمولا کیا ہے؟</span>", options: ["A) πr²", "B) 2πr", "C) 4r", "D) πd²"], answer: 1 },
+    { q: "14. Find the volume of a cube with edge length 3 cm:<br><span class='urdu-text'>اس مکعب (Cube) کا حجم (Volume) معلوم کریں جس کے کناروں کی لمبائی 3 سم ہو:</span>", options: ["A) 9 cm³", "B) 18 cm³", "C) 27 cm³", "D) 12 cm³"], answer: 2 },
+    { q: "15. What is the median of the data: 5, 2, 9, 7, 3?<br><span class='urdu-text'>اعداد 5, 2, 9, 7, 3 کا وستانیہ (Median) کیا ہے؟</span>", options: ["A) 5", "B) 7", "C) 3", "D) 9"], answer: 0 },
+    { q: "16. What is the mode of the data: 4, 2, 4, 5, 2, 4, 1?<br><span class='urdu-text'>اعداد 4, 2, 4, 5, 2, 4, 1 کا اعادہ (Mode) کیا ہے؟</span>", options: ["A) 2", "B) 4", "C) 5", "D) 1"], answer: 1 },
+    { q: "17. What is 15% expressed as a decimal?<br><span class='urdu-text'>15 فیصد کو عشاریہ (Decimal) کی شکل میں کیسے لکھیں گے؟</span>", options: ["A) 1.5", "B) 0.15", "C) 0.015", "D) 15.0"], answer: 1 },
+    { q: "18. If the speed of a car is 60 km/h, how far will it travel in 2 hours?<br><span class='urdu-text'>اگر ایک کار کی رفتار 60 کلومیٹر فی گھنٹہ ہو تو وہ 2 گھنٹے میں کتنا فاصلہ طے کرے گی؟</span>", options: ["A) 60 km", "B) 120 km", "C) 30 km", "D) 240 km"], answer: 1 },
+    { q: "19. Two lines that never intersect and always remain at equal distance are called:<br><span class='urdu-text'>ایسی دو لکیریں جو کبھی آپس میں نہ ملیں اور ان کے درمیان فاصلہ ہمیشہ یکساں رہے، کہلاتی ہیں:</span>", options: ["A) Perpendicular Lines", "B) Parallel Lines", "C) Intersecting Lines", "D) Ray"], answer: 1 },
+    { q: "20. The probability of an impossible event is always:<br><span class='urdu-text'>ناممکن واقعے کے وقوع پذیر ہونے کا احتمال (Probability) ہمیشہ کتنا ہوتا ہے؟</span>", options: ["A) 0", "B) 1", "C) 0.5", "D) 100"], answer: 0 }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = mathTest2Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = qData.q;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${mathTest2Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = mathTest2Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < mathTest2Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = mathTest2Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
