@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>جماعت 7 - اردو ٹیسٹ 2 - HMSA Learning Academy</title>
+
+<!-- اردو نستعلیق فونٹ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    /* پورے پیج پر نستعلیق فونٹ لازمی لگائیں */
+    * {
+        font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Arial, sans-serif !important;
+    }
+    
+    body { 
+        background-color: #f2f6f7; 
+        margin: 0; 
+        padding: 20px; 
+        display: flex; 
+        justify-content: center; 
+        align-items: flex-start; 
+        min-height: 100vh; 
+        direction: rtl; 
+    }
+    .quiz-container { 
+        background: white; 
+        padding: 25px; 
+        border-radius: 13px; 
+        box-shadow: 0 3px 12px #123b6510; 
+        width: 100%; 
+        max-width: 650px; 
+        border-top: 5px solid #123b65;
+    }
+    .header { 
+        color: #087c59; 
+        font-size: 24px; 
+        margin-bottom: 10px; 
+        font-weight: bold; 
+        text-align: center;
+    }
+    .sub-header {
+        text-align: center;
+        color: #526575;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+    .timer-box {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #dc3545;
+        background: #f8d7da;
+        padding: 8px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #question-text { 
+        font-size: 22px; 
+        margin-bottom: 20px; 
+        font-weight: bold; 
+        color: #263746; 
+        line-height: 1.8;
+    }
+    .options-container { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 12px; 
+    }
+    .option-btn { 
+        background: #e9ecef; 
+        border: 2px solid #ced4da; 
+        padding: 12px; 
+        border-radius: 8px; 
+        font-size: 18px; 
+        cursor: pointer; 
+        transition: 0.3s; 
+        text-align: right;
+    }
+    .option-btn:hover:not(:disabled) { 
+        background: #d1d8e0; 
+    }
+    .option-btn.correct { 
+        background: #28a745 !important; 
+        color: white; 
+        border-color: #28a745; 
+    }
+    .option-btn.wrong { 
+        background: #dc3545 !important; 
+        color: white; 
+        border-color: #dc3545; 
+    }
+    .option-btn:disabled {
+        cursor: default;
+    }
+    #score-display { 
+        margin-top: 20px; 
+        font-size: 18px; 
+        color: #123b65; 
+        font-weight: bold; 
+        text-align: center;
+    }
+    .hidden { display: none; }
+    .result-box { text-align: center; padding: 20px 0; }
+    .result-box h2 { color: #087c59; font-size: 28px; margin-bottom: 15px;}
+    .result-stats { 
+        font-size: 20px; 
+        color: #263746; 
+        font-weight: bold; 
+        margin-bottom: 10px; 
+        background: #e3f2e9; 
+        padding: 15px; 
+        border-radius: 8px;
+        display: inline-block;
+    }
+    .back-btn {
+        display: block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #123b65;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 18px;
+    }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header" id="test-title">جماعت 7 - اردو ٹیسٹ 2</div>
+    <div class="sub-header">HMSA Learning Academy</div>
+    
+    <div class="timer-box" id="timer-display">باقی وقت: 05:00</div>
+
+    <div id="quiz-box">
+        <div id="question-text">لوڈنگ...</div>
+        <div class="options-container" id="options-box"></div>
+        <div id="score-display">سکور: 0 / 0</div>
+    </div>
+
+    <div id="result-box" class="hidden result-box">
+        <h2 id="result-title">ٹیسٹ مکمل! 🎉</h2>
+        <div class="result-stats" id="final-stats"></div>
+        <a href="index.html" class="back-btn">واپس ہوم پیج پر جائیں</a>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // جماعت 7 اردو ٹیسٹ 2 (آپشنز کی رینڈمائزنگ کے ساتھ)
+    // ==========================================
+    const questions = [
+        // --- فعل ماضی ---
+        {
+            question: "وہ فعل جس میں کسی کام کا کرنا یا ہونا گزرے ہوئے زمانے میں پایا جائے، کیا کہلاتا ہے؟",
+            options: ["فعل مضارع", "فعل امر", "فعل ماضی", "فعل نہی"],
+            answer: 2 // تیسرا آپشن
+        },
+        {
+            question: "''اس نے خط لکھا''۔ اس جملے میں ''لکھا'' کس قسم کا فعل ماضی ہے؟",
+            options: ["ماضی قریب", "ماضی مطلق", "ماضی استمراری", "ماضی شکیہ"],
+            answer: 1 // دوسرا آپشن
+        },
+        {
+            question: "''وہ روزانہ سکول جاتا تھا''۔ اس جملے میں ''جاتا تھا'' کون سا فعل ماضی ہے؟",
+            options: ["ماضی مطلق", "ماضی قریب", "ماضی استمراری", "ماضی شرطی"],
+            answer: 2 // تیسرا آپشن
+        },
+        {
+            question: "''کاش وہ آج آتا''۔ اس جملے میں ''آتا'' کس قسم کا فعل ہے؟",
+            options: ["ماضی شکیہ", "ماضی استمراری", "ماضی مطلق", "ماضی قریب"],
+            answer: 0 // پہلا آپشن
+        },
+
+        // --- القاب، خطاب، عرف، تخلص ---
+        {
+            question: "وہ نام جو کسی شخص کی بڑائی یا اس کی خدمات کے اعتراف میں حکومت یا عوام کی طرف سے دیا جائے، کیا کہلاتا ہے؟",
+            options: ["عرف", "لقب", "تخلص", "خطاب"],
+            answer: 3 // چوتھا آپشن
+        },
+        {
+            question: "''قائدِ اعظم'' کس قسم کی مثال ہے؟",
+            options: ["لقب", "خطاب", "عرف", "کنیت"],
+            answer: 1 // دوسرا آپشن
+        },
+        {
+            question: "وہ نام جو کسی شخص کی تعریف یا خوبی کے طور پر مشہور ہو جائے، کیا کہلاتا ہے؟",
+            options: ["لقب", "خطاب", "عرف", "اسمِ نکرہ"],
+            answer: 0 // پہلا آپشن
+        },
+        {
+            question: "''علامہ محمد اقبال'' میں ''علامہ'' کیا ہے؟",
+            options: ["عرف", "تخلص", "لقب", "خطاب"],
+            answer: 2 // تیسرا آپشن
+        },
+        {
+            question: "وہ نام جو کسی شخص کی اصل پہچان کے بجائے کوئی اور نام پڑ جائے، کیا کہلاتا ہے؟",
+            options: ["لقب", "خطاب", "عرف", "تخلص"],
+            answer: 2 // تیسرا آپشن
+        },
+        {
+            question: "شعراء اپنے اصل نام کی بجائے جو نام اپنی شاعری میں استعمال کرتے ہیں، اسے کیا کہتے ہیں؟",
+            options: ["لقب", "تخلص", "عرف", "خطاب"],
+            answer: 1 // دوسرا آپشن
+        },
+        {
+            question: "''غالب'' علامہ اسد اللہ خان کا کیا ہے؟",
+            options: ["لقب", "خطاب", "عرف", "تخلص"],
+            answer: 3 // چوتھا آپشن
+        },
+
+        // --- سابقے اور لاحقے ---
+        {
+            question: "وہ حروف جو کسی لفظ کے شروع میں لگ کر اس کے معنی میں تبدیلی پیدا کر دیں، کیا کہلاتے ہیں؟",
+            options: ["لاحقے", "سابقے", "حروفِ جار", "حروفِ عطف"],
+            answer: 1 // دوسرا آپشن
+        },
+        {
+            question: "''ان پڑھ'' میں ''ان'' کیا ہے؟",
+            options: ["لاحقہ", "حرفِ علت", "سابقہ", "اسم"],
+            answer: 2 // تیسرا آپشن
+        },
+        {
+            question: "وہ حروف جو کسی لفظ کے آخر میں لگ کر نئی علامت یا معنی پیدا کریں، کیا کہلاتے ہیں؟",
+            options: ["لاحقے", "سابقے", "حروفِ تاکید", "حروفِ ندا"],
+            answer: 0 // پہلا آپشن
+        },
+        {
+            question: "''خدمت گار'' میں ''گار'' کیا ہے؟",
+            options: ["سابقہ", "اسمِ آلہ", "لاحقہ", "حرفِ جار"],
+            answer: 2 // تیسرا آپشن
+        },
+
+        // --- اعراب / درست املا / جمع و مونث ---
+        {
+            question: "درج ذیل میں سے کون سا لفظ اعراب (زیر، زبر) کے لحاظ سے درست ہے؟",
+            options: ["کَتاب", "کُتاب", "کِتاب", "کتابَ"],
+            answer: 2 // تیسرا آپشن
+        },
+        {
+            question: "درج ذیل میں سے کون سا لفظ املا کے لحاظ سے غلط ہے؟",
+            options: ["زمداری", "ذمہ داری", "خوبصورت", "محبت"],
+            answer: 0 // پہلا آپشن
+        },
+        {
+            question: "''گھوڑا'' کا صحیح مونث کیا ہے؟",
+            options: ["گھوڑیا", "گھوڑیاں", "گھوڑے", "گھوڑی"],
+            answer: 3 // چوتھا آپشن
+        },
+        {
+            question: "''باغ'' کی صحیح جمع کیا ہے؟",
+            options: ["باغوں", "باغات", "باغیں", "باغے"],
+            answer: 1 // دوسرا آپشن
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+    
+    // 5 منٹ کا ٹائمر
+    let timeLeft = 300; 
+    let timerInterval;
+
+    const questionText = document.getElementById('question-text');
+    const optionsBox = document.getElementById('options-box');
+    const scoreDisplay = document.getElementById('score-display');
+    const quizBox = document.getElementById('quiz-box');
+    const resultBox = document.getElementById('result-box');
+    const timerDisplay = document.getElementById('timer-display');
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                endTestDueToTime();
+            } else {
+                timeLeft--;
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                timerDisplay.innerText = `باقی وقت: ${minutes}:${seconds}`;
+            }
+        }, 1000); 
+    }
+
+    function endTestDueToTime() {
+        timerDisplay.innerText = "وقت ختم!";
+        timerDisplay.style.color = "red";
+        showResult(true);
+    }
+
+    function loadQuestion() {
+        answered = false;
+        const currentQuestion = questions[currentQuestionIndex];
+        
+        questionText.innerText = (currentQuestionIndex + 1) + ". " + currentQuestion.question;
+        
+        optionsBox.innerHTML = '';
+
+        currentQuestion.options.forEach((option, index) => {
+            const btn = document.createElement('button');
+            btn.innerText = option;
+            btn.classList.add('option-btn');
+            btn.onclick = () => checkAnswer(index, btn);
+            optionsBox.appendChild(btn);
+        });
+        
+        updateScore();
+    }
+
+    function checkAnswer(selectedIndex, btn) {
+        if (answered) return;
+        answered = true;
+        
+        const currentQuestion = questions[currentQuestionIndex];
+        const allBtns = optionsBox.querySelectorAll('.option-btn');
+
+        // تمام بٹنز کو ڈس ایبل کر دیں
+        allBtns.forEach(b => b.disabled = true);
+
+        if (selectedIndex === currentQuestion.answer) {
+            btn.classList.add('correct'); 
+            score++;
+        } else {
+            btn.classList.add('wrong'); 
+            allBtns[currentQuestion.answer].classList.add('correct'); // صحیح جواب دکھائیں
+        }
+
+        updateScore();
+
+        // اگلا سوال خود بخود لوڈ کرنے کے لیے 1 سیکنڈ کا وقفہ
+        setTimeout(() => {
+            loadNextQuestion();
+        }, 1200); // 1.2 سیکنڈز
+    }
+
+    function loadNextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            clearInterval(timerInterval);
+            showResult(false);
+        }
+    }
+
+    function updateScore() {
+        scoreDisplay.innerText = `سکور: ${score} / ${questions.length}`;
+    }
+
+    function showResult(isTimeUp) {
+        quizBox.classList.add('hidden');
+        resultBox.classList.remove('hidden');
+        
+        if(isTimeUp) {
+            document.getElementById('result-title').innerText = "وقت ختم ہو گیا! ⏰";
+        } else {
+            document.getElementById('result-title').innerText = "ٹیسٹ مکمل! 🎉";
+        }
+        
+        // پرسنٹیج کیلکولیشن
+        let percentage = (score / questions.length) * 100;
+        percentage = Math.round(percentage); // راؤنڈ آف
+
+        document.getElementById('final-stats').innerHTML = `
+            آپ کے کل نمبر: <span style="color:#28a745">${score}</span> / ${questions.length}<br>
+            آپ کی پرسنٹیج: <span style="color:#dc3545">${percentage}%</span>
+        `;
+    }
+
+    if(questions.length > 0) {
+        startTimer(); 
+        loadQuestion(); 
+    } else {
+        questionText.innerText = "معذرت، ابھی کوئی سوالات شامل نہیں کیے گئے۔";
+    }
+</script>
+
+</body>
+</html>
