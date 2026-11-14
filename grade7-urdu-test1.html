@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>جماعت 7 - اردو گرامر ٹیسٹ 1 - HMSA Learning Academy</title>
+
+<!-- اردو نستعلیق فونٹ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body { 
+        font-family: 'Noto Nastaliq Urdu', Arial, sans-serif; 
+        background-color: #f2f6f7; 
+        margin: 0; 
+        padding: 20px; 
+        display: flex; 
+        justify-content: center; 
+        align-items: flex-start; 
+        min-height: 100vh; 
+        direction: rtl; 
+    }
+    .quiz-container { 
+        background: white; 
+        padding: 25px; 
+        border-radius: 13px; 
+        box-shadow: 0 3px 12px #123b6510; 
+        width: 100%; 
+        max-width: 650px; 
+        border-top: 5px solid #123b65;
+    }
+    .header { 
+        color: #087c59; 
+        font-size: 24px; 
+        margin-bottom: 10px; 
+        font-weight: bold; 
+        text-align: center;
+    }
+    .sub-header {
+        text-align: center;
+        color: #526575;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+    .timer-box {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #dc3545;
+        background: #f8d7da;
+        padding: 8px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #question-text { 
+        font-size: 22px; 
+        margin-bottom: 20px; 
+        font-weight: bold; 
+        color: #263746; 
+        line-height: 1.6;
+    }
+    .options-container { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 12px; 
+    }
+    .option-btn { 
+        background: #e9ecef; 
+        border: 2px solid #ced4da; 
+        padding: 12px; 
+        border-radius: 8px; 
+        font-size: 18px; 
+        cursor: pointer; 
+        transition: 0.3s; 
+        font-family: inherit; 
+        text-align: right;
+    }
+    .option-btn:hover { 
+        background: #d1d8e0; 
+    }
+    .option-btn.correct { 
+        background: #28a745 !important; 
+        color: white; 
+        border-color: #28a745; 
+    }
+    .option-btn.wrong { 
+        background: #dc3545 !important; 
+        color: white; 
+        border-color: #dc3545; 
+    }
+    #next-btn { 
+        display: none; 
+        margin-top: 25px; 
+        padding: 12px; 
+        background: #123b65; 
+        color: white; 
+        border: none; 
+        border-radius: 8px; 
+        font-size: 20px; 
+        font-weight: bold; 
+        cursor: pointer; 
+        font-family: inherit; 
+        width: 100%;
+    }
+    #next-btn:hover {
+        background: #0d2a4b;
+    }
+    #score-display { 
+        margin-top: 20px; 
+        font-size: 18px; 
+        color: #123b65; 
+        font-weight: bold; 
+        text-align: center;
+    }
+    .hidden { display: none; }
+    .result-box { text-align: center; }
+    .result-box h2 { color: #087c59; }
+    .back-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: #123b65;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-family: inherit;
+    }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header" id="test-title">جماعت 7 - اردو گرامر ٹیسٹ 1</div>
+    <div class="sub-header">HMSA Learning Academy</div>
+    
+    <div class="timer-box" id="timer-display">باقی وقت: 05:00</div>
+
+    <div id="quiz-box">
+        <div id="question-text">لوڈنگ...</div>
+        <div class="options-container" id="options-box"></div>
+        <button id="next-btn" onclick="loadNextQuestion()">اگلا سوال</button>
+        <div id="score-display">سکور: 0 / 0</div>
+    </div>
+
+    <div id="result-box" class="hidden result-box">
+        <h2 id="result-title">ٹیسٹ مکمل! 🎉</h2>
+        <p id="final-score" style="font-size: 22px; color: #263746; font-weight: bold;"></p>
+        <a href="index.html" class="back-btn">واپس ہوم پیج پر جائیں</a>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // جماعت 7 اردو کے 20 متوازن اور واضح سوالات
+    // ==========================================
+    const questions = [
+        // --- حروفِ علت اور تاکید ---
+        {
+            question: "وہ حروف جو کسی وجہ یا سبب کو ظاہر کرنے کے لیے استعمال ہوں، کیا کہلاتے ہیں؟",
+            options: ["حروفِ تاکید", "حروفِ علت", "حروفِ جار", "حروفِ عطف"],
+            answer: 1 
+        },
+        {
+            question: "''میں نے محنت کی، اس لیے کامیاب ہوا''۔ اس جملے میں ''اس لیے'' کیا ہے؟",
+            options: ["حرفِ علت", "حرفِ تاکید", "اسمِ اشارہ", "اسمِ موصول"],
+            answer: 0
+        },
+        {
+            question: "''وہ ہرگز نہیں آئے گا''۔ اس جملے میں ''ہرگز'' کس قسم کا حرف ہے؟",
+            options: ["حرفِ تاکید", "حرفِ علت", "حرفِ جار", "حرفِ ندا"],
+            answer: 0
+        },
+        
+        // --- مترادف (Synonyms) ---
+        {
+            question: "''حسن'' کا مترادف (ہم معنی) لفظ کیا ہے؟",
+            options: ["خوبصورتی", "بدصورتی", "روشنی", "تاریکی"],
+            answer: 0
+        },
+        {
+            question: "''شجر'' کا مترادف لفظ کیا ہے؟",
+            options: ["پتھر", "درخت", "پھول", "پانی"],
+            answer: 1
+        },
+        {
+            question: "''سخاوت'' کا مترادف لفظ کیا ہے؟",
+            options: ["کنجوسی", "فیاضی", "امیری", "غربت"],
+            answer: 1
+        },
+
+        // --- متضاد (Antonyms) ---
+        {
+            question: "''آزادی'' کا متضاد (اُلٹا) لفظ کیا ہے؟",
+            options: ["غلامی", "قید", "جیل", "پابندی"],
+            answer: 0
+        },
+        {
+            question: "''نادان'' کا متضاد لفظ کیا ہے؟",
+            options: ["دانشمند", "بیوقوف", "جاہل", "ان پڑھ"],
+            answer: 0
+        },
+
+        // --- واحد اور جمع ---
+        {
+            question: "''مضمون'' کی جمع کیا ہے؟",
+            options: ["مضمونات", "مضامین", "مضمونے", "مضمونیں"],
+            answer: 1 
+        },
+        {
+            question: "''استاد'' کی جمع کیا ہے؟",
+            options: ["استادوں", "استادیں", "اساتذہ", "استادے"],
+            answer: 2
+        },
+        {
+            question: "''کتاب'' کی جمع کیا ہے؟",
+            options: ["کتب", "کتابیں", "کتابے", "کتبہ"],
+            answer: 1
+        },
+
+        // --- مذکر اور مونث ---
+        {
+            question: "درج ذیل میں سے کون سا لفظ مونث (Feminine) ہے؟",
+            options: ["کتاب", "قلم", "دروازہ", "باغ"],
+            answer: 0
+        },
+        {
+            question: "''شیر'' کا مونث کیا ہے؟",
+            options: ["شیرنی", "شیراں", "شیری", "شیرین"],
+            answer: 0
+        },
+        {
+            question: "درج ذیل میں سے کون سا لفظ مذکر (Masculine) ہے؟",
+            options: ["میخ", "گایا", "کھیت", "چڑیا"],
+            answer: 2
+        },
+
+        // --- اسمِ آلہ اور اسمِ کیفیت ---
+        {
+            question: "وہ اسم جس سے کام کرنے کا ذریعہ یا آلہ معلوم ہو، کیا کہلاتا ہے؟",
+            options: ["اسمِ آلہ", "اسمِ کیفیت", "اسمِ اشارہ", "اسمِ موصول"],
+            answer: 0
+        },
+        {
+            question: "''چاقو'' کس قسم کا اسم ہے؟",
+            options: ["اسمِ نکرہ", "اسمِ آلہ", "اسمِ کیفیت", "اسمِ معرفہ"],
+            answer: 1
+        },
+
+        // --- املا کی درستگی ---
+        {
+            question: "درج ذیل میں سے کون سا لفظ املا (سپیلنگ) کے لحاظ سے درست ہے؟",
+            options: ["مجبور", "مجبر", "مز بور", "مجبوور"],
+            answer: 0
+        },
+        {
+            question: "درج ذیل میں سے کون سا لفظ غلط املا کے ساتھ لکھا گیا ہے؟",
+            options: ["ذمہ دار", "زمداری", "خوشبو", "محنت"],
+            answer: 1
+        },
+
+        // --- محاورے ---
+        {
+            question: "''آنکھ کا تارا'' محاورے کا مطلب کیا ہے؟",
+            options: ["بہت پیارا", "دکھی ہونا", "روشنی", "اندھا ہونا"],
+            answer: 0
+        },
+        {
+            question: "''ہاتھ سے ہاتھ دھونا'' محاورے کا مطلب کیا ہے؟",
+            options: ["صاف ہونا", "رابطہ ختم کرنا", "جھگڑا کرنا", "مدد کرنا"],
+            answer: 1
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+    
+    // 5 منٹ کا ٹائمر
+    let timeLeft = 300; 
+    let timerInterval;
+
+    const questionText = document.getElementById('question-text');
+    const optionsBox = document.getElementById('options-box');
+    const nextBtn = document.getElementById('next-btn');
+    const scoreDisplay = document.getElementById('score-display');
+    const quizBox = document.getElementById('quiz-box');
+    const resultBox = document.getElementById('result-box');
+    const timerDisplay = document.getElementById('timer-display');
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                endTestDueToTime();
+            } else {
+                timeLeft--;
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                timerDisplay.innerText = `باقی وقت: ${minutes}:${seconds}`;
+            }
+        }, 1000); 
+    }
+
+    function endTestDueToTime() {
+        timerDisplay.innerText = "وقت ختم!";
+        timerDisplay.style.color = "red";
+        showResult(true);
+    }
+
+    function loadQuestion() {
+        answered = false;
+        nextBtn.style.display = 'none';
+        const currentQuestion = questions[currentQuestionIndex];
+        
+        questionText.innerText = (currentQuestionIndex + 1) + ". " + currentQuestion.question;
+        
+        optionsBox.innerHTML = '';
+
+        currentQuestion.options.forEach((option, index) => {
+            const btn = document.createElement('button');
+            btn.innerText = option;
+            btn.classList.add('option-btn');
+            btn.onclick = () => checkAnswer(index, btn);
+            optionsBox.appendChild(btn);
+        });
+        
+        updateScore();
+    }
+
+    function checkAnswer(selectedIndex, btn) {
+        if (answered) return;
+        answered = true;
+        const currentQuestion = questions[currentQuestionIndex];
+        const allBtns = optionsBox.querySelectorAll('.option-btn');
+
+        if (selectedIndex === currentQuestion.answer) {
+            btn.classList.add('correct'); 
+            score++;
+        } else {
+            btn.classList.add('wrong'); 
+            allBtns[currentQuestion.answer].classList.add('correct'); 
+        }
+
+        allBtns.forEach(b => b.disabled = true);
+        updateScore();
+        nextBtn.style.display = 'block';
+    }
+
+    function loadNextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            clearInterval(timerInterval);
+            showResult(false);
+        }
+    }
+
+    function updateScore() {
+        scoreDisplay.innerText = `سکور: ${score} / ${currentQuestionIndex + 1}`;
+    }
+
+    function showResult(isTimeUp) {
+        quizBox.classList.add('hidden');
+        resultBox.classList.remove('hidden');
+        
+        if(isTimeUp) {
+            document.getElementById('result-title').innerText = "وقت ختم ہو گیا! ⏰";
+        } else {
+            document.getElementById('result-title').innerText = "ٹیسٹ مکمل! 🎉";
+        }
+        
+        document.getElementById('final-score').innerText = `آپ نے کل ${questions.length} سوالات میں سے ${score} نمبر حاصل کیے۔`;
+    }
+
+    if(questions.length > 0) {
+        startTimer(); 
+        loadQuestion(); 
+    } else {
+        questionText.innerText = "معذرت، ابھی کوئی سوالات شامل نہیں کیے گئے۔";
+    }
+</script>
+
+</body>
+</html>
