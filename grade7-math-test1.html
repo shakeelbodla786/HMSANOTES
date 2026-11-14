@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 7 Mathematics Test 1 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:8px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:16px;line-height:2.2;border-top:1px dashed #d7e5df;padding-top:8px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;display:flex;justify-content:space-between;align-items:center;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-eng{direction:ltr;text-align:left;font-family:Arial, sans-serif;}
+.opt-urdu{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;font-size:14px;color:#555;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت ہفتم — ریاضی آن لائن ٹیسٹ 1</h2>
+    <p class="subtitle">Grade 7 Mathematics Online Test 1 — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 1 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const mathTest1Data = [
+    {
+        eng: "1. Which of the following is a rational number?",
+        urdu: "1. ذیل میں سے کون سا ناطق عدد (Rational Number) ہے؟",
+        options: [
+            { eng: "A) √2", urdu: "الف) √2" },
+            { eng: "B) 3/4", urdu: "ب) 3/4" },
+            { eng: "C) π", urdu: "ج) π" },
+            { eng: "D) √3", urdu: "د) √3" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "2. Simplify according to BODMAS: 10 + 2 × 3 = ?",
+        urdu: "2. بوڈماس (BODMAS) اصول کے تحت حل کریں: 10 + 2 × 3 = ؟",
+        options: [
+            { eng: "A) 36", urdu: "الف) 36" },
+            { eng: "B) 16", urdu: "ب) 16" },
+            { eng: "C) 15", urdu: "ج) 15" },
+            { eng: "D) 12", urdu: "د) 12" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "3. A set containing no elements is called a:",
+        urdu: "3. ایسا سیٹ جس میں کوئی عنصر نہ ہو، کہلاتا ہے:",
+        options: [
+            { eng: "A) Empty Set / Null Set", urdu: "الف) خالی سیٹ" },
+            { eng: "B) Universal Set", urdu: "ب) یونیورسل سیٹ" },
+            { eng: "C) Equal Set", urdu: "ج) برابر سیٹ" },
+            { eng: "D) Subset", urdu: "د) ذیلی سیٹ" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "4. If set A = {1, 2} and B = {2, 3}, what is A ∪ B?",
+        urdu: "4. اگر سیٹ A = {1, 2} اور B = {2, 3} ہوں تو A ∪ B کیا ہوگا؟",
+        options: [
+            { eng: "A) {2}", urdu: "الف) {2}" },
+            { eng: "B) {1, 2, 3}", urdu: "ب) {1, 2, 3}" },
+            { eng: "C) {1, 3}", urdu: "ج) {1, 3}" },
+            { eng: "D) {}", urdu: "د) {}" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "5. Find the ratio of 20 cm to 1 metre in simplest form:",
+        urdu: "5. 20 سینٹی میٹر اور 1 میٹر کی نسبت (Ratio) سادہ ترین شکل میں معلوم کریں:",
+        options: [
+            { eng: "A) 1:5", urdu: "الف) 1:5" },
+            { eng: "B) 1:2", urdu: "ب) 1:2" },
+            { eng: "C) 2:5", urdu: "ج) 2:5" },
+            { eng: "D) 1:10", urdu: "د) 1:10" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "6. If 5 books cost Rs. 500, what is the cost of 1 book?",
+        urdu: "6. اگر 5 کتابوں کی قیمت 500 روپے ہو تو 1 کتاب کی قیمت کیا ہوگی؟",
+        options: [
+            { eng: "A) Rs. 50", urdu: "الف) 50 روپے" },
+            { eng: "B) Rs. 100", urdu: "ب) 100 روپے" },
+            { eng: "C) Rs. 150", urdu: "ج) 150 روپے" },
+            { eng: "D) Rs. 200", urdu: "د) 200 روپے" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "7. What is the square of 12?",
+        urdu: "7. عدد 12 کا مربع (Square) کیا ہے؟",
+        options: [
+            { eng: "A) 120", urdu: "الف) 120" },
+            { eng: "B) 144", urdu: "ب) 144" },
+            { eng: "C) 169", urdu: "ج) 169" },
+            { eng: "D) 124", urdu: "د) 124" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "8. What is the square root of 81?",
+        urdu: "8. عدد 81 کا جزرِ مربعی (Square Root) کیا ہے؟",
+        options: [
+            { eng: "A) 7", urdu: "الف) 7" },
+            { eng: "B) 8", urdu: "ب) 8" },
+            { eng: "C) 9", urdu: "ج) 9" },
+            { eng: "D) 11", urdu: "د) 11" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "9. What is the coefficient of x in the algebraic expression 5x + 7?",
+        urdu: "9. جبراتی جملے 5x + 7 میں x کا ضریب (Coefficient) کیا ہے؟",
+        options: [
+            { eng: "A) 7", urdu: "الف) 7" },
+            { eng: "B) 5", urdu: "ب) 5" },
+            { eng: "C) x", urdu: "ج) x" },
+            { eng: "D) 12", urdu: "د) 12" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "10. Solve the linear equation: x - 3 = 7",
+        urdu: "10. خطی مساوات کو حل کریں: x - 3 = 7",
+        options: [
+            { eng: "A) x = 4", urdu: "الف) x = 4" },
+            { eng: "B) x = 10", urdu: "ب) x = 10" },
+            { eng: "C) x = -4", urdu: "ج) x = -4" },
+            { eng: "D) x = -10", urdu: "د) x = -10" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. If a car travels 120 km in 2 hours, what is its speed?",
+        urdu: "11. اگر ایک کار 2 گھنٹے میں 120 کلومیٹر فاصلہ طے کرے تو اس کی رفتار کیا ہوگی؟",
+        options: [
+            { eng: "A) 50 km/h", urdu: "الف) 50 کلومیٹر/گھنٹہ" },
+            { eng: "B) 60 km/h", urdu: "ب) 60 کلومیٹر/گھنٹہ" },
+            { eng: "C) 70 km/h", urdu: "ج) 70 کلومیٹر/گھنٹہ" },
+            { eng: "D) 80 km/h", urdu: "د) 80 کلومیٹر/گھنٹہ" },
+        ],
+        answer: 1
+    },
+    {
+        eng: "12. Find the perimeter of a square with side length 6 cm:",
+        urdu: "12. اس مربع کا احاطہ (Perimeter) معلوم کریں جس کے ایک ضلع کی لمبائی 6 سینٹی میٹر ہو:",
+        options: [
+            { eng: "A) 12 cm", urdu: "الف) 12 سینٹی میٹر" },
+            { eng: "B) 18 cm", urdu: "ب) 18 سینٹی میٹر" },
+            { eng: "C) 24 cm", urdu: "ج) 24 سینٹی میٹر" },
+            { eng: "D) 36 cm", urdu: "د) 36 سینٹی میٹر" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "13. What is the sum of angles in a triangle?",
+        urdu: "13. ایک مثلث (Triangle) کے تینوں زاویوں کا مجموعہ کتنا ہوتا ہے؟",
+        options: [
+            { eng: "A) 90°", urdu: "الف) 90 ڈگری" },
+            { eng: "B) 180°", urdu: "ب) 180 ڈگری" },
+            { eng: "C) 270°", urdu: "ج) 270 ڈگری" },
+            { eng: "D) 360°", urdu: "د) 360 ڈگری" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "14. What is the arithmetic mean of 2, 4, 6, 8, and 10?",
+        urdu: "14. اعداد 2, 4, 6, 8 اور 10 کا حسابی اوسط (Mean) کیا ہے؟",
+        options: [
+            { eng: "A) 5", urdu: "الف) 5" },
+            { eng: "B) 6", urdu: "ب) 6" },
+            { eng: "C) 7", urdu: "ج) 7" },
+            { eng: "D) 8", urdu: "د) 8" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. Convert 3/4 into a percentage:",
+        urdu: "15. کسر 3/4 کو فیصد (Percentage) میں تبدیل کریں:",
+        options: [
+            { eng: "A) 25%", urdu: "الف) 25%" },
+            { eng: "B) 50%", urdu: "ب) 50%" },
+            { eng: "C) 75%", urdu: "ج) 75%" },
+            { eng: "D) 80%", urdu: "د) 80%" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "16. What is the additive inverse of +15?",
+        urdu: "16. عدد +15 کا جمعی معکوس (Additive Inverse) کیا ہے؟",
+        options: [
+            { eng: "A) +15", urdu: "الف) +15" },
+            { eng: "B) -15", urdu: "ب) -15" },
+            { eng: "C) 1/15", urdu: "ج) 1/15" },
+            { eng: "D) 0", urdu: "د) 0" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "17. What is the reciprocal of 4/5?",
+        urdu: "17. کسر 4/5 کا معکوس (Reciprocal) کیا ہے؟",
+        options: [
+            { eng: "A) 4/5", urdu: "الف) 4/5" },
+            { eng: "B) 5/4", urdu: "ب) 5/4" },
+            { eng: "C) -4/5", urdu: "ج) -4/5" },
+            { eng: "D) 1", urdu: "د) 1" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "18. Find the area of a rectangle with length 8 cm and width 5 cm:",
+        urdu: "18. اس مستطیل کا رقبہ (Area) معلوم کریں جس کی لمبائی 8 سینٹی میٹر اور چوڑائی 5 سینٹی میٹر ہو:",
+        options: [
+            { eng: "A) 13 cm²", urdu: "الف) 13 مربع سینٹی میٹر" },
+            { eng: "B) 26 cm²", urdu: "ب) 26 مربع سینٹی میٹر" },
+            { eng: "C) 40 cm²", urdu: "ج) 40 مربع سینٹی میٹر" },
+            { eng: "D) 45 cm²", urdu: "د) 45 مربع سینٹی میٹر" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "19. An angle measuring greater than 90° and less than 180° is called:",
+        urdu: "19. ایسا زاویہ جو 90 درجے سے بڑا اور 180 درجے سے چھوٹا ہو، کہلاتا ہے:",
+        options: [
+            { eng: "A) Acute Angle", urdu: "الف) حادہ زاویہ" },
+            { eng: "B) Right Angle", urdu: "ب) قائمہ زاویہ" },
+            { eng: "C) Obtuse Angle", urdu: "ج) منفرجہ زاویہ" },
+            { eng: "D) Straight Angle", urdu: "د) مستقیم زاویہ" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "20. The probability of a sure (certain) event is always:",
+        urdu: "20. یقینی واقعے کا احتمال (Probability of a sure event) ہمیشہ کتنا ہوتا ہے؟",
+        options: [
+            { eng: "A) 0", urdu: "الف) 0" },
+            { eng: "B) 0.5", urdu: "ب) 0.5" },
+            { eng: "C) 1", urdu: "ج) 1" },
+            { eng: "D) 10", urdu: "د) 10" }
+        ],
+        answer: 2
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = mathTest1Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = `
+        <div class="eng-stmt">${qData.eng}</div>
+        <div class="urdu-stmt">${qData.urdu}</div>
+    `;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `
+            <span class="opt-eng">${opt.eng}</span>
+            <span class="opt-urdu">${opt.urdu}</span>
+        `;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${mathTest1Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = mathTest1Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < mathTest1Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = mathTest1Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
