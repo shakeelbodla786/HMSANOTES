@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 Mathematics Test 2 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:8px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:16px;line-height:2.2;border-top:1px dashed #d7e5df;padding-top:8px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;display:flex;justify-content:space-between;align-items:center;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-eng{direction:ltr;text-align:left;font-family:Arial, sans-serif;}
+.opt-urdu{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;font-size:14px;color:#555;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت ہشتم — ریاضی آن لائن ٹیسٹ 2</h2>
+    <p class="subtitle">Grade 8 Mathematics Test 2 — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const mathTest2Data = [
+    {
+        eng: "1. Which of the following is a terminating decimal?",
+        urdu: "1. ذیل میں سے کون سا اختتامی عشاریہ (Terminating Decimal) ہے؟",
+        options: [
+            { eng: "A) 1/3", urdu: "الف) 1/3" },
+            { eng: "B) 3/8", urdu: "ب) 3/8" },
+            { eng: "C) 2/7", urdu: "ج) 2/7" },
+            { eng: "D) 1/6", urdu: "د) 1/6" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "2. What is the square root of 225?",
+        urdu: "2. عدد 225 کا جزرِ مربعی کیا ہے؟",
+        options: [
+            { eng: "A) 13", urdu: "الف) 13" },
+            { eng: "B) 14", urdu: "ب) 14" },
+            { eng: "C) 15", urdu: "ج) 15" },
+            { eng: "D) 25", urdu: "د) 25" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "3. What is the cube of 4?",
+        urdu: "3. عدد 4 کا مکعب (Cube) کیا ہے؟",
+        options: [
+            { eng: "A) 12", urdu: "الف) 12" },
+            { eng: "B) 16", urdu: "ب) 16" },
+            { eng: "C) 64", urdu: "ج) 64" },
+            { eng: "D) 32", urdu: "د) 32" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "4. If A = {1, 2, 3} and B = {3, 4, 5}, what is A ∩ B?",
+        urdu: "4. اگر A = {1, 2, 3} اور B = {3, 4, 5} ہوں تو A ∩ B کیا ہوگا؟",
+        options: [
+            { eng: "A) {3}", urdu: "الف) {3}" },
+            { eng: "B) {1, 2, 3, 4, 5}", urdu: "ب) {1, 2, 3, 4, 5}" },
+            { eng: "C) {1, 2}", urdu: "ج) {1, 2}" },
+            { eng: "D) {}", urdu: "د) {}" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "5. De Morgan's first law is represented as:",
+        urdu: "5. ڈی مورگن کا پہلا قانون (De Morgan's First Law) کس طرح ظاہر کیا جاتا ہے؟",
+        options: [
+            { eng: "A) (A ∪ B)' = A' ∩ B'", urdu: "الف) (A ∪ B)' = A' ∩ B'" },
+            { eng: "B) (A ∩ B)' = A' ∪ B'", urdu: "ب) (A ∩ B)' = A' ∪ B'" },
+            { eng: "C) A ∪ B = B ∪ A", urdu: "ج) A ∪ B = B ∪ A" },
+            { eng: "D) A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)", urdu: "د) تقسیم کا قانون" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "6. Find the value of x in direct proportion: 3:5 = 12:x",
+        urdu: "6. راست تناسب میں x کی قیمت معلوم کریں: 3:5 = 12:x",
+        options: [
+            { eng: "A) 15", urdu: "الف) 15" },
+            { eng: "B) 20", urdu: "ب) 20" },
+            { eng: "C) 25", urdu: "ج) 25" },
+            { eng: "D) 30", urdu: "د) 30" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "7. If an article is bought for Rs. 500 and sold for Rs. 600, what is the profit percentage?",
+        urdu: "7. اگر ایک چیز 500 روپے میں خریدی جائے اور 600 روپے میں فروخت کی جائے تو منافع کی فیصد کتنی ہوگی؟",
+        options: [
+            { eng: "A) 10%", urdu: "الف) 10%" },
+            { eng: "B) 15%", urdu: "ب) 15%" },
+            { eng: "C) 20%", urdu: "ج) 20%" },
+            { eng: "D) 25%", urdu: "د) 25%" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "8. Expand: (x - 4)²",
+        urdu: "8. پھیلائیں (Expand کریں): (x - 4)²",
+        options: [
+            { eng: "A) x² - 16", urdu: "الف) x² - 16" },
+            { eng: "B) x² - 8x + 16", urdu: "ب) x² - 8x + 16" },
+            { eng: "C) x² + 8x + 16", urdu: "ج) x² + 8x + 16" },
+            { eng: "D) x² - 4x + 16", urdu: "د) x² - 4x + 16" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "9. Factorize by taking common: 5x + 10y",
+        urdu: "9. مشترک (Common) لے کر تجزیہ کریں: 5x + 10y",
+        options: [
+            { eng: "A) 5(x + 2y)", urdu: "الف) 5(x + 2y)" },
+            { eng: "B) 10(x + y)", urdu: "ب) 10(x + y)" },
+            { eng: "C) 5(x + y)", urdu: "ج) 5(x + y)" },
+            { eng: "D) 2(x + 5y)", urdu: "د) 2(x + 5y)" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "10. Solve the inequality: 3x < 12",
+        urdu: "10. عدم مساوات (Inequality) کو حل کریں: 3x < 12",
+        options: [
+            { eng: "A) x < 3", urdu: "الف) x < 3" },
+            { eng: "B) x < 4", urdu: "ب) x < 4" },
+            { eng: "C) x > 4", urdu: "ج) x > 4" },
+            { eng: "D) x = 4", urdu: "د) x = 4" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. What is the total surface area of a cube with edge length 3 cm?",
+        urdu: "11. اس مکعب (Cube) کا کل سطح کا رقبہ (Total Surface Area) کیا ہوگا جس کے ایک کنارے کی لمبائی 3 سم ہو؟",
+        options: [
+            { eng: "A) 27 cm²", urdu: "الف) 27 مربع سینٹی میٹر" },
+            { eng: "B) 36 cm²", urdu: "ب) 36 مربع سینٹی میٹر" },
+            { eng: "C) 54 cm²", urdu: "ج) 54 مربع سینٹی میٹر" },
+            { eng: "D) 18 cm²", urdu: "د) 18 مربع سینٹی میٹر" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "12. Find the volume of a cylinder with radius 7 cm and height 10 cm (Use π = 22/7):",
+        urdu: "12. اس سلنڈر کا حجم معلوم کریں جس کا رداس 7 سم اور اونچائی 10 سم ہو:",
+        options: [
+            { eng: "A) 1540 cm³", urdu: "الف) 1540 مکعب سینٹی میٹر" },
+            { eng: "B) 770 cm³", urdu: "ب) 770 مکعب سینٹی میٹر" },
+            { eng: "C) 3080 cm³", urdu: "ج) 3080 مکعب سینٹی میٹر" },
+            { eng: "D) 440 cm³", urdu: "د) 440 مکعب سینٹی میٹر" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "13. An angle measuring 90 degrees is called a:",
+        urdu: "13. 90 درجے کا زاویہ کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Acute Angle", urdu: "الف) حادہ زاویہ" },
+            { eng: "B) Right Angle", urdu: "ب) قائمہ زاویہ" },
+            { eng: "C) Obtuse Angle", urdu: "ج) منفرجہ زاویہ" },
+            { eng: "D) Reflex Angle", urdu: "د) منعکس زاویہ" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "14. What is the mode of the data: 5, 2, 5, 8, 5, 1, 9?",
+        urdu: "14. اعداد 5, 2, 5, 8, 5, 1, 9 کا اعادہ (Mode) کیا ہے؟",
+        options: [
+            { eng: "A) 2", urdu: "الف) 2" },
+            { eng: "B) 5", urdu: "ب) 5" },
+            { eng: "C) 8", urdu: "ج) 8" },
+            { eng: "D) 9", urdu: "د) 9" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. The probability of an impossible event is:",
+        urdu: "15. ناممکن واقعے کے وقوع پذیر ہونے کا احتمال (Probability) کتنا ہوتا ہے؟",
+        options: [
+            { eng: "A) 1", urdu: "الف) 1" },
+            { eng: "B) 0.5", urdu: "ب) 0.5" },
+            { eng: "C) 0", urdu: "ج) 0" },
+            { eng: "D) 100", urdu: "د) 100" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "16. Express 3/5 as a percentage:",
+        urdu: "16. کسر 3/5 کو فیصد میں تبدیل کریں:",
+        options: [
+            { eng: "A) 30%", urdu: "الف) 30%" },
+            { eng: "B) 50%", urdu: "ب) 50%" },
+            { eng: "C) 60%", urdu: "ج) 60%" },
+            { eng: "D) 75%", urdu: "د) 75%" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "17. What is the square of -11?",
+        urdu: "17. عدد -11 کا مربع کیا ہے؟",
+        options: [
+            { eng: "A) -121", urdu: "الف) -121" },
+            { eng: "B) 121", urdu: "ب) 121" },
+            { eng: "C) -22", urdu: "ج) -22" },
+            { eng: "D) 22", urdu: "د) 22" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "18. If the marked price is Rs. 1000 and discount is 10%, what is the sale price?",
+        urdu: "18. اگر کسی چیز پر درج قیمت 1000 روپے ہو اور 10 فیصد ڈسکاؤنٹ ہو تو فروخت قیمت کیا ہوگی؟",
+        options: [
+            { eng: "A) Rs. 900", urdu: "الف) 900 روپے" },
+            { eng: "B) Rs. 950", urdu: "ب) 950 روپے" },
+            { eng: "C) Rs. 800", urdu: "ج) 800 روپے" },
+            { eng: "D) Rs. 850", urdu: "د) 850 روپے" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "19. The line segment joining two points on a circle and passing through its center is called:",
+        urdu: "19. دائرے کے دو نقاط کو ملانے والا اور مرکز سے گزرنے والا خط کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Radius", urdu: "الف) رداس" },
+            { eng: "B) Diameter", urdu: "ب) قطر (Diameter)" },
+            { eng: "C) Chord", urdu: "ج) وتر" },
+            { eng: "D) Arc", urdu: "د) قوس" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "20. What is the median of the data: 4, 2, 6, 8, 10?",
+        urdu: "20. اعداد 4, 2, 6, 8, 10 کا وستانیہ (Median) کیا ہے؟",
+        options: [
+            { eng: "A) 4", urdu: "الف) 4" },
+            { eng: "B) 6", urdu: "ب) 6" },
+            { eng: "C) 8", urdu: "ج) 8" },
+            { eng: "D) 5", urdu: "د) 5" }
+        ],
+        answer: 1
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = mathTest2Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = `
+        <div class="eng-stmt">${qData.eng}</div>
+        <div class="urdu-stmt">${qData.urdu}</div>
+    `;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `
+            <span class="opt-eng">${opt.eng}</span>
+            <span class="opt-urdu">${opt.urdu}</span>
+        `;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${mathTest2Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = mathTest2Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < mathTest2Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = mathTest2Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
