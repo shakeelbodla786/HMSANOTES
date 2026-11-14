@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 General Science Test 2 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:8px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:16px;line-height:2.2;border-top:1px dashed #d7e5df;padding-top:8px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;display:flex;justify-content:space-between;align-items:center;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-eng{direction:ltr;text-align:left;font-family:Arial, sans-serif;}
+.opt-urdu{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;font-size:14px;color:#555;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>جماعت ہشتم — جنرل سائنس آن لائن ٹیسٹ 2</h2>
+    <p class="subtitle">Grade 8 General Science Test 2 — HMSA Learning Academy</p>
+
+    <div id="quiz-screen" class="quiz-box">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span>Total Marks: 20</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const scienceTest2Data = [
+    {
+        eng: "1. Which part of the human brain controls balance and posture?",
+        urdu: "1. انسانی دماغ کا کون سا حصہ جسم کے توازن اور پوزیشن کو کنٹرول کرتا ہے؟",
+        options: [
+            { eng: "A) Cerebrum", urdu: "الف) سیریبرم" },
+            { eng: "B) Cerebellum", urdu: "ب) سیریبیلم" },
+            { eng: "C) Medulla Oblongata", urdu: "ج) میڈولا ابلونگاٹا" },
+            { eng: "D) Pons", urdu: "د) پونز" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "2. The functional units of heredity that pass traits from parents to offspring are:",
+        urdu: "2. وراثت کی وہ اکائیاں جو والدین سے بچوں میں خصوصیات منتقل کرتی ہیں، کہلاتی ہیں:",
+        options: [
+            { eng: "A) Chromosomes", urdu: "الف) کروموسومز" },
+            { eng: "B) Genes", urdu: "ب) جینز (Genes)" },
+            { eng: "C) Nucleus", urdu: "ج) مرکزہ" },
+            { eng: "D) Cytoplasm", urdu: "د) سائٹوپلازم" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "3. What is the process of cell division that produces gametes (sperm and egg cells)?",
+        urdu: "3. خلیے کی تقسیم کا وہ عمل جو تولیدی خلیات (سپرم اور انڈا) بناتا ہے، کہلاتا ہے:",
+        options: [
+            { eng: "A) Mitosis", urdu: "الف) مائٹوسس" },
+            { eng: "B) Meiosis", urdu: "ب) مییاسس (Meiosis)" },
+            { eng: "C) Binary fission", urdu: "ج) بائنری فشن" },
+            { eng: "D) Regeneration", urdu: "د) ری جنریشن" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "4. Which microorganism is commonly used in biotechnology to make bread and yogurt?",
+        urdu: "4. بائیو ٹیکنالوجی میں ڈبل روٹی اور دہی بنانے کے لیے کون سا مائیکرو آرگنزم استعمال ہوتا ہے؟",
+        options: [
+            { eng: "A) Virus", urdu: "الف) وائرس" },
+            { eng: "B) Bacteria and Yeast", urdu: "ب) بیکٹیریا اور خمیر (Yeast)" },
+            { eng: "C) Algae", urdu: "ج) ایلگی" },
+            { eng: "D) Protozoa", urdu: "د) پروٹوزوا" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "5. Elements in Group 1 of the Periodic Table are known as:",
+        urdu: "5. دوری جدول کے گروپ 1 کے عناصر کیا کہلاتے ہیں؟",
+        options: [
+            { eng: "A) Halogens", urdu: "الف) ہالوجنز" },
+            { eng: "B) Alkali Metals", urdu: "ب) الکلی میٹلز (اساس دھاتیں)" },
+            { eng: "C) Noble Gases", urdu: "ج) نوبل گیسیں" },
+            { eng: "D) Transition Metals", urdu: "د) ٹرانزیشن میٹلز" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "6. A reaction that absorbs heat from the surroundings is called an:",
+        urdu: "6. وہ کیمیائی عمل جو اردگرد سے حرارت جذب کرتا ہے، کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Exothermic reaction", urdu: "الف) ایگزوتھرمک ری ایکشن" },
+            { eng: "B) Endothermic reaction", urdu: "ب) اینڈوتھرمک ری ایکشن (حرارت گیر)" },
+            { eng: "C) Neutralization", urdu: "ج) نیوٹرلائزیشن" },
+            { eng: "D) Combustion", urdu: "د) جلنے کا عمل" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "7. Substances that turn red litmus paper blue are:",
+        urdu: "7. وہ اشیاء جو سرخ لٹمس پیپر کو نیلا کر دیتی ہیں، کہلاتی ہیں:",
+        options: [
+            { eng: "A) Acids", urdu: "الف) تیزاب" },
+            { eng: "B) Bases", urdu: "ب) اساس (Bases)" },
+            { eng: "C) Salts", urdu: "ج) نمکیات" },
+            { eng: "D) Water", urdu: "د) پانی" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "8. What is formed when an acid reacts with a base?",
+        urdu: "8. جب کوئی تیزاب کسی اساس (Base) سے عمل کرتا ہے تو کیا بنتا ہے؟",
+        options: [
+            { eng: "A) Salt and Water", urdu: "الف) نمک اور پانی (Salt and Water)" },
+            { eng: "B) Hydrogen gas", urdu: "ب) ہائیڈروجن گیس" },
+            { eng: "C) Oxygen gas", urdu: "ج) آکسیجن گیس" },
+            { eng: "D) Sugar", urdu: "د) چینی" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "9. Pressure is defined as force divided by:",
+        urdu: "9. دباؤ (Pressure) کی تعریف ہے: قوت تقسیم بائی:",
+        options: [
+            { eng: "A) Mass", urdu: "الف) ماس (مادہ)" },
+            { eng: "B) Area", urdu: "ب) رقبہ (Area)" },
+            { eng: "C) Volume", urdu: "ج) حجم" },
+            { eng: "D) Speed", urdu: "د) رفتار" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "10. An image formed by a plane mirror is always:",
+        urdu: "10. سیدھے آئینے (Plane mirror) سے بننے والی تصویر ہمیشہ کیسی ہوتی ہے؟",
+        options: [
+            { eng: "A) Real and inverted", urdu: "الف) حقیقی اور الٹی" },
+            { eng: "B) Virtual and upright (erect)", urdu: "ب) خیالی اور سیدھی (Virtual and upright)" },
+            { eng: "C) Magnified", urdu: "ج) بڑی" },
+            { eng: "D) Diminished", urdu: "د) چھوٹی" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. The splitting of white light into its seven constituent colors is called:",
+        urdu: "11. سفید روشنی کا اپنے سات رنگوں میں بکھر جانا کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Reflection", urdu: "الف) انعکاس" },
+            { eng: "B) Dispersion of light", urdu: "ب) انتشارِ نور (Dispersion)" },
+            { eng: "C) Refraction", urdu: "ج) انعطاف" },
+            { eng: "D) Absorption", urdu: "د) جذب" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "12. Which device is used to measure electric current in a circuit?",
+        urdu: "12. برقی سرکٹ میں برقی رو (Current) ناپنے کے لیے کون سا آلہ استعمال ہوتا ہے؟",
+        options: [
+            { eng: "A) Voltmeter", urdu: "الف) وولٹ میٹر" },
+            { eng: "B) Ammeter", urdu: "ب) ایم میٹر (Ammeter)" },
+            { eng: "C) Galvanometer", urdu: "ج) گیلوانومیٹر" },
+            { eng: "D) Rheostat", urdu: "د) ریوسٹیٹ" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "13. The unit of electrical resistance is:",
+        urdu: "13. برقی مزاحمت (Resistance) کا یونٹ کیا ہے؟",
+        options: [
+            { eng: "A) Ampere", urdu: "الف) ایمپئیر" },
+            { eng: "B) Volt", urdu: "ب) وولٹ" },
+            { eng: "C) Ohm", urdu: "ج) اوہم (Ohm)" },
+            { eng: "D) Watt", urdu: "د) واٹ" }
+        ],
+        answer: 2
+    },
+    {
+        eng: "14. A magnet attracts objects made of:",
+        urdu: "14. مقناطیس کس چیز سے بنی اشیاء کو اپنی طرف کھینچتا ہے؟",
+        options: [
+            { eng: "A) Wood", urdu: "الف) لکڑی" },
+            { eng: "B) Iron and Steel", urdu: "ب) لوہا اور سٹیل (Iron and Steel)" },
+            { eng: "C) Plastic", urdu: "ج) پلاسٹک" },
+            { eng: "D) Glass", urdu: "د) شیشہ" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. The path of a planet around the Sun is called its:",
+        urdu: "15. سورج کے گرد سیارے کا راستہ کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Axis", urdu: "الف) محور" },
+            { eng: "B) Orbit", urdu: "ب) مدار (Orbit)" },
+            { eng: "C) Equator", urdu: "ج) خطِ استوا" },
+            { eng: "D) Horizon", urdu: "د) افق" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "16. Which of the following is considered a renewable source of energy?",
+        urdu: "16. ذیل میں سے کون سا توانائی کا قابلِ تجدید (Renewable) ذریعہ ہے؟",
+        options: [
+            { eng: "A) Coal", urdu: "الف) کوئلہ" },
+            { eng: "B) Solar energy", urdu: "ب) شمسی توانائی (Solar energy)" },
+            { eng: "C) Natural gas", urdu: "ج) قدرتی گیس" },
+            { eng: "D) Petroleum", urdu: "د) پیٹرولیم" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "17. What is the outermost visible layer of the Sun called?",
+        urdu: "17. سورج کی سب سے بیرونی نظر آنے والی تہہ کیا کہلاتا ہے؟",
+        options: [
+            { eng: "A) Core", urdu: "الف) کور" },
+            { eng: "B) Photosphere", urdu: "ب) فوٹوسفییر" },
+            { eng: "C) Corona", urdu: "ج) کورونا" },
+            { eng: "D) Mantle", urdu: "د) مینٹل" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "18. A group of ecosystems with similar climate and vegetation is called a:",
+        urdu: "18. ایک جیسے ماحول اور آب و ہوا والے ایکو سسٹمز کے مجموعے کو کیا کہتے ہیں؟",
+        options: [
+            { eng: "A) Biome", urdu: "الف) بائیوم (Biome)" },
+            { eng: "B) Population", urdu: "ب) پاپولیشن" },
+            { eng: "C) Species", urdu: "ج) سپیزیز" },
+            { eng: "D) Community", urdu: "د) کمیونٹی" }
+        ],
+        answer: 0
+    },
+    {
+        eng: "19. Which blood cells carry oxygen from lungs to body cells?",
+        urdu: "19. خون کے کون سے خلیے پھیپھڑوں سے آکسیجن جسم کے خلیات تک لے جاتے ہیں؟",
+        options: [
+            { eng: "A) White Blood Cells", urdu: "الف) سفید خلیے" },
+            { eng: "B) Red Blood Cells", urdu: "ب) سرخ خون کے خلیے (RBCs)" },
+            { eng: "C) Platelets", urdu: "ج) پلیٹلیٹس" },
+            { eng: "D) Plasma", urdu: "د) پلازما" }
+        ],
+        answer: 1
+    },
+    {
+        eng: "20. The ability of a material to be drawn into thin wires is called:",
+        urdu: "20. کسی مادے کو کھینچ کر پتلی تاروں میں تبدیل کرنے کی صلاحیت کیا کہلاتی ہے؟",
+        options: [
+            { eng: "A) Malleability", urdu: "الف) ملیبلٹی (چادر بننا)" },
+            { eng: "B) Ductility", urdu: "ب) ڈکٹلٹی (تار آوری)" },
+            { eng: "C) Conductivity", urdu: "ج) موصلیت" },
+            { eng: "D) Solubility", urdu: "د) حل پذیری" }
+        ],
+        answer: 1
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startTest() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const qData = scienceTest2Data[currentQuestionIndex];
+    document.getElementById('question-text').innerHTML = `
+        <div class="eng-stmt">${qData.eng}</div>
+        <div class="urdu-stmt">${qData.urdu}</div>
+    `;
+    
+    const optBox = document.getElementById('options-box');
+    optBox.innerHTML = '';
+    
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `
+            <span class="opt-eng">${opt.eng}</span>
+            <span class="opt-urdu">${opt.urdu}</span>
+        `;
+        btn.onclick = () => checkAnswer(index, btn);
+        optBox.appendChild(btn);
+    });
+
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of ${scienceTest2Data.length}`;
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const buttons = document.querySelectorAll('.opt-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    const qData = scienceTest2Data[currentQuestionIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    
+    if (selectedIndex === qData.answer) {
+        score++;
+        btnElement.style.background = '#2b9348';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btnElement.style.background = '#d90429';
+        btnElement.style.color = '#fff';
+        btnElement.style.borderColor = '#d90429';
+        buttons[qData.answer].style.background = '#2b9348';
+        buttons[qData.answer].style.color = '#fff';
+        buttons[qData.answer].style.borderColor = '#2b9348';
+        feedbackBox.innerHTML = '<span style="color: #d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    
+    currentQuestionIndex++;
+    setTimeout(() => {
+        if (currentQuestionIndex < scienceTest2Data.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+    
+    const total = scienceTest2Data.length;
+    const percentage = Math.round((score / total) * 100);
+    
+    document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+    document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+    document.getElementById('percentage-score').innerText = `Percentage: ${percentage}%`;
+}
+
+window.onload = function() {
+    startTest();
+};
+</script>
+
+</body>
+</html>
