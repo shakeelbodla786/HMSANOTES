@@ -32,7 +32,6 @@ body{
  line-height:1.8
 }
 
-/* HEADER */
 header{
  background:linear-gradient(135deg,#102b4c,#087b59);
  color:white;
@@ -62,7 +61,6 @@ header p{
  color:#f6e9c6
 }
 
-/* NAVIGATION BAR - LTR */
 .main-nav{
  background:white;
  padding:8px 5px;
@@ -79,8 +77,6 @@ header p{
 }
 
 .main-nav a{
- font-size:15px;
-padding:10px 3px;
  display:flex;
  flex:1;
  flex-direction:column;
@@ -98,8 +94,8 @@ padding:10px 3px;
 }
 
 .main-nav a span{
- font-size:27px;
- line-height:1.5;
+ font-size:21px;
+ line-height:1.3
 }
 
 .main-nav a:hover{
@@ -107,12 +103,6 @@ padding:10px 3px;
  color:#087c59
 }
 
-.main-nav a span{
- font-size:21px;
- line-height:1.3
-}
-
-/* HERO */
 .hero{
  text-align:center;
  padding:35px 15px;
@@ -129,7 +119,6 @@ padding:10px 3px;
  margin:8px auto
 }
 
-/* CONTAINER */
 .container{
  max-width:950px;
  margin:auto;
@@ -156,14 +145,12 @@ padding:10px 3px;
  margin-top:0
 }
 
-/* CLASS GRID */
 .grid{
  display:grid;
- grid-template-columns:repeat(3,1fr);
+ grid-template-columns:repeat(2,minmax(0,1fr));
  gap:11px
 }
 
-/* GRADE BOX */
 .grade-box{
  background:white;
  border-radius:12px;
@@ -210,11 +197,10 @@ padding:10px 3px;
 
 .subject-grid{
  display:grid;
- grid-template-columns:repeat(2,1fr);
+ grid-template-columns:repeat(2,minmax(0,1fr));
  gap:10px
 }
 
-/* BUTTONS */
 .btn{
  display:block;
  text-align:center;
@@ -238,7 +224,6 @@ padding:10px 3px;
  cursor:default
 }
 
-/* OTHER SECTIONS */
 .note{
  background:#fff5d9;
  padding:12px;
@@ -252,7 +237,6 @@ padding:10px 3px;
  flex-wrap:wrap
 }
 
-/* FOOTER */
 footer{
  background:#102b4c;
  color:white;
@@ -272,116 +256,277 @@ footer .developer{
  line-height:1.8
 }
 
-/* MOBILE RESPONSIVE */
-@media(max-width:450px){
-
- header h1{font-size:23px}
-
- .grid{
-  grid-template-columns:repeat(2,1fr)
- }
-
- .main-nav{
-  gap:2px;
-  padding:9px 3px
- }
-.main-nav a{
-  font-size:13px;
-  min-width:0;
-  padding:8px 2px;
+:root{
+  --navy:#12345a;
+  --green:#087c59;
+  --mint:#e8f6ef;
+  --gold:#c18b2d;
+  --ink:#263746;
+  --paper:#ffffff;
 }
 
-.main-nav a span{
-  font-size:24px;
- 
- }
+body{
+  background:
+    radial-gradient(circle at 10% 5%, rgba(8,124,89,.10), transparent 28%),
+    radial-gradient(circle at 92% 30%, rgba(18,52,90,.08), transparent 25%),
+    linear-gradient(135deg,#f3f8f6 0%,#eef3fa 52%,#fff9ed 100%);
+  color:var(--ink);
+}
 
- .subjects{padding:10px}
+header{
+  background:linear-gradient(125deg,#102b4c 0%,#075d50 55%,#0b8b65 100%);
+  padding:22px 12px 26px;
+  box-shadow:0 5px 20px rgba(16,43,76,.16);
+}
 
- .academy-banner{
+.academy-banner{
+  border-radius:0 0 18px 18px;
+}
+
+header h1{
+  text-shadow:0 2px 8px rgba(0,0,0,.18);
+  letter-spacing:.2px;
+}
+
+.main-nav{
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid rgba(18,52,90,.08);
+}
+
+.main-nav a{
+  transition:background .2s ease,color .2s ease,transform .2s ease;
+}
+
+.main-nav a:hover{
+  transform:translateY(-2px);
+}
+
+.hero{
+  background:linear-gradient(135deg,#e2f4eb 0%,#f5fbf8 48%,#fff3d9 100%);
+  border-bottom:1px solid rgba(8,124,89,.10);
+  padding:38px 16px;
+}
+
+.hero h2{
+  color:var(--navy);
+  text-shadow:0 1px 0 #fff;
+}
+
+.container{
+  max-width:1000px;
+  padding:18px 14px 28px;
+}
+
+.heading{
+  color:var(--navy);
+  position:relative;
+  padding-bottom:10px;
+}
+
+.heading:after{
+  content:"";
+  display:block;
+  width:76px;
+  height:4px;
+  border-radius:10px;
+  margin:8px auto 0;
+  background:linear-gradient(90deg,var(--green),var(--gold));
+}
+
+.card{
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(18,52,90,.07);
+  border-right:5px solid var(--green);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 8px 24px rgba(18,52,90,.07);
+  scroll-margin-top:82px;
+}
+
+.card h3{
+  color:var(--navy);
+  padding-bottom:7px;
+  border-bottom:1px solid #e8eef1;
+}
+
+.card h4{
+  color:#176b58;
+  margin:16px 0 8px;
+}
+
+.grid,
+.subject-grid,
+.notes-actions{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.grid .btn,
+.subject-grid .btn,
+.notes-actions .btn{
   width:100%;
-  border-radius:10px
- }
+  min-width:0;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow-wrap:anywhere;
+  margin:0;
+  padding:9px 7px;
+  line-height:1.8;
+}
 
- .card{padding:14px}
+.btn{
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#07845f,#05684f);
+  color:#fff;
+  box-shadow:0 4px 10px rgba(8,124,89,.17);
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+
+.btn:hover{
+  filter:brightness(1.06);
+  transform:translateY(-2px);
+  box-shadow:0 7px 15px rgba(8,124,89,.22);
+}
+
+.btn.blue{
+  background:linear-gradient(135deg,#1c5486,#12345a);
+  box-shadow:0 4px 10px rgba(18,52,90,.17);
+}
+
+.btn.gold{
+  background:linear-gradient(135deg,#d5a23f,#a8751c);
+  box-shadow:0 4px 10px rgba(167,123,34,.18);
+}
+
+.btn.pending{
+  background:linear-gradient(135deg,#f0f3f5,#e4e9ed);
+  color:#687783;
+  border:1px dashed #b7c2ca;
+  box-shadow:none;
+  cursor:default;
+}
+
+.btn.pending:hover{
+  transform:none;
+  filter:none;
+  box-shadow:none;
+}
+
+.grade-box{
+  border:1px solid rgba(18,52,90,.08);
+  border-radius:16px;
+  box-shadow:0 7px 20px rgba(18,52,90,.07);
+  scroll-margin-top:82px;
+}
+
+.grade-box summary{
+  background:linear-gradient(115deg,#087c59,#123b65);
+  padding:14px 16px;
+  letter-spacing:.1px;
+}
+
+.subjects{
+  background:linear-gradient(180deg,#ffffff,#f8fbfa);
+}
+
+.notes-actions{
+  margin:10px 0 18px;
+}
+
+.note{
+  background:linear-gradient(120deg,#fff7df,#fffdf5);
+  border:1px solid #f2e3b9;
+  color:#65522a;
+}
+
+.section-back{
+  max-width:290px;
+  margin:16px auto 0;
+}
+
+.social .btn{
+  min-width:145px;
+}
+
+footer{
+  background:linear-gradient(125deg,#102b4c,#075d50);
+  border-top:4px solid #d1a34b;
+}
+
+@media(max-width:450px){
+  .grid,
+  .subject-grid,
+  .notes-actions{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .card{
+    padding:15px;
+    border-radius:15px;
+  }
+
+  .grid .btn,
+  .subject-grid .btn,
+  .notes-actions .btn{
+    font-size:12px;
+    min-height:46px;
+    padding:8px 5px;
+  }
+
+  .main-nav a{
+    font-size:11px;
+  }
+
+  .main-nav a span{
+    font-size:21px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
-
 <img
  class="academy-banner"
- src="./HMSA-Learning-Academy-Classroom.png"
+ src="./HMSA Learning Academy Classroom Banner (1).png"
  alt="HMSA Learning Academy Classroom">
 
 <h1>HMSA Learning Academy</h1>
 <p>Learn • Prepare • Excel</p>
 <p>مفت تعلیم — روشن مستقبل</p>
-
 </header>
 
-<!-- NAVIGATION BAR -->
 <nav class="main-nav">
-
-<a href="#home">
-<span>⌂</span>
-Home
-</a>
-
-<a href="#classes">
-<span>🎓</span>
-Classes
-</a>
-
-<a href="#practice">
-<span>📝</span>
-Tests
-</a>
-
-<a href="#notes">
-<span>📚</span>
-Notes
-</a>
-
-<a href="#about">
-<span>ℹ️</span>
-About
-</a>
-
+<a href="#home"><span>⌂</span>Home</a>
+<a href="#classes"><span>🎓</span>Classes</a>
+<a href="#practice"><span>📝</span>Tests</a>
+<a href="#notes"><span>📚</span>Notes</a>
+<a href="#about"><span>ℹ️</span>About</a>
 </nav>
 
-<!-- HOME -->
 <section class="hero" id="home">
-
 <h2>علم سب کے لیے، تعلیم سب کے لیے</h2>
-
 <p>
 HMSA Learning Academy میں خوش آمدید!
 یہاں طلبہ کے لیے مفت تعلیمی نوٹس،
 مشقیں، ٹیسٹ اور PDF مواد فراہم کیا جائے گا۔
 </p>
-
 <p><strong>آئیے سیکھیں، آگے بڑھیں اور کامیاب ہوں!</strong></p>
-
 <a class="btn" href="#classes">اپنی جماعت منتخب کریں</a>
-
 </section>
 
 <main class="container">
 
-<!-- CLASSES -->
 <h2 class="heading" id="classes">اپنی جماعت منتخب کریں</h2>
 
 <div class="card">
-
 <h3>جماعت 3 تا 8</h3>
-
-<p>اپنی جماعت منتخب کریں۔ ایک بٹن دبانے سے تمام مضامین سامنے آجائیں گے۔</p>
-
 <div class="grid">
 <a class="btn blue" href="#grade3">جماعت 3</a>
 <a class="btn blue" href="#grade4">جماعت 4</a>
@@ -390,238 +535,212 @@ HMSA Learning Academy میں خوش آمدید!
 <a class="btn blue" href="#grade7">جماعت 7</a>
 <a class="btn blue" href="#grade8">جماعت 8</a>
 </div>
-
 </div>
 
-<!-- ONLINE TESTS -->
-<h2 class="heading" id="practice">آن لائن پریکٹس اور ٹیسٹ</h2>
+<h2 class="heading" id="practice">آن لائن پریکٹس اور ٹیسٹ — جماعت وار</h2>
 
-<!-- CLASS 3 -->
 <details class="grade-box" id="grade3">
-<summary>جماعت 3 — تمام مضامین</summary>
+<summary>جماعت 3</summary>
 <div class="subjects">
-<p>اپنا مضمون منتخب کریں</p>
 <div class="subject-grid">
-<a class="btn" href="grade3-english.html">English — انگلش</a>
-<a class="btn" href="grade3-urdu.html">Urdu — اردو</a>
-<a class="btn" href="grade3-math.html">Mathematics — میتھ</a>
+<a class="btn" href="grade3-english.html">انگلش ٹیسٹ</a>
+<a class="btn" href="grade3-urdu.html">اردو ٹیسٹ</a>
+<a class="btn" href="grade3-math.html">ریاضی ٹیسٹ</a>
 </div>
 </div>
 </details>
 
-<!-- CLASS 4 -->
 <details class="grade-box" id="grade4">
-<summary>جماعت 4 — تمام مضامین</summary>
+<summary>جماعت 4</summary>
 <div class="subjects">
-<p>اپنا مضمون منتخب کریں</p>
 <div class="subject-grid">
-<a class="btn" href="grade4-english.html">English — انگلش</a>
-<a class="btn" href="grade4-math.html">جماعت 4 ریاضی ٹیسٹ (Grade 4 Math Test)</a>
-<a class="btn" href="grade4-urdu.html">جماعت 4 اردو ٹیسٹ (Grade 4 Urdu)</a>
+<a class="btn" href="grade4-english.html">انگلش ٹیسٹ</a>
+<a class="btn" href="grade4-math.html">ریاضی ٹیسٹ</a>
+<a class="btn" href="grade4-urdu.html">اردو ٹیسٹ</a>
 </div>
 </div>
 </details>
 
-<!-- CLASS 5 -->
 <details class="grade-box" id="grade5">
-<summary>جماعت 5 — تمام مضامین</summary>
+<summary>جماعت 5</summary>
 <div class="subjects">
-<p>اپنا مضمون منتخب کریں</p>
 <div class="subject-grid">
-<a class="btn" href="grade5-english.html">English — انگلش</a>
-<a class="btn" href="grade5-urdu.html">جماعت 5 اردو ٹیسٹ (Grade 5 Urdu)</a>
-<a class="btn" href="grade5-math.html">جماعت 5 ریاضی ٹیسٹ (Grade 5 Math)</a>
+<a class="btn" href="grade5-english.html">انگلش ٹیسٹ</a>
+<a class="btn" href="grade5-urdu.html">اردو ٹیسٹ</a>
+<a class="btn" href="grade5-math.html">ریاضی ٹیسٹ</a>
 </div>
 </div>
 </details>
 
-<!-- CLASS 6 -->
 <details class="grade-box" id="grade6">
-<summary>جماعت 6 — تمام مضامین</summary>
+<summary>جماعت 6</summary>
 <div class="subjects">
-<p>اپنا مضمون منتخب کریں</p>
 <div class="subject-grid">
-<a class="btn" href="grade6-english.html">English — انگلش</a>
-<a class="btn" href="grade6-english-test2.html">جماعت 6 انگلش ٹیسٹ 2 (Grade 6 English Test 2)</a>
-<a class="btn" href="grade6-urdu.html">جماعت 6 اردو ٹیسٹ (Grade 6 Urdu)</a>
-<a class="btn" href="grade6-urdu-test2.html">جماعت 6 اردو ٹیسٹ 2 (Grade 6 Urdu Test 2)</a>
-<a class="btn" href="grade6-math-test1.html">ریاضی ٹیسٹ 1 (Math Test 1)</a>
-<a class="btn" href="grade6-math-test2.html">ریاضی ٹیسٹ 2 (Math Test 2)</a>
-<a class="btn" href="grade6-science-test1.html">جنرل سائنس ٹیسٹ 1 (Science Test 1)</a>
-<a class="btn" href="grade6-science-test2.html">جنرل سائنس ٹیسٹ 2 (Science Test 2)</a>
+<a class="btn" href="grade6-english.html">انگلش ٹیسٹ</a>
+<a class="btn" href="grade6-english-test2.html">انگلش ٹیسٹ 2</a>
+<a class="btn" href="grade6-urdu.html">اردو ٹیسٹ 1</a>
+<a class="btn" href="grade6-urdu-test2.html">اردو ٹیسٹ 2</a>
+<a class="btn" href="grade6-math-test1.html">ریاضی ٹیسٹ 1</a>
+<a class="btn" href="grade6-math-test2.html">ریاضی ٹیسٹ 2</a>
+<a class="btn" href="grade6-science-test1.html">جنرل سائنس ٹیسٹ 1</a>
+<a class="btn" href="grade6-science-test2.html">جنرل سائنس ٹیسٹ 2</a>
 </div>
 </div>
 </details>
 
-<!-- CLASS 7 -->
 <details class="grade-box" id="grade7">
-<summary>جماعت 7 — تمام مضامین</summary>
+<summary>جماعت 7</summary>
 <div class="subjects">
-<p>اپنا مضمون منتخب کریں</p>
 <div class="subject-grid">
-<a class="btn" href="grade7-english.html">English — انگلش</a>
-<a class="btn" href="grade7-english-test2.html">جماعت 7 انگلش ٹیسٹ 2 (Grade 7 English Test 2)</a>
-<a class="btn" href="grade7-urdu-test1.html">جماعت 7 اردو ٹیسٹ 1 (Grade 7 Urdu Test 1)</a>
-<a class="btn" href="grade7-urdu-test2.html">جماعت 7 اردو ٹیسٹ 2 (Grade 7 Urdu Test 2)</a>
-<a class="btn" href="grade7-math-test1.html">جماعت 7 ریاضی ٹیسٹ 1 (Grade 7 Math Test 1)</a>
-<a class="btn" href="grade7-math-test2.html">جماعت 7 ریاضی ٹیسٹ 2 (Grade 7 Math Test 2)</a>
-<a class="btn" href="grade7-science-test1.html">جنرل سائنس ٹیسٹ 1 (Science Test 1)</a>
-<a class="btn" href="grade7-science-test2.html">جنرل سائنس ٹیسٹ 2 (Science Test 2)</a>
+<a class="btn" href="grade7-english.html">انگلش ٹیسٹ</a>
+<a class="btn" href="grade7-english-test2.html">انگلش ٹیسٹ 2</a>
+<a class="btn" href="grade7-urdu-test1.html">اردو ٹیسٹ 1</a>
+<a class="btn" href="grade7-urdu-test2.html">اردو ٹیسٹ 2</a>
+<a class="btn" href="grade7-math-test1.html">ریاضی ٹیسٹ 1</a>
+<a class="btn" href="grade7-math-test2.html">ریاضی ٹیسٹ 2</a>
+<a class="btn" href="grade7-science-test1.html">جنرل سائنس ٹیسٹ 1</a>
+<a class="btn" href="grade7-science-test2.html">جنرل سائنس ٹیسٹ 2</a>
 </div>
 </div>
 </details>
 
-<!-- CLASS 8 -->
 <details class="grade-box" id="grade8">
-<summary>جماعت 8 — تمام مضامین</summary>
+<summary>جماعت 8</summary>
 <div class="subjects">
-<p>اپنا مضمون منتخب کریں</p>
 <div class="subject-grid">
-<a class="btn" href="grade8-english.html">English — انگلش</a>
-<a class="btn" href="grade8-english-test2.html">جماعت 8 انگلش ٹیسٹ 2 (Grade 8 English Test 2)</a>
-<a class="btn" href="grade8-english-test3.html">جماعت 8 انگلش ٹیسٹ 3 (Grade 8 English Test 3)</a>
-<a class="btn" href="grade8-urdu-test1.html">جماعت 8 اردو ٹیسٹ 1 (Grade 8 Urdu Test 1)</a>
-<a class="btn" href="grade8-urdu-test2.html">جماعت 8 اردو ٹیسٹ 2 (Grade 8 Urdu Test 2)</a>
-<a class="btn" href="grade8-math-test1.html">جماعت 8 ریاضی ٹیسٹ 1 (Grade 8 Math Test 1)</a>
-<a class="btn" href="grade8-math-test2.html">جماعت 8 ریاضی ٹیسٹ 2 (Grade 8 Math Test 2)</a>
-<a class="btn" href="grade8-science-test1.html">جماعت 8 جنرل سائنس ٹیسٹ 1 (Grade 8 Science Test 1)</a>
-<a class="btn" href="grade8-science-test2.html">جماعت 8 جنرل سائنس ٹیسٹ 2 (Grade 8 Science Test 2)</a>
+<a class="btn" href="grade8-english.html">انگلش ٹیسٹ</a>
+<a class="btn" href="grade8-english-test2.html">انگلش ٹیسٹ 2</a>
+<a class="btn" href="grade8-english-test3.html">انگلش ٹیسٹ 3</a>
+<a class="btn" href="grade8-urdu-test1.html">اردو ٹیسٹ 1</a>
+<a class="btn" href="grade8-urdu-test2.html">اردو ٹیسٹ 2</a>
+<a class="btn" href="grade8-math-test1.html">ریاضی ٹیسٹ 1</a>
+<a class="btn" href="grade8-math-test2.html">ریاضی ٹیسٹ 2</a>
+<a class="btn" href="grade8-science-test1.html">جنرل سائنس ٹیسٹ 1</a>
+<a class="btn" href="grade8-science-test2.html">جنرل سائنس ٹیسٹ 2</a>
 </div>
 </div>
 </details>
 
-<!-- TEST SYSTEM -->
 <div class="card" id="test-system">
-
 <h3>آن لائن ٹیسٹ سسٹم</h3>
-
 <p class="note">
 ٹائمر، MCQs، خودکار مارکنگ اور فوری نتائج کا نظام
 مرحلہ وار شامل کیا جائے گا۔
 </p>
-
 </div>
 
-<!-- PDF NOTES -->
+<h2 class="heading" id="notes">تعلیمی نوٹس — جماعت نہم اور جماعت دہم</h2>
 
-<!-- EDUCATIONAL NOTES AND PDF DOWNLOAD -->
-<h2 class="heading" id="notes">
-تعلیمی نوٹس اور PDF ڈاؤن لوڈ
-</h2>
-
-<!-- CLASS 9 SUBJECTS -->
-<div class="card">
-<h3>جماعت نہم — تعلیمی نوٹس</h3>
-<p>اپنا مضمون منتخب کریں۔</p>
-
-<a class="btn" href="#class9-physics">فزکس (Physics)</a>
-<a class="btn" href="#class9-computer">کمپیوٹر سائنس (Computer Science)</a>
-<a class="btn pending">کیمسٹری — جلد دستیاب ہوگا</a>
-<a class="btn pending">بیالوجی — جلد دستیاب ہوگا</a>
-<a class="btn pending">ریاضی — جلد دستیاب ہوگا</a>
-<a class="btn pending">انگلش — جلد دستیاب ہوگا</a>
+<div class="card" id="class9-notes">
+<h3>جماعت نہم — مضامین</h3>
+<div class="subject-grid">
+<a class="btn" href="#class9-computer">کمپیوٹر سائنس</a>
+<span class="btn pending" aria-disabled="true">ریاضی</span>
+<a class="btn blue" href="#class9-physics">فزکس</a>
+<span class="btn pending" aria-disabled="true">کیمسٹری</span>
+<span class="btn pending" aria-disabled="true">بیالوجی</span>
+<span class="btn pending" aria-disabled="true">انگلش</span>
+</div>
 </div>
 
-<!-- CLASS 9 PHYSICS -->
 <div class="card" id="class9-physics">
-<h3>جماعت نہم — فزکس (Physics)</h3>
-
-<h4>یونٹ 1 — فزکس (اردو میڈیم)</h4>
-
-<a class="btn blue"
-href="./unit1-class9phy-v2.pdf"
-download>
-⬇ ڈاؤنلوڈ
-</a>
-
+<h3>جماعت نہم — فزکس</h3>
+<h4>یونٹ 1 — اردو میڈیم</h4>
+<div class="notes-actions">
+<a class="btn blue" href="./unit1-class9phy-v2.pdf" target="_blank" rel="noopener">📖 نوٹس کھولیں</a>
+<a class="btn gold" href="./unit1-class9phy-v2.pdf" download>⬇ ڈاؤن لوڈ کریں</a>
+</div>
 <p class="note">مزید یونٹس اور انگلش میڈیم نوٹس جلد شامل کیے جائیں گے۔</p>
+<a class="btn section-back" href="#class9-notes">واپس جماعت نہم کے مضامین</a>
 </div>
 
-<!-- CLASS 9 COMPUTER SCIENCE -->
 <div class="card" id="class9-computer">
 <h3>جماعت نہم — کمپیوٹر سائنس</h3>
 
 <h4>یونٹ 1: کمپیوٹر کا تعارف</h4>
-<a class="btn blue" href="./unit1.pdf" download>⬇ ڈاؤنلوڈ — انگلش میڈیم</a>
-<a class="btn blue" href="./Unit1-Urdu.pdf" download>⬇ ڈاؤنلوڈ — اردو میڈیم</a>
+<div class="notes-actions">
+<a class="btn blue" href="./unit1.pdf" target="_blank" rel="noopener">📖 انگلش نوٹس کھولیں</a>
+<a class="btn gold" href="./unit1.pdf" download>⬇ انگلش ڈاؤن لوڈ</a>
+<a class="btn blue" href="./Unit1-Urdu.pdf" target="_blank" rel="noopener">📖 اردو نوٹس کھولیں</a>
+<a class="btn gold" href="./Unit1-Urdu.pdf" download>⬇ اردو ڈاؤن لوڈ</a>
+</div>
 
 <h4>یونٹ 2: سسٹم ڈیزائن اینڈ ٹربل شوٹنگ</h4>
-<a class="btn blue" href="./Unit2.pdf" download>⬇ ڈاؤنلوڈ — اردو میڈیم</a>
-<a class="btn blue" href="./Unit2-%20English.pdf" download>⬇ ڈاؤنلوڈ — انگلش میڈیم</a>
+<div class="notes-actions">
+<a class="btn blue" href="./Unit2-%20English.pdf" target="_blank" rel="noopener">📖 انگلش نوٹس کھولیں</a>
+<a class="btn gold" href="./Unit2-%20English.pdf" download>⬇ انگلش ڈاؤن لوڈ</a>
+<a class="btn blue" href="./Unit2.pdf" target="_blank" rel="noopener">📖 اردو نوٹس کھولیں</a>
+<a class="btn gold" href="./Unit2.pdf" download>⬇ اردو ڈاؤن لوڈ</a>
+</div>
 
 <h4>یونٹ 3: کمپیوٹر نیٹ ورکس</h4>
-<a class="btn blue" href="./Unit3-Urdu.pdf" download>⬇ ڈاؤنلوڈ — اردو میڈیم</a>
-<a class="btn blue" href="./Unit3-English.pdf" download>⬇ ڈاؤنلوڈ — انگلش میڈیم</a>
+<div class="notes-actions">
+<a class="btn blue" href="./Unit3-English.pdf" target="_blank" rel="noopener">📖 انگلش نوٹس کھولیں</a>
+<a class="btn gold" href="./Unit3-English.pdf" download>⬇ انگلش ڈاؤن لوڈ</a>
+<a class="btn blue" href="./Unit3-Urdu.pdf" target="_blank" rel="noopener">📖 اردو نوٹس کھولیں</a>
+<a class="btn gold" href="./Unit3-Urdu.pdf" download>⬇ اردو ڈاؤن لوڈ</a>
+</div>
 
 <h4>یونٹ 4: کمپیوٹیشنل تھنکنگ</h4>
-<a class="btn blue" href="./Unit4.pdf" download>⬇ ڈاؤنلوڈ — اردو میڈیم</a>
-<a class="btn blue" href="./Unit4-English.pdf" download>⬇ ڈاؤنلوڈ — انگلش میڈیم</a>
+<div class="notes-actions">
+<a class="btn blue" href="./Unit4-English.pdf" target="_blank" rel="noopener">📖 انگلش نوٹس کھولیں</a>
+<a class="btn gold" href="./Unit4-English.pdf" download>⬇ انگلش ڈاؤن لوڈ</a>
+<a class="btn blue" href="./Unit4.pdf" target="_blank" rel="noopener">📖 اردو نوٹس کھولیں</a>
+<a class="btn gold" href="./Unit4.pdf" download>⬇ اردو ڈاؤن لوڈ</a>
 </div>
 
-<!-- CLASS 10 SUBJECTS -->
-<div class="card">
-<h3>جماعت دہم — تعلیمی نوٹس</h3>
-<p>اپنا مضمون منتخب کریں۔</p>
-
-<a class="btn pending">کمپیوٹر سائنس — جلد دستیاب ہوگا</a>
-<a class="btn pending">فزکس — جلد دستیاب ہوگا</a>
-<a class="btn pending">کیمسٹری — جلد دستیاب ہوگا</a>
-<a class="btn pending">بیالوجی — جلد دستیاب ہوگا</a>
-<a class="btn pending">ریاضی — جلد دستیاب ہوگا</a>
-<a class="btn pending">اردو — جلد دستیاب ہوگا</a>
-<a class="btn pending">مطالعہ پاکستان — جلد دستیاب ہوگا</a>
+<a class="btn section-back" href="#class9-notes">واپس جماعت نہم کے مضامین</a>
 </div>
 
-<!-- ABOUT -->
+<div class="card" id="class10-notes">
+<h3>جماعت دہم — مضامین</h3>
+<p>جماعت دہم کے نوٹس ابھی شامل نہیں کیے گئے۔</p>
+<div class="subject-grid">
+<span class="btn pending" aria-disabled="true">ریاضی</span>
+<span class="btn pending" aria-disabled="true">فزکس</span>
+<span class="btn pending" aria-disabled="true">کیمسٹری</span>
+<span class="btn pending" aria-disabled="true">بیالوجی</span>
+<span class="btn pending" aria-disabled="true">کمپیوٹر سائنس</span>
+<span class="btn pending" aria-disabled="true">اردو</span>
+<span class="btn pending" aria-disabled="true">مطالعہ پاکستان</span>
+</div>
+</div>
+
 <div class="card" id="about">
-
 <h3>ہمارا مقصد</h3>
-
 <p>
 HMSA Learning Academy کا مقصد ہر بچے تک معیاری
 تعلیمی مواد مفت اور آسان طریقے سے پہنچانا ہے۔
 ہم چاہتے ہیں کہ ہر طالب علم اپنی رفتار سے سیکھے،
 مشق کرے اور اپنی صلاحیتوں کو بہتر بنائے۔
 </p>
-
 <p><strong>مفت تعلیم، آسان رسائی، روشن مستقبل!</strong></p>
-
 </div>
 
-<!-- CONTACT -->
 <div class="card">
-
 <h3>ہم سے رابطہ</h3>
-
 <p>واٹس ایپ، فیس بک اور انسٹاگرام کے روابط یہاں شامل کیے جا سکتے ہیں۔</p>
-
 <div class="social">
 <span class="btn">WhatsApp — لنک بعد میں</span>
 <span class="btn blue">Facebook — لنک بعد میں</span>
 <span class="btn gold">Instagram — لنک بعد میں</span>
 </div>
-
 </div>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
-
 <p><strong>HMSA Learning Academy</strong></p>
 <p>Knowledge Today • Success Tomorrow</p>
 <p>Learn • Prepare • Excel</p>
 <p>Free Educational Facilities for All Students</p>
-
 <p class="developer">
 Developed by: H.M. Shakeel Abbas
 <br>
 GHS 40A/4L, Okara
 </p>
-
 </footer>
 
-<!-- CLASS OPENING SCRIPT -->
 <script>
 document.querySelectorAll('a[href^="#grade"]').forEach(link=>{
  link.addEventListener('click',()=>{
