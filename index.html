@@ -377,7 +377,84 @@ header h1{
   padding:9px 7px;
   line-height:1.8;
 }
+.junior-test-grid {
+  display: grid;
+  gap: 7px;
+  margin: 12px 0 18px;
+  direction: rtl;
+}
 
+.junior-test-grid.three-subjects {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.junior-test-grid.four-subjects {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.junior-subject-title,
+.junior-test {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: white !important;
+  border-radius: 7px;
+  padding: 9px 3px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.junior-subject-title {
+  background: #087c59;
+}
+
+/* Urdu - Green */
+.junior-test.urdu,
+.junior-subject-title.urdu {
+  background: linear-gradient(135deg, #0a956b, #05684f);
+}
+
+/* English - Blue */
+.junior-test.english,
+.junior-subject-title.english {
+  background: linear-gradient(135deg, #2479c5, #14558f);
+}
+
+/* Mathematics - Golden */
+.junior-test.math,
+.junior-subject-title.math {
+  background: linear-gradient(135deg, #d5a23f, #a8751c);
+}
+
+/* General Science - Pink */
+.junior-test.science,
+.junior-subject-title.science {
+  background: linear-gradient(135deg, #d653a0, #a72e78);
+}
+
+.junior-test {
+  box-shadow: 0 3px 7px rgba(0,0,0,.12);
+}
+
+.junior-test:hover {
+  filter: brightness(1.08);
+}
+
+@media(max-width:450px) {
+  .junior-test-grid {
+    gap: 5px;
+  }
+
+  .junior-subject-title,
+  .junior-test {
+    font-size: 10px;
+    padding: 8px 2px;
+  }
+}
 .btn{
   border:0;
   border-radius:12px;
@@ -571,99 +648,125 @@ HMSA Learning Academy میں خوش آمدید!
 <h2 class="heading" id="practice">آن لائن پریکٹس اور ٹیسٹ — جماعت وار</h2>
 
 <details class="grade-box" id="grade3">
-<summary>جماعت 3</summary>
-<div class="subjects">
-<div class="subject-grid">
-<a class="btn" href="grade3-english.html">انگلش ٹیسٹ</a>
-<a class="btn" href="grade3-urdu.html">اردو ٹیسٹ</a>
-<a class="btn" href="grade3-math.html">ریاضی ٹیسٹ</a>
-</div>
-</div>
- <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px;">
-    <a class="btn" href="grade3-urdu-test2.html" style="text-align: center; padding: 10px;">اردو ٹیسٹ 2 (Urdu Test 2)</a>
-    <a class="btn" href="grade3-english-test2.html" style="text-align: center; padding: 10px;">انگلش ٹیسٹ 2 (English Test 2)</a>
-    <a class="btn" href="grade3-math-test2.html" style="text-align: center; padding: 10px; grid-column: span 2;">ریاضی ٹیسٹ 2 بائی لینگول (Math Test 2)</a>
+ <summary>جماعت 3</summary>
+<div class="junior-test-grid three-subjects">
+
+  <div class="junior-subject-title urdu">اردو</div>
+  <div class="junior-subject-title english">English</div>
+  <div class="junior-subject-title math">ریاضی</div>
+
+  <a class="junior-test urdu" href="grade3-urdu.html">Test 1</a>
+  <a class="junior-test english" href="grade3-english.html">Test 1</a>
+  <a class="junior-test math" href="grade3-math.html">Test 1</a>
+
+  <a class="junior-test urdu" href="grade3-urdu-test2.html">Test 2</a>
+  <a class="junior-test english" href="grade3-english-test2.html">Test 2</a>
+  <a class="junior-test math" href="grade3-math-test2.html">Test 2</a>
+
 </div>
 </details>
 
 <details class="grade-box" id="grade4">
 <summary>جماعت 4</summary>
-<div class="subjects">
-<div class="subject-grid">
-<a class="btn" href="grade4-english.html">انگلش ٹیسٹ</a>
-<a class="btn" href="grade4-math.html">ریاضی ٹیسٹ</a>
-<a class="btn" href="grade4-urdu.html">اردو ٹیسٹ</a>
-</div>
-</div>
- <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px;">
-    <a class="btn" href="grade4-urdu-test2.html" style="text-align: center; padding: 10px;">اردو ٹیسٹ 2 (Urdu Test 2)</a>
-    <a class="btn" href="grade4-english-test2.html" style="text-align: center; padding: 10px;">انگلش ٹیسٹ 2 (English Test 2)</a>
-    <a class="btn" href="grade4-math-test2.html" style="text-align: center; padding: 10px; grid-column: span 2;">ریاضی ٹیسٹ 2 بائی لینگول (Math Test 2)</a>
+<div class="junior-test-grid three-subjects">
+
+  <div class="junior-subject-title urdu">اردو</div>
+  <div class="junior-subject-title english">English</div>
+  <div class="junior-subject-title math">ریاضی</div>
+
+  <a class="junior-test urdu" href="grade4-urdu.html">Test 1</a>
+  <a class="junior-test english" href="grade4-english.html">Test 1</a>
+  <a class="junior-test math" href="grade4-math.html">Test 1</a>
+
+  <a class="junior-test urdu" href="grade4-urdu-test2.html">Test 2</a>
+  <a class="junior-test english" href="grade4-english-test2.html">Test 2</a>
+  <a class="junior-test math" href="grade4-math-test2.html">Test 2</a>
+
 </div>
 </details>
 
 <details class="grade-box" id="grade5">
 <summary>جماعت 5</summary>
-<div class="subjects">
-<div class="subject-grid">
-<a class="btn" href="grade5-english.html">انگلش ٹیسٹ</a>
-<a class="btn" href="grade5-urdu.html">اردو ٹیسٹ</a>
-<a class="btn" href="grade5-math.html">ریاضی ٹیسٹ</a>
-</div>
-</div>
- <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px;">
-    <a class="btn" href="grade5-urdu-test2.html" style="text-align: center; padding: 10px;">اردو ٹیسٹ 2 (Urdu Test 2)</a>
-    <a class="btn" href="grade5-english-test2.html" style="text-align: center; padding: 10px;">انگلش ٹیسٹ 2 (English Test 2)</a>
-    <a class="btn" href="grade5-math-test2.html" style="text-align: center; padding: 10px; grid-column: span 2;">ریاضی ٹیسٹ 2 بائی لینگول (Math Test 2)</a>
+<div class="junior-test-grid three-subjects">
+
+  <div class="junior-subject-title urdu">اردو</div>
+  <div class="junior-subject-title english">English</div>
+  <div class="junior-subject-title math">ریاضی</div>
+
+  <a class="junior-test urdu" href="grade5-urdu.html">Test 1</a>
+  <a class="junior-test english" href="grade5-english.html">Test 1</a>
+  <a class="junior-test math" href="grade5-math.html">Test 1</a>
+
+  <a class="junior-test urdu" href="grade5-urdu-test2.html">Test 2</a>
+  <a class="junior-test english" href="grade5-english-test2.html">Test 2</a>
+  <a class="junior-test math" href="grade5-math-test2.html">Test 2</a>
+
 </div>
 </details>
 
 <details class="grade-box" id="grade6">
 <summary>جماعت 6</summary>
-<div class="subjects">
-<div class="subject-grid">
-<a class="btn" href="grade6-english.html">انگلش ٹیسٹ</a>
-<a class="btn" href="grade6-english-test2.html">انگلش ٹیسٹ 2</a>
-<a class="btn" href="grade6-urdu.html">اردو ٹیسٹ 1</a>
-<a class="btn" href="grade6-urdu-test2.html">اردو ٹیسٹ 2</a>
-<a class="btn" href="grade6-math-test1.html">ریاضی ٹیسٹ 1</a>
-<a class="btn" href="grade6-math-test2.html">ریاضی ٹیسٹ 2</a>
-<a class="btn" href="grade6-science-test1.html">جنرل سائنس ٹیسٹ 1</a>
-<a class="btn" href="grade6-science-test2.html">جنرل سائنس ٹیسٹ 2</a>
-</div>
+<div class="junior-test-grid four-subjects">
+
+  <div class="junior-subject-title urdu">اردو</div>
+  <div class="junior-subject-title english">English</div>
+  <div class="junior-subject-title math">ریاضی</div>
+  <div class="junior-subject-title science">جنرل سائنس</div>
+
+  <a class="junior-test urdu" href="grade6-urdu.html">Test 1</a>
+  <a class="junior-test english" href="grade6-english.html">Test 1</a>
+  <a class="junior-test math" href="grade6-math-test1.html">Test 1</a>
+  <a class="junior-test science" href="grade6-science-test1.html">Test 1</a>
+
+  <a class="junior-test urdu" href="grade6-urdu-test2.html">Test 2</a>
+  <a class="junior-test english" href="grade6-english-test2.html">Test 2</a>
+  <a class="junior-test math" href="grade6-math-test2.html">Test 2</a>
+  <a class="junior-test science" href="grade6-science-test2.html">Test 2</a>
+
 </div>
 </details>
 
 <details class="grade-box" id="grade7">
 <summary>جماعت 7</summary>
-<div class="subjects">
-<div class="subject-grid">
-<a class="btn" href="grade7-english.html">انگلش ٹیسٹ</a>
-<a class="btn" href="grade7-english-test2.html">انگلش ٹیسٹ 2</a>
-<a class="btn" href="grade7-urdu-test1.html">اردو ٹیسٹ 1</a>
-<a class="btn" href="grade7-urdu-test2.html">اردو ٹیسٹ 2</a>
-<a class="btn" href="grade7-math-test1.html">ریاضی ٹیسٹ 1</a>
-<a class="btn" href="grade7-math-test2.html">ریاضی ٹیسٹ 2</a>
-<a class="btn" href="grade7-science-test1.html">جنرل سائنس ٹیسٹ 1</a>
-<a class="btn" href="grade7-science-test2.html">جنرل سائنس ٹیسٹ 2</a>
-</div>
+ <div class="junior-test-grid four-subjects">
+
+  <div class="junior-subject-title urdu">اردو</div>
+  <div class="junior-subject-title english">English</div>
+  <div class="junior-subject-title math">ریاضی</div>
+  <div class="junior-subject-title science">جنرل سائنس</div>
+
+  <a class="junior-test urdu" href="grade7-urdu-test1.html">Test 1</a>
+  <a class="junior-test english" href="grade7-english.html">Test 1</a>
+  <a class="junior-test math" href="grade7-math-test1.html">Test 1</a>
+  <a class="junior-test science" href="grade7-science-test1.html">Test 1</a>
+
+  <a class="junior-test urdu" href="grade7-urdu-test2.html">Test 2</a>
+  <a class="junior-test english" href="grade7-english-test2.html">Test 2</a>
+  <a class="junior-test math" href="grade7-math-test2.html">Test 2</a>
+  <a class="junior-test science" href="grade7-science-test2.html">Test 2</a>
+
 </div>
 </details>
 
 <details class="grade-box" id="grade8">
 <summary>جماعت 8</summary>
-<div class="subjects">
-<div class="subject-grid">
-<a class="btn" href="grade8-english.html">انگلش ٹیسٹ</a>
-<a class="btn" href="grade8-english-test2.html">انگلش ٹیسٹ 2</a>
-<a class="btn" href="grade8-english-test3.html">انگلش ٹیسٹ 3</a>
-<a class="btn" href="grade8-urdu-test1.html">اردو ٹیسٹ 1</a>
-<a class="btn" href="grade8-urdu-test2.html">اردو ٹیسٹ 2</a>
-<a class="btn" href="grade8-math-test1.html">ریاضی ٹیسٹ 1</a>
-<a class="btn" href="grade8-math-test2.html">ریاضی ٹیسٹ 2</a>
-<a class="btn" href="grade8-science-test1.html">جنرل سائنس ٹیسٹ 1</a>
-<a class="btn" href="grade8-science-test2.html">جنرل سائنس ٹیسٹ 2</a>
-</div>
+<div class="junior-test-grid four-subjects">
+
+  <div class="junior-subject-title urdu">اردو</div>
+  <div class="junior-subject-title english">English</div>
+  <div class="junior-subject-title math">ریاضی</div>
+  <div class="junior-subject-title science">جنرل سائنس</div>
+
+  <a class="junior-test urdu" href="grade8-urdu-test1.html">Test 1</a>
+  <a class="junior-test english" href="grade8-english.html">Test 1</a>
+  <a class="junior-test math" href="grade8-math-test1.html">Test 1</a>
+  <a class="junior-test science" href="grade8-science-test1.html">Test 1</a>
+
+  <a class="junior-test urdu" href="grade8-urdu-test2.html">Test 2</a>
+  <a class="junior-test english" href="grade8-english-test2.html">Test 2</a>
+  <a class="junior-test math" href="grade8-math-test2.html">Test 2</a>
+  <a class="junior-test science" href="grade8-science-test2.html">Test 2</a>
+
 </div>
 </details>
 
