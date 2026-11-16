@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 5 Urdu Online Test 2 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;background:var(--light);color:#263746;padding:15px;line-height:2.2}
+.container{max-width:750px;margin:auto;background:#fff;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin:0 0 5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:18px;font-family:Arial,sans-serif}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy);flex-wrap:wrap;gap:8px}
+.timer-badge{background:var(--navy);color:#fff;padding:2px 12px;border-radius:20px;font-size:14px;font-family:Arial,sans-serif;direction:ltr}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-right:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:10px 15px;text-align:right;font-size:16px;border-radius:8px;cursor:pointer;transition:.2s;color:#263746;font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:17px;font-weight:bold;min-height:35px}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:25px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:#fff;border:none;padding:10px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px;font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>جماعت پنجم — اردو آن لائن ٹیسٹ 2</h2>
+  <p class="subtitle">Grade 5 Urdu Online Test 2 — HMSA Learning Academy</p>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">سوال 1 از 20</span>
+      <span class="timer-badge" id="timer-display">05:00</span>
+      <span>کل نمبر: 20</span>
+    </div>
+    <div id="question-text" class="question"></div>
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h3 id="result-title">ٹیسٹ نمبر 2 مکمل ہو گیا!</h3>
+    <div class="result-card">
+      <div class="result-item" id="total-q">کل سوالات: 20</div>
+      <div class="result-item" id="correct-q" style="color:#087c59">درست جوابات: 0</div>
+      <div class="result-item" id="obtained-marks">حاصل کردہ نمبر: 0 / 20</div>
+      <div class="result-item" id="percentage-score" style="font-size:20px">فیصد: 0%</div>
+    </div>
+    <button class="restart-btn" onclick="startTest()">دوبارہ ٹیسٹ دیں</button>
+  </div>
+
+  <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const quizData = [
+  { q: "1. وہ اسم جو کسی خاص شخص، جگہ یا چیز کے نام کو ظاہر کرے، کہلاتا ہے:", options: ["الف) اسمِ نکرہ", "ب) اسمِ معرفہ", "ج) اسمِ صفت", "د) اسمِ ضمیر"], answer: 1 },
+  { q: "2. لفظ 'علم' کی جمع کیا ہے؟", options: ["الف) علماء", "ب) علوم", "ج) عالم", "د) معلومات"], answer: 1 },
+  { q: "3. لفظ 'ترقی' کا متضاد کیا ہے؟", options: ["الف) کامیابی", "ب) تنزلی", "ج) بلندی", "د) خوشحالی"], answer: 1 },
+  { q: "4. وہ فعل جس میں موجودہ زمانے میں کام کا کرنا یا ہونا پایا جائے، کہلاتا ہے:", options: ["الف) فعلِ ماضی", "ب) فعلِ حال", "ج) فعلِ مستقبل", "د) فعلِ امر"], answer: 1 },
+  { q: "5. ضرب المثل مکمل کریں: 'ناچ نہ جانے ___ ٹیڑھا'", options: ["الف) کمرہ", "ب) آنگن", "ج) راستہ", "د) صحن"], answer: 1 },
+  { q: "6. 'راشد نے کتاب پڑھی۔' اس جملے میں 'راشد' کیا ہے؟", options: ["الف) مفعول", "ب) فاعل", "ج) فعل", "د) حرف"], answer: 1 },
+  { q: "7. لفظ 'عالم' کی جمع کیا ہوگی؟", options: ["الف) علوم", "ب) علماء", "ج) عالمین", "د) علم"], answer: 1 },
+  { q: "8. لفظ 'آغاز' کا متضاد کیا ہے؟", options: ["الف) ابتدا", "ب) انجام", "ج) شروع", "د) بنیاد"], answer: 1 },
+  { q: "9. کسی چیز کی اچھائی یا برائی بیان کرنے والے لفظ کو کیا کہتے ہیں؟", options: ["الف) اسمِ صفت", "ب) اسمِ ضمیر", "ج) فعل", "د) حرف"], answer: 0 },
+  { q: "10. پاکستان کا قومی ترانہ کس شاعر نے لکھا؟", options: ["الف) علامہ اقبال", "ب) حفیظ جالندھری", "ج) فیض احمد فیض", "د) احمد ندیم قاسمی"], answer: 1 },
+  { q: "11. لفظ 'مشرق' کا متضاد کیا ہے؟", options: ["الف) شمال", "ب) مغرب", "ج) جنوب", "د) افق"], answer: 1 },
+  { q: "12. لفظ 'شیر' کا مؤنث کیا ہے؟", options: ["الف) شیری", "ب) شیرنی", "ج) ہرنی", "د) بلی"], answer: 1 },
+  { q: "13. وہ کلمہ جو کسی کام کے کرنے کا حکم ظاہر کرے، کہلاتا ہے:", options: ["الف) فعلِ نہ
