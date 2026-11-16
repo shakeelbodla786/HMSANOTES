@@ -1,167 +1,332 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grade 3 Mathematics Online Test 2 | HMSA Learning Academy</title>
+<title>Grade 3 Mathematics Test 2 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#102b4c;--green:#087c59;--light:#f2f6f7;--red:#d90429}
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
-.container{max-width:750px;margin:auto;background:#fff;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,.1);border-top:5px solid var(--green)}
-h2{text-align:center;color:var(--navy);margin:0 0 5px}
-.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:18px}
-.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy);flex-wrap:wrap;gap:8px}
-.timer-badge{background:var(--navy);color:#fff;padding:4px 12px;border-radius:20px;font-size:15px}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;}
 .question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:5px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:15px;}
 .options{display:grid;gap:10px;margin-bottom:15px}
-.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:.2s;color:#263746}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:15px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;}
 .opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
-#feedback-box{text-align:center;margin:10px 0;font-size:17px;font-weight:bold;min-height:32px}
+.opt-eng{font-family:Arial, sans-serif; font-weight:bold;}
+.opt-urdu{font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif; font-size:13px; color:#555; margin-left:5px;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
 .score-box{text-align:center;display:none;padding:15px 0}
-.score-box h3{color:var(--navy);font-size:25px;margin-bottom:10px}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
 .result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
 .result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
-.restart-btn{background:var(--navy);color:#fff;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
 .back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
 </style>
 </head>
 <body>
 <div class="container">
-  <h2>Grade 3 — Mathematics Online Test 2</h2>
-  <p class="subtitle">HMSA Learning Academy — Grade 3 Math Assessment 2</p>
-
-  <div id="quiz-screen">
-    <div class="quiz-header">
-      <span id="progress-text">Question 1 of 20</span>
-      <span class="timer-badge" id="timer-display">Time Left: 05:00</span>
-      <span>Marks: 20</span>
+    <h2>جماعت سوم — ریاضی آن لائن ٹیسٹ 2 (بائی لینگول)</h2>
+    <p class="subtitle">Grade 3 Mathematics Test 2 — HMSA Learning Academy</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
     </div>
-    <div id="question-text" class="question"></div>
-    <div id="options-box" class="options"></div>
-    <div id="feedback-box"></div>
-  </div>
-
-  <div id="score-screen" class="score-box">
-    <h3 id="result-title">Math Test 2 Completed!</h3>
-    <div class="result-card">
-      <div class="result-item" id="total-q">Total Questions: 20</div>
-      <div class="result-item" id="correct-q" style="color:#087c59">Correct Answers: 0</div>
-      <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
-      <div class="result-item" id="percentage-score" style="font-size:20px">Percentage: 0%</div>
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
     </div>
-    <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
-  </div>
-
-  <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
 </div>
-
 <script>
-const quizData = [
-  { q: "1. What is the place value of 7 in 4,725?", options: ["A) 7", "B) 70", "C) 700", "D) 7000"], answer: 2 },
-  { q: "2. Add: 345 + 210 = ?", options: ["A) 545", "B) 555", "C) 655", "D) 535"], answer: 1 },
-  { q: "3. Subtract: 890 - 450 = ?", options: ["A) 440", "B) 340", "C) 450", "D) 540"], answer: 0 },
-  { q: "4. Multiply: 8 × 7 = ?", options: ["A) 54", "B) 56", "C) 64", "D) 48"], answer: 1 },
-  { q: "5. Divide: 36 ÷ 4 = ?", options: ["A) 7", "B) 8", "C) 9", "D) 6"], answer: 2 },
-  { q: "6. Which number is an even number?", options: ["A) 33", "B) 47", "C) 58", "D) 91"], answer: 2 },
-  { q: "7. How many sides does a triangle have?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1 },
-  { q: "8. Write in Roman numerals: 10", options: ["A) V", "B) IX", "C) X", "D) XI"], answer: 2 },
-  { q: "9. 1 metre is equal to how many centimetres?", options: ["A) 10 cm", "B) 50 cm", "C) 100 cm", "D) 1000 cm"], answer: 2 },
-  { q: "10. What is the smallest 4-digit number?", options: ["A) 100", "B) 999", "C) 1000", "D) 9999"], answer: 2 },
-  { q: "11. Find the missing number: 5, 10, 15, ___, 25", options: ["A) 18", "B) 20", "C) 22", "D) 30"], answer: 1 },
-  { q: "12. How many minutes are there in 1 hour?", options: ["A) 30", "B) 45", "C) 60", "D) 100"], answer: 2 },
-  { q: "13. Which fraction represents one-half?", options: ["A) 1/4", "B) 1/3", "C) 1/2", "D) 2/3"], answer: 2 },
-  { q: "14. 9 × 6 = ?", options: ["A) 45", "B) 54", "C) 63", "D) 48"], answer: 1 },
-  { q: "15. What is 500 + 30 + 9 in standard form?", options: ["A) 539", "B) 593", "C) 359", "D) 5309"], answer: 0 },
-  { q: "16. How many days are there in a leap year?", options: ["A) 364", "B) 365", "C) 366", "D) 360"], answer: 2 },
-  { q: "17. Which symbol means 'greater than'?", options: ["A) <", "B) >", "C) =", "D) +"], answer: 1 },
-  { q: "18. 45 ÷ 5 = ?", options: ["A) 7", "B) 8", "C) 9", "D) 10"], answer: 2 },
-  { q: "19. A square has how many equal sides?", options: ["A) 2", "B) 3", "C) 4", "D) 6"], answer: 2 },
-  { q: "20. If you have Rs. 100 and spend Rs. 35, how much is left?", options: ["A) Rs. 55", "B) Rs. 65", "C) Rs. 75", "D) Rs. 45"], answer: 1 }
-];
-
-let currentIdx = 0, score = 0, timeLeft = 300, timerInterval;
-
-function startTimer() {
-  clearInterval(timerInterval);
-  timeLeft = 300;
-  updateTimerDisplay();
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    updateTimerDisplay();
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      showResult("Time's Up! Test Finished.");
+const testData = [
+    {
+        eng: "1. What is the sum of 45 and 35?",
+        urdu: "1. 45 اور 35 کا مجموعہ کیا ہے؟",
+        options: [
+            {eng: "A) 70", urdu: "(۷۰)"},
+            {eng: "B) 80", urdu: "(۸۰)"},
+            {eng: "C) 90", urdu: "(۹۰)"},
+            {eng: "D) 75", urdu: "(۷۵)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "2. Subtract 24 from 75.",
+        urdu: "2. 75 میں سے 24 تفریق کریں۔",
+        options: [
+            {eng: "A) 41", urdu: "(۴۱)"},
+            {eng: "B) 51", urdu: "(۵۱)"},
+            {eng: "C) 61", urdu: "(۶۱)"},
+            {eng: "D) 50", urdu: "(۵۰)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "3. What is 8 multiplied by 6?",
+        urdu: "3. 8 کو 6 سے ضرب دینے پر کیا آئے گا؟",
+        options: [
+            {eng: "A) 42", urdu: "(۴۲)"},
+            {eng: "B) 48", urdu: "(۴۸)"},
+            {eng: "C) 54", urdu: "(۵۴)"},
+            {eng: "D) 36", urdu: "(۳۶)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "4. Divide 36 by 4.",
+        urdu: "4. 36 کو 4 پر تقسیم کریں۔",
+        options: [
+            {eng: "A) 8", urdu: "(۸)"},
+            {eng: "B) 9", urdu: "(۹)"},
+            {eng: "C) 7", urdu: "(۷)"},
+            {eng: "D) 6", urdu: "(۶)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "5. Write in figures: Two hundred and fifty.",
+        urdu: "5. ہندسوں میں لکھیں: دو سو پچاس۔",
+        options: [
+            {eng: "A) 205", urdu: "(۲۰۵)"},
+            {eng: "B) 250", urdu: "(۲۵۰)"},
+            {eng: "C) 520", urdu: "(۵۲۰)"},
+            {eng: "D) 215", urdu: "(۲۱۵)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "6. Which number is greater: 489 or 498?",
+        urdu: "6. کون سا عدد بڑا ہے: 489 یا 498؟",
+        options: [
+            {eng: "A) 489", urdu: "(۴۸۹)"},
+            {eng: "B) 498", urdu: "(۴۹۸)"},
+            {eng: "C) Both are equal", urdu: "(دونوں برابر ہیں)"},
+            {eng: "D) None", urdu: "(کوئی نہیں)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "7. How many sides does a triangle have?",
+        urdu: "7. مثلث (Triangle) کے کتنے اضلاع ہوتے ہیں؟",
+        options: [
+            {eng: "A) 3", urdu: "(۳)"},
+            {eng: "B) 4", urdu: "(۴)"},
+            {eng: "C) 5", urdu: "(۵)"},
+            {eng: "D) 6", urdu: "(۶)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "8. What is the place value of 7 in 734?",
+        urdu: "8. عدد 734 میں 7 کی مقامی قیمت کیا ہے؟",
+        options: [
+            {eng: "A) 7", urdu: "(۷)"},
+            {eng: "B) 70", urdu: "(۷۰)"},
+            {eng: "C) 700", urdu: "(۷۰۰)"},
+            {eng: "D) 7000", urdu: "(۷۰۰۰)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "9. Add: 125 + 125 =",
+        urdu: "9. جمع کریں: 125 + 125",
+        options: [
+            {eng: "A) 240", urdu: "(۲۴۰)"},
+            {eng: "B) 250", urdu: "(۲۵۰)"},
+            {eng: "C) 260", urdu: "(۲۶۰)"},
+            {eng: "D) 300", urdu: "(۳۰۰)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "10. How many centimeters make 1 meter?",
+        urdu: "10. کتنے سینٹی میٹر مل کر 1 میٹر بناتے ہیں؟",
+        options: [
+            {eng: "A) 10 cm", urdu: "(۱۰ سینٹی میٹر)"},
+            {eng: "B) 100 cm", urdu: "(۱۰۰ سینٹی میٹر)"},
+            {eng: "C) 1000 cm", urdu: "(۱۰۰۰ سینٹی میٹر)"},
+            {eng: "D) 50 cm", urdu: "(۵۰ سینٹی میٹر)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. What is half of 50?",
+        urdu: "11. 50 کا آدھا کتنا ہوتا ہے؟",
+        options: [
+            {eng: "A) 20", urdu: "(۲۰)"},
+            {eng: "B) 25", urdu: "(۲۵)"},
+            {eng: "C) 30", urdu: "(۳۰)"},
+            {eng: "D) 15", urdu: "(۱۵)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "12. What shape has 4 equal sides?",
+        urdu: "12. کس شکل کے چاروں اضلاع برابر ہوتے ہیں؟",
+        options: [
+            {eng: "A) Rectangle", urdu: "(مستطیل)"},
+            {eng: "B) Square", urdu: "(مربع)"},
+            {eng: "C) Circle", urdu: "(دائرہ)"},
+            {eng: "D) Triangle", urdu: "(مثلث)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "13. What is 9 x 9?",
+        urdu: "13. 9 کو 9 سے ضرب دیں:",
+        options: [
+            {eng: "A) 72", urdu: "(۷۲)"},
+            {eng: "B) 81", urdu: "(۸۱)"},
+            {eng: "C) 90", urdu: "(۹۰)"},
+            {eng: "D) 64", urdu: "(۶۴)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "14. If today is Monday, what day is tomorrow?",
+        urdu: "14. اگر آج پیر ہے، تو کل کون سا دن ہوگا؟",
+        options: [
+            {eng: "A) Sunday", urdu: "(اتوار)"},
+            {eng: "B) Tuesday", urdu: "(منگل)"},
+            {eng: "C) Wednesday", urdu: "(بدھ)"},
+            {eng: "D) Saturday", urdu: "(ہفتہ)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. What is 100 - 45?",
+        urdu: "15. 100 میں سے 45 نکالیں:",
+        options: [
+            {eng: "A) 55", urdu: "(۵۵)"},
+            {eng: "B) 65", urdu: "(۶۵)"},
+            {eng: "C) 50", urdu: "(۵۰)"},
+            {eng: "D) 45", urdu: "(۴۵)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "16. How many hours are in a day?",
+        urdu: "16. ایک دن میں کتنے گھنٹے ہوتے ہیں؟",
+        options: [
+            {eng: "A) 12", urdu: "(۱۲)"},
+            {eng: "B) 24", urdu: "(۲۴)"},
+            {eng: "C) 48", urdu: "(۴۸)"},
+            {eng: "D) 60", urdu: "(۶۰)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "17. Write the next number in sequence: 5, 10, 15, 20, ?",
+        urdu: "17. ترتیب کا اگلا عدد لکھیں: 5, 10, 15, 20, ?",
+        options: [
+            {eng: "A) 22", urdu: "(۲۲)"},
+            {eng: "B) 25", urdu: "(۲۵)"},
+            {eng: "C) 30", urdu: "(۳۰)"},
+            {eng: "D) 35", urdu: "(۳۵)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "18. Which is an even number?",
+        urdu: "18. ذیل میں سے کون سا جفت (Even) عدد ہے؟",
+        options: [
+            {eng: "A) 7", urdu: "(۷)"},
+            {eng: "B) 9", urdu: "(۹)"},
+            {eng: "C) 12", urdu: "(۱۲)"},
+            {eng: "D) 15", urdu: "(۱۵)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "19. How many months are in a year?",
+        urdu: "19. ایک سال میں کتنے مہینے ہوتے ہیں؟",
+        options: [
+            {eng: "A) 4", urdu: "(۴)"},
+            {eng: "B) 6", urdu: "(۶)"},
+            {eng: "C) 12", urdu: "(۱۲)"},
+            {eng: "D) 365", urdu: "(۳۶۵)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "20. What is 50 divided by 5?",
+        urdu: "20. 50 کو 5 پر تقسیم کریں:",
+        options: [
+            {eng: "A) 5", urdu: "(۵)"},
+            {eng: "B) 10", urdu: "(۱۰)"},
+            {eng: "C) 15", urdu: "(۱۵)"},
+            {eng: "D) 20", urdu: "(۲۰)"}
+        ],
+        answer: 1
     }
-  }, 1000);
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerHTML = `<div class="eng-stmt">${q.eng}</div><div class="urdu-stmt">${q.urdu}</div>`;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; 
+        btn.innerHTML = `<span class="opt-eng">${opt.eng}</span> <span class="opt-urdu">${opt.urdu}</span>`;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `Question ${idx+1} of ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
 }
-
-function updateTimerDisplay() {
-  const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-  const s = String(timeLeft % 60).padStart(2, '0');
-  document.getElementById('timer-display').innerText = `Time Left: ${m}:${s}`;
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
 }
-
-function startTest() {
-  currentIdx = 0; score = 0;
-  document.getElementById('score-screen').style.display = 'none';
-  document.getElementById('quiz-screen').style.display = 'block';
-  startTimer();
-  loadQuestion();
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`Total Questions: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText=`Obtained Marks: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`Percentage: ${perc}%`;
 }
-
-function loadQuestion() {
-  const qData = quizData[currentIdx];
-  document.getElementById('question-text').innerText = qData.q;
-  const optBox = document.getElementById('options-box');
-  optBox.innerHTML = '';
-  qData.options.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'opt-btn';
-    btn.innerText = opt;
-    btn.onclick = () => checkAnswer(i, btn);
-    optBox.appendChild(btn);
-  });
-  document.getElementById('progress-text').innerText = `Question ${currentIdx + 1} of ${quizData.length}`;
-  document.getElementById('feedback-box').innerHTML = '';
-}
-
-function checkAnswer(selected, btn) {
-  const btns = document.querySelectorAll('.opt-btn');
-  btns.forEach(b => b.disabled = true);
-  const qData = quizData[currentIdx];
-  const fb = document.getElementById('feedback-box');
-
-  if (selected === qData.answer) {
-    score++;
-    btn.style.background = '#2b9348'; btn.style.color = '#fff'; btn.style.borderColor = '#2b9348';
-    fb.innerHTML = `<span style="color:#2b9348">✅ درست جواب! (Correct Answer)</span>`;
-  } else {
-    btn.style.background = '#d90429'; btn.style.color = '#fff'; btn.style.borderColor = '#d90429';
-    btns[qData.answer].style.background = '#2b9348'; btns[qData.answer].style.color = '#fff'; btns[qData.answer].style.borderColor = '#2b9348';
-    fb.innerHTML = `<span style="color:#d90429">❌ غلط جواب! درست جواب: ${qData.options[qData.answer]}</span>`;
-  }
-
-  currentIdx++;
-  setTimeout(() => {
-    if (currentIdx < quizData.length) loadQuestion();
-    else { clearInterval(timerInterval); showResult("Math Test 2 Completed Successfully!"); }
-  }, 1500);
-}
-
-function showResult(title) {
-  document.getElementById('quiz-screen').style.display = 'none';
-  document.getElementById('score-screen').style.display = 'block';
-  document.getElementById('result-title').innerText = title;
-  const total = quizData.length;
-  const pct = Math.round((score / total) * 100);
-  document.getElementById('total-q').innerText = `Total Questions: ${total}`;
-  document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
-  document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
-  document.getElementById('percentage-score').innerText = `Percentage: ${pct}%`;
-}
-
-window.onload = startTest;
+window.onload=startTest;
 </script>
 </body>
 </html>
