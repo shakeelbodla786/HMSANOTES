@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 5 English Online Test 2 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:750px;margin:auto;background:#fff;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin:0 0 5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:18px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy);flex-wrap:wrap;gap:8px}
+.timer-badge{background:var(--navy);color:#fff;padding:4px 12px;border-radius:20px;font-size:15px}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:17px;font-weight:bold;min-height:32px}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:25px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:#fff;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Grade 5 — English Online Test 2</h2>
+  <p class="subtitle">HMSA Learning Academy — Grade 5 Assessment 2</p>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">Question 1 of 20</span>
+      <span class="timer-badge" id="timer-display">Time Left: 05:00</span>
+      <span>Marks: 20</span>
+    </div>
+    <div id="question-text" class="question"></div>
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h3 id="result-title">Test 2 Completed!</h3>
+    <div class="result-card">
+      <div class="result-item" id="total-q">Total Questions: 20</div>
+      <div class="result-item" id="correct-q" style="color:#087c59">Correct Answers: 0</div>
+      <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+      <div class="result-item" id="percentage-score" style="font-size:20px">Percentage: 0%</div>
+    </div>
+    <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+  </div>
+
+  <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+
+<script>
+const quizData = [
+  { q: "1. Identify the Collective Noun in the following:", options: ["A) Soldier", "B) Army", "C) Sword", "D) Courage"], answer: 1 },
+  { q: "2. Which word is an Abstract Noun?", options: ["A) Table", "B) Wisdom", "C) Garden", "D) River"], answer: 1 },
+  { q: "3. Choose the correct form of verb: 'She ___ to school every day.'", options: ["A) go", "B) goes", "C) going", "D) gone"], answer: 1 },
+  { q: "4. Identify the tense: 'We will visit Islamabad next week.'", options: ["A) Past Simple", "B) Present Simple", "C) Future Simple", "D) Present Perfect"], answer: 2 },
+  { q: "5. What is the superlative degree of 'Happy'?", options: ["A) Happier", "B) Happiest", "C) Most happy", "D) More happy"], answer: 1 },
+  { q: "6. Choose the correct relative pronoun: 'The boy ___ won the race is my friend.'", options: ["A) which", "B) who", "C) whose", "D) whom"], answer: 1 },
+  { q: "7. What is the synonym of 'Brave'?", options: ["A) Coward", "B) Courageous", "C) Weak", "D) Afraid"], answer: 1 },
+  { q: "8. What is the antonym of 'Victory'?", options: ["A) Win", "B) Success", "C) Defeat", "D) Triumph"], answer: 2 },
+  { q: "9. Choose the correct preposition: 'He is fond ___ reading books.'", options: ["A) in", "B) at", "C) of", "D) on"], answer: 2 },
+  { q: "10. Identify the adverb of frequency: 'He always speaks the truth.'", options: ["A) speaks", "B) truth", "C) always", "D) He"], answer: 2 },
+  { q: "11. Plural of 'Mouse' is:", options: ["A) Mouses", "B) Mice", "C) Mices", "D) Mousies"], answer: 1 },
+  { q: "12. Which sentence is an Imperative sentence?", options: ["A) What is your name?", "B) Open the door.", "C) How beautiful the flower is!", "D) Ali is a good boy."], answer: 1 },
+  { q: "13. Choose the correct homophone: 'I need to buy a ___ of shoes.'", options: ["A) pear", "B) pair", "C) pare", "D) peer"], answer: 1 },
+  { q: "14. What is the past tense of 'Teach'?", options: ["A) Teached", "B) Taught", "C) Teaching", "D) Teaches"], answer: 1 },
+  { q: "15. Fill in the blank: 'Neither Ali ___ Ahmed was present.'", options: ["A) or", "B) nor", "C) and", "D) but"], answer: 1 },
+  { q: "16. Identify the prefix in the word 'Disagree':", options: ["A) agree", "B) dis-", "C) -ree", "D) di-"], answer: 1 },
+  { q: "17. What is the feminine of 'Nephew'?", options: ["A) Cousin", "B) Niece", "C) Sister", "D) Daughter"], answer: 1 },
+  { q: "18. Choose the correct modal verb: 'You ___ respect your elders.'", options: ["A) can", "B) may", "C) should", "D) might"], answer: 2 },
+  { q: "19. Which word has a silent 'b'?", options: ["A) Baby", "B) Comb", "C) Table", "D) Boat"], answer: 1 },
+  { q: "20. 'Actions speak louder than ___.' Complete the idiom:", options: ["A) noise", "B) words", "C) voice", "D) sounds"], answer: 1 }
+];
+
+let currentIdx = 0, score = 0, timeLeft = 300, timerInterval;
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = 300;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      showResult("Time's Up! Test Finished.");
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+  const s = String(timeLeft % 60).padStart(2, '0');
+  document.getElementById('timer-display').innerText = `Time Left: ${m}:${s}`;
+}
+
+function startTest() {
+  currentIdx = 0; score = 0;
+  document.getElementById('score-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  startTimer();
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const qData = quizData[currentIdx];
+  document.getElementById('question-text').innerText = qData.q;
+  const optBox = document.getElementById('options-box');
+  optBox.innerHTML = '';
+  qData.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerText = opt;
+    btn.onclick = () => checkAnswer(i, btn);
+    optBox.appendChild(btn);
+  });
+  document.getElementById('progress-text').innerText = `Question ${currentIdx + 1} of ${quizData.length}`;
+  document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selected, btn) {
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  const qData = quizData[currentIdx];
+  const fb = document.getElementById('feedback-box');
+
+  if (selected === qData.answer) {
+    score++;
+    btn.style.background = '#2b9348'; btn.style.color = '#fff'; btn.style.borderColor = '#2b9348';
+    fb.innerHTML = `<span style="color:#2b9348">✅ درست جواب! (Correct Answer)</span>`;
+  } else {
+    btn.style.background = '#d90429'; btn.style.color = '#fff'; btn.style.borderColor = '#d90429';
+    btns[qData.answer].style.background = '#2b9348'; btns[qData.answer].style.color = '#fff'; btns[qData.answer].style.borderColor = '#2b9348';
+    fb.innerHTML = `<span style="color:#d90429">❌ غلط جواب! درست جواب: ${qData.options[qData.answer]}</span>`;
+  }
+
+  currentIdx++;
+  setTimeout(() => {
+    if (currentIdx < quizData.length) loadQuestion();
+    else { clearInterval(timerInterval); showResult("Test 2 Completed Successfully!"); }
+  }, 1500);
+}
+
+function showResult(title) {
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('score-screen').style.display = 'block';
+  document.getElementById('result-title').innerText = title;
+  const total = quizData.length;
+  const pct = Math.round((score / total) * 100);
+  document.getElementById('total-q').innerText = `Total Questions: ${total}`;
+  document.getElementById('correct-q').innerText = `Correct Answers: ${score}`;
+  document.getElementById('obtained-marks').innerText = `Obtained Marks: ${score} / ${total}`;
+  document.getElementById('percentage-score').innerText = `Percentage: ${pct}%`;
+}
+
+window.onload = startTest;
+</script>
+</body>
+</html>
