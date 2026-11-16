@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 5 Mathematics Test 2 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:5px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:15px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:15px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-eng{font-family:Arial, sans-serif; font-weight:bold;}
+.opt-urdu{font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif; font-size:13px; color:#555; margin-left:5px;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>جماعت پنجم — ریاضی آن لائن ٹیسٹ 2 (بائی لینگول)</h2>
+    <p class="subtitle">Grade 5 Mathematics Test 2 — HMSA Learning Academy</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+    <div id="score-screen" class="score-box">
+        <h3>Test 2 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+<script>
+const testData = [
+    {
+        eng: "1. What is the sum of 24,500 and 13,250?",
+        urdu: "1. 24,500 اور 13,250 کا مجموعہ کیا ہے؟",
+        options: [
+            {eng: "A) 37,750", urdu: "(۳۷,۷۵۰)"},
+            {eng: "B) 36,750", urdu: "(۳۶,۷۵۰)"},
+            {eng: "C) 38,750", urdu: "(۳۸,۷۵۰)"},
+            {eng: "D) 35,750", urdu: "(۳۵,۷۵۰)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "2. Subtract 12,400 from 55,900.",
+        urdu: "2. 55,900 میں سے 12,400 تفریق کریں۔",
+        options: [
+            {eng: "A) 42,500", urdu: "(۴۲,۵۰۰)"},
+            {eng: "B) 43,500", urdu: "(۴۳,۵۰۰)"},
+            {eng: "C) 44,500", urdu: "(۴۴,۵۰۰)"},
+            {eng: "D) 41,500", urdu: "(۴۱,۵۰۰)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "3. Multiply 345 by 12.",
+        urdu: "3. 345 کو 12 سے ضرب دیں۔",
+        options: [
+            {eng: "A) 4,040", urdu: "(۴,۰۴۰)"},
+            {eng: "B) 4,140", urdu: "(۴,۱۴۰)"},
+            {eng: "C) 4,240", urdu: "(۴,۲۴۰)"},
+            {eng: "D) 4,340", urdu: "(۴,۳۴۰)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "4. Divide 625 by 25.",
+        urdu: "4. 625 کو 25 پر تقسیم کریں۔",
+        options: [
+            {eng: "A) 15", urdu: "(۱۵)"},
+            {eng: "B) 20", urdu: "(۲۰)"},
+            {eng: "C) 25", urdu: "(۲۵)"},
+            {eng: "D) 30", urdu: "(۳۰)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "5. What is 25% of 200?",
+        urdu: "5. 200 کا 25 فیصد کتنا ہوتا ہے؟",
+        options: [
+            {eng: "A) 25", urdu: "(۲۵)"},
+            {eng: "B) 50", urdu: "(۵۰)"},
+            {eng: "C) 75", urdu: "(۷۵)"},
+            {eng: "D) 100", urdu: "(۱۰۰)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "6. Convert 3/4 into a percentage.",
+        urdu: "6. کسر 3/4 کو فیصد میں تبدیل کریں:",
+        options: [
+            {eng: "A) 25%", urdu: "(۲۵٪)"},
+            {eng: "B) 50%", urdu: "(۵۰٪)"},
+            {eng: "C) 75%", urdu: "(۷۵٪)"},
+            {eng: "D) 100%", urdu: "(۱۰۰٪)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "7. What is the area of a rectangle with length 8 cm and width 5 cm?",
+        urdu: "7. اس مستطیل کا رقبہ کیا ہوگا جس کی لمبائی 8 سینٹی میٹر اور چوڑائی 5 سینٹی میٹر ہو؟",
+        options: [
+            {eng: "A) 13 sq cm", urdu: "(۱۳ مربع سینٹی میٹر)"},
+            {eng: "B) 40 sq cm", urdu: "(۴۰ مربع سینٹی میٹر)"},
+            {eng: "C) 26 sq cm", urdu: "(۲۶ مربع سینٹی میٹر)"},
+            {eng: "D) 35 sq cm", urdu: "(۳۵ مربع سینٹی میٹر)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "8. Find the average of numbers: 10, 20, 30, 40, 50.",
+        urdu: "8. اعداد 10, 20, 30, 40 اور 50 کا اوسط (Average) کیا ہے؟",
+        options: [
+            {eng: "A) 25", urdu: "(۲۵)"},
+            {eng: "B) 30", urdu: "(۳۰)"},
+            {eng: "C) 35", urdu: "(۳۵)"},
+            {eng: "D) 40", urdu: "(۴۰)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "9. What is the Prime Factorization of 12?",
+        urdu: "9. 12 کے مفرد اجزائے ضربی (Prime Factors) کیا ہیں؟",
+        options: [
+            {eng: "A) 2 x 2 x 3", urdu: "(2 x 2 x 3)"},
+            {eng: "B) 2 x 3 x 3", urdu: "(2 x 3 x 3)"},
+            {eng: "C) 4 x 3", urdu: "(4 x 3)"},
+            {eng: "D) 2 x 6", urdu: "(2 x 6)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "10. What is 3.5 + 2.25?",
+        urdu: "10. 3.5 اور 2.25 کو جمع کریں:",
+        options: [
+            {eng: "A) 5.55", urdu: "(۵.۵۵)"},
+            {eng: "B) 5.75", urdu: "(۵.۷۵)"},
+            {eng: "C) 6.00", urdu: "(۶.۰۰)"},
+            {eng: "D) 4.75", urdu: "(۴.۷۵)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. How many degrees are in a full circle?",
+        urdu: "11. ایک مکمل دائرے میں کتنے درجے ہوتے ہیں؟",
+        options: [
+            {eng: "A) 90°", urdu: "(۹۰ ڈگری)"},
+            {eng: "B) 180°", urdu: "(۱۸۰ ڈگری)"},
+            {eng: "C) 360°", urdu: "(۳۶۰ ڈگری)"},
+            {eng: "D) 270°", urdu: "(۲۷۰ ڈگری)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "12. What is 15.4 divided by 2?",
+        urdu: "12. 15.4 کو 2 پر تقسیم کریں:",
+        options: [
+            {eng: "A) 7.2", urdu: "(۷.۲)"},
+            {eng: "B) 7.7", urdu: "(۷.۷)"},
+            {eng: "C) 8.2", urdu: "(۸.۲)"},
+            {eng: "D) 6.7", urdu: "(۶.۷)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "13. Simplify the fraction: 8/16",
+        urdu: "13. کسر 8/16 کو مختصر کریں:",
+        options: [
+            {eng: "A) 1/2", urdu: "(۱/۲)"},
+            {eng: "B) 1/4", urdu: "(۱/۴)"},
+            {eng: "C) 2/3", urdu: "(۲/۳)"},
+            {eng: "D) 3/4", urdu: "(۳/۴)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "14. What is the LCM of 3 and 5?",
+        urdu: "14. 3 اور 5 کا ضلعی المشترک (LCM) کیا ہے؟",
+        options: [
+            {eng: "A) 8", urdu: "(۸)"},
+            {eng: "B) 15", urdu: "(۱۵)"},
+            {eng: "C) 10", urdu: "(۱۰)"},
+            {eng: "D) 30", urdu: "(۳۰)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. What is the HCF of 15 and 25?",
+        urdu: "15. 15 اور 25 کا عظم المشترک (HCF) کیا ہے؟",
+        options: [
+            {eng: "A) 3", urdu: "(۳)"},
+            {eng: "B) 5", urdu: "(۵)"},
+            {eng: "C) 10", urdu: "(۱۰)"},
+            {eng: "D) 15", urdu: "(۱۵)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "16. Convert 2.5 kg into grams.",
+        urdu: "16. 2.5 کلوگرام کو گرام میں تبدیل کریں:",
+        options: [
+            {eng: "A) 250 g", urdu: "(۲۵۰ گرام)"},
+            {eng: "B) 2500 g", urdu: "(۲۵۰۰ گرام)"},
+            {eng: "C) 25000 g", urdu: "(۲۵۰۰۰ گرام)"},
+            {eng: "D) 25 g", urdu: "(۲۵ گرام)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "17. What is 12 squared (12²)?",
+        urdu: "17. 12 کا مربع کیا ہے؟",
+        options: [
+            {eng: "A) 120", urdu: "(۱۲۰)"},
+            {eng: "B) 144", urdu: "(۱۴۴)"},
+            {eng: "C) 132", urdu: "(۱۳۲)"},
+            {eng: "D) 164", urdu: "(۱۶۴)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "18. If a book costs Rs. 250, what will be the cost of 4 such books?",
+        urdu: "18. اگر ایک کتاب کی قیمت 250 روپے ہو، تو ایسی 4 کتابوں کی قیمت کیا ہوگی؟",
+        options: [
+            {eng: "A) Rs. 800", urdu: "(۸۰۰ روپے)"},
+            {eng: "B) Rs. 1000", urdu: "(۱۰۰۰ روپے)"},
+            {eng: "C) Rs. 1200", urdu: "(۱۲۰۰ روپے)"},
+            {eng: "D) Rs. 900", urdu: "(۹۰۰ روپے)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "19. What is the supplement of a 60-degree angle?",
+        urdu: "19. 60 درجے کے زاویہ کا تکمیلی (Supplementary) زاویہ کتنا ہوگا؟",
+        options: [
+            {eng: "A) 30°", urdu: "(۳۰ ڈگری)"},
+            {eng: "B) 120°", urdu: "(۱۲۰ ڈگری)"},
+            {eng: "C) 90°", urdu: "(۹۰ ڈگری)"},
+            {eng: "D) 180°", urdu: "(۱۸۰ ڈگری)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "20. What is 1000 divided by 10?",
+        urdu: "20. 1000 کو 10 پر تقسیم کریں:",
+        options: [
+            {eng: "A) 10", urdu: "(۱۰)"},
+            {eng: "B) 100", urdu: "(۱۰۰)"},
+            {eng: "C) 1000", urdu: "(۱۰۰۰)"},
+            {eng: "D) 1", urdu: "(۱)"}
+        ],
+        answer: 1
+    }
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerHTML = `<div class="eng-stmt">${q.eng}</div><div class="urdu-stmt">${q.urdu}</div>`;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; 
+        btn.innerHTML = `<span class="opt-eng">${opt.eng}</span> <span class="opt-urdu">${opt.urdu}</span>`;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `Question ${idx+1} of ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
+}
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
+}
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`Total Questions: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText=`Obtained Marks: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`Percentage: ${perc}%`;
+}
+window.onload=startTest;
+</script>
+</body>
+</html>
