@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 English Test 4 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:#102b4c;color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Grade 8 — English Online Test 4</h2>
+    <p class="subtitle">HMSA Learning Academy — Master English Grammar Guide</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+    <div id="score-screen" class="score-box">
+        <h3>Test 4 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+<script>
+const testData = [
+    {q: "1. What is the smallest meaningful unit of a language?", options: ["Paragraph", "Clause", "Morpheme", "Article"], answer: 2},
+    {q: "2. Which word contains a silent letter 'k'?", options: ["Knowledge", "Kingdom", "Kangaroo", "Kindness"], answer: 0},
+    {q: "3. 'Knight' and 'Night' are examples of:", options: ["Antonyms", "Homophones", "Acronyms", "Prefixes"], answer: 1},
+    {q: "4. Identify the prefix in the word 'Misunderstand':", options: ["-stand", "Under-", "-ing", "Mis-"], answer: 3},
+    {q: "5. What does the idiom 'Once in a blue moon' mean?", options: ["Very rarely", "Every night", "Very angrily", "Quickly"], answer: 0},
+    {q: "6. Doctor : Hospital :: Teacher : ___?", options: ["Court", "School", "Market", "Station"], answer: 1},
+    {q: "7. 'He is as brave as a lion' is an example of:", options: ["Metaphor", "Simile", "Personification", "Hyperbole"], answer: 1},
+    {q: "8. Identify the group in 'Because it rained, we stayed home':", options: ["Prepositional Phrase", "Noun Phrase", "Dependent Clause", "Interjection"], answer: 2},
+    {q: "9. What is the plural form of 'Phenomenon'?", options: ["Phenomenons", "Phenomena", "Phenomenas", "Phenomeni"], answer: 1},
+    {q: "10. 'May you live long!' is which kind of sentence?", options: ["Interrogative", "Optative Sentence", "Imperative", "Declarative"], answer: 1},
+    {q: "11. Choose the correct article: 'He is ___ honest man.'", options: ["a", "the", "an", "no article"], answer: 2},
+    {q: "12. What is the antonym of 'Optimistic'?", options: ["Hopeful", "Cheerful", "Pessimistic", "Confident"], answer: 2},
+    {q: "13. Which of the following is a Material Noun?", options: ["Crowd", "Gold", "Bravery", "Lahore"], answer: 1},
+    {q: "14. 'Each of the players received a medal.' Here 'Each' is a:", options: ["Reflexive Pronoun", "Relative Pronoun", "Distributive Pronoun", "Personal Pronoun"], answer: 2},
+    {q: "15. Identify the adjective in: 'Those mangoes are sweet.'", options: ["sweet", "are", "Those", "mangoes"], answer: 2},
+    {q: "16. 'The baby sleeps soundly.' Here 'sleeps' is an:", options: ["Transitive Verb", "Intransitive Verb", "Auxiliary Verb", "Modal Verb"], answer: 1},
+    {q: "17. Choose the correct preposition: 'He is fond ___ reading books.'", options: ["off", "with", "of", "at"], answer: 2},
+    {q: "18. 'She has been teaching in this school since 2020.' Identify the tense:", options: ["Present Perfect Continuous", "Past Continuous", "Future Perfect", "Present Continuous"], answer: 0},
+    {q: "19. Change into Passive Voice: 'Who broke this glass?'", options: ["By whom is this glass broken?", "Who was broken this glass?", "By whom was this glass broken?", "Whom this glass broke?"], answer: 2},
+    {q: "20. Change into Indirect Speech: He said, 'I am busy now.'", options: ["He said that I am busy now.", "He said that he was busy then.", "He told that he is busy then.", "He said he was busy now."], answer: 1}
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerText = q.q;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `Question ${idx+1} of ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
+}
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ Correct Answer!</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ Incorrect Answer!</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
+}
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`Total Questions: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText=`Obtained Marks: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`Percentage: ${perc}%`;
+}
+window.onload=startTest;
+</script>
+</body>
+</html>
