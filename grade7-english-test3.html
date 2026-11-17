@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 7 English Test 3 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:#102b4c;color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Grade 7 — English Online Test 3</h2>
+    <p class="subtitle">HMSA Learning Academy — Advanced Grammar & Syntax</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+    <div id="score-screen" class="score-box">
+        <h3>Test 3 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+<script>
+const testData = [
+    {q: "1. Which sentence is in the Present Perfect Tense?", options: ["A) He has finished his homework.", "B) He finished his homework.", "C) He is finishing his homework.", "D) He finishes his homework."], answer: 0},
+    {q: "2. What is the passive voice of 'Ali plays cricket.'?", options: ["A) Cricket was played by Ali.", "B) Cricket is played by Ali.", "C) Cricket has been played by Ali.", "D) Cricket will be played by Ali."], answer: 1},
+    {q: "3. Identify the gerund in: 'Swimming is a good exercise.'", options: ["A) is", "B) good", "C) Swimming", "D) exercise"], answer: 2},
+    {q: "4. Choose the correct indirect speech for: He said, 'I am going to Lahore.'", options: ["A) He said that he was going to Lahore.", "B) He said that I am going to Lahore.", "C) He told that he is going to Lahore.", "D) He said he goes to Lahore."], answer: 0},
+    {q: "5. What is the plural form of 'Phenomenon'?", options: ["A) Phenomenons", "B) Phenomena", "C) Phenomenas", "D) Phenomeni"], answer: 1},
+    {q: "6. Choose the correct preposition: 'He is junior ___ me.'", options: ["A) than", "B) from", "C) to", "D) with"], answer: 2},
+    {q: "7. Identify the clause type in: 'I know where he lives.'", options: ["A) Noun Clause", "B) Adjective Clause", "C) Adverb Clause", "D) Independent Clause"], answer: 0},
+    {q: "8. What is the antonym of 'Transparent'?", options: ["A) Clear", "B) Opaque", "C) Bright", "D) Shiny"], answer: 1},
+    {q: "9. Choose the correct spelling:", options: ["A) Millennium", "B) Milennium", "C) Milenium", "D) Millenium"], answer: 0},
+    {q: "10. What is the superlative degree of 'Little'?", options: ["A) Littler", "B) Littlest", "C) Least", "D) Less"], answer: 2},
+    {q: "11. Identify the modal verb in: 'You should obey your elders.'", options: ["A) obey", "B) elders", "C) your", "D) should"], answer: 3},
+    {q: "12. Choose the correct article: 'He is ___ honorable man.'", options: ["A) a", "B) an", "C) the", "D) no article"], answer: 1},
+    {q: "13. What is the plural of 'Chief'?", options: ["A) Chieves", "B) Chiefs", "C) Chieffs", "D) Chive"], answer: 1},
+    {q: "14. Identify the conjunction in: 'Hardly had I reached the station when the train left.'", options: ["A) Hardly", "B) reached", "C) when", "D) left"], answer: 2},
+    {q: "15. What is the synonym of 'Abundant'?", options: ["A) Scarce", "B) Plentiful", "C) Little", "D) Rare"], answer: 1},
+    {q: "16. Choose the correct conditional form: 'If you heat ice, it ___.'", options: ["A) melts", "B) melted", "C) will melt", "D) would melt"], answer: 0},
+    {q: "17. Identify the prefix in the word 'International':", options: ["A) -national", "B) Inter-", "C) Nation-", "D) -al"], answer: 1},
+    {q: "18. What is the feminine of 'Ram'?", options: ["A) Ewe", "B) Doe", "C) Hind", "D) Cow"], answer: 0},
+    {q: "19. Choose the correct auxiliary verb: 'Why ___ you late yesterday?'", options: ["A) are", "B) were", "C) did", "D) have"], answer: 1},
+    {q: "20. What is a sentence that expresses a strong sudden feeling called?", options: ["A) Imperative", "B) Interrogative", "C) Declarative", "D) Exclamatory"], answer: 3}
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerText = q.q;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `Question ${idx+1} of ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
+}
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ Correct Answer!</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ Incorrect Answer!</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
+}
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`Total Questions: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText=`Obtained Marks: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`Percentage: ${perc}%`;
+}
+window.onload=startTest;
+</script>
+</body>
+</html>
