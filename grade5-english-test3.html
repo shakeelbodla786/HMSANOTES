@@ -29,7 +29,7 @@ h2{text-align:center;color:var(--navy);margin-bottom:5px}
 <body>
 <div class="container">
     <h2>Grade 5 — English Online Test 3</h2>
-    <p class="subtitle">HMSA Learning Academy — Grammar & Syllables</p>
+    <p class="subtitle">HMSA Learning Academy — Intermediate Grammar</p>
     <div id="quiz-screen">
         <div class="quiz-header">
             <span id="progress-text">Question 1 of 20</span>
@@ -53,26 +53,26 @@ h2{text-align:center;color:var(--navy);margin-bottom:5px}
 </div>
 <script>
 const testData = [
-    {q: "1. How many syllables are in the word 'Computer' (com-pu-ter)?", options: ["A) 2", "B) 3", "C) 4", "D) 1"], answer: 1},
-    {q: "2. How many syllables are in the word 'Education' (ed-u-ca-tion)?", options: ["A) 3", "B) 4", "C) 5", "D) 2"], answer: 1},
-    {q: "3. What is the superlative degree of 'Good'?", options: ["A) Better", "B) Best", "C) Goodest", "D) More good"], answer: 1},
-    {q: "4. Identify the Abstract Noun in: 'Honesty is the best policy.'", options: ["A) Honesty", "B) policy", "C) best", "D) None"], answer: 0},
-    {q: "5. Which sentence is in the Present Continuous Tense?", options: ["A) He plays cricket.", "B) He is playing cricket.", "C) He played cricket.", "D) He will play."], answer: 1},
-    {q: "6. How many syllables are in the word 'Cat'?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 0},
-    {q: "7. What is the plural of 'Tooth'?", options: ["A) Tooths", "B) Teeth", "C) Teethes", "D) Tooth"], answer: 1},
-    {q: "8. Identify the Conjunction in: 'Ali and Ahmed are friends.'", options: ["A) Ali", "B) and", "C) are", "D) friends"], answer: 1},
-    {q: "9. What is the synonym of 'Quick'?", options: ["A) Slow", "B) Fast", "C) Late", "D) Heavy"], answer: 1},
-    {q: "10. How many syllables are in 'Water' (wa-ter)?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 1},
-    {q: "11. Choose the correct spelling:", options: ["A) Necessary", "B) Necessaary", "C) Nesessary", "D) Necesary"], answer: 0},
-    {q: "12. What is the antonym of 'Accept'?", options: ["A) Agree", "B) Refuse / Reject", "C) Receive", "D) Take"], answer: 1},
-    {q: "13. How many syllables are in 'Elephant' (el-e-phant)?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1},
-    {q: "14. What is the feminine gender of 'Lion'?", options: ["A) Lioness", "B) Tiger", "C) Cow", "D) Hen"], answer: 0},
-    {q: "15. What is the past participle of 'Write'?", options: ["A) Wrote", "B) Written", "C) Writing", "D) Writes"], answer: 1},
-    {q: "16. How many syllables are in 'Beautiful' (beau-ti-ful)?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1},
-    {q: "17. Identify the Adverb in: 'The soldier fought bravely.'", options: ["A) soldier", "B) fought", "C) bravely", "D) The"], answer: 2},
-    {q: "18. What punctuation mark is used at the end of a question?", options: ["A) Full stop (.)", "B) Question mark (?)", "C) Comma (,)", "D) Exclamation (!)"], answer: 1},
-    {q: "19. How many syllables are in 'Banana' (ba-na-na)?", options: ["A) 2", "B) 3", "C) 4", "D) 1"], answer: 1},
-    {q: "20. What is the opposite of 'Strong'?", options: ["A) Weak", "B) Powerful", "C) Hard", "D) Tough"], answer: 0}
+    {q: "1. Which of the following is an abstract noun?", options: ["A) Table", "B) Honesty", "C) Lahore", "D) Book"], answer: 1},
+    {q: "2. What is the plural form of 'Lady'?", options: ["A) Ladys", "B) Ladies", "C) Ladyies", "D) Ladi"], answer: 1},
+    {q: "3. Choose the correct article: 'He reads ___ Quran every day.'", options: ["A) a", "B) an", "C) the", "D) no article"], answer: 2},
+    {q: "4. What is the antonym of 'Brave'?", options: ["A) Coward", "B) Bold", "C) Fearless", "D) Valiant"], answer: 0},
+    {q: "5. Identify the pronoun in: 'The teacher praised her because she worked hard.'", options: ["A) teacher", "B) praised", "C) she", "D) hard"], answer: 2},
+    {q: "6. What is the past participle of 'Write'?", options: ["A) Wrote", "B) Written", "C) Writing", "D) Writes"], answer: 1},
+    {q: "7. Which word is an adverb in 'The old man walked slowly.'?", options: ["A) old", "B) man", "C) walked", "D) slowly"], answer: 3},
+    {q: "8. Choose the correct spelling:", options: ["A) Necessary", "B) Neccesary", "C) Necassary", "D) Nessary"], answer: 0},
+    {q: "9. What is the plural of 'Knife'?", options: ["A) Knifes", "B) Knives", "C) Knifves", "D) Knife"], answer: 1},
+    {q: "10. Choose the correct preposition: 'The bird flew ___ the tree.'", options: ["A) over", "B) on", "C) in", "D) at"], answer: 0},
+    {q: "11. What is the synonym of 'Glad'?", options: ["A) Sad", "B) Happy", "C) Angry", "D) Tired"], answer: 1},
+    {q: "12. Identify the preposition in: 'The cat jumped over the fence.'", options: ["A) cat", "B) jumped", "C) over", "D) fence"], answer: 2},
+    {q: "13. Choose the correct pronoun: 'Ali and Ahmed are brothers. ___ play cricket together.'", options: ["A) He", "B) They", "C) We", "D) You"], answer: 1},
+    {q: "14. What is the masculine gender of 'Duck'?", options: ["A) Drake", "B) Goose", "C) Duckling", "D) Bull"], answer: 0},
+    {q: "15. Choose the correct article: 'She is ___ best student in the class.'", options: ["A) a", "B) an", "C) the", "D) no article"], answer: 2},
+    {q: "16. What is the plural of 'Ox'?", options: ["A) Oxes", "B) Oxen", "C) Oxs", "D) Ox"], answer: 1},
+    {q: "17. Which word is a conjunction in 'I wanted to go, but it started raining.'", options: ["A) wanted", "B) go", "C) but", "D) started"], answer: 2},
+    {q: "18. What is the opposite of 'Ancient'?", options: ["A) Old", "B) Modern", "C) Antique", "D) Past"], answer: 1},
+    {q: "19. Choose the correct tense form: 'She ___ to school yesterday.'", options: ["A) go", "B) goes", "C) went", "D) gone"], answer: 2},
+    {q: "20. What punctuation mark indicates a strong emotion or surprise?", options: ["A) Full stop (.)", "B) Comma (,)", "C) Exclamation mark (!)", "D) Question mark (?)"], answer: 2}
 ];
 let idx=0, score=0, timerInterval, timeLeft=300;
 function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
