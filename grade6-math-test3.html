@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 6 Mathematics Test 3 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:5px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:15px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:15px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-eng{font-family:Arial, sans-serif; font-weight:bold;}
+.opt-urdu{font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif; font-size:13px; color:#555; margin-left:5px;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>جماعت ششم — ریاضی آن لائن ٹیسٹ 3 (بائی لینگول)</h2>
+    <p class="subtitle">Grade 6 Mathematics Test 3 — HMSA Learning Academy</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+    <div id="score-screen" class="score-box">
+        <h3>Test 3 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+<script>
+const testData = [
+    {
+        eng: "1. What is the HCF (عاد اعظم) of 24 and 36?",
+        urdu: "1. 24 اور 36 کا عاد اعظم (HCF) کیا ہے؟",
+        options: [
+            {eng: "12", urdu: ""},
+            {eng: "6", urdu: ""},
+            {eng: "8", urdu: ""},
+            {eng: "4", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "2. Find the LCM (ذواضعافِ عقل) of 12 and 15.",
+        urdu: "2. 12 اور 15 کا ذواضعافِ اقل (LCM) معلوم کریں۔",
+        options: [
+            {eng: "30", urdu: ""},
+            {eng: "60", urdu: ""},
+            {eng: "45", urdu: ""},
+            {eng: "90", urdu: ""}
+        ],
+        answer: 1
+    },
+    {
+        eng: "3. What is the value of (-15) + (+8)?",
+        urdu: "3. (-15) + (+8) کی قیمت کیا ہے؟",
+        options: [
+            {eng: "-7", urdu: ""},
+            {eng: "+7", urdu: ""},
+            {eng: "-23", urdu: ""},
+            {eng: "+23", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "4. Solve: 5 + 3 x 4",
+        urdu: "4. حل کریں: 5 + 3 x 4",
+        options: [
+            {eng: "32", urdu: ""},
+            {eng: "20", urdu: ""},
+            {eng: "17", urdu: ""},
+            {eng: "15", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "5. What is 25% of 200?",
+        urdu: "5. 200 کا 25 فیصد کتنا ہوتا ہے؟",
+        options: [
+            {eng: "50", urdu: ""},
+            {eng: "25", urdu: ""},
+            {eng: "75", urdu: ""},
+            {eng: "100", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "6. If a car travels 150 km in 3 hours, what is its speed?",
+        urdu: "6. اگر ایک کار 3 گھنٹوں میں 150 کلومیٹر فاصلہ طے کرے تو اس کی رفتار کیا ہوگی؟",
+        options: [
+            {eng: "40 km/h", urdu: "(کلومیٹر فی گھنٹہ)"},
+            {eng: "50 km/h", urdu: "(کلومیٹر فی گھنٹہ)"},
+            {eng: "60 km/h", urdu: "(کلومیٹر فی گھنٹہ)"},
+            {eng: "45 km/h", urdu: "(کلومیٹر فی گھنٹہ)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "7. Find the HCF (عاد اعظم) of 18 and 27.",
+        urdu: "7. 18 اور 27 کا عاد اعظم (HCF) معلوم کریں۔",
+        options: [
+            {eng: "3", urdu: ""},
+            {eng: "6", urdu: ""},
+            {eng: "9", urdu: ""},
+            {eng: "12", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "8. What is the area of a rectangle with length 10 cm and width 5 cm?",
+        urdu: "8. اس مستطیل کا رقبہ کیا ہوگا جس کی لمبائی 10 سینٹی میٹر اور چوڑائی 5 سینٹی میٹر ہو؟",
+        options: [
+            {eng: "15 sq cm", urdu: "(مربع سینٹی میٹر)"},
+            {eng: "30 sq cm", urdu: "(مربع سینٹی میٹر)"},
+            {eng: "25 sq cm", urdu: "(مربع سینٹی میٹر)"},
+            {eng: "50 sq cm", urdu: "(مربع سینٹی میٹر)"}
+        ],
+        answer: 3
+    },
+    {
+        eng: "9. Find the LCM (ذواضعافِ عقل) of 6 and 8.",
+        urdu: "9. 6 اور 8 کا ذواضعافِ اقل (LCM) معلوم کریں۔",
+        options: [
+            {eng: "24", urdu: ""},
+            {eng: "12", urdu: ""},
+            {eng: "48", urdu: ""},
+            {eng: "16", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "10. Convert 3/5 into a percentage.",
+        urdu: "10. کسر 3/5 کو فیصد میں تبدیل کریں۔",
+        options: [
+            {eng: "50%", urdu: ""},
+            {eng: "60%", urdu: ""},
+            {eng: "75%", urdu: ""},
+            {eng: "80%", urdu: ""}
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. Solve the equation: x + 7 = 15",
+        urdu: "11. مساوات حل کریں: x + 7 = 15",
+        options: [
+            {eng: "x = 7", urdu: ""},
+            {eng: "x = 9", urdu: ""},
+            {eng: "x = 8", urdu: ""},
+            {eng: "x = 10", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "12. What is the supplement of a 70 degree angle?",
+        urdu: "12. 70 درجے کے زاویے کا تکمیلی زاویہ (Supplementary angle) کیا ہوگا؟",
+        options: [
+            {eng: "20 degrees", urdu: "(درجے)"},
+            {eng: "90 degrees", urdu: "(درجے)"},
+            {eng: "180 degrees", urdu: "(درجے)"},
+            {eng: "110 degrees", urdu: "(درجے)"}
+        ],
+        answer: 3
+    },
+    {
+        eng: "13. Find the HCF (عاد اعظم) of 16 and 24.",
+        urdu: "13. 16 اور 24 کا عاد اعظم (HCF) معلوم کریں۔",
+        options: [
+            {eng: "8", urdu: ""},
+            {eng: "4", urdu: ""},
+            {eng: "2", urdu: ""},
+            {eng: "6", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "14. What is the mean of numbers 10, 20, 30, 40, and 50?",
+        urdu: "14. اعداد 10، 20، 30، 40 اور 50 کا اوسط (Mean) کیا ہے؟",
+        options: [
+            {eng: "25", urdu: ""},
+            {eng: "30", urdu: ""},
+            {eng: "35", urdu: ""},
+            {eng: "40", urdu: ""}
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. Find the LCM (ذواضعافِ عقل) of 9 and 12.",
+        urdu: "15. 9 اور 12 کا ذواضعافِ اقل (LCM) معلوم کریں۔",
+        options: [
+            {eng: "18", urdu: ""},
+            {eng: "24", urdu: ""},
+            {eng: "36", urdu: ""},
+            {eng: "72", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "16. What is the value of 2 to the power 3 (2^3)?",
+        urdu: "16. 2 کی طاقت 3 (2^3) کی قیمت کیا ہے؟",
+        options: [
+            {eng: "6", urdu: ""},
+            {eng: "9", urdu: ""},
+            {eng: "4", urdu: ""},
+            {eng: "8", urdu: ""}
+        ],
+        answer: 3
+    },
+    {
+        eng: "17. Express 0.75 as a simple fraction in lowest terms.",
+        urdu: "17. اعشاریہ 0.75 کو مختصر ترین کسر کی شکل میں لکھیں:",
+        options: [
+            {eng: "3/4", urdu: ""},
+            {eng: "1/2", urdu: ""},
+            {eng: "4/5", urdu: ""},
+            {eng: "2/3", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "18. Find the HCF (عاد اعظم) of 14 and 21.",
+        urdu: "18. 14 اور 21 کا عاد اعظم (HCF) معلوم کریں۔",
+        options: [
+            {eng: "2", urdu: ""},
+            {eng: "7", urdu: ""},
+            {eng: "3", urdu: ""},
+            {eng: "1", urdu: ""}
+        ],
+        answer: 1
+    },
+    {
+        eng: "19. If the perimeter of a square is 36 cm, what is the length of its side?",
+        urdu: "19. اگر کسی مربع کا احاطہ 36 سینٹی میٹر ہو تو اس کے ایک ضلع کی لمبائی کیا ہوگی؟",
+        options: [
+            {eng: "6 cm", urdu: "(سینٹی میٹر)"},
+            {eng: "12 cm", urdu: "(سینٹی میٹر)"},
+            {eng: "9 cm", urdu: "(سینٹی میٹر)"},
+            {eng: "18 cm", urdu: "(سینٹی میٹر)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "20. Find the LCM (ذواضعافِ عقل) of 7 and 11.",
+        urdu: "20. 7 اور 11 کا ذواضعافِ اقل (LCM) معلوم کریں۔",
+        options: [
+            {eng: "18", urdu: ""},
+            {eng: "44", urdu: ""},
+            {eng: "66", urdu: ""},
+            {eng: "77", urdu: ""}
+        ],
+        answer: 3
+    }
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerHTML = `<div class="eng-stmt">${q.eng}</div><div class="urdu-stmt">${q.urdu}</div>`;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; 
+        btn.innerHTML = `<span class="opt-eng">${opt.eng}</span> <span class="opt-urdu">${opt.urdu}</span>`;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `Question ${idx+1} of ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
+}
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
+}
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`Total Questions: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText=`Obtained Marks: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`Percentage: ${perc}%`;
+}
+window.onload=startTest;
+</script>
+</body>
+</html>
