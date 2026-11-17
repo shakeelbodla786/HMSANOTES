@@ -22,14 +22,14 @@ h2{text-align:center;color:var(--navy);margin-bottom:5px}
 .score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
 .result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
 .result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
-.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.restart-btn{background:#102b4c;color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
 .back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
 </style>
 </head>
 <body>
 <div class="container">
     <h2>Grade 3 — English Online Test 3</h2>
-    <p class="subtitle">HMSA Learning Academy — Grammar & Syllables</p>
+    <p class="subtitle">HMSA Learning Academy — Basic English Grammar</p>
     <div id="quiz-screen">
         <div class="quiz-header">
             <span id="progress-text">Question 1 of 20</span>
@@ -53,26 +53,26 @@ h2{text-align:center;color:var(--navy);margin-bottom:5px}
 </div>
 <script>
 const testData = [
-    {q: "1. How many syllables are in the word 'Cat'?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 0},
-    {q: "2. How many syllables are in the word 'Teacher' (teach-er)?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 1},
-    {q: "3. Identify the Noun in: 'The dog barks.'", options: ["A) The", "B) dog", "C) barks", "D) None"], answer: 1},
-    {q: "4. Identify the Verb in: 'She runs fast.'", options: ["A) She", "B) runs", "C) fast", "D) None"], answer: 1},
-    {q: "5. What is the plural of 'Bus'?", options: ["A) Busses", "B) Buses", "C) Busies", "D) Buss"], answer: 1},
-    {q: "6. How many syllables are in the word 'Computer' (com-pu-ter)?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 2},
-    {q: "7. Choose the correct indefinite article for 'Orange':", options: ["A) A", "B) An", "C) The", "D) None"], answer: 1},
-    {q: "8. What is the opposite of 'Happy'?", options: ["A) Sad", "B) Glad", "C) Joy", "D) Fun"], answer: 0},
-    {q: "9. Identify the adjective in: 'A sweet mango.'", options: ["A) A", "B) sweet", "C) mango", "D) None"], answer: 1},
-    {q: "10. How many syllables are in the word 'Book'?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 0},
-    {q: "11. What is the past tense of 'Play'?", options: ["A) Plays", "B) Played", "C) Playing", "D) Play"], answer: 1},
-    {q: "12. Which word is a pronoun?", options: ["A) Ali", "B) He", "C) Table", "D) Run"], answer: 1},
-    {q: "13. How many syllables are in the word 'School'?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 0},
-    {q: "14. What punctuation is used at the end of an exclamatory sentence?", options: ["A) Period (.)", "B) Question mark (?)", "C) Exclamation mark (!)", "D) Comma (,)"], answer: 2},
-    {q: "15. Choose the correct spelling:", options: ["A) Friend", "B) Freind", "C) Frind", "D) Frend"], answer: 0},
-    {q: "16. How many syllables are in 'Water' (wa-ter)?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 1},
-    {q: "17. What is the plural of 'Baby'?", options: ["A) Babys", "B) Babies", "C) Babies'", "D) Babes"], answer: 1},
-    {q: "18. Identify the preposition in: 'The cat is under the table.'", options: ["A) under", "B) cat", "C) table", "D) is"], answer: 0},
-    {q: "19. How many syllables are in 'Butterfly' (but-ter-fly)?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 2},
-    {q: "20. What is the opposite of 'Hot'?", options: ["A) Cold", "B) Warm", "C) Sun", "D) Fire"], answer: 0}
+    {q: "1. What is the capital letter of 'apple'?", options: ["A) a", "B) APPLE", "C) Apple", "D) APple"], answer: 2},
+    {q: "2. How many letters are there in the English alphabet?", options: ["A) 24", "B) 26", "C) 28", "D) 30"], answer: 1},
+    {q: "3. Choose the vowel letter:", options: ["A) b", "B) c", "C) e", "D) d"], answer: 2},
+    {q: "4. What is the plural of 'Cat'?", options: ["A) Cat", "B) Cats", "C) Cates", "D) Catic"], answer: 1},
+    {q: "5. Choose the correct article: 'This is ___ umbrella.'", options: ["A) a", "B) an", "C) the", "D) no article"], answer: 1},
+    {q: "6. Which one is a Noun (name of a person)?", options: ["A) Run", "B) Ali", "C) Fast", "D) Slowly"], answer: 1},
+    {q: "7. What is the opposite of 'Big'?", options: ["A) Small", "B) Tall", "C) Hot", "D) Cold"], answer: 0},
+    {q: "8. Choose the correct pronoun: '___ is a good boy.'", options: ["A) She", "B) He", "C) It", "D) They"], answer: 1},
+    {q: "9. What is the plural of 'Book'?", options: ["A) Bookes", "B) Book", "C) Books", "D) Bos"], answer: 2},
+    {q: "10. Select the correct spelling:", options: ["A) Scholl", "B) School", "C) Skool", "D) Scool"], answer: 1},
+    {q: "11. What is the opposite of 'Hot'?", options: ["A) Cold", "B) Warm", "C) Bright", "D) Wet"], answer: 0},
+    {q: "12. Choose the correct verb: 'Birds ___ in the sky.'", options: ["A) swim", "B) fly", "C) run", "D) walk"], answer: 1},
+    {q: "13. What comes after Tuesday?", options: ["A) Monday", "B) Wednesday", "C) Thursday", "D) Friday"], answer: 1},
+    {q: "14. How many vowels are there in English?", options: ["A) 3", "B) 4", "C) 5", "D) 6"], answer: 2},
+    {q: "15. Choose the correct article: 'I have ___ pen.'", options: ["A) an", "B) a", "C) the", "D) two"], answer: 1},
+    {q: "16. What is the opposite of 'Happy'?", options: ["A) Sad", "B) Glad", "C) Good", "D) Fast"], answer: 0},
+    {q: "17. Which word is an animal?", options: ["A) Table", "B) Lion", "C) Pencil", "D) Book"], answer: 1},
+    {q: "18. What is the plural of 'Apple'?", options: ["A) Appls", "B) Apple", "C) Apples", "D) Applies"], answer: 2},
+    {q: "19. Choose the correct spelling:", options: ["A) Friend", "B) Freind", "C) Frind", "D) Frend"], answer: 0},
+    {q: "20. Which one is a color?", options: ["A) Cat", "B) Red", "C) Pen", "D) Bat"], answer: 1}
 ];
 let idx=0, score=0, timerInterval, timeLeft=300;
 function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
