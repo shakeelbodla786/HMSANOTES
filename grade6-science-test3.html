@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 6 General Science Test 3 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:5px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:15px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:15px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-eng{font-family:Arial, sans-serif; font-weight:bold;}
+.opt-urdu{font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif; font-size:13px; color:#555; margin-left:5px;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>جماعت ششم — جنرل سائنس آن لائن ٹیسٹ 3 (بائی لینگول)</h2>
+    <p class="subtitle">Grade 6 General Science Test 3 — HMSA Learning Academy</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+    <div id="score-screen" class="score-box">
+        <h3>Test 3 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+<script>
+const testData = [
+    {
+        eng: "1. What is the basic structural and functional unit of life?",
+        urdu: "1. زندگی کی بنیادی ساخت اور فعل کی اکائی (Unit of life) کیا کہلاتی ہے؟",
+        options: [
+            {eng: "Cell", urdu: "(خلیہ)"},
+            {eng: "Tissue", urdu: "(بافت)"},
+            {eng: "Organ", urdu: "(عضو)"},
+            {eng: "System", urdu: "(نظام)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "2. Which gas is essential for photosynthesis in plants?",
+        urdu: "2. پودوں میں ضیائ تلافی (Photosynthesis) کے لیے کون سی گیس ضروری ہے؟",
+        options: [
+            {eng: "Oxygen", urdu: "(آکسیجن)"},
+            {eng: "Carbon dioxide", urdu: "(کاربن ڈائی آکسائید)"},
+            {eng: "Nitrogen", urdu: "(نائٹروجن)"},
+            {eng: "Hydrogen", urdu: "(ہائڈروجن)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "3. What is the boiling point of pure water at sea level?",
+        urdu: "3. سمندر کی سطح پر خالص پانی کا نقطہ کھولاؤ (Boiling point) کتنا ہوتا ہے؟",
+        options: [
+            {eng: "100 degrees Celsius", urdu: "(ڈگری سینٹی گریڈ)"},
+            {eng: "0 degrees Celsius", urdu: "(ڈگری سینٹی گریڈ)"},
+            {eng: "50 degrees Celsius", urdu: "(ڈگری سینٹی گریڈ)"},
+            {eng: "212 degrees Celsius", urdu: "(ڈگری سینٹی گریڈ)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "4. Which organ pumps blood throughout the human body?",
+        urdu: "4. انسانی جسم میں خون پمپ کرنے والا کون سا عضو ہے؟",
+        options: [
+            {eng: "Lungs", urdu: "(پھیپھڑے)"},
+            {eng: "Brain", urdu: "(دماغ)"},
+            {eng: "Heart", urdu: "(دل)"},
+            {eng: "Liver", urdu: "(جگر)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "5. What type of energy is stored in food?",
+        urdu: "5. خوراک میں کون سی توانائی ذخیرہ ہوتی ہے؟",
+        options: [
+            {eng: "Chemical energy", urdu: "(کیمیائی توانائی)"},
+            {eng: "Electrical energy", urdu: "(برقی توانائی)"},
+            {eng: "Solar energy", urdu: "(شمسی توانائی)"},
+            {eng: "Magnetic energy", urdu: "(مقناطیسی توانائی)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "6. Which of the following is a good conductor of electricity?",
+        urdu: "6. درج ذیل میں سے کون سا بجلی کا اچھا موصل (Good conductor) ہے؟",
+        options: [
+            {eng: "Wood", urdu: "(لکڑی)"},
+            {eng: "Copper", urdu: "(تاانبہ / کاپر)"},
+            {eng: "Plastic", urdu: "(پلاسٹک)"},
+            {eng: "Rubber", urdu: "(ربر)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "7. What is the center of our solar system?",
+        urdu: "7. ہمارے نظامِ شمسی (Solar system) کا مرکز کیا ہے؟",
+        options: [
+            {eng: "Earth", urdu: "(زمین)"},
+            {eng: "Moon", urdu: "(چاند)"},
+            {eng: "Sun", urdu: "(سورج)"},
+            {eng: "Mars", urdu: "(مریخ)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "8. Which layer of the Earth do we live on?",
+        urdu: "8. ہم زمین کی کس تہہ پر رہتے ہیں؟",
+        options: [
+            {eng: "Core", urdu: "(مرکز)"},
+            {eng: "Mantle", urdu: "(پردہ)"},
+            {eng: "Atmosphere", urdu: "(فضائیہ)"},
+            {eng: "Crust", urdu: "(قشرِ ارض / بھوپردہ)"}
+        ],
+        answer: 3
+    },
+    {
+        eng: "9. What gas do living animals release during respiration?",
+        urdu: "9. جاندار سانس لینے کے عمل میں کون سی گیس خارج کرتے ہیں؟",
+        options: [
+            {eng: "Carbon dioxide", urdu: "(کاربن ڈائی آکسائیڈ)"},
+            {eng: "Oxygen", urdu: "(آکسیجن)"},
+            {eng: "Nitrogen", urdu: "(نائٹروجن)"},
+            {eng: "Helium", urdu: "(ہیلیم)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "10. What is the freezing point of water?",
+        urdu: "10. پانی کا نقطہ انجماد (Freezing point) کتنا ہوتا ہے؟",
+        options: [
+            {eng: "100 degrees Celsius", urdu: "(ڈگری سینٹی گریڈ)"},
+            {eng: "0 degrees Celsius", urdu: "(ڈگری سینٹی گریڈ)"},
+            {eng: "32 degrees Celsius", urdu: "(ڈگری سینٹی گریڈ)"},
+            {eng: "-10 degrees Celsius", urdu: "(ڈگری سینٹی گریڈ)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. Which vitamin do we get directly from sunlight?",
+        urdu: "11. ہمیں سورج کی روشنی سے کون سا وٹامن براہِ راست ملتا ہے؟",
+        options: [
+            {eng: "Vitamin A", urdu: "(وٹامن اے)"},
+            {eng: "Vitamin C", urdu: "(وٹامن سی)"},
+            {eng: "Vitamin D", urdu: "(وٹامن ڈی)"},
+            {eng: "Vitamin K", urdu: "(وٹامن کے)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "12. What force pulls objects toward the center of the Earth?",
+        urdu: "12. کون سی قوت اشیاء کو زمین کے مرکز کی طرف کھینچتی ہے؟",
+        options: [
+            {eng: "Friction", urdu: "(رگڑ کی قوت)"},
+            {eng: "Magnetic force", urdu: "(مقناطیسی قوت)"},
+            {eng: "Muscular force", urdu: "(عضلاتی قوت)"},
+            {eng: "Gravity", urdu: "(قوتِ ثقل / کششِ ثقل)"}
+        ],
+        answer: 3
+    },
+    {
+        eng: "13. Which part of a plant conducts water from roots to leaves?",
+        urdu: "13. پودے کا کون سا حصہ جڑوں سے پانی پتوں تک پہنچاتا ہے؟",
+        options: [
+            {eng: "Xylem", urdu: "(زائلم نالیاں)"},
+            {eng: "Phloem", urdu: "(فلوئم نالیاں)"},
+            {eng: "Flower", urdu: "(پھول)"},
+            {eng: "Seed", urdu: "(بیج)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "14. What is the chemical symbol for water?",
+        urdu: "14. پانی کی کیمیائی علامت (Chemical formula) کیا ہے؟",
+        options: [
+            {eng: "CO2", urdu: ""},
+            {eng: "H2O", urdu: ""},
+            {eng: "O2", urdu: ""},
+            {eng: "NaCl", urdu: ""}
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. Which of these is a renewable source of energy?",
+        urdu: "15. درج ذیل میں سے توانائی کا کون سا ذریعہ قابلِ تجدید (Renewable) ہے؟",
+        options: [
+            {eng: "Coal", urdu: "(کوئلہ)"},
+            {eng: "Petroleum", urdu: "(پیٹرولیم)"},
+            {eng: "Solar energy", urdu: "(شمسی توانائی)"},
+            {eng: "Natural gas", urdu: "(قدرتی گیس)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "16. How many bones are there in an adult human body?",
+        urdu: "16. ایک بالغ انسانی جسم میں کتنی ہڈیاں ہوتی ہیں؟",
+        options: [
+            {eng: "200", urdu: ""},
+            {eng: "150", urdu: ""},
+            {eng: "300", urdu: ""},
+            {eng: "206", urdu: ""}
+        ],
+        answer: 3
+    },
+    {
+        eng: "17. What state of matter has a definite volume but no definite shape?",
+        urdu: "17. مادے کی کس حالت کا حجم معین ہوتا ہے لیکن شکل معین نہیں ہوتی؟",
+        options: [
+            {eng: "Liquid", urdu: "(مائع)"},
+            {eng: "Solid", urdu: "(ٹھوس)"},
+            {eng: "Gas", urdu: "(گیس)"},
+            {eng: "Plasma", urdu: "(پلازما)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "18. Which blood cells fight against germs in our body?",
+        urdu: "18. ہمارے جسم میں کون سے خون کے خلیات جراثیم کا مقابلہ کرتے ہیں؟",
+        options: [
+            {eng: "Red blood cells", urdu: "(سرخ خلیات)"},
+            {eng: "White blood cells", urdu: "(سیدھے / سفید خلیات)"},
+            {eng: "Platelets", urdu: "(پلیٹ لیٹس)"},
+            {eng: "Plasma", urdu: "(پلازما)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "19. What causes day and night on Earth?",
+        urdu: "19. زمین پر دن اور رات کس وجہ سے بنتے ہیں؟",
+        options: [
+            {eng: "Revolution of Earth", urdu: "(زمین کا سورج کے گرد چکر)"},
+            {eng: "Tilting of Earth", urdu: "(زمین کا جھکاؤ)"},
+            {eng: "Rotation of Earth on its axis", urdu: "(زمین کا اپنے محور پر گھومنا)"},
+            {eng: "Moon's movement", urdu: "(چاند کی حرکت)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "20. Which instrument is used to measure temperature?",
+        urdu: "20. درجہ حرارت ناپنے کے لیے کون سا آلہ استعمال ہوتا ہے؟",
+        options: [
+            {eng: "Barometer", urdu: "(بارومیٹر)"},
+            {eng: "Ammeter", urdu: "(امیٹر)"},
+            {eng: "Ruler", urdu: "(رولر)"},
+            {eng: "Thermometer", urdu: "(تھرمامیٹر)"}
+        ],
+        answer: 3
+    }
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerHTML = `<div class="eng-stmt">${q.eng}</div><div class="urdu-stmt">${q.urdu}</div>`;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; 
+        btn.innerHTML = `<span class="opt-eng">${opt.eng}</span> <span class="opt-urdu">${opt.urdu}</span>`;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `Question ${idx+1} of ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
+}
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
+}
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`Total Questions: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText=`Obtained Marks: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`Percentage: ${perc}%`;
+}
+window.onload=startTest;
+</script>
+</body>
+</html>
