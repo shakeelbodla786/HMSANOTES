@@ -59,184 +59,107 @@ h2{text-align:center;color:var(--navy);margin-bottom:5px}
 <script>
 const testData = [
     {
-        eng: "1. What is the sum of 3400 and 2150?",
-        urdu: "1. 3400 اور 2150 کا مجموعہ کیا ہے؟",
+        eng: "1. What is 345 + 234?",
+        urdu: "1. جمع کریں: 345 + 234",
         options: [
-            {eng: "A) 5550", urdu: "(۵۵۵۰)"},
-            {eng: "B) 5450", urdu: "(۵۴۵۰)"},
-            {eng: "C) 5650", urdu: "(۵۶۵۰)"},
-            {eng: "D) 5350", urdu: "(۵۳۵۰)"}
+            {eng: "A) 579", urdu: "(۵۷۹)"},
+            {eng: "B) 600", urdu: "(۶۰۰)"},
+            {eng: "C) 550", urdu: "(۵۵۰)"},
+            {eng: "D) 489", urdu: "(۴۸۹)"}
         ],
         answer: 0
     },
     {
-        eng: "2. Subtract 2100 from 7500.",
-        urdu: "2. 7500 میں سے 2100 تفریق کریں۔",
+        eng: "2. What is 782 - 341?",
+        urdu: "2. تفریق کریں: 782 - 341",
         options: [
-            {eng: "A) 5300", urdu: "(۵۳۰۰)"},
-            {eng: "B) 5400", urdu: "(۵۴۰۰)"},
-            {eng: "C) 5500", urdu: "(۵۵۰۰)"},
-            {eng: "D) 5200", urdu: "(۵۲۰۰)"}
+            {eng: "A) 400", urdu: "(۴۰۰)"},
+            {eng: "B) 441", urdu: "(۴۴۱)"},
+            {eng: "C) 500", urdu: "(۵۰۰)"},
+            {eng: "D) 421", urdu: "(۴۲۱)"}
         ],
         answer: 1
     },
     {
-        eng: "3. Multiply 150 by 5.",
-        urdu: "3. 150 کو 5 سے ضرب دیں۔",
+        eng: "3. What is 12 x 5?",
+        urdu: "3. ضرب دیں: 12 کو 5 سے (12 x 5)",
         options: [
-            {eng: "A) 700", urdu: "(۷۰۰)"},
-            {eng: "B) 750", urdu: "(۷۵۰)"},
-            {eng: "C) 800", urdu: "(۸۰۰)"},
-            {eng: "D) 650", urdu: "(۶۵۰)"}
+            {eng: "A) 50", urdu: "(۵۰)"},
+            {eng: "B) 55", urdu: "(۵۵)"},
+            {eng: "C) 60", urdu: "(۶۰)"},
+            {eng: "D) 65", urdu: "(۶۵)"}
         ],
-        answer: 1
+        answer: 2
     },
     {
-        eng: "4. Divide 96 by 8.",
-        urdu: "4. 96 کو 8 پر تقسیم کریں۔",
+        eng: "4. What is 48 ÷ 6?",
+        urdu: "4. تقسیم کریں: 48 تقسیم 6 (48 ÷ 6)",
         options: [
-            {eng: "A) 11", urdu: "(۱۱)"},
-            {eng: "B) 12", urdu: "(۱۲)"},
-            {eng: "C) 13", urdu: "(۱۳)"},
+            {eng: "A) 7", urdu: "(۷)"},
+            {eng: "B) 9", urdu: "(۹)"},
+            {eng: "C) 6", urdu: "(۶)"},
+            {eng: "D) 8", urdu: "(۸)"}
+        ],
+        answer: 3
+    },
+    {
+        eng: "5. Find the HCF (عاد اعظم) of 8 and 12.",
+        urdu: "5. 8 اور 12 کا عاد اعظم (HCF) معلوم کریں۔",
+        options: [
+            {eng: "A) 4", urdu: "(۴)"},
+            {eng: "B) 2", urdu: "(۲)"},
+            {eng: "C) 6", urdu: "(۶)"},
+            {eng: "D) 3", urdu: "(۳)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "6. Find the LCM (ذواضعافِ عقل) of 4 and 5.",
+        urdu: "6. 4 اور 5 کا ذواضعافِ اقل (LCM) معلوم کریں۔",
+        options: [
+            {eng: "A) 15", urdu: "(۱۵)"},
+            {eng: "B) 20", urdu: "(۲۰)"},
+            {eng: "C) 25", urdu: "(۲۵)"},
             {eng: "D) 10", urdu: "(۱۰)"}
         ],
         answer: 1
     },
     {
-        eng: "5. What is the HCF of 16 and 24?",
-        urdu: "5. 16 اور 24 کا عظم المشترک (HCF) کیا ہے؟",
+        eng: "7. What is 3/4 + 1/4?",
+        urdu: "7. کسر کا جوڑ معلوم کریں: 3/4 + 1/4",
         options: [
-            {eng: "A) 4", urdu: "(۴)"},
-            {eng: "B) 8", urdu: "(۸)"},
-            {eng: "C) 6", urdu: "(۶)"},
-            {eng: "D) 2", urdu: "(۲)"}
-        ],
-        answer: 1
-    },
-    {
-        eng: "6. What is the LCM of 3 and 5?",
-        urdu: "6. 3 اور 5 کا ضلعی المشترک (LCM) کیا ہے؟",
-        options: [
-            {eng: "A) 15", urdu: "(۱۵)"},
-            {eng: "B) 8", urdu: "(۸)"},
-            {eng: "C) 12", urdu: "(۱۲)"},
-            {eng: "D) 30", urdu: "(۳۰)"}
-        ],
-        answer: 0
-    },
-    {
-        eng: "7. Convert 5 kilograms into grams.",
-        urdu: "7. 5 کلوگرام کو گرام میں تبدیل کریں۔",
-        options: [
-            {eng: "A) 500 g", urdu: "(۵۰۰ گرام)"},
-            {eng: "B) 5000 g", urdu: "(۵۰۰۰ گرام)"},
-            {eng: "C) 50 g", urdu: "(۵۰ گرام)"},
-            {eng: "D) 50000 g", urdu: "(۵۰۰۰۰ گرام)"}
-        ],
-        answer: 1
-    },
-    {
-        eng: "8. What fraction represents three-quarters?",
-        urdu: "8. تین چوتھائی (Three-quarters) کون سا کسر ظاہر کرتا ہے؟",
-        options: [
-            {eng: "A) 1/4", urdu: "(۱/۴)"},
-            {eng: "B) 1/2", urdu: "(۱/۲)"},
-            {eng: "C) 3/4", urdu: "(۳/۴)"},
-            {eng: "D) 2/3", urdu: "(۲/۳)"}
-        ],
-        answer: 2
-    },
-    {
-        eng: "9. Add the fractions: 1/4 + 2/4 =",
-        urdu: "9. کسریں جمع کریں: 1/4 + 2/4",
-        options: [
-            {eng: "A) 3/4", urdu: "(۳/۴)"},
+            {eng: "A) 1/2", urdu: "(۱/۲)"},
             {eng: "B) 3/8", urdu: "(۳/۸)"},
-            {eng: "C) 1/2", urdu: "(۱/۲)"},
-            {eng: "D) 4/4", urdu: "(۴/۴)"}
-        ],
-        answer: 0
-    },
-    {
-        eng: "10. How many milliliters make 3 liters?",
-        urdu: "10. کتنے ملی لیٹر مل کر 3 لیٹر بناتے ہیں؟",
-        options: [
-            {eng: "A) 300 ml", urdu: "(۳۰۰ ملی لیٹر)"},
-            {eng: "B) 3000 ml", urdu: "(۳۰۰۰ ملی لیٹر)"},
-            {eng: "C) 30 ml", urdu: "(۳۰ ملی لیٹر)"},
-            {eng: "D) 30000 ml", urdu: "(۳۰۰۰۰ ملی لیٹر)"}
-        ],
-        answer: 1
-    },
-    {
-        eng: "11. What is the perimeter of a square with side 7 cm?",
-        urdu: "11. اس مربع کا احاطہ (Perimeter) کیا ہوگا جس کے ضلع کی لمبائی 7 سینٹی میٹر ہو؟",
-        options: [
-            {eng: "A) 14 cm", urdu: "(۱۴ سینٹی میٹر)"},
-            {eng: "B) 28 cm", urdu: "(۲۸ سینٹی میٹر)"},
-            {eng: "C) 21 cm", urdu: "(۲۱ سینٹی میٹر)"},
-            {eng: "D) 49 cm", urdu: "(۴۹ سینٹی میٹر)"}
-        ],
-        answer: 1
-    },
-    {
-        eng: "12. Write Roman numerals for 10:",
-        urdu: "12. 10 کو رومن ہندسوں میں لکھیں:",
-        options: [
-            {eng: "A) V", urdu: "(V)"},
-            {eng: "B) X", urdu: "(X)"},
-            {eng: "C) L", urdu: "(L)"},
-            {eng: "D) XV", urdu: "(XV)"}
-        ],
-        answer: 1
-    },
-    {
-        eng: "13. What is 12 multiplied by 10?",
-        urdu: "13. 12 کو 10 سے ضرب دیں:",
-        options: [
-            {eng: "A) 120", urdu: "(۱۲۰)"},
-            {eng: "B) 102", urdu: "(۱۰۲)"},
-            {eng: "C) 1200", urdu: "(۱۲۰۰)"},
-            {eng: "D) 210", urdu: "(۲۱۰)"}
-        ],
-        answer: 0
-    },
-    {
-        eng: "14. Which of these is a prime number?",
-        urdu: "14. ذیل میں سے کون سا مفرد (Prime) عدد ہے؟",
-        options: [
-            {eng: "A) 9", urdu: "(۹)"},
-            {eng: "B) 10", urdu: "(۱۰)"},
-            {eng: "C) 11", urdu: "(۱۱)"},
-            {eng: "D) 12", urdu: "(۱۲)"}
+            {eng: "C) 1", urdu: "(۱)"},
+            {eng: "D) 4/8", urdu: "(۴/۸)"}
         ],
         answer: 2
     },
     {
-        eng: "15. What is 1000 - 450?",
-        urdu: "15. 1000 میں سے 450 تفریق کریں:",
+        eng: "8. How many centimeters are in 3 meters?",
+        urdu: "8. 3 میٹر میں کتنے سینٹی میٹر ہوتے ہیں؟",
         options: [
-            {eng: "A) 550", urdu: "(۵۵۰)"},
-            {eng: "B) 650", urdu: "(۶۵۰)"},
-            {eng: "C) 500", urdu: "(۵۰۰)"},
-            {eng: "D) 400", urdu: "(۴۰۰)"}
+            {eng: "A) 30 cm", urdu: "(۳۰ سینٹی میٹر)"},
+            {eng: "B) 3000 cm", urdu: "(۳۰۰۰ سینٹی میٹر)"},
+            {eng: "C) 300 cm", urdu: "(۳۰۰ سینٹی میٹر)"},
+            {eng: "D) 30000 cm", urdu: "(۳۰۰۰۰ سینٹی میٹر)"}
         ],
-        answer: 0
+        answer: 2
     },
     {
-        eng: "16. How many hours are in 3 days?",
-        urdu: "16. 3 دنوں میں کتنے گھنٹے ہوتے ہیں؟",
+        eng: "9. What is the place value of 7 in 4,725?",
+        urdu: "9. عدد 4,725 میں ہندسے 7 کی مقامی قیمت (Place Value) کیا ہے؟",
         options: [
-            {eng: "A) 48 hours", urdu: "(۴۸ گھنٹے)"},
-            {eng: "B) 72 hours", urdu: "(۷۲ گھنٹے)"},
-            {eng: "C) 96 hours", urdu: "(۹۶ گھنٹے)"},
-            {eng: "D) 60 hours", urdu: "(۶۰ گھنٹے)"}
+            {eng: "A) 7", urdu: "(۷)"},
+            {eng: "B) 70", urdu: "(۷۰)"},
+            {eng: "C) 7000", urdu: "(۷۰۰۰)"},
+            {eng: "D) 700", urdu: "(۷۰۰)"}
         ],
-        answer: 1
+        answer: 3
     },
     {
-        eng: "17. What is 8 multiplied by 9?",
-        urdu: "17. 8 کو 9 سے ضرب دیں:",
+        eng: "10. What is 9 x 8?",
+        urdu: "10. ضرب دیں: 9 کو 8 سے (9 x 8)",
         options: [
             {eng: "A) 72", urdu: "(۷۲)"},
             {eng: "B) 64", urdu: "(۶۴)"},
@@ -246,37 +169,114 @@ const testData = [
         answer: 0
     },
     {
-        eng: "18. What is the place value of 6 in 6,432?",
-        urdu: "18. عدد 6,432 میں 6 کی مقامی قیمت کیا ہے؟",
+        eng: "11. What is 81 ÷ 9?",
+        urdu: "11. تقسیم کریں: 81 تقسیم 9 (81 ÷ 9)",
         options: [
-            {eng: "A) 6", urdu: "(۶)"},
-            {eng: "B) 60", urdu: "(۶۰)"},
-            {eng: "C) 600", urdu: "(۶۰۰)"},
-            {eng: "D) 6000", urdu: "(۶۰۰۰)"}
+            {eng: "A) 8", urdu: "(۸)"},
+            {eng: "B) 9", urdu: "(۹)"},
+            {eng: "C) 7", urdu: "(۷)"},
+            {eng: "D) 6", urdu: "(۶)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "12. Find the HCF (عاد اعظم) of 10 and 15.",
+        urdu: "12. 10 اور 15 کا عاد اعظم (HCF) معلوم کریں۔",
+        options: [
+            {eng: "A) 3", urdu: "(۳)"},
+            {eng: "B) 2", urdu: "(۲)"},
+            {eng: "C) 5", urdu: "(۵)"},
+            {eng: "D) 1", urdu: "(۱)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "13. Find the LCM (ذواضعافِ عقل) of 3 and 6.",
+        urdu: "13. 3 اور 6 کا ذواضعافِ اقل (LCM) معلوم کریں۔",
+        options: [
+            {eng: "A) 9", urdu: "(۹)"},
+            {eng: "B) 18", urdu: "(۱۸)"},
+            {eng: "C) 3", urdu: "(۳)"},
+            {eng: "D) 6", urdu: "(۶)"}
         ],
         answer: 3
     },
     {
-        eng: "19. Which angle is less than 90 degrees?",
-        urdu: "19. 90 درجے سے کم کے زاویہ کو کیا کہتے ہیں؟",
+        eng: "14. How many grams are in 2 kilograms?",
+        urdu: "14. 2 کلوگرام میں کتنے گرام ہوتے ہیں؟",
         options: [
-            {eng: "A) Acute angle", urdu: "(حادہ زاویہ)"},
-            {eng: "B) Obtuse angle", urdu: "(منفرجہ زاویہ)"},
-            {eng: "C) Right angle", urdu: "(قائمہ زاویہ)"},
-            {eng: "D) Straight angle", urdu: "(مستقیم زاویہ)"}
+            {eng: "A) 2000 g", urdu: "(۲۰۰۰ گرام)"},
+            {eng: "B) 200 g", urdu: "(۲۰۰ گرام)"},
+            {eng: "C) 500 g", urdu: "(۵۰۰ گرام)"},
+            {eng: "D) 20 g", urdu: "(۲۰ گرام)"}
         ],
         answer: 0
     },
     {
-        eng: "20. What is 64 divided by 8?",
-        urdu: "20. 64 کو 8 پر تقسیم کریں:",
+        eng: "15. What is 500 + 450?",
+        urdu: "15. جمع کریں: 500 + 450",
         options: [
-            {eng: "A) 7", urdu: "(۷)"},
-            {eng: "B) 8", urdu: "(۸)"},
-            {eng: "C) 9", urdu: "(۹)"},
-            {eng: "D) 6", urdu: "(۶)"}
+            {eng: "A) 900", urdu: "(۹۰۰)"},
+            {eng: "B) 950", urdu: "(۹۵۰)"},
+            {eng: "C) 1000", urdu: "(۱۰۰۰)"},
+            {eng: "D) 850", urdu: "(۸۵۰)"}
         ],
         answer: 1
+    },
+    {
+        eng: "16. Which shape has 4 equal sides?",
+        urdu: "16. کس شکل کے چاروں اضلاع برابر ہوتے ہیں؟",
+        options: [
+            {eng: "A) Rectangle", urdu: "(مستطیل)"},
+            {eng: "B) Triangle", urdu: "(مثلث)"},
+            {eng: "C) Square", urdu: "(مربع)"},
+            {eng: "D) Circle", urdu: "(دائرہ)"}
+        ],
+        answer: 2
+    },
+    {
+        eng: "17. What is 1000 - 350?",
+        urdu: "17. تفریق کریں: 1000 - 350",
+        options: [
+            {eng: "A) 750", urdu: "(۷۵۰)"},
+            {eng: "B) 600", urdu: "(۶۰۰)"},
+            {eng: "C) 700", urdu: "(۷۰۰)"},
+            {eng: "D) 650", urdu: "(۶۵۰)"}
+        ],
+        answer: 3
+    },
+    {
+        eng: "18. What is 7 x 7?",
+        urdu: "18. ضرب دیں: 7 کو 7 سے (7 x 7)",
+        options: [
+            {eng: "A) 49", urdu: "(۴۹)"},
+            {eng: "B) 42", urdu: "(۴۲)"},
+            {eng: "C) 56", urdu: "(۵۶)"},
+            {eng: "D) 36", urdu: "(۳۶)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "19. How many minutes are in 2 hours?",
+        urdu: "19. 2 گھنٹوں میں کتنے منٹ ہوتے ہیں؟",
+        options: [
+            {eng: "A) 90 minutes", urdu: "(۹۰ منٹ)"},
+            {eng: "B) 120 minutes", urdu: "(۱۲۰ منٹ)"},
+            {eng: "C) 60 minutes", urdu: "(۶۰ منٹ)"},
+            {eng: "D) 100 minutes", urdu: "(۱۰۰ منٹ)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "20. Find the HCF (عاد اعظم) of 5 and 10.",
+        urdu: "20. 5 اور 10 کا عاد اعظم (HCF) معلوم کریں۔",
+        options: [
+            {eng: "A) 2", urdu: "(۲)"},
+            {eng: "B) 1", urdu: "(۱)"},
+            {eng: "C) 5", urdu: "(۵)"},
+            {eng: "D) 10", urdu: "(۱۰)"}
+        ],
+        answer: 2
     }
 ];
 let idx=0, score=0, timerInterval, timeLeft=300;
