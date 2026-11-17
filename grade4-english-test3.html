@@ -29,7 +29,7 @@ h2{text-align:center;color:var(--navy);margin-bottom:5px}
 <body>
 <div class="container">
     <h2>Grade 4 — English Online Test 3</h2>
-    <p class="subtitle">HMSA Learning Academy — Grammar & Syllables</p>
+    <p class="subtitle">HMSA Learning Academy — Elementary Grammar</p>
     <div id="quiz-screen">
         <div class="quiz-header">
             <span id="progress-text">Question 1 of 20</span>
@@ -53,26 +53,26 @@ h2{text-align:center;color:var(--navy);margin-bottom:5px}
 </div>
 <script>
 const testData = [
-    {q: "1. How many syllables are in the word 'Banana' (ba-na-na)?", options: ["A) 2", "B) 3", "C) 4", "D) 1"], answer: 1},
-    {q: "2. How many syllables are in the word 'Elephant' (el-e-phant)?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1},
-    {q: "3. Identify the Proper Noun in: 'Ali lives in Lahore.'", options: ["A) lives", "B) Lahore", "C) in", "D) None"], answer: 1},
-    {q: "4. Identify the Adjective in: 'The clever fox runs.'", options: ["A) clever", "B) fox", "C) runs", "D) The"], answer: 0},
-    {q: "5. What is the past tense of 'Go'?", options: ["A) Goes", "B) Gone", "C) Went", "D) Going"], answer: 2},
-    {q: "6. How many syllables are in the word 'School'?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 0},
-    {q: "7. Choose the correct article: '___ umbrella'", options: ["A) A", "B) An", "C) The", "D) None"], answer: 1},
-    {q: "8. What is the plural of 'Leaf'?", options: ["A) Leafs", "B) Leaves", "C) Leavs", "D) Leave"], answer: 1},
-    {q: "9. Identify the Adverb in: 'She sings sweetly.'", options: ["A) She", "B) sings", "C) sweetly", "D) None"], answer: 2},
-    {q: "10. How many syllables are in 'Computer' (com-pu-ter)?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1},
-    {q: "11. What is the opposite of 'Brave'?", options: ["A) Coward", "B) Bold", "C) Strong", "D) Tall"], answer: 0},
-    {q: "12. Identify the Pronoun in: 'They are playing.'", options: ["A) They", "B) are", "C) playing", "D) None"], answer: 0},
-    {q: "13. How many syllables are in 'Teacher' (teach-er)?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 1},
-    {q: "14. What is the plural of 'Child'?", options: ["A) Childs", "B) Children", "C) Childes", "D) Child"], answer: 1},
-    {q: "15. Choose the correct spelling:", options: ["A) Beautiful", "B) Beautifull", "C) Batifull", "D) Byutiful"], answer: 0},
-    {q: "16. How many syllables are in 'Book'?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 0},
-    {q: "17. What is the past participle of 'Write'?", options: ["A) Wrote", "B) Written", "C) Writing", "D) Writes"], answer: 1},
-    {q: "18. Identify the Preposition in: 'The cat jumped over the wall.'", options: ["A) jumped", "B) over", "C) wall", "D) cat"], answer: 1},
-    {q: "19. How many syllables are in 'Beautiful' (beau-ti-ful)?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1},
-    {q: "20. What is the antonym of 'True'?", options: ["A) False", "B) Right", "C) Correct", "D) Yes"], answer: 0}
+    {q: "1. Which of the following is a proper noun?", options: ["A) city", "B) boy", "C) Pakistan", "D) dog"], answer: 2},
+    {q: "2. What is the plural form of 'Child'?", options: ["A) Children", "B) Childs", "C) Childes", "D) Child",], answer: 0},
+    {q: "3. Choose the correct article: 'She bought ___ orange.'", options: ["A) a", "B) an", "C) the", "D) no article"], answer: 1},
+    {q: "4. What is the antonym (opposite) of 'Fast'?", options: ["A) Quick", "B) Rapid", "C) Slow", "D) Speedy"], answer: 2},
+    {q: "5. Identify the pronoun in: 'Ali is happy because he won.'", options: ["A) Ali", "B) happy", "C) won", "D) he"], answer: 3},
+    {q: "6. What is the past tense of 'Go'?", options: ["A) Went", "B) Gone", "C) Going", "D) Goes"], answer: 0},
+    {q: "7. Which word is an adjective in 'The clever fox ran fast.'?", options: ["A) fox", "B) ran", "C) clever", "D) fast"], answer: 2},
+    {q: "8. Choose the correct spelling:", options: ["A) Beautiful", "B) Beautifull", "C) Bewtiful", "D) Butiful"], answer: 0},
+    {q: "9. What is the plural of 'Bus'?", options: ["A) Busses", "B) Buses", "C) Buss", "D) Busies"], answer: 1},
+    {q: "10. Choose the correct preposition: 'The cat is sitting ___ the mat.'", options: ["A) in", "B) on", "C) at", "D) under"], answer: 1},
+    {q: "11. What is the synonym of 'Start'?", options: ["A) Finish", "B) End", "C) Begin", "D) Stop"], answer: 2},
+    {q: "12. Identify the verb in: 'Children are playing football.'", options: ["A) Children", "B) playing", "C) football", "D) are"], answer: 1},
+    {q: "13. Choose the correct pronoun: 'Sara and I are friends. ___ go to school together.'", options: ["A) They", "B) We", "C) You", "D) He"], answer: 1},
+    {q: "14. What is the feminine gender of 'Lion'?", options: ["A) Lioness", "B) Lionesss", "C) Tiger", "D) Cow"], answer: 0},
+    {q: "15. Choose the correct article: 'Sun rises in the east.'", options: ["A) A", "B) An", "C) The", "D) No article"], answer: 2},
+    {q: "16. What is the plural of 'Tooth'?", options: ["A) Tooths", "B) Teeth", "C) Toothes", "D) Tooth"], answer: 1},
+    {q: "17. Which word is an adverb in 'He ran very quickly.'?", options: ["A) He", "B) ran", "C) very", "D) quickly"], answer: 3},
+    {q: "18. What is the opposite of 'Strong'?", options: ["A) Weak", "B) Hard", "C) Tough", "D) Powerful"], answer: 0},
+    {q: "19. Choose the correct helping verb: 'They ___ reading books.'", options: ["A) is", "B) am", "C) are", "D) was"], answer: 2},
+    {q: "20. What punctuation mark is used at the end of a question?", options: ["A) Full stop (.)", "B) Question mark (?)", "C) Exclamation mark (!)", "D) Comma (,)"], answer: 1}
 ];
 let idx=0, score=0, timerInterval, timeLeft=300;
 function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
