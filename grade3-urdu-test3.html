@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 3 Urdu Test 3 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:2.2}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy);direction:ltr;}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;font-family:Arial;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-right:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:right;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>جماعت سوم — اردو آن لائن ٹیسٹ 3</h2>
+    <p class="subtitle">Grade 3 Urdu Online Test 3 — HMSA Learning Academy</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">سوال 1 از 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">سوال یہاں ظاہر ہوگا</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+    <div id="score-screen" class="score-box">
+        <h3>ٹیسٹ 3 مکمل ہو گیا!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">کل سوالات: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">درست جوابات: 0</div>
+            <div class="result-item" id="obtained-marks">حاصل کردہ نمبر: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">فیصد: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">دوبارہ ٹیسٹ دیں</button>
+    </div>
+    <a class="back-link" href="index.html">← مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+<script>
+const testData = [
+    {q: "1. حرفِ جار 'پر' کی مثال درج ذیل میں سے کون سی ہے؟", options: ["الف) میز پر کتاب رکھی ہے۔", "ب) علی دوڑ رہا ہے۔", "ج) وہ اچھا لڑکا ہے۔", "د) واہ کیا بات ہے!"], answer: 0},
+    {q: "2. لفظ 'پھول' کی جمع کیا ہے؟", options: ["الف) پھولوں", "ب) پھول", "ج) پھوار", "د) پھولان"], answer: 1},
+    {q: "3. 'احمد نے خط لکھا' اس جملے میں 'خط' کیا ہے؟", options: ["الف) فاعل", "ب) مفعول", "ج) فعل", "د) حرف"], answer: 1},
+    {q: "4. صبح کے وقت سورج کس سمت سے نکلتا ہے؟", options: ["الف) مغرب", "ب) مشرق", "ج) شمال", "د) جنوب"], answer: 1},
+    {q: "5. لفظ 'نرم' کا متضاد کیا ہے؟", options: ["الف) سخت", "ب) گرم", "ج) سرد", "د) میٹھا"], answer: 0},
+    {q: "6. اسم نکرہ (عام چیز) کی پہچان کریں:", options: ["الف) دریا", "ب) دریائے سندھ", "ج) لاہور", "د) قائد اعظم"], answer: 0},
+    {q: "7. اچھے بچے کس کی بات مانتے ہیں؟", options: ["الف) والدین اور اساتذہ کی", "ب) کسی کی نہیں", "ج) صرف دوستوں کی", "د) لڑائی کی"], answer: 0},
+    {q: "8. لفظ 'آسمان' کا متضاد کیا ہے؟", options: ["الف) زمین", "ب) ستارہ", "ج) بادل", "د) چاند"], answer: 0},
+    {q: "9. حروفِ تہجی میں کتنے حروف ہیں (عام قاعدہ)؟", options: ["الف) 28", "ب) 37 یا قریب تر", "ج) 50", "د) 20"], answer: 1},
+    {q: "10. پاکستان کا قومی ترانہ کس نے لکھا؟", options: ["الف) حفیظ جالندھری", "ب) علامہ اقبال", "ج) جوش ملیح آبادی", "د) فیض احمد فیض"], answer: 0},
+    {q: "11. فعلِ حال کی مثال کون سی ہے؟", options: ["الف) وہ کتاب پڑھتا ہے", "ب) اس نے خط لکھا تھا", "ج) وہ کل جائے گا", "د) تم سو رہے تھے"], answer: 0},
+    {q: "12. لفظ 'بہادر' کا مترادف کیا ہے؟", options: ["الف) دلیر / نڈر", "ب) بزدل", "ج) کمزور", "د) سست"], answer: 0},
+    {q: "13. ہفتے میں کل کتنے دن ہوتے ہیں؟", options: ["الف) 5", "ب) 6", "ج) 7", "د) 8"], answer: 2},
+    {q: "14. لفظ 'پرندہ' کی جمع کیا ہے؟", options: ["الف) پرندے", "ب) پروند", "ج) پرند", "د) پرندوں"], answer: 0},
+    {q: "15. قائداعظم محمد علی جناح کا یومِ پیدائش کب ہوتا ہے؟", options: ["الف) 25 دسمبر", "ب) 14 اگست", "ج) 23 مارچ", "د) 6 ستمبر"], answer: 0},
+    {q: "16. درخت ہمیں کیا عطا کرتے ہیں؟", options: ["الف) آکسیجن اور تازہ ہوا", "ب) دھواں", "ج) مٹی", "د) پتھر"], answer: 0},
+    {q: "17. لفظ 'محنت' کا متضاد کیا ہے؟", options: ["الف) کاهلی / سستی", "ب) مشقت", "ج) کام", "د) کوشش"], answer: 0},
+    {q: "18. ہمارے پیارے وطن کا نام کیا ہے؟", options: ["الف) پاکستان", "ب) بھارت", "ج) ایران", "د) ترکی"], answer: 0},
+    {q: "19. استاد کی عزت کرنا کیا ہے؟", options: ["الف) فرض اور اچھی عادت", "ب) بُری بات", "ج) وقت کا ضیاع", "د) غیر ضروری"], answer: 0},
+    {q: "20. صفائی کے بارے میں کیا مشہور ہے؟", options: ["الف) صفائی نصف ایمان ہے", "ب) صفائی بُری عادت ہے", "ج) صفائی سے بیماری ہوتی ہے", "د) کوئی نہیں"], answer: 0}
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerText = q.q;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `سوال ${idx+1} از ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
+}
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ درست جواب! (Correct)</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ غلط جواب! (Incorrect)</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
+}
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`کل سوالات: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`درست جوابات: ${score}`;
+    document.getElementById('obtained-marks').innerText=`حاصل کردہ نمبر: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`فیصد: ${perc}%`;
+}
+window.onload=startTest;
+</script>
+</body>
+</html>
