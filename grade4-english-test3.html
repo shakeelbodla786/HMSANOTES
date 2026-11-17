@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 4 English Test 3 | HMSA Learning Academy</title>
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.6}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:16px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:#102b4c;color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Grade 4 — English Online Test 3</h2>
+    <p class="subtitle">HMSA Learning Academy — Grammar & Syllables</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+    <div id="score-screen" class="score-box">
+        <h3>Test 3 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+<script>
+const testData = [
+    {q: "1. How many syllables are in the word 'Banana' (ba-na-na)?", options: ["A) 2", "B) 3", "C) 4", "D) 1"], answer: 1},
+    {q: "2. How many syllables are in the word 'Elephant' (el-e-phant)?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1},
+    {q: "3. Identify the Proper Noun in: 'Ali lives in Lahore.'", options: ["A) lives", "B) Lahore", "C) in", "D) None"], answer: 1},
+    {q: "4. Identify the Adjective in: 'The clever fox runs.'", options: ["A) clever", "B) fox", "C) runs", "D) The"], answer: 0},
+    {q: "5. What is the past tense of 'Go'?", options: ["A) Goes", "B) Gone", "C) Went", "D) Going"], answer: 2},
+    {q: "6. How many syllables are in the word 'School'?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 0},
+    {q: "7. Choose the correct article: '___ umbrella'", options: ["A) A", "B) An", "C) The", "D) None"], answer: 1},
+    {q: "8. What is the plural of 'Leaf'?", options: ["A) Leafs", "B) Leaves", "C) Leavs", "D) Leave"], answer: 1},
+    {q: "9. Identify the Adverb in: 'She sings sweetly.'", options: ["A) She", "B) sings", "C) sweetly", "D) None"], answer: 2},
+    {q: "10. How many syllables are in 'Computer' (com-pu-ter)?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1},
+    {q: "11. What is the opposite of 'Brave'?", options: ["A) Coward", "B) Bold", "C) Strong", "D) Tall"], answer: 0},
+    {q: "12. Identify the Pronoun in: 'They are playing.'", options: ["A) They", "B) are", "C) playing", "D) None"], answer: 0},
+    {q: "13. How many syllables are in 'Teacher' (teach-er)?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 1},
+    {q: "14. What is the plural of 'Child'?", options: ["A) Childs", "B) Children", "C) Childes", "D) Child"], answer: 1},
+    {q: "15. Choose the correct spelling:", options: ["A) Beautiful", "B) Beautifull", "C) Batifull", "D) Byutiful"], answer: 0},
+    {q: "16. How many syllables are in 'Book'?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], answer: 0},
+    {q: "17. What is the past participle of 'Write'?", options: ["A) Wrote", "B) Written", "C) Writing", "D) Writes"], answer: 1},
+    {q: "18. Identify the Preposition in: 'The cat jumped over the wall.'", options: ["A) jumped", "B) over", "C) wall", "D) cat"], answer: 1},
+    {q: "19. How many syllables are in 'Beautiful' (beau-ti-ful)?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], answer: 1},
+    {q: "20. What is the antonym of 'True'?", options: ["A) False", "B) Right", "C) Correct", "D) Yes"], answer: 0}
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerText = q.q;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `Question ${idx+1} of ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
+}
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ Correct Answer!</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ Incorrect Answer!</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
+}
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`Total Questions: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText=`Obtained Marks: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`Percentage: ${perc}%`;
+}
+window.onload=startTest;
+</script>
+</body>
+</html>
