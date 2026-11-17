@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 Mathematics Test 3 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:1.8}
+.container{max-width:780px;margin:auto;background:white;padding:25px;border-radius:13px;box-shadow:0 3px 12px rgba(0,0,0,0.1);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:14px;margin-bottom:20px}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:8px;margin-bottom:15px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:white;padding:3px 10px;border-radius:5px;}
+.question{font-size:18px;font-weight:bold;color:var(--navy);margin-bottom:15px;background:#f8fcfa;padding:15px;border-radius:8px;border-left:4px solid var(--green)}
+.eng-stmt{direction:ltr;text-align:left;font-family:Arial, sans-serif;color:#102b4c;font-size:17px;margin-bottom:5px;}
+.urdu-stmt{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;color:#263746;font-size:15px;}
+.options{display:grid;gap:10px;margin-bottom:15px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:12px 15px;text-align:left;font-size:15px;border-radius:8px;cursor:pointer;transition:0.2s;color:#263746;}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-eng{font-family:Arial, sans-serif; font-weight:bold;}
+.opt-urdu{font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif; font-size:13px; color:#555; margin-left:5px;}
+#feedback-box{text-align:center;margin:10px 0;font-size:18px;font-weight:bold;min-height:30px;}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:26px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:10px;padding:20px;margin:15px auto;max-width:400px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:bold}
+.restart-btn{background:var(--navy);color:white;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px}
+.back-link{display:block;text-align:center;margin-top:20px;color:var(--green);text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>جماعت ہشتم — ریاضی آن لائن ٹیسٹ 3 (بائی لینگول)</h2>
+    <p class="subtitle">Grade 8 Mathematics Test 3 — HMSA Learning Academy</p>
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 20</span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+        <div id="question-text" class="question">Question will appear here</div>
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+    </div>
+    <div id="score-screen" class="score-box">
+        <h3>Test 3 Completed Successfully!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q">Total Questions: 20</div>
+            <div class="result-item" id="correct-q" style="color: #087c59;">Correct Answers: 0</div>
+            <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20</div>
+            <div class="result-item" id="percentage-score" style="color: #102b4c; font-size: 20px;">Percentage: 0%</div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">Test Again / دوبارہ ٹیسٹ دیں</button>
+    </div>
+    <a class="back-link" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+</div>
+<script>
+const testData = [
+    {
+        eng: "1. Which of the following is an irrational number?",
+        urdu: "1. درج ذیل میں سے کون سا غیر ناطق عدد (Irrational Number) ہے؟",
+        options: [
+            {eng: "sqrt(5)", urdu: ""},
+            {eng: "sqrt(16)", urdu: ""},
+            {eng: "22/7", urdu: ""},
+            {eng: "0.25", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "2. Find the HCF (عاد اعظم) of 45 and 75.",
+        urdu: "2. 45 اور 75 کا عاد اعظم (HCF) معلوم کریں۔",
+        options: [
+            {eng: "5", urdu: ""},
+            {eng: "15", urdu: ""},
+            {eng: "25", urdu: ""},
+            {eng: "45", urdu: ""}
+        ],
+        answer: 1
+    },
+    {
+        eng: "3. Find the LCM (ذواضعافِ عقل) of 12, 18, and 24.",
+        urdu: "3. 12، 18 اور 24 کا ذواضعافِ اقل (LCM) معلوم کریں۔",
+        options: [
+            {eng: "36", urdu: ""},
+            {eng: "48", urdu: ""},
+            {eng: "72", urdu: ""},
+            {eng: "144", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "4. Factorize: x^2 - 49",
+        urdu: "4. تجزی کریں: x^2 - 49",
+        options: [
+            {eng: "(x - 7)^2", urdu: ""},
+            {eng: "(x + 7)^2", urdu: ""},
+            {eng: "(x - 49)(x + 1)", urdu: ""},
+            {eng: "(x - 7)(x + 7)", urdu: ""}
+        ],
+        answer: 3
+    },
+    {
+        eng: "5. Expand: (a + b)^2",
+        urdu: "5. کلیہ پھیلائیں: (a + b)^2",
+        options: [
+            {eng: "a^2 + 2ab + b^2", urdu: ""},
+            {eng: "a^2 - 2ab + b^2", urdu: ""},
+            {eng: "a^2 + b^2", urdu: ""},
+            {eng: "a^2 - b^2", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "6. In a right-angled triangle, if base = 6 cm and perpendicular = 8 cm, find the hypotenuse.",
+        urdu: "6. ایک قائمۃ الزاویہ مثلث میں قاعدہ 6 سینٹی میٹر اور عمود 8 سینٹی میٹر ہو، تو وتر معلوم کریں:",
+        options: [
+            {eng: "14 cm", urdu: "(سینٹی میٹر)"},
+            {eng: "10 cm", urdu: "(سینٹی میٹر)"},
+            {eng: "12 cm", urdu: "(سینٹی میٹر)"},
+            {eng: "7 cm", urdu: "(سینٹی میٹر)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "7. Find the cube root of 343 (cuberoot(343)).",
+        urdu: "7. 343 کا جزر المكعب معلوم کریں۔",
+        options: [
+            {eng: "9", urdu: ""},
+            {eng: "6", urdu: ""},
+            {eng: "7", urdu: ""},
+            {eng: "8", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "8. Convert binary number (1101)_2 into decimal system.",
+        urdu: "8. ثنائی عدد (1101)_2 کو اعشاری نظام میں تبدیل کریں:",
+        options: [
+            {eng: "11", urdu: ""},
+            {eng: "15", urdu: ""},
+            {eng: "9", urdu: ""},
+            {eng: "13", urdu: ""}
+        ],
+        answer: 3
+    },
+    {
+        eng: "9. If a set A has 4 elements, how many subsets can it have?",
+        urdu: "9. اگر سیٹ A کے ارکان کی تعداد 4 ہو، تو اس کے تہتی سیٹوں کی تعداد کتنی ہوگی؟",
+        options: [
+            {eng: "16", urdu: ""},
+            {eng: "8", urdu: ""},
+            {eng: "4", urdu: ""},
+            {eng: "32", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "10. Find the HCF (عاد اعظم) of 54 and 90.",
+        urdu: "10. 54 اور 90 کا عاد اعظم (HCF) معلوم کریں:",
+        options: [
+            {eng: "9", urdu: ""},
+            {eng: "18", urdu: ""},
+            {eng: "27", urdu: ""},
+            {eng: "6", urdu: ""}
+        ],
+        answer: 1
+    },
+    {
+        eng: "11. Find the LCM (ذواضعافِ عقل) of 14 and 21.",
+        urdu: "11. 14 اور 21 کا ذواضعافِ اقل (LCM) معلوم کریں:",
+        options: [
+            {eng: "28", urdu: ""},
+            {eng: "63", urdu: ""},
+            {eng: "42", urdu: ""},
+            {eng: "84", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "12. Find the simple interest on Rs. 10,000 at 5% per annum for 3 years.",
+        urdu: "12. 10,000 روپے پر 5 فیصد سالانہ شرح سے 3 سال کا سادہ منافع معلوم کریں:",
+        options: [
+            {eng: "Rs. 500", urdu: "(روپے)"},
+            {eng: "Rs. 1,000", urdu: "(روپے)"},
+            {eng: "Rs. 2,000", urdu: "(روپے)"},
+            {eng: "Rs. 1,500", urdu: "(روپے)"}
+        ],
+        answer: 3
+    },
+    {
+        eng: "13. What is the sum of interior angles of a pentagon (5-sided polygon)?",
+        urdu: "13. ایک مخمس (5 اضلاع والی شکل) کے اندرونی زاویوں کا مجموعہ کتنا ہوتا ہے؟",
+        options: [
+            {eng: "540 degrees", urdu: "(درجے)"},
+            {eng: "360 degrees", urdu: "(درجے)"},
+            {eng: "720 degrees", urdu: "(درجے)"},
+            {eng: "180 degrees", urdu: "(درجے)"}
+        ],
+        answer: 0
+    },
+    {
+        eng: "14. Find the volume of a cylinder with radius 7 cm and height 10 cm (V = pi*r^2*h).",
+        urdu: "14. 7 سینٹی میٹر رداس اور 10 سینٹی میٹر اونچائی والے سلنڈر کا حجم معلوم کریں:",
+        options: [
+            {eng: "440 cubic cm", urdu: "(مکعب سینٹی میٹر)"},
+            {eng: "1540 cubic cm", urdu: "(مکعب سینٹی میٹر)"},
+            {eng: "770 cubic cm", urdu: "(مکعب سینٹی میٹر)"},
+            {eng: "220 cubic cm", urdu: "(مکعب سینٹی میٹر)"}
+        ],
+        answer: 1
+    },
+    {
+        eng: "15. Solve simultaneous equations: x + y = 10 and x - y = 4. Find x.",
+        urdu: "15. ہم زاد مساواتیں حل کریں: x + y = 10 اور x - y = 4، تو x کیا ہوگا؟",
+        options: [
+            {eng: "3", urdu: ""},
+            {eng: "6", urdu: ""},
+            {eng: "7", urdu: ""},
+            {eng: "5", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "16. What is the distance between points A(2, 3) and B(2, 8)?",
+        urdu: "16. نقاط A(2, 3) اور B(2, 8) کے درمیان فاصلہ معلوم کریں:",
+        options: [
+            {eng: "11 units", urdu: "(اکائیاں)"},
+            {eng: "4 units", urdu: "(اکائیاں)"},
+            {eng: "6 units", urdu: "(اکائیاں)"},
+            {eng: "5 units", urdu: "(اکائیاں)"}
+        ],
+        answer: 3
+    },
+    {
+        eng: "17. Find the median of the data: 8, 3, 11, 5, 9.",
+        urdu: "17. دیے گئے مواد کا وسطانیہ (Median) معلوم کریں: 8, 3, 11, 5, 9",
+        options: [
+            {eng: "8", urdu: ""},
+            {eng: "11", urdu: ""},
+            {eng: "5", urdu: ""},
+            {eng: "9", urdu: ""}
+        ],
+        answer: 0
+    },
+    {
+        eng: "18. If a die is rolled once, what is the probability of getting an even number?",
+        urdu: "18. اگر ایک چھکا پھینکا جائے، تو جفت عدد آنے کا امکان (Probability) کیا ہے؟",
+        options: [
+            {eng: "1/6", urdu: ""},
+            {eng: "1/2", urdu: ""},
+            {eng: "1/3", urdu: ""},
+            {eng: "2/3", urdu: ""}
+        ],
+        answer: 1
+    },
+    {
+        eng: "19. What is the value of x^0 (where x != 0)?",
+        urdu: "19. x^0 کی قیمت کیا ہوتی ہے (جبکہ x != 0)؟",
+        options: [
+            {eng: "0", urdu: ""},
+            {eng: "x", urdu: ""},
+            {eng: "1", urdu: ""},
+            {eng: "-1", urdu: ""}
+        ],
+        answer: 2
+    },
+    {
+        eng: "20. If cost price of a watch is Rs. 800 and selling price is Rs. 1,000, find profit percentage.",
+        urdu: "20. اگر گھڑی کی قیمتِ خرید 800 اور قیمتِ فروخت 1000 روپے ہو، تو نفع فیصد کیا ہے؟",
+        options: [
+            {eng: "20%", urdu: ""},
+            {eng: "15%", urdu: ""},
+            {eng: "30%", urdu: ""},
+            {eng: "25%", urdu: ""}
+        ],
+        answer: 3
+    }
+];
+let idx=0, score=0, timerInterval, timeLeft=300;
+function startTest(){ idx=0; score=0; timeLeft=300; document.getElementById('score-screen').style.display='none'; document.getElementById('quiz-screen').style.display='block'; startTimer(); loadQ(); }
+function startTimer(){ clearInterval(timerInterval); timerInterval = setInterval(()=>{ timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('timer').innerText=`${m}:${s<10?'0':''}${s}`; if(timeLeft<=0){ clearInterval(timerInterval); showResult(); } }, 1000); }
+function loadQ(){
+    let q = testData[idx];
+    document.getElementById('question-text').innerHTML = `<div class="eng-stmt">${q.eng}</div><div class="urdu-stmt">${q.urdu}</div>`;
+    let box = document.getElementById('options-box'); box.innerHTML='';
+    q.options.forEach((opt, i)=>{
+        let btn = document.createElement('button');
+        btn.className = 'opt-btn'; 
+        btn.innerHTML = `<span class="opt-eng">${opt.eng}</span> <span class="opt-urdu">${opt.urdu}</span>`;
+        btn.onclick = () => checkAns(i, btn);
+        box.appendChild(btn);
+    });
+    document.getElementById('progress-text').innerText = `Question ${idx+1} of ${testData.length}`;
+    document.getElementById('feedback-box').innerHTML='';
+}
+function checkAns(selected, btn){
+    clearInterval(timerInterval);
+    let btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => b.disabled=true);
+    let fb = document.getElementById('feedback-box');
+    let q = testData[idx];
+    if(selected === q.answer){
+        score++;
+        btn.style.background='#2b9348'; btn.style.color='#fff';
+        fb.innerHTML='<span style="color:#2b9348;">✅ Correct Answer! (درست جواب)</span>';
+    } else {
+        btn.style.background='#d90429'; btn.style.color='#fff';
+        btns[q.answer].style.background='#2b9348'; btns[q.answer].style.color='#fff';
+        fb.innerHTML='<span style="color:#d90429;">❌ Incorrect Answer! (غلط جواب)</span>';
+    }
+    idx++;
+    setTimeout(()=>{
+        if(idx < testData.length){ startTimer(); loadQ(); } else { showResult(); }
+    }, 1500);
+}
+function showResult(){
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display='none';
+    document.getElementById('score-screen').style.display='block';
+    let perc = Math.round((score/testData.length)*100);
+    document.getElementById('total-q').innerText=`Total Questions: ${testData.length}`;
+    document.getElementById('correct-q').innerText=`Correct Answers: ${score}`;
+    document.getElementById('obtained-marks').innerText=`Obtained Marks: ${score} / ${testData.length}`;
+    document.getElementById('percentage-score').innerText=`Percentage: ${perc}%`;
+}
+window.onload=startTest;
+</script>
+</body>
+</html>
