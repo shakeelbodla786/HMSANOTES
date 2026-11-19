@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMSA Learning Academy - Grade 3 Math Test 4</title>
+<!-- اردو نستعلیق فونٹ -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Jameel Noori Nastaleeq';
+        src: local('Jameel Noori Nastaleeq'), local('Noto Nastaliq Urdu');
+    }
+    
+    /* بنیادی ڈیزائن */
+    body {
+        font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', Tahoma, sans-serif;
+        background-color: #e9eef2;
+        margin: 0;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+    }
+    .app-container {
+        width: 100%;
+        max-width: 550px; /* تھوڑا چوڑا تاکہ دو زبانیں سما سکیں */
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        overflow: hidden;
+    }
+    
+    /* ہیڈر */
+    .header {
+        background: linear-gradient(135deg, #0c2340 0%, #087c59 100%);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        border-bottom: 4px solid #d4af37;
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 1px;
+        font-family: Arial, sans-serif;
+    }
+    .header h2 {
+        margin: 5px 0 0 0;
+        font-size: 18px;
+        color: #f3e5ab;
+        font-weight: normal;
+    }
+
+    /* ٹائمر اور سوال نمبر */
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f4f7f9;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ccc;
+        font-weight: bold;
+        color: #0c2340;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+    }
+    .timer {
+        background: #e74c3c;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+
+    /* سوال کا خانہ */
+    .quiz-container {
+        padding: 20px;
+    }
+    
+    /* اردو اور انگلش سوالات کی سٹائلنگ */
+    .urdu-question {
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        line-height: 1.8;
+        text-align: right;
+        direction: rtl;
+        margin-bottom: 8px;
+    }
+    .english-question {
+        font-size: 16px;
+        color: #555;
+        font-family: Arial, sans-serif;
+        text-align: left;
+        direction: ltr;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+
+    /* آپشنز */
+    .options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .option-btn {
+        background: #fff;
+        border: 2px solid #b0c4de;
+        padding: 12px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* نمبر اور لفظ کو الگ الگ کرنے کے لیے */
+    }
+    .option-btn:hover {
+        background: #f0f8ff;
+        border-color: #087c59;
+    }
+    .option-btn .option-letter {
+        font-weight: bold;
+        color: #0c2340;
+        font-family: Arial, sans-serif;
+        margin-left: 10px; /* RTL کے لیے */
+    }
+    .option-text-container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        text-align: right;
+    }
+    .option-urdu {
+        font-size: 20px;
+        font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', Tahoma, sans-serif;
+    }
+    .option-english {
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        color: #555;
+        text-align: left;
+        direction: ltr;
+    }
+    /* اگر صرف نمبر ہو تو */
+    .option-number {
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        direction: ltr;
+        text-align: right;
+        width: 100%;
+    }
+    
+    /* صحیح اور غلط کے رنگ */
+    .option-btn.correct {
+        background-color: #d4edda;
+        border-color: #28a745;
+    }
+    .option-btn.wrong {
+        background-color: #f8d7da;
+        border-color: #dc3545;
+    }
+    .option-btn.disabled {
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
+    /* بٹن */
+    .next-btn {
+        background: #087c59;
+        color: white;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        display: none;
+        transition: 0.3s;
+        font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', Tahoma, sans-serif;
+    }
+    .next-btn:hover {
+        background: #0c2340;
+    }
+
+    /* نتیجہ */
+    .result-container {
+        display: none;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .result-container h2 {
+        color: #0c2340;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .score-box {
+        background: #f4f7f9;
+        border: 2px solid #d4af37;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .score-box p {
+        font-size: 20px;
+        margin: 12px 0;
+        color: #333;
+        font-family: Arial, sans-serif;
+    }
+    .score-box span {
+        font-weight: bold;
+        color: #087c59;
+        font-size: 24px;
+    }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- ہیڈر -->
+    <div class="header">
+        <h1>HMSA Learning Academy</h1>
+        <h2>Grade 3 Math - Test 4</h2>
+    </div>
+
+    <!-- ٹائمر اور سوال نمبر -->
+    <div class="top-bar">
+        <div id="question-progress">Question 1 / 20</div>
+        <div class="timer" id="timer">05:00</div>
+    </div>
+
+    <!-- کوئز کا حصہ -->
+    <div class="quiz-container" id="quiz-section">
+        <div class="urdu-question" id="urdu-question">لوڈ ہو رہا ہے...</div>
+        <div class="english-question" id="english-question">Loading...</div>
+        
+        <div class="options-container" id="options-container">
+            <!-- آپشنز یہاں آئیں گے -->
+        </div>
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">اگلا سوال / Next Question ➔</button>
+    </div>
+
+    <!-- نتیجہ کا حصہ -->
+    <div class="result-container" id="result-section">
+        <h2>ٹیسٹ مکمل ہو گیا! 🎉</h2>
+        <div class="score-box">
+            <p>Total Questions: <span>20</span></p>
+            <p>Correct Answers: <span id="correct-count">0</span></p>
+            <p>Wrong Answers: <span id="wrong-count">0</span></p>
+            <p>Percentage: <span id="percentage">0%</span></p>
+        </div>
+        <button class="next-btn" style="display:block;" onclick="location.reload()">دوبارہ ٹیسٹ دیں / Retake Test 🔄</button>
+    </div>
+</div>
+
+<script>
+    // 20 سوالات کا ڈیٹا (Bilingual)
+    const questions = [
+        {
+            urdu: "1 564 اور 7 325 کا مجموعہ کیا ہے؟",
+            english: "Sum of 1 564 and 7 325 is?",
+            options: ["8 889", "8 888", "8 899", "8 886"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "6 351 اور 1 265 کا فرق کیا ہے؟",
+            english: "Difference of 6 351 and 1 265 is?",
+            options: ["5 086", "5 076", "5 056", "5 096"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "3 246 سے 1 886 کتنا کم ہے؟",
+            english: "3 246 is ______ less than 1 886.",
+            options: ["1 360", "1 350", "1 370", "1 380"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "ایک ٹوکری میں 6 انڈے ہیں۔ تو 7 ٹوکریوں میں کتنے انڈے ہوں گے؟",
+            english: "There are 6 eggs in a basket. Then ______ eggs are in 7 such baskets.",
+            options: ["42", "28", "35", "21"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "جب کسی عدد کو 0 سے ضرب دیا جائے تو کیا حاصل ہوتا ہے؟",
+            english: "When any number is multiplied by 0, we get ______.",
+            options: [
+                { ur: "صفر", en: "0" },
+                { ur: "ایک", en: "1" },
+                { ur: "دس", en: "10" },
+                { ur: "سو", en: "100" }
+            ],
+            isNumber: false,
+            correct: 0
+        },
+        {
+            urdu: "12 کو 5 سے ضرب دینے سے کیا حاصل ہوتا ہے؟",
+            english: "By multiplying 12 by 1, we get ______.",
+            options: ["60", "112", "48", "24"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "24 کو 6 سے تقسیم کرنے پر کیا حاصل ہوتا ہے؟",
+            english: "By dividing 24 by 6, we get ______.",
+            options: ["4", "5", "6", "7"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "84 کو 4 سے تقسیم کرنے پر کیا حاصل ہوتا ہے؟",
+            english: "By dividing 84 by 4, we get ______.",
+            options: ["21", "19", "20", "18"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "ایک اسکول میں طلباء کی کل تعداد 4 356 ہے۔ اگر لڑکیوں کی تعداد 1 968 ہے تو لڑکوں کی تعداد معلوم کریں۔",
+            english: "The total number of students in a school is 4 356. If the number of female students is 1 968 then find the number of male students.",
+            options: ["2 388", "2 488", "2 288", "2 588"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "ایک کسر جس میں شمار کنندہ (numerator) سے بڑا ہو، اسے کیا کہتے ہیں؟",
+            english: "A fraction in which numerator is greater than denominator is called ______ fraction.",
+            options: [
+                { ur: "غیر صحیح کسر", en: "improper" },
+                { ur: "صحیح کسر", en: "proper" },
+                { ur: "مساوی کسر", en: "equivalent" },
+                { ur: "عام کسر", en: "common" }
+            ],
+            isNumber: false,
+            correct: 0
+        },
+        {
+            urdu: "2/5 کے مساوی کسر کون سی ہے؟",
+            english: "Equivalent fraction of 2/5 is ______.",
+            options: ["4/10", "4/7", "4/6", "4/3"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "کون سا نشان درست ہے: 4/5 ___ 3/5",
+            english: "In fractions, 4/5 ___ 3/5, use symbol.",
+            options: [">", "<", "=", "≠"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "کون سا نشان درست ہے: 4/15 ___ 7/15",
+            english: "In fractions, 4/15 ___ 7/15, use symbol.",
+            options: ["<", ">", "=", "≠"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "کون سا یونٹ سوئی (needle) کی لمبائی معلوم کرنے کے لیے موزوں ہے؟",
+            english: "What is the appropriate unit to determine the length of a needle?",
+            options: [
+                { ur: "سینٹی میٹر", en: "centimetre" },
+                { ur: "کلومیٹر", en: "kilometre" },
+                { ur: "میٹر", en: "metre" },
+                { ur: "ملی لیٹر", en: "millilitre" }
+            ],
+            isNumber: false,
+            correct: 0
+        },
+        {
+            urdu: "3500 ml پانی میں سے 2000 ml نکالنے کے بعد کتنے ملی لیٹر پانی بچے گا؟",
+            english: "How many millilitre of water is saved after extracting 2 000 ml of water from 3500 ml of water.",
+            options: ["1 500 ml", "500 ml", "1 000 ml", "2 000 ml"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "کمیت (mass) کا معیاری یونٹ کیا ہے؟",
+            english: "What is standard unit of mass?",
+            options: [
+                { ur: "کلوگرام", en: "kilogram" },
+                { ur: "میٹر", en: "metre" },
+                { ur: "لیٹر", en: "litre" },
+                { ur: "کلومیٹر", en: "kilometre" }
+            ],
+            isNumber: false,
+            correct: 0
+        },
+        {
+            urdu: "اگر میرے پاس 800 ml جوس کے دو ڈبے ہوں تو کل مقدار کتنی ہوگی؟",
+            english: "If I had two cans of 800 ml juice, what would be the total quantity?",
+            options: ["1 600 ml", "1 000 ml", "800 ml", "200 ml"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "ایک مثلث (triangle) کے کتنے راس (vertices) ہوتے ہیں؟",
+            english: "A triangle has ______ vertices.",
+            options: ["3", "2", "4", "5"],
+            isNumber: true,
+            correct: 0
+        },
+        {
+            urdu: "دی گئی تصویر میں لائن سیگمنٹ (line segment) کون سی ہے؟",
+            english: "Given figure, line segment is ______.",
+            options: [
+                { ur: "لائن سیگمنٹ AB", en: "line segment AB" },
+                { ur: "لائن AB", en: "line AB" },
+                { ur: "شعاع AB", en: "ray AB" },
+                { ur: "نقطہ AB", en: "point AB" }
+            ],
+            isNumber: false,
+            correct: 0
+        },
+        {
+            urdu: "ایک کیوب (cube) میں کتنے کنارے (edges) ہوتے ہیں؟",
+            english: "In a cube, number of edges are ______.",
+            options: ["12", "6", "8", "4"],
+            isNumber: true,
+            correct: 0
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let wrongAnswers = 0;
+    let timerInterval;
+    let timeLeft = 300; // 5 منٹ
+
+    const urduQ = document.getElementById('urdu-question');
+    const engQ = document.getElementById('english-question');
+    const optionsContainer = document.getElementById('options-container');
+    const nextBtn = document.getElementById('next-btn');
+    const progressText = document.getElementById('question-progress');
+    const timerDisplay = document.getElementById('timer');
+    const quizSection = document.getElementById('quiz-section');
+    const resultSection = document.getElementById('result-section');
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                endQuiz();
+            }
+        }, 1000);
+    }
+
+    function loadQuestion() {
+        nextBtn.style.display = 'none';
+        const q = questions[currentQuestionIndex];
+        
+        // سوالات لوڈ کریں
+        urduQ.textContent = q.urdu;
+        engQ.textContent = q.english;
+        progressText.textContent = `Question ${currentQuestionIndex + 1} / 20`;
+        
+        optionsContainer.innerHTML = '';
+        
+        // آپشنز کی شفلنگ (الف، ب، ج، د)
+        let shuffledOptions = q.options.map((opt, index) => ({ text: opt, originalIndex: index }));
+        shuffledOptions.sort(() => Math.random() - 0.5);
+
+        const letters = ['الف / A', 'ب / B', 'ج / C', 'د / D'];
+
+        shuffledOptions.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            
+            let contentHTML = `<span class="option-letter">${letters[i]}.</span>`;
+            
+            // اگر آپشن نمبر ہے یا لفظ ہے، اسے فارمیٹ کریں
+            if (q.isNumber) {
+                contentHTML += `<div class="option-number">${opt.text}</div>`;
+            } else {
+                contentHTML += `
+                    <div class="option-text-container">
+                        <span class="option-urdu">${opt.text.ur}</span>
+                        <span class="option-english">${opt.text.en}</span>
+                    </div>
+                `;
+            }
+            
+            btn.innerHTML = contentHTML;
+            
+            // صحیح جواب چیک کرنے کے لیے
+            let isCorrect = false;
+            if (q.isNumber) {
+                if (opt.text === q.options[q.correct]) isCorrect = true;
+            } else {
+                if (opt.text.ur === q.options[q.correct].ur) isCorrect = true;
+            }
+
+            btn.onclick = () => selectOption(btn, isCorrect);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function selectOption(selectedBtn, isCorrect) {
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(btn => btn.classList.add('disabled'));
+
+        if (isCorrect) {
+            selectedBtn.classList.add('correct');
+            score++;
+        } else {
+            selectedBtn.classList.add('wrong');
+            wrongAnswers++;
+            // صحیح جواب کو ہائی لائٹ کریں
+            allBtns.forEach(btn => {
+                const q = questions[currentQuestionIndex];
+                // اگر صحیح جواب کا متن بٹن میں موجود ہو تو اسے سبز کر دیں
+                if (q.isNumber) {
+                     if (btn.querySelector('.option-number').textContent === q.options[q.correct]) {
+                        btn.classList.add('correct');
+                     }
+                } else {
+                     if (btn.querySelector('.option-urdu').textContent === q.options[q.correct].ur) {
+                        btn.classList.add('correct');
+                     }
+                }
+            });
+        }
+        nextBtn.style.display = 'block';
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            endQuiz();
+        }
+    }
+
+    function endQuiz() {
+        clearInterval(timerInterval);
+        quizSection.style.display = 'none';
+        resultSection.style.display = 'block';
+
+        document.getElementById('correct-count').textContent = score;
+        document.getElementById('wrong-count').textContent = wrongAnswers;
+        
+        let percentage = (score / questions.length) * 100;
+        document.getElementById('percentage').textContent = percentage.toFixed(1) + '%';
+    }
+
+    window.onload = () => {
+        startTimer();
+        loadQuestion();
+    };
+</script>
+
+</body>
+</html>
