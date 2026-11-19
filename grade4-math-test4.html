@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMSA Learning Academy - Grade 4 Math Test 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+    font-family: 'Jameel Noori Nastaleeq';
+    src: local('Jameel Noori Nastaleeq'), local('Noto Nastaliq Urdu');
+}
+* { box-sizing: border-box; }
+body {
+    font-family: 'Jameel Noori Nastaleeq','Noto Nastaliq Urdu',Tahoma,sans-serif;
+    background: #e9eef2;
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.app-container {
+    width: 100%;
+    max-width: 550px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    overflow: hidden;
+}
+.header {
+    background: linear-gradient(135deg,#0c2340,#087c59);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 4px solid #d4af37;
+}
+.header h1 {
+    margin: 0;
+    font: bold 22px Arial,sans-serif;
+}
+.header h2 {
+    margin: 7px 0 0;
+    font-size: 19px;
+    color: #f3e5ab;
+    font-weight: normal;
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f4f7f9;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+    font: bold 15px Arial,sans-serif;
+    color: #0c2340;
+}
+.timer {
+    background: #e74c3c;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+.quiz-container { padding: 20px; }
+.urdu-question {
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+    line-height: 2;
+    text-align: right;
+    direction: rtl;
+    margin-bottom: 12px;
+}
+.english-question {
+    font: 16px/1.5 Arial,sans-serif;
+    color: #555;
+    text-align: left;
+    direction: ltr;
+    margin-bottom: 25px;
+}
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+.option-btn {
+    width: 100%;
+    background: white;
+    border: 2px solid #b0c4de;
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #333;
+    display: flex;
+    align-items: flex-start;
+    direction: ltr;
+    text-align: left;
+    font-size: 16px;
+}
+.option-btn:hover {
+    background: #f0f8ff;
+    border-color: #087c59;
+}
+.option-letter {
+    font: bold 18px Arial,sans-serif;
+    color: #0c2340;
+    min-width: 30px;
+    margin: 5px 10px 0 0;
+}
+.option-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.option-urdu {
+    font-family: 'Jameel Noori Nastaleeq','Noto Nastaliq Urdu',Tahoma,sans-serif;
+    font-size: 18px;
+    direction: rtl;
+    text-align: right;
+    line-height: 2;
+    unicode-bidi: isolate;
+}
+.option-english {
+    font: 15px/1.5 Arial,sans-serif;
+    color: #555;
+    direction: ltr;
+    text-align: left;
+    unicode-bidi: isolate;
+}
+.option-number {
+    font: 18px Arial,sans-serif;
+    direction: ltr;
+    text-align: left;
+    width: 100%;
+    margin-top: 5px;
+}
+.option-btn.correct {
+    background: #d4edda;
+    border-color: #28a745;
+}
+.option-btn.wrong {
+    background: #f8d7da;
+    border-color: #dc3545;
+}
+.option-btn.disabled {
+    pointer-events: none;
+    opacity: .85;
+}
+.next-btn {
+    background: #087c59;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    display: none;
+    font-family: 'Jameel Noori Nastaleeq','Noto Nastaliq Urdu',Tahoma,sans-serif;
+}
+.result-container {
+    display: none;
+    text-align: center;
+    padding: 30px 20px;
+}
+.result-container h2 {
+    color: #0c2340;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+.score-box {
+    background: #f4f7f9;
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.score-box p {
+    font: 18px Arial,sans-serif;
+    margin: 12px 0;
+    color: #333;
+}
+.score-box span {
+    font-weight: bold;
+    color: #087c59;
+    font-size: 22px;
+}
+.retake-btn {
+    display: block;
+    background: #0c2340;
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h1>HMSA Learning Academy</h1>
+        <h2>Grade 4 Math - Test 4</h2>
+    </div>
+
+    <div class="top-bar">
+        <div id="question-progress">Question 1 / 20</div>
+        <div class="timer" id="timer">05:00</div>
+    </div>
+
+    <div class="quiz-container" id="quiz-section">
+        <div class="urdu-question" id="urdu-question">لوڈ ہو رہا ہے...</div>
+        <div class="english-question" id="english-question">Loading...</div>
+        <div class="options-container" id="options-container"></div>
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">اگلا سوال / Next Question ➔</button>
+    </div>
+
+    <div class="result-container" id="result-section">
+        <h2>ٹیسٹ مکمل ہو گیا! 🎉</h2>
+        <div class="score-box">
+            <p>Total Questions: <span id="total-count">20</span></p>
+            <p>Correct Answers: <span id="correct-count">0</span></p>
+            <p>Wrong Answers: <span id="wrong-count">0</span></p>
+            <p>Percentage: <span id="percentage">0%</span></p>
+        </div>
+        <button class="next-btn retake-btn" style="display:block" onclick="location.reload()">دوبارہ ٹیسٹ دیں / Retake Test 🔄</button>
+    </div>
+</div>
+
+<script>
+const questions = [
+{urdu:"اعشاریہ (Decimal) ایک کسر ہے جس کا ڈینومینیٹر کس کی طاقت ہوتا ہے؟",english:"Decimal is a fraction with the denominator is power of ______.",options:[{ur:"10",en:"10"},{ur:"2",en:"2"},{ur:"15",en:"15"},{ur:"0",en:"0"}],isNumber:true,correct:0},
+{urdu:"جب ہم کسی شکل کو 10 برابر حصوں میں تقسیم کرتے ہیں، تو ہر حصے کو کیا کہتے ہیں؟",english:"When we divide a shape into 10 equal parts, then each part is called ______.",options:[{ur:"دہائی (Tenths)",en:"tenths"},{ur:"سینکڑا (Hundredths)",en:"hundredths"},{ur:"ایک (One)",en:"one"},{ur:"آدھا (Half)",en:"half"}],correct:0},
+{urdu:"اعشاریہ کو جمع کرنے کے لیے ہمیشہ ______ کو ایک ساتھ، دہائیوں کو دہائیوں کے ساتھ اور سینکڑوں کو سینکڑوں کے ساتھ جوڑیں۔",english:"To add the decimals always ______ ones in ones, tenths in tenths and hundredths in hundredths.",options:[{ur:"جمع کریں (Add)",en:"add"},{ur:"تفریق کریں (Subtract)",en:"subtract"},{ur:"ضرب دیں (Multiply)",en:"multiply"},{ur:"تقسیم کریں (Divide)",en:"divide"}],correct:0},
+{urdu:"جب ہم کسی اعشاریہ کو 100 سے ضرب دیتے ہیں، تو ہم اعشاریہ نقطہ کو دائیں طرف ______ جگہ منتقل کرتے ہیں۔",english:"When we multiply any decimal by 100, we move the decimal point ______ places to the right.",options:[{ur:"2",en:"2"},{ur:"1",en:"1"},{ur:"3",en:"3"},{ur:"0",en:"0"}],isNumber:true,correct:0},
+{urdu:"______ کا مطلب ہے وہ نمبر تلاش کرنا جو اصل نمبر کے قریب ہو لیکن بالکل درست نہ ہو۔",english:"______ means to find a number that is nearest to the original number but not exact.",options:[{ur:"گول کرنا (Round off)",en:"round off"},{ur:"اعشاریہ (Decimal)",en:"decimal"},{ur:"کسر (Fraction)",en:"fraction"},{ur:"تخمینہ (Estimation)",en:"estimation"}],correct:0},
+{urdu:"درج ذیل میں سے کون سی کسر صحیح کسر (Proper Fraction) ہے؟",english:"Which of the following is a proper fraction?",options:[{ur:"1/2",en:"1/2"},{ur:"5/4",en:"5/4"},{ur:"9/7",en:"9/7"},{ur:"7/6",en:"7/6"}],isNumber:true,correct:0},
+{urdu:"درج ذیل میں سے کون سی کسر غیر صحیح کسر (Improper Fraction) ہے؟",english:"Which of the following is an improper fraction?",options:[{ur:"5/4",en:"5/4"},{ur:"1/2",en:"1/2"},{ur:"3/5",en:"3/5"},{ur:"2/9",en:"2/9"}],isNumber:true,correct:0},
+{urdu:"1/4 + 3/4 کس کے برابر ہے؟",english:"1/4 + 3/4 is equal to ______.",options:[{ur:"1",en:"1"},{ur:"1/4",en:"1/4"},{ur:"3/4",en:"3/4"},{ur:"4/8",en:"4/8"}],isNumber:true,correct:0},
+{urdu:"7/6 - 2/6 کس کے برابر ہے؟",english:"7/6 - 2/6 is equal to ______.",options:[{ur:"5/6",en:"5/6"},{ur:"9/6",en:"9/6"},{ur:"2/6",en:"2/6"},{ur:"1/6",en:"1/6"}],isNumber:true,correct:0},
+{urdu:"ایک میٹر میں کتنے سینٹی میٹر ہوتے ہیں؟",english:"How many centimetres are there in one metre?",options:[{ur:"100",en:"100"},{ur:"10",en:"10"},{ur:"1000",en:"1000"},{ur:"50",en:"50"}],isNumber:true,correct:0},
+{urdu:"ایک کلوگرام میں کتنے گرام ہوتے ہیں؟",english:"How many grams are there in one kilogram?",options:[{ur:"1000",en:"1000"},{ur:"100",en:"100"},{ur:"10",en:"10"},{ur:"500",en:"500"}],isNumber:true,correct:0},
+{urdu:"وہ لکیریں جو سیدھی چلتی رہیں اور کبھی ایک دوسرے کو نہ ملیں، انہیں کیا کہتے ہیں؟",english:"The lines which keep going straight and never meet each other are called:",options:[{ur:"متوازی لکیریں (Parallel lines)",en:"parallel lines"},{ur:"افقی لکیریں (Horizontal lines)",en:"horizontal lines"},{ur:"عمودی لکیریں (Vertical lines)",en:"vertical lines"},{ur:"غیر متوازی لکیریں (Non-parallel lines)",en:"non-parallel lines"}],correct:0},
+{urdu:"ایک پروٹریکٹر (Protractor) میں کتنے چھوٹے حصے ہوتے ہیں جن میں سے ہر ایک 1 ڈگری کے برابر ہوتا ہے؟",english:"There are ______ small parts in a protractor and each part is equal to 1 degree.",options:[{ur:"180",en:"180"},{ur:"150",en:"150"},{ur:"120",en:"120"},{ur:"360",en:"360"}],isNumber:true,correct:0},
+{urdu:"جب افقی اور عمودی لکیریں ایک نقطے پر ایک دوسرے کو کاٹتی ہیں، تو وہ کیا بناتی ہیں؟",english:"When horizontal and vertical lines intersect each other at a point, they form:",options:[{ur:"قائمہ زاویے (Right angles)",en:"right angles"},{ur:"فراخ زاویے (Obtuse angles)",en:"obtuse angles"},{ur:"تنگ زاویے (Acute angles)",en:"acute angles"},{ur:"افقی زاویے (Horizontal angles)",en:"horizontal angles"}],correct:0},
+{urdu:"______ سے کم زاویے کو تنگ زاویہ (Acute angle) کہا جاتا ہے۔",english:"An angle less than ______ is called acute angle.",options:[{ur:"90°",en:"90°"},{ur:"80°",en:"80°"},{ur:"100°",en:"100°"},{ur:"180°",en:"180°"}],isNumber:true,correct:0},
+{urdu:"دائرے کی حد (boundary) کی لمبائی کو دائرے کا ______ کہا جاتا ہے۔",english:"The length of boundary of a circle is called ______ of the circle.",options:[{ur:"محیط (Circumference)",en:"circumference"},{ur:"مرکز (Centre)",en:"centre"},{ur:"قطر (Diameter)",en:"diameter"},{ur:"رداس (Radius)",en:"radius"}],correct:0},
+{urdu:"بند شکل (closed figure) کے ذریعے گھیرے گئے حصے کو اس شکل کا ______ کہا جاتا ہے۔",english:"The area covered by a closed figure is the ______ of that figure.",options:[{ur:"رقبہ (Area)",en:"area"},{ur:"لمبائی (Length)",en:"length"},{ur:"ضلع (Side)",en:"side"},{ur:"احاطہ (Perimeter)",en:"perimeter"}],correct:0},
+{urdu:"لائن آف سیمیٹری (Line of symmetry) کسی شکل کو ______ برابر حصوں میں تقسیم کرتی ہے۔",english:"Line of symmetry divides a figure into ______ equal parts.",options:[{ur:"2",en:"2"},{ur:"5",en:"5"},{ur:"4",en:"4"},{ur:"3",en:"3"}],isNumber:true,correct:0},
+{urdu:"بار گراف (Bar graph) میں ہر بار کی ______ کا یکساں ہونا ضروری ہے۔",english:"It is important that in a bar graph, the ______ of each bar is same.",options:[{ur:"چوڑائی (Width)",en:"width"},{ur:"لمبائی (Length)",en:"length"},{ur:"رنگ (Colour)",en:"colour"},{ur:"ویلیو (Value)",en:"value"}],correct:0},
+{urdu:"1/2 + 1/4 کا جواب کیا ہوگا؟",english:"What is the sum of 1/2 + 1/4?",options:[{ur:"3/4",en:"3/4"},{ur:"2/6",en:"2/6"},{ur:"1/4",en:"1/4"},{ur:"1",en:"1"}],isNumber:true,correct:0}
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+let wrongAnswers = 0;
+let timerInterval;
+let timeLeft = 300;
+let lastCorrectPosition = -1;
+let answered = false;
+
+const urduQ = document.getElementById('urdu-question');
+const engQ = document.getElementById('english-question');
+const optionsContainer = document.getElementById('options-container');
+const nextBtn = document.getElementById('next-btn');
+const progressText = document.getElementById('question-progress');
+const timerDisplay = document.getElementById('timer');
+const quizSection = document.getElementById('quiz-section');
+const resultSection = document.getElementById('result-section');
+
+function shuffleOptions(items) {
+    const shuffled = items.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function startTimer() {
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.textContent =
+            `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endQuiz();
+        }
+    }, 1000);
+}
+
+function loadQuestion() {
+    answered = false;
+    nextBtn.style.display = 'none';
+
+    const q = questions[currentQuestionIndex];
+    urduQ.textContent = q.urdu;
+    engQ.textContent = q.english;
+    progressText.textContent =
+        `Question ${currentQuestionIndex + 1} / ${questions.length}`;
+
+    optionsContainer.innerHTML = '';
+
+    let shuffled = shuffleOptions(q.options.map((opt,index) => ({
+        text: opt,
+        isCorrect: index === q.correct
+    })));
+
+    let correctPosition = shuffled.findIndex(o => o.isCorrect);
+
+    if (correctPosition === lastCorrectPosition) {
+        const newPosition = (correctPosition + 1 + Math.floor(Math.random() * 3)) % 4;
+        [shuffled[correctPosition],shuffled[newPosition]] =
+            [shuffled[newPosition],shuffled[correctPosition]];
+        correctPosition = newPosition;
+    }
+    lastCorrectPosition = correctPosition;
+
+    const letters = ['A','B','C','D'];
+
+    shuffled.forEach((opt,index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.setAttribute('data-correct',opt.isCorrect ? 'true' : 'false');
+
+        let html = `<span class="option-letter">${letters[index]}.</span>`;
+
+        if (q.isNumber) {
+            html += `<div class="option-number">${opt.text.en}</div>`;
+        } else {
+            html += `<div class="option-content">
+                <span class="option-urdu">${opt.text.ur}</span>
+                <span class="option-english">${opt.text.en}</span>
+            </div>`;
+        }
+
+        btn.innerHTML = html;
+        btn.onclick = () => selectOption(btn,opt.isCorrect);
+        optionsContainer.appendChild(btn);
+    });
+}
+
+function selectOption(selectedBtn,isCorrect) {
+    if (answered) return;
+    answered = true;
+
+    const allBtns = document.querySelectorAll('.option-btn');
+    allBtns.forEach(btn => btn.classList.add('disabled'));
+
+    if (isCorrect) {
+        selectedBtn.classList.add('correct');
+        score++;
+    } else {
+        selectedBtn.classList.add('wrong');
+        wrongAnswers++;
+        allBtns.forEach(btn => {
+            if (btn.getAttribute('data-correct') === 'true') {
+                btn.classList.add('correct');
+            }
+        });
+    }
+    nextBtn.style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+    } else {
+        endQuiz();
+    }
+}
+
+function endQuiz() {
+    clearInterval(timerInterval);
+    quizSection.style.display = 'none';
+    resultSection.style.display = 'block';
+
+    document.getElementById('total-count').textContent = questions.length;
+    document.getElementById('correct-count').textContent = score;
+    document.getElementById('wrong-count').textContent = wrongAnswers;
+
+    const percentage = (score / questions.length) * 100;
+    document.getElementById('percentage').textContent =
+        percentage.toFixed(1) + '%';
+}
+
+window.onload = function() {
+    startTimer();
+    loadQuestion();
+};
+</script>
+</body>
+</html>
