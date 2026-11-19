@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMSA Learning Academy - Grade 3 Urdu Test 4</title>
+<!-- اردو نستعلیق فونٹ -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Jameel Noori Nastaleeq';
+        src: local('Jameel Noori Nastaleeq'), local('Noto Nastaliq Urdu');
+    }
+    
+    /* بنیادی ڈیزائن */
+    body {
+        font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', Tahoma, sans-serif;
+        background-color: #e9eef2;
+        margin: 0;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+    }
+    .app-container {
+        width: 100%;
+        max-width: 500px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        overflow: hidden;
+    }
+    
+    /* ہیڈر */
+    .header {
+        background: linear-gradient(135deg, #0c2340 0%, #087c59 100%);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        border-bottom: 4px solid #d4af37;
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 1px;
+        font-family: Arial, sans-serif;
+    }
+    .header h2 {
+        margin: 5px 0 0 0;
+        font-size: 18px;
+        color: #f3e5ab;
+        font-weight: normal;
+    }
+
+    /* ٹائمر اور سوال نمبر */
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f4f7f9;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ccc;
+        font-weight: bold;
+        color: #0c2340;
+        font-size: 16px;
+    }
+    .timer {
+        background: #e74c3c;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 15px;
+        font-family: Arial, sans-serif;
+    }
+
+    /* سوال کا خانہ */
+    .quiz-container {
+        padding: 20px;
+    }
+    .question-text {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 600;
+        line-height: 1.8;
+    }
+
+    /* آپشنز */
+    .options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .option-btn {
+        background: #fff;
+        border: 2px solid #b0c4de;
+        padding: 12px 15px;
+        border-radius: 8px;
+        font-size: 20px;
+        text-align: right;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #333;
+        display: flex;
+        align-items: center;
+        font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', Tahoma, sans-serif;
+    }
+    .option-btn:hover {
+        background: #f0f8ff;
+        border-color: #087c59;
+    }
+    .option-btn span {
+        font-weight: bold;
+        margin-left: 10px;
+        color: #0c2340;
+    }
+    
+    /* صحیح اور غلط کے رنگ */
+    .option-btn.correct {
+        background-color: #d4edda;
+        border-color: #28a745;
+        color: #155724;
+    }
+    .option-btn.wrong {
+        background-color: #f8d7da;
+        border-color: #dc3545;
+        color: #721c24;
+    }
+    .option-btn.disabled {
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
+    /* بٹن */
+    .next-btn {
+        background: #087c59;
+        color: white;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        display: none;
+        transition: 0.3s;
+        font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', Tahoma, sans-serif;
+    }
+    .next-btn:hover {
+        background: #0c2340;
+    }
+
+    /* نتیجہ */
+    .result-container {
+        display: none;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .result-container h2 {
+        color: #0c2340;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .score-box {
+        background: #f4f7f9;
+        border: 2px solid #d4af37;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .score-box p {
+        font-size: 20px;
+        margin: 12px 0;
+        color: #333;
+    }
+    .score-box span {
+        font-weight: bold;
+        color: #087c59;
+        font-size: 24px;
+        font-family: Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- ہیڈر -->
+    <div class="header">
+        <h1>HMSA Learning Academy</h1>
+        <h2>Grade 3 Urdu - Test 4</h2>
+    </div>
+
+    <!-- ٹائمر اور سوال نمبر -->
+    <div class="top-bar">
+        <div id="question-progress">سوال 1 / 20</div>
+        <div class="timer" id="timer">05:00</div>
+    </div>
+
+    <!-- کوئز کا حصہ -->
+    <div class="quiz-container" id="quiz-section">
+        <div class="question-text" id="question-text">لوڈ ہو رہا ہے...</div>
+        <div class="options-container" id="options-container">
+            <!-- آپشنز یہاں آئیں گے -->
+        </div>
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">اگلا سوال ➔</button>
+    </div>
+
+    <!-- نتیجہ کا حصہ -->
+    <div class="result-container" id="result-section">
+        <h2>ٹیسٹ مکمل ہو گیا! 🎉</h2>
+        <div class="score-box">
+            <p>کل سوالات: <span>20</span></p>
+            <p>درست جوابات: <span id="correct-count">0</span></p>
+            <p>غلط جوابات: <span id="wrong-count">0</span></p>
+            <p>پرسنٹیج: <span id="percentage">0%</span></p>
+        </div>
+        <button class="next-btn" style="display:block;" onclick="location.reload()">دوبارہ ٹیسٹ دیں 🔄</button>
+    </div>
+</div>
+
+<script>
+    // 20 مختلف سوالات کا ڈیٹا
+    const questions = [
+        // 1. مترادف
+        {
+            q: "لفظ 'حاصل' کے مترادف (ہم معنی) لفظ کیا ہے؟",
+            options: ["رکھنے والا", "کھونے والا", "دینے والا", "بیچنے والا"],
+            correct: 0
+        },
+        // 2. متضاد
+        {
+            q: "لفظ 'مفید' کا متضاد لفظ کیا ہے؟",
+            options: ["فائدہ مند", "بے کار", "اچھا", "نفع بخش"],
+            correct: 1
+        },
+        // 3. واحد سے جمع
+        {
+            q: "لفظ 'موسم' کی جمع کیا ہے؟",
+            options: ["موسمی", "موسموں", "موسمات", "موسمے"],
+            correct: 2
+        },
+        // 4. مذکر سے مونث
+        {
+            q: "لفظ 'بندر' کی مونث کیا ہے؟",
+            options: ["بندریا", "بندرنی", "بندری", "بندرانی"],
+            correct: 0
+        },
+        // 5. مونث سے مذکر
+        {
+            q: "لفظ 'ننھی' کا مذکر کیا ہے؟",
+            options: ["ننھیالی", "ننھا", "چھوٹا", "ننھے"],
+            correct: 1
+        },
+        // 6. اسم کی پہچان
+        {
+            q: "درج ذیل میں سے کون سا لفظ 'اسمِ نکرہ' (کسی عام چیز کا نام) ہے؟",
+            options: ["لاہور", "احمد", "کتاب", "اقبال"],
+            correct: 2
+        },
+        // 7. فعل کی پہچان
+        {
+            q: "'وہ روزانہ اسکول جاتا ہے۔' اس جملے میں فعل کون سا ہے؟",
+            options: ["وہ", "روزانہ", "اسکول", "جاتا ہے"],
+            correct: 3
+        },
+        // 8. فعل ماضی
+        {
+            q: "'بچوں نے میدان میں کھیلا۔' اس جملے میں فعل کا زمانہ کیا ہے؟",
+            options: ["فعل حال", "فعل ماضی", "فعل مستقبل", "فعل امر"],
+            correct: 1
+        },
+        // 9. فعل مستقبل
+        {
+            q: "'میں کل اپنا سبق یاد کروں گا۔' یہ کون سا زمانہ ہے؟",
+            options: ["فعل ماضی", "فعل حال", "فعل مستقبل", "فعل نہی"],
+            correct: 2
+        },
+        // 10. حرف کی پہچان
+        {
+            q: "درج ذیل میں سے کون سا 'حرفِ جار' ہے؟",
+            options: ["میز", "پر", "کھانا", "خوبصورت"],
+            correct: 1
+        },
+        // 11. جملے کی قسم (استفہامیہ)
+        {
+            q: "'تم کہاں جا رہے ہو؟' یہ کس قسم کا جملہ ہے؟",
+            options: ["فجائیہ", "استفہامیہ", "ندائیہ", "خبریہ"],
+            correct: 1
+        },
+        // 12. جملے کی قسم (فجائیہ)
+        {
+            q: "'واہ! کتنا خوبصورت منظر ہے۔' یہ کس قسم کا جملہ ہے؟",
+            options: ["استفہامیہ", "خبریہ", "فجائیہ", "امریہ"],
+            correct: 2
+        },
+        // 13. جملے کی قسم (ندائیہ)
+        {
+            q: "'اے اللہ! ہم پر رحم فرما۔' یہ کس قسم کا جملہ ہے؟",
+            options: ["ندائیہ", "استفہامیہ", "فجائیہ", "خبریہ"],
+            correct: 0
+        },
+        // 14. صفت کی پہچان
+        {
+            q: "'علی ایک ہوشیار لڑکا ہے۔' اس جملے میں صفت (Adjective) کون سی ہے؟",
+            options: ["علی", "ایک", "ہوشیار", "لڑکا"],
+            correct: 2
+        },
+        // 15. ضمیر کی پہچان
+        {
+            q: "'وہ بہت محنتی ہے۔' اس جملے میں 'وہ' کیا ہے؟",
+            options: ["اسمِ نکرہ", "فعل", "ضمیر", "صفت"],
+            correct: 2
+        },
+        // 16. مترادف
+        {
+            q: "لفظ 'خوبصورت' کا مترادف لفظ کیا ہے؟",
+            options: ["بدصورت", "حسین", "گندا", "بھدا"],
+            correct: 1
+        },
+        // 17. متضاد
+        {
+            q: "لفظ 'اندھیرا' کا متضاد لفظ کیا ہے؟",
+            options: ["رات", "اجالا", "سیاہ", "تاریک"],
+            correct: 1
+        },
+        // 18. واحد سے جمع
+        {
+            q: "لفظ 'کتاب' کی جمع کیا ہے؟",
+            options: ["کتابیں", "کتابے", "کتابوں", "کتبہ"],
+            correct: 0
+        },
+        // 19. مذکر سے مونث
+        {
+            q: "لفظ 'استاد' کی مونث کیا ہے؟",
+            options: ["استادنی", "استانی", "استاداں", "استادہ"],
+            correct: 1
+        },
+        // 20. اسمِ معرفہ
+        {
+            q: "درج ذیل میں سے کون سا لفظ 'اسمِ معرفہ' (کسی خاص جگہ کا نام) ہے؟",
+            options: ["شہر", "لڑکا", "ملتان", "دریا"],
+            correct: 2
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let wrongAnswers = 0;
+    let timerInterval;
+    let timeLeft = 300; // 5 منٹ
+
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const nextBtn = document.getElementById('next-btn');
+    const progressText = document.getElementById('question-progress');
+    const timerDisplay = document.getElementById('timer');
+    const quizSection = document.getElementById('quiz-section');
+    const resultSection = document.getElementById('result-section');
+
+    // اردو گنتی
+    const urduNumbers = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۱۰", "۱۱", "۱۲", "۱۳", "۱۴", "۱۵", "۱۶", "۱۷", "۱۸", "۱۹", "۲۰"];
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                endQuiz();
+            }
+        }, 1000);
+    }
+
+    function loadQuestion() {
+        nextBtn.style.display = 'none';
+        const q = questions[currentQuestionIndex];
+        
+        questionText.textContent = `${urduNumbers[currentQuestionIndex]}. ${q.q}`;
+        progressText.textContent = `سوال ${urduNumbers[currentQuestionIndex]} / ۲۰`;
+        
+        optionsContainer.innerHTML = '';
+        
+        // شفلنگ (Shuffling) کا فنکشن
+        let shuffledOptions = q.options.map((opt, index) => ({ text: opt, originalIndex: index }));
+        shuffledOptions.sort(() => Math.random() - 0.5);
+
+        const letters = ['الف', 'ب', 'ج', 'د'];
+
+        shuffledOptions.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span>${letters[i]}.</span> ${opt.text}`;
+            btn.onclick = () => selectOption(btn, opt.originalIndex === q.correct);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function selectOption(selectedBtn, isCorrect) {
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(btn => btn.classList.add('disabled'));
+
+        if (isCorrect) {
+            selectedBtn.classList.add('correct');
+            score++;
+        } else {
+            selectedBtn.classList.add('wrong');
+            wrongAnswers++;
+            allBtns.forEach(btn => {
+                if (btn.textContent.includes(questions[currentQuestionIndex].options[questions[currentQuestionIndex].correct])) {
+                    btn.classList.add('correct');
+                }
+            });
+        }
+        nextBtn.style.display = 'block';
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            endQuiz();
+        }
+    }
+
+    function endQuiz() {
+        clearInterval(timerInterval);
+        quizSection.style.display = 'none';
+        resultSection.style.display = 'block';
+
+        document.getElementById('correct-count').textContent = score;
+        document.getElementById('wrong-count').textContent = wrongAnswers;
+        
+        let percentage = (score / questions.length) * 100;
+        document.getElementById('percentage').textContent = percentage.toFixed(1) + '%';
+    }
+
+    window.onload = () => {
+        startTimer();
+        loadQuestion();
+    };
+</script>
+
+</body>
+</html>
