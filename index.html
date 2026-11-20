@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
@@ -322,6 +321,10 @@ header h1{
   position:relative;
   padding-bottom:10px;
 }
+   color:var(--navy);
+  position:relative;
+  padding-bottom:10px;
+}
 
 .heading:after{
   content:"";
@@ -597,6 +600,50 @@ footer{
     font-size:21px;
   }
 }
+
+/* جماعت نہم اور دہم کے یونٹ: ہر قطار میں چار بٹن */
+.notes-actions.unit-row{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:9px !important;
+  margin:14px 0 !important;
+  direction:rtl;
+}
+.notes-actions.unit-row > .btn,
+.notes-actions.unit-row > span.btn{
+  min-width:0;
+  min-height:54px;
+  padding:8px 5px;
+  font-size:13px;
+  overflow-wrap:anywhere;
+}
+.notes-actions.urdu-only{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.subject-card{scroll-margin-top:82px}
+@media(max-width:600px){
+  .notes-actions.unit-row{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  .notes-actions.unit-row > .btn,
+  .notes-actions.unit-row > span.btn{font-size:12px;min-height:50px;}
+}
+
+/* Subject-wise notes layout: headings stay parallel, four buttons stay in one row */
+.notes-subject-card{margin:16px 0;padding:18px;background:#fff;border:1px solid #e4ebef;border-right:5px solid #087c59;border-radius:16px;box-shadow:0 6px 18px rgba(18,52,90,.06)}
+.notes-subject-card h3{margin:0 0 14px;color:#12345a;text-align:center;border-bottom:1px solid #e8eef1;padding-bottom:9px}
+.unit-block{margin:14px 0 20px;padding:12px;border:1px solid #e6edf0;border-radius:12px;background:#fbfdfc}
+.unit-title{text-align:center;color:#12345a;font-weight:bold;margin:0 0 10px}
+.medium-headings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:7px;direction:rtl}
+.medium-heading{text-align:center;padding:7px 4px;border-radius:8px;color:#fff;font-weight:bold;background:linear-gradient(135deg,#07845f,#05684f)}
+.medium-heading.english-heading{background:linear-gradient(135deg,#2479c5,#14558f)}
+.unit-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;direction:rtl}
+.unit-buttons .btn{min-width:0;min-height:48px;margin:0;padding:7px 4px;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.unit-buttons .urdu-open{background:linear-gradient(135deg,#07845f,#05684f)}
+.unit-buttons .urdu-download{background:linear-gradient(135deg,#d5a23f,#a8751c)}
+ .unit-buttons .english-open{background:linear-gradient(135deg,#2479c5,#14558f)}
+.unit-buttons .english-download{background:linear-gradient(135deg,#526b91,#344b70)}
+@media(max-width:600px){.notes-subject-card{padding:12px}.unit-block{padding:9px}.unit-buttons{gap:5px}.unit-buttons .btn{font-size:10px;min-height:48px;padding:6px 2px}.medium-heading{font-size:12px;padding:6px 2px}}
 </style>
 </head>
 
@@ -615,7 +662,7 @@ footer{
 <nav class="main-nav">
 <a href="#home"><span>⌂</span>Home</a>
 <a href="#classes"><span>🎓</span>Classes</a>
-<a href="#practice"><span>📝</span>Tests</a>
+<a href="#practice"><span>📝</span>Online Testing</a>
 <a href="#notes"><span>📚</span>Notes</a>
 <a href="#about"><span>ℹ️</span>About</a>
 </nav>
@@ -664,7 +711,7 @@ HMSA Learning Academy میں خوش آمدید!
   <a class="junior-test urdu" href="grade3-urdu-test2.html">Test 2</a>
   <a class="junior-test english" href="grade3-english-test2.html">Test 2</a>
   <a class="junior-test math" href="grade3-math-test2.html">Test 2</a>
- 
+
   <a class="junior-test urdu" href="grade3-urdu-test3.html">Test 3</a>
   <a class="junior-test english" href="grade3-english-test3.html">Test 3</a>
   <a class="junior-test math" href="grade3-math-test3.html">Test 3</a>
@@ -690,15 +737,10 @@ HMSA Learning Academy میں خوش آمدید!
   <a class="junior-test urdu" href="grade4-urdu-test2.html">Test 2</a>
   <a class="junior-test english" href="grade4-english-test2.html">Test 2</a>
   <a class="junior-test math" href="grade4-math-test2.html">Test 2</a>
- 
+
   <a class="junior-test urdu" href="grade4-urdu-test3.html">Test 3</a>
   <a class="junior-test english" href="grade4-english-test3.html">Test 3</a>
   <a class="junior-test math" href="grade4-math-test3.html">Test 3</a>
- 
-  <a class="junior-test urdu" href="grade4-urdu-test4.html">Test 4</a>
-  <a class="junior-test english" href="grade4-english-test4.html">Test 4</a>
-  <a class="junior-test math" href="grade4-math-test4.html">Test 4</a>
-
 </div>
 </details>
 
@@ -717,7 +759,7 @@ HMSA Learning Academy میں خوش آمدید!
   <a class="junior-test urdu" href="grade5-urdu-test2.html">Test 2</a>
   <a class="junior-test english" href="grade5-english-test2.html">Test 2</a>
   <a class="junior-test math" href="grade5-math-test2.html">Test 2</a>
- 
+
   <a class="junior-test urdu" href="grade5-urdu-test3.html">Test 3</a>
   <a class="junior-test english" href="grade5-english-test3.html">Test 3</a>
   <a class="junior-test math" href="grade5-math-test3.html">Test 3</a>
@@ -742,7 +784,7 @@ HMSA Learning Academy میں خوش آمدید!
   <a class="junior-test english" href="grade6-english-test2.html">Test 2</a>
   <a class="junior-test math" href="grade6-math-test2.html">Test 2</a>
   <a class="junior-test science" href="grade6-science-test2.html">Test 2</a>
- 
+
   <a class="junior-test urdu" href="grade6-urdu-test3.html">Test 3</a>
   <a class="junior-test english" href="grade6-english-test3.html">Test 3</a>
   <a class="junior-test math" href="grade6-math-test3.html">Test 3</a>
@@ -768,7 +810,7 @@ HMSA Learning Academy میں خوش آمدید!
   <a class="junior-test english" href="grade7-english-test2.html">Test 2</a>
   <a class="junior-test math" href="grade7-math-test2.html">Test 2</a>
   <a class="junior-test science" href="grade7-science-test2.html">Test 2</a>
-  
+
   <a class="junior-test urdu" href="grade7-urdu-test3.html">Test 3</a>
   <a class="junior-test english" href="grade7-english-test3.html">Test 3</a>
   <a class="junior-test math" href="grade7-math-test3.html">Test 3</a>
@@ -810,461 +852,365 @@ HMSA Learning Academy میں خوش آمدید!
 </p>
 </div>
 
-<h2 class="heading" id="notes">تعلیمی نوٹس سمارٹ سلیبس کے مطابق— جماعت نہم اور جماعت دہم</h2>
+<h2 class="heading" id="notes">تعلیمی نوٹس — جماعت نہم اور جماعت دہم</h2>
 
 <div class="card" id="class9-notes">
 <h3>جماعت نہم — مضامین</h3>
 <div class="subject-grid">
 <a class="btn" href="#class9-computer">کمپیوٹر سائنس</a>
-<a class="btn blue" href="#class9-math">ریاضی</a>
-<a class="btn blue" href="#class9-physics">فزکس</a>
 <a class="btn blue" href="#class9-chemistry">کیمسٹری</a>
 <a class="btn blue" href="#class9-bio">بیالوجی</a>
-<a class="btn blue"
-   href="./letter.class9.pdf"
-   target="_blank"
-   rel="noopener">
-   انگلش
-</a>
+<a class="btn blue" href="#class9-physics">فزکس</a>
+<a class="btn blue" href="#class9-math">ریاضی</a>
+<a class="btn blue" href="#class9-english">انگلش</a>
 </div>
 </div>
 
-
-<div class="card" id="class9-physics">
-<h3>جماعت نہم — فزکس</h3>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit1-class9phy-v2.pdf" target="_blank" rel="noopener">
-    📖 Unit 1 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit1-class9phy-v2.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit2-class9phy.pdf" target="_blank" rel="noopener">
-    📖 Unit 2 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit2-class9phy.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit3.clsss9phy.pdf" target="_blank" rel="noopener">
-    📖 Unit 3 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit3.clsss9phy.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<!-- Physics Unit 4 -->
-<div class="notes-actions">
-  <a class="btn blue"
-     href="./unit4-class9phy.pdf"
-     target="_blank"
-     rel="noopener">
-     📖 Unit 4 — Open Notes
-  </a>
-  <a class="btn gold"
-     href="./unit4-class9phy.pdf"
-     download>
-     ⬇ Download
-  </a>
-</div>
-
-<!-- Physics Unit 5 -->
-<div class="notes-actions">
-  <a class="btn blue"
-     href="./unit5-class9phy.pdf"
-     target="_blank"
-     rel="noopener">
-     📖 Unit 5 — Open Notes
-  </a>
-  <a class="btn gold"
-     href="./unit5-class9phy.pdf"
-     download>
-     ⬇ Download
-  </a>
-</div>
-
-<!-- Physics Unit 6 -->
-<div class="notes-actions">
-  <a class="btn blue"
-     href="./unit6-class9phy.pdf"
-     target="_blank"
-     rel="noopener">
-     📖 Unit 6 — Open Notes
-  </a>
-  <a class="btn gold"
-     href="./unit6-class9phy.pdf"
-     download>
-     ⬇ Download
-  </a>
-</div>
-<div class="card" id="class9-math">
-
-<h3>جماعت نہم — ریاضی (اردو میڈیم)</h3>
-
-<div class="notes-actions">
-
-<a class="btn blue"
-href="./unit1.class9m.um.pdf"
-target="_blank" rel="noopener">یونٹ 1</a>
-
-<a class="btn gold"
-href="./unit1.class9m.um.pdf"
-download>Download</a>
-
-</div>
-</div>
-
-<p class="note">مزید یونٹس اور انگلش میڈیم نوٹس جلد شامل کیے جائیں گے۔</p>
-
-<a class="btn section-back" href="#class9-notes">
-  واپس جماعت نہم کے مضامین
-</a>
-</div>
-
-<div class="card" id="class9-computer">
+<!-- جماعت نہم: ہر یونٹ کے لیے اردو اور انگلش کے متوازی عنوانات اور چار فعال بٹن -->
+<div class="notes-subject-card" id="class9-computer">
 <h3>جماعت نہم — کمپیوٹر سائنس</h3>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit1.pdf" target="_blank" rel="noopener">
-    📖 Unit 1 — English
-  </a>
-  <a class="btn gold" href="./unit1.pdf" download>
-    ⬇ Download English
-  </a>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./Unit1-Urdu.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./Unit1-Urdu.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 2</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./Unit2.pdf" target="_blank" rel="noopener">یونٹ 2 PDF کھولیں</a>
+<a class="btn urdu-download" href="./Unit2.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./Unit2-%20English.pdf" target="_blank" rel="noopener">Unit 2 PDF Open</a>
+<a class="btn english-download" href="./Unit2-%20English.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 3</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./Unit3-Urdu.pdf" target="_blank" rel="noopener">یونٹ 3 PDF کھولیں</a>
+<a class="btn urdu-download" href="./Unit3-Urdu.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./Unit3-English.pdf" target="_blank" rel="noopener">Unit 3 PDF Open</a>
+<a class="btn english-download" href="./Unit3-English.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 4</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./Unit4.pdf" target="_blank" rel="noopener">یونٹ 4 PDF کھولیں</a>
+<a class="btn urdu-download" href="./Unit4.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./Unit4-English.pdf" target="_blank" rel="noopener">Unit 4 PDF Open</a>
+<a class="btn english-download" href="./Unit4-English.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./Unit1-Urdu.pdf" target="_blank" rel="noopener">
-    📖 Unit 1 — اردو
-  </a>
-  <a class="btn gold" href="./Unit1-Urdu.pdf" download>
-    ⬇ ڈاؤن لوڈ اردو
-  </a>
+<div class="notes-subject-card" id="class9-physics"><h3>جماعت نہم — فزکس</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1-class9phy-v2.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit1-class9phy-v2.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.class9phy.em.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.class9phy.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 2</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit2-class9phy.pdf" target="_blank" rel="noopener">یونٹ 2 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit2-class9phy.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit2.class9phy.em.pdf" target="_blank" rel="noopener">Unit 2 PDF Open</a>
+<a class="btn english-download" href="./unit2.class9phy.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 3</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit3.clsss9phy.pdf" target="_blank" rel="noopener">یونٹ 3 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit3.clsss9phy.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit3.class9phy.em.pdf" target="_blank" rel="noopener">Unit 3 PDF Open</a>
+<a class="btn english-download" href="./unit3.class9phy.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 4</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit4-class9phy.pdf" target="_blank" rel="noopener">یونٹ 4 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit4-class9phy.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit4.class9phy.em.pdf" target="_blank" rel="noopener">Unit 4 PDF Open</a>
+<a class="btn english-download" href="./unit4.class9phy.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 5</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit5-class9phy.pdf" target="_blank" rel="noopener">یونٹ 5 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit5-class9phy.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit5.class9phy.em.pdf" target="_blank" rel="noopener">Unit 5 PDF Open</a>
+<a class="btn english-download" href="./unit5.class9phy.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 6</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit6-class9phy.pdf" target="_blank" rel="noopener">یونٹ 6 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit6-class9phy.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit6.class9phy.em.pdf" target="_blank" rel="noopener">Unit 6 PDF Open</a>
+<a class="btn english-download" href="./unit6.class9phy.em.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./Unit2-%20English.pdf" target="_blank" rel="noopener">
-    📖 Unit 2 — English
-  </a>
-  <a class="btn gold" href="./Unit2-%20English.pdf" download>
-    ⬇ Download English
-  </a>
+<div class="notes-subject-card" id="class9-chemistry"><h3>جماعت نہم — کیمسٹری</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1.class9ch.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit1.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.class9ch.em.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 2</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit2.class9ch.pdf" target="_blank" rel="noopener">یونٹ 2 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit2.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit2.class9ch.em.pdf" target="_blank" rel="noopener">Unit 2 PDF Open</a>
+<a class="btn english-download" href="./unit2.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 3</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit3.class9ch.pdf" target="_blank" rel="noopener">یونٹ 3 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit3.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit3.class9ch.em.pdf" target="_blank" rel="noopener">Unit 3 PDF Open</a>
+<a class="btn english-download" href="./unit3.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 4</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit4.class9ch.pdf" target="_blank" rel="noopener">یونٹ 4 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit4.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit4.class9ch.em.pdf" target="_blank" rel="noopener">Unit 4 PDF Open</a>
+<a class="btn english-download" href="./unit4.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 5</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit5.class9ch.pdf" target="_blank" rel="noopener">یونٹ 5 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit5.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit5.class9ch.em.pdf" target="_blank" rel="noopener">Unit 5 PDF Open</a>
+<a class="btn english-download" href="./unit5.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 6</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit6.class9ch.pdf" target="_blank" rel="noopener">یونٹ 6 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit6.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit6.class9ch.em.pdf" target="_blank" rel="noopener">Unit 6 PDF Open</a>
+<a class="btn english-download" href="./unit6.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 7</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit7.class9ch.pdf" target="_blank" rel="noopener">یونٹ 7 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit7.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit7.class9ch.em.pdf" target="_blank" rel="noopener">Unit 7 PDF Open</a>
+<a class="btn english-download" href="./unit7.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 8</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit8.class9ch.pdf" target="_blank" rel="noopener">یونٹ 8 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit8.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit8.class9ch.em.pdf" target="_blank" rel="noopener">Unit 8 PDF Open</a>
+<a class="btn english-download" href="./unit8.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 9</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit9.class9ch.pdf" target="_blank" rel="noopener">یونٹ 9 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit9.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit9.class9ch.em.pdf" target="_blank" rel="noopener">Unit 9 PDF Open</a>
+<a class="btn english-download" href="./unit9.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 10</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit10.class9ch.pdf" target="_blank" rel="noopener">یونٹ 10 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit10.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit10.class9ch.em.pdf" target="_blank" rel="noopener">Unit 10 PDF Open</a>
+<a class="btn english-download" href="./unit10.class9ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 11</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit11.class9ch.pdf" target="_blank" rel="noopener">یونٹ 11 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit11.class9ch.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit11.class9ch.em.pdf" target="_blank" rel="noopener">Unit 11 PDF Open</a>
+<a class="btn english-download" href="./unit11.class9ch.em.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./Unit2.pdf" target="_blank" rel="noopener">
-    📖 Unit 2 — اردو
-  </a>
-  <a class="btn gold" href="./Unit2.pdf" download>
-    ⬇ ڈاؤن لوڈ اردو
-  </a>
+<div class="notes-subject-card" id="class9-bio"><h3>جماعت نہم — بیالوجی</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1.class9bio.um.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit1.class9bio.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.class9bio.em.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.class9bio.em.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./Unit3-English.pdf" target="_blank" rel="noopener">
-    📖 Unit 3 — English
-  </a>
-  <a class="btn gold" href="./Unit3-English.pdf" download>
-    ⬇ Download English
-  </a>
+<div class="notes-subject-card" id="class9-math"><h3>جماعت نہم — ریاضی</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1.class9m.um.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit1.class9m.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.class9m.em.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.class9m.em.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./Unit3-Urdu.pdf" target="_blank" rel="noopener">
-    📖 Unit 3 — اردو
-  </a>
-  <a class="btn gold" href="./Unit3-Urdu.pdf" download>
-    ⬇ ڈاؤن لوڈ اردو
-  </a>
+<div class="notes-subject-card" id="class9-english"><h3>جماعت نہم — انگلش</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1.class9eng.um.pdf" target="_blank" rel="noopener">اردو یونٹ 1 PDF</a>
+<a class="btn urdu-download" href="./unit1.class9eng.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./letter.class9.pdf" target="_blank" rel="noopener">English Notes PDF</a>
+<a class="btn english-download" href="./letter.class9.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./Unit4-English.pdf" target="_blank" rel="noopener">
-    📖 Unit 4 — English
-  </a>
-  <a class="btn gold" href="./Unit4-English.pdf" download>
-    ⬇ Download English
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./Unit4.pdf" target="_blank" rel="noopener">
-    📖 Unit 4 — اردو
-  </a>
-  <a class="btn gold" href="./Unit4.pdf" download>
-    ⬇ ڈاؤن لوڈ اردو
-  </a>
-</div>
-
-<!-- Class 9 Chemistry Notes -->
-<div class="card" id="class9-chemistry">
-<h3>جماعت نہم — کیمسٹری</h3>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit1.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 1 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit1.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit2.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 2 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit2.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit3.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 3 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit3.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit4.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 4 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit4.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit5.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 5 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit5.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit6.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 6 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit6.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit7.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 7 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit7.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit8.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 8 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit8.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit9.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 9 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit9.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit10.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 10 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit10.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<div class="notes-actions">
-  <a class="btn blue" href="./unit11.class9ch.pdf" target="_blank" rel="noopener">
-    📖 Unit 11 — Open Notes
-  </a>
-  <a class="btn gold" href="./unit11.class9ch.pdf" download>
-    ⬇ Download
-  </a>
-</div>
-
-<!-- جماعت نہم بیالوجی -->
-
-<div class="card" id="class9-bio">
-
-<h3>جماعت نہم — بیالوجی (اردو میڈیم)</h3>
-
-<div class="notes-actions">
-
-<a class="btn blue"
-href="./unit1.class9bio.um.pdf"
-target="_blank" rel="noopener">
-یونٹ 1
-</a>
-
-<a class="btn gold"
-href="./unit1.class9bio.um.pdf"
-download>
-Download
-</a>
-
-</div>
-</div>
-
-<a class="btn section-back" href="#class9-notes">
-  واپس جماعت نہم کے مضامین
-</a>
-</div>
-
+<a class="btn section-back" href="#class9-notes">واپس جماعت نہم کے مضامین</a>
 <div class="card" id="class10-notes">
-
 <h3>جماعت دہم — مضامین</h3>
-
 <div class="subject-grid">
-<a class="btn blue" href="#class10-math">ریاضی</a>
-<a class="btn blue" href="#class10-physics">
-فزکس
-</a>
-<a class="btn blue" href="#class10-chemistry">
-کیمسٹری
-</a>
-<a class="btn blue" href="#class10-urdu">
-اردو
-</a>
-<span class="btn pending" aria-disabled="true">بیالوجی</span>
-
-
 <a class="btn blue" href="#class10-computer">کمپیوٹر سائنس</a>
-
-
-<span class="btn pending" aria-disabled="true">مطالعہ پاکستان</span>
-
+<a class="btn blue" href="#class10-chemistry">کیمسٹری</a>
+<a class="btn blue" href="#class10-bio">بیالوجی</a>
+<a class="btn blue" href="#class10-physics">فزکس</a>
+<a class="btn blue" href="#class10-math">ریاضی</a>
+<a class="btn blue" href="#class10-pakistan">مطالعہ پاکستان</a>
+<a class="btn blue" href="#class10-urdu">اردو</a>
+</div></div>
+<div class="notes-subject-card" id="class10-computer"><h3>جماعت دہم — کمپیوٹر سائنس</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1.class10cs.um.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit1.class10cs.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.class10cs.em.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.class10cs.em.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<!-- فزکس اردو میڈیم -->
-
-<div class="card" id="class10-physics">
-
-<h3>فزکس — اردو میڈیم</h3>
-
-<div class="notes-actions">
-
-<a class="btn blue" href="./unit10.class10phy.um.pdf"
-target="_blank" rel="noopener">یونٹ 10</a>
-
-<a class="btn gold" href="./unit10.class10phy.um.pdf"
-download>Download</a>
-
-<a class="btn blue" href="./unit11.class10phy.um.pdf"
-target="_blank" rel="noopener">یونٹ 11</a>
-
-<a class="btn gold" href="./unit11.class10phy.um.pdf"
-download>Download</a>
-
-<a class="btn blue" href="./unit12.class10phy.um.pdf"
-target="_blank" rel="noopener">یونٹ 12</a>
-
-<a class="btn gold" href="./unit12.class10phy.um.pdf"
-download>Download</a>
-
+<div class="notes-subject-card" id="class10-chemistry"><h3>جماعت دہم — کیمسٹری</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 14</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit14.class10ch.um.pdf" target="_blank" rel="noopener">یونٹ 14 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit14.class10ch.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit14.class10ch.em.pdf" target="_blank" rel="noopener">Unit 14 PDF Open</a>
+<a class="btn english-download" href="./unit14.class10ch.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 15</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit15.class10ch.um.pdf" target="_blank" rel="noopener">یونٹ 15 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit15.class10ch.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit15.class10ch.em.pdf" target="_blank" rel="noopener">Unit 15 PDF Open</a>
+<a class="btn english-download" href="./unit15.class10ch.em.pdf" download>Download English</a>
+</div></div>
 </div>
+<div class="notes-subject-card" id="class10-bio"><h3>جماعت دہم — بیالوجی</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1.class10bio.um.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit1.class10bio.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.class10bio.em.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.class10bio.em.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<!-- کیمسٹری اردو میڈیم -->
-
-<div class="card" id="class10-chemistry">
-
-<h3>کیمسٹری — اردو میڈیم</h3>
-
-<div class="notes-actions">
-
-<a class="btn blue" href="./unit14.class10ch.um.pdf"
-target="_blank" rel="noopener">یونٹ 14</a>
-
-<a class="btn gold" href="./unit14.class10ch.um.pdf"
-download>Download</a>
-
-<a class="btn blue" href="./unit15.class10ch.um.pdf"
-target="_blank" rel="noopener">یونٹ 15</a>
-
-<a class="btn gold" href="./unit15.class10ch.um.pdf"
-download>Download</a>
-
+<div class="notes-subject-card" id="class10-physics"><h3>جماعت دہم — فزکس</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 10</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit10.class10phy.um.pdf" target="_blank" rel="noopener">یونٹ 10 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit10.class10phy.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit10.class10phy.em.pdf" target="_blank" rel="noopener">Unit 10 PDF Open</a>
+<a class="btn english-download" href="./unit10.class10phy.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 11</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit11.class10phy.um.pdf" target="_blank" rel="noopener">یونٹ 11 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit11.class10phy.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit11.class10phy.em.pdf" target="_blank" rel="noopener">Unit 11 PDF Open</a>
+<a class="btn english-download" href="./unit11.class10phy.em.pdf" download>Download English</a>
+</div></div>
+<div class="unit-block">
+<p class="unit-title">Unit 12</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit12.class10phy.um.pdf" target="_blank" rel="noopener">یونٹ 12 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit12.class10phy.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit12.class10phy.em.pdf" target="_blank" rel="noopener">Unit 12 PDF Open</a>
+<a class="btn english-download" href="./unit12.class10phy.em.pdf" download>Download English</a>
+</div></div>
 </div>
+<div class="notes-subject-card" id="class10-math"><h3>جماعت دہم — ریاضی</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1.class10m.um.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit1.class10m.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.class10m.em.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.class10m.em.pdf" download>Download English</a>
+</div></div>
 </div>
-
-<!-- اردو مضامین -->
-
-<div class="card" id="class10-urdu">
-
-<h3>جماعت دہم — اردو مضامین</h3>
-
-<div class="notes-actions">
-
-<a class="btn blue"
-href="./اردو%20مضامین%20دہم.pdf"
-target="_blank" rel="noopener">
-📖 اردو مضامین کھولیں
-</a>
-
-<a class="btn gold"
-href="./اردو%20مضامین%20دہم.pdf"
-download>
-⬇ اردو مضامین ڈاؤن لوڈ کریں
-</a>
- 
-<div class="card" id="class10-math">
-
-<h3>جماعت دہم — ریاضی (اردو میڈیم)</h3>
-
-<div class="notes-actions">
-
-<a class="btn blue"
-href="./unit1.class10m.um.pdf"
-target="_blank" rel="noopener">یونٹ 1</a>
-
-<a class="btn gold"
-href="./unit1.class10m.um.pdf"
-download>Download</a>
-
+<div class="notes-subject-card" id="class10-pakistan"><h3>جماعت دہم — مطالعہ پاکستان</h3>
+<div class="unit-block">
+<p class="unit-title">Unit 1</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div><div class="medium-heading english-heading">English Notes</div></div>
+<div class="unit-buttons">
+<a class="btn urdu-open" href="./unit1.class10pak.um.pdf" target="_blank" rel="noopener">یونٹ 1 PDF کھولیں</a>
+<a class="btn urdu-download" href="./unit1.class10pak.um.pdf" download>اردو ڈاؤن لوڈ</a>
+<a class="btn english-open" href="./unit1.class10pak.em.pdf" target="_blank" rel="noopener">Unit 1 PDF Open</a>
+<a class="btn english-download" href="./unit1.class10pak.em.pdf" download>Download English</a>
+</div></div>
 </div>
-</div>
-
-<div class="card" id="class10-computer">
-
-<h3>جماعت دہم — کمپیوٹر سائنس (اردو میڈیم)</h3>
-
-<div class="notes-actions">
-
-<a class="btn blue"
-href="./unit1.class10cs.um.pdf"
-target="_blank" rel="noopener">یونٹ 1</a>
-
-<a class="btn gold"
-href="./unit1.class10cs.um.pdf"
-download>Download</a>
-
-</div>
-</div>
-
+<div class="notes-subject-card" id="class10-urdu">
+<h3>جماعت دہم — اردو</h3>
+<div class="unit-block">
+<p class="unit-title">اردو مضامین</p>
+<div class="medium-headings"><div class="medium-heading">اردو نوٹس</div></div>
+<div class="notes-actions urdu-only">
+<a class="btn blue" href="./اردو%20مضامین%20دہم.pdf" target="_blank" rel="noopener">PDF کھولیں</a>
+<a class="btn gold" href="./اردو%20مضامین%20دہم.pdf" download>ڈاؤن لوڈ کریں</a>
+</div></div></div>
+<a class="btn section-back" href="#class10-notes">واپس جماعت دہم کے مضامین</a>
 <div class="card" id="about">
 <h3>ہمارا مقصد</h3>
 <p>
