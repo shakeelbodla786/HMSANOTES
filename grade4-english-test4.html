@@ -139,7 +139,25 @@
     .next-btn:hover {
         background: #0c2340;
     }
+.home-btn {
+    display: block;
+    background: linear-gradient(135deg, #d4af37, #a8751c);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: 0.3s;
+}
 
+.home-btn:hover {
+    background: #0c2340;
+}
     /* نتیجہ */
     .result-container {
         display: none;
@@ -191,6 +209,7 @@
             <!-- آپشنز یہاں آئیں گے -->
         </div>
         <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question ➔</button>
+        <a href="index.html" class="home-btn">🏠 Back to Home Page</a>
     </div>
 
     <!-- نتیجہ کا حصہ -->
@@ -203,6 +222,7 @@
             <p>Percentage: <span id="percentage">0%</span></p>
         </div>
         <button class="next-btn" style="display:block;" onclick="location.reload()">Restart Test 🔄</button>
+        <a href="index.html" class="home-btn">🏠 Back to Home Page</a>
     </div>
 </div>
 
