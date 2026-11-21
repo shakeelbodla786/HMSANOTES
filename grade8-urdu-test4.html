@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اردو ٹیسٹ فور - آٹھویں جماعت | ایچ ایم ایس اے لرننگ اکیڈمی</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3f7f5;
+      --card: #ffffff;
+      --primary: #0f5132;
+      --primary-light: #198754;
+      --accent: #b45309;
+      --text: #16221c;
+      --muted: #55665e;
+      --border: #d4e0da;
+      --correct-bg: #15803d;
+      --correct-soft: #dcfce7;
+      --wrong-bg: #dc2626;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px 14px 48px;
+      background: linear-gradient(180deg, #e7f0eb 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+      line-height: 2.15;
+    }
+    .container { max-width: 820px; margin: 0 auto; }
+    .header-box {
+      background: linear-gradient(135deg, var(--primary) 0%, #1c6e47 100%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 22px 24px;
+      box-shadow: 0 10px 26px rgba(15, 81, 50, 0.16);
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .academy-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .main-title { margin: 4px 0; font-size: 1.85rem; font-weight: 700; }
+    .sub-title { margin: 0; font-size: 1.05rem; opacity: 0.95; }
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+    .timer-box {
+      background: #fffbeb;
+      border: 1.5px solid #f59e0b;
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .btn {
+      font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+      border: none;
+      border-radius: 11px;
+      padding: 9px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-home {
+      background: #eef4f0;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+    }
+    .btn-home:hover { background: var(--primary); color: #fff; }
+    .btn-primary { background: var(--primary-light); color: #fff; }
+    .progress-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 18px;
+      margin-bottom: 18px;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .progress-track {
+      height: 10px;
+      background: #e5ece8;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 5%;
+      background: linear-gradient(90deg, var(--primary-light), #22c55e);
+      transition: width 0.35s ease;
+    }
+    .quiz-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 22px;
+      box-shadow: 0 8px 24px rgba(15, 81, 50, 0.07);
+    }
+    .question-text {
+      font-size: 1.32rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px dashed var(--border);
+    }
+    .options-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .option-btn {
+      width: 100%;
+      text-align: right;
+      background: #f8fbf9;
+      color: var(--text);
+      border: 1.8px solid #c9d8d0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+      font-size: 1.12rem;
+      font-weight: 600;
+      line-height: 2;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary-light);
+      background: #edf7f1;
+    }
+    .option-btn:disabled { cursor: default; }
+    .option-btn.correct {
+      background: var(--correct-bg);
+      border-color: var(--correct-bg);
+      color: #ffffff;
+    }
+    .option-btn.wrong {
+      background: var(--wrong-bg);
+      border-color: var(--wrong-bg);
+      color: #ffffff;
+    }
+    .auto-next-note {
+      min-height: 32px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+    .card-footer-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .result-box {
+      display: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 10px 26px rgba(15, 81, 50, 0.08);
+    }
+    .result-score { font-size: 2rem; font-weight: 700; color: var(--primary); margin: 10px 0; }
+    .percentage-badge {
+      display: inline-block;
+      background: var(--correct-soft);
+      color: var(--correct-bg);
+      border: 1.5px solid var(--correct-bg);
+      padding: 6px 20px;
+      border-radius: 999px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 18px 0 24px;
+    }
+    .stat-card {
+      background: #f6faf8;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: 700;
+    }
+    @media (max-width: 600px) {
+      .main-title { font-size: 1.45rem; }
+      .question-text { font-size: 1.15rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header-box">
+      <div class="academy-badge">ایچ ایم ایس اے لرننگ اکیڈمی</div>
+      <h1 class="main-title">اردو ٹیسٹ فائیو — آٹھویں جماعت</h1>
+      <p class="sub-title">جامع اردو گرامر ٹیسٹ (20 ایم سی کیوز)</p>
+    </header>
+
+    <div class="top-bar">
+      <div class="timer-box" id="timerDisplay">وقت: 15:00</div>
+      <button type="button" class="btn btn-home" onclick="goHomePage()">ہوم پیج</button>
+    </div>
+
+    <div class="progress-wrap" id="progressSection">
+      <div class="progress-meta">
+        <span id="questionCounter">سوال 1 از 20</span>
+        <span id="scorePreview">درست جوابات: 0</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <main class="quiz-card" id="quizCard">
+      <h2 class="question-text" id="questionText"></h2>
+      <div class="options-list" id="optionsList"></div>
+      <div class="auto-next-note" id="autoNextNote"></div>
+      <div class="card-footer-actions">
+        <button type="button" class="btn btn-home" onclick="goHomePage()">بیک ٹو ہوم پیج</button>
+      </div>
+    </main>
+
+    <section class="result-box" id="resultBox">
+      <h2 style="margin: 0; font-size: 1.65rem; color: var(--primary);">ٹیسٹ مکمل — نتیجہ کارڈ</h2>
+      <div class="result-score" id="finalScoreText"></div>
+      <div class="percentage-badge" id="percentageText"></div>
+      <div class="stats-grid">
+        <div class="stat-card" style="color: var(--correct-bg);" id="correctCountBox"></div>
+        <div class="stat-card" style="color: var(--wrong-bg);" id="wrongCountBox"></div>
+        <div class="stat-card" style="color: var(--muted);" id="unansweredCountBox"></div>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-primary" onclick="restartTest()">دوبارہ ٹیسٹ دیں</button>
+        <button type="button" class="btn btn-home" onclick="goHomePage()">بیک ٹو ہوم پیج</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const HOME_URL = "index.html";
+
+    const questions = [
+      {
+        q: "1. حروفِ علت یا آواز کے حروف میں 'و' کی کتنی آوازیں مانی جاتی ہیں؟",
+        options: ["ایک آواز", "دو آوازیں", "تین آوازیں", "چار آوازیں"],
+        answer: 2
+      },
+      {
+        q: "2. درج ذیل میں سے کون سا لفظ 'مذکر' ہے؟",
+        options: ["تکلیف", "قلمدان", "محبت", "دعا"],
+        answer: 1
+      },
+      {
+        q: "3. لفظ 'مطلب' کی درست جمع کیا ہے؟",
+        options: ["مطلبیں", "مطالب", "مطلبان", "مطلوب"],
+        answer: 1
+      },
+      {
+        q: "4. وہ اسم جو کسی شاعر کے اختتامی شعر میں استعمال ہو، کیا کہلاتا ہے؟",
+        options: ["تخلص", "لقب", "خطاب", "عرف"],
+        answer: 0
+      },
+      {
+        q: "5. 'کوئی' یا 'کچھ' کس قسم کے الفاظ ہیں؟",
+        options: ["اسم علم", "اسم نکرہ", "اسم خطاب", "اسم صوت"],
+        answer: 1
+      },
+      {
+        q: "6. ایسا فعل جس میں فاعل کے ساتھ مفعول بھی پایا جائے، کیا کہلاتا ہے؟",
+        options: ["فعل لازم", "فعل متعدی", "فعل ماضی مطلق", "فعل استمراری"],
+        answer: 1
+      },
+      {
+        q: "7. جملے 'باغبان نے پھول توڑے' میں 'باغبان' کیا ہے؟",
+        options: ["مفعول", "فاعل", "فعل", "صفت"],
+        answer: 1
+      },
+      {
+        q: "8. جملے 'چوکیدار نے دروازہ کھولا' میں 'دروازہ' کیا ہے؟",
+        options: ["فاعل", "فعل", "مفعول", "حرف"],
+        answer: 2
+      },
+      {
+        q: "9. لفظ 'مشورہ' کی درست جمع کیا ہے؟",
+        options: ["مشوریں", "مشورے", "مشورات", "مشوران"],
+        answer: 1
+      },
+      {
+        q: "10. درج ذیل میں سے 'مؤنث' لفظ کون سا ہے؟",
+        options: ["آسمان", "رستہ", "مٹی", "شہر"],
+        answer: 2
+      },
+      {
+        q: "11. لفظ 'سلطان' کا مؤنث کیا ہے؟",
+        options: ["سلطانہ", "بیگم", "ملکہ", "شہزادی"],
+        answer: 0
+      },
+      {
+        q: "12. لفظ 'موضوع' کی جمع کیا ہے؟",
+        options: ["موضوعیں", "موضوعات", "موضوعان", "موضوعوں"],
+        answer: 1
+      },
+      {
+        q: "13. 'شمس العلماء' کس اسم کی مثال ہے؟",
+        options: ["اسم نکرہ", "اسم علم", "اسم عام", "اسم صوت"],
+        answer: 1
+      },
+      {
+        q: "14. 'عورت' کس قسم کا اسم ہے؟",
+        options: ["اسم علم", "اسم نکرہ", "اسم تخلص", "اسم لقب"],
+        answer: 1
+      },
+      {
+        q: "15. جملے 'سارا خط لکھتی ہے' میں 'لکھتی ہے' کون سا فعل ہے؟",
+        options: ["فعل لازم", "فعل متعدی", "فعل ماضی بعید", "فعل مستقبل"],
+        answer: 1
+      },
+      {
+        q: "16. جملے 'مصنف نے کتاب تصنیف کی' میں فاعل کون ہے؟",
+        options: ["کتاب", "مصنف", "تصنیف کی", "کوئی نہیں"],
+        answer: 1
+      },
+      {
+        q: "17. جملے 'دھوبی نے کپڑے دھوئے' میں مفعول کون ہے؟",
+        options: ["دھوبی", "کپڑے", "دھوئے", "نے"],
+        answer: 1
+      },
+      {
+        q: "18. لفظ 'خبر' کی جمع کیا ہے؟",
+        options: ["خبریں", "اخبارات", "خبران", "خبرون"],
+        answer: 0
+      },
+      {
+        q: "19. 'مظلوم' کا مؤنث کیا ہے؟",
+        options: ["مظلومہ", "مظلومی", "مظلومات", "مظلومان"],
+        answer: 0
+      },
+      {
+        q: "20. لفظ 'حیوان' کی درست جمع کیا ہے؟",
+        options: ["حیوانات", "حیوانیں", "حیوانان", "حیوانوں"],
+        answer: 0
+      }
+    ];
+
+    let currentIndex = 0;
+    let score = 0;
+    let wrongCount = 0;
+    let answered = false;
+    let autoNextTimer = null;
+    let totalSeconds = 15 * 60;
+    let countdownInterval = null;
+
+    function goHomePage() {
+      window.location.href = HOME_URL;
+    }
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `وقت: ${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+
+    function startCountdown() {
+      clearInterval(countdownInterval);
+      document.getElementById("timerDisplay").textContent = formatTime(totalSeconds);
+      countdownInterval = setInterval(() => {
+        totalSeconds--;
+        document.getElementById("timerDisplay").textContent = formatTime(Math.max(0, totalSeconds));
+        if (totalSeconds <= 0) {
+          clearInterval(countdownInterval);
+          showResult();
+        }
+      }, 1000);
+    }
+
+    function renderQuestion() {
+      clearTimeout(autoNextTimer);
+      answered = false;
+      const item = questions[currentIndex];
+      document.getElementById("questionCounter").textContent = `سوال ${currentIndex + 1} از ${questions.length}`;
+      document.getElementById("scorePreview").textContent = `درست جوابات: ${score}`;
+      document.getElementById("progressFill").style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+      document.getElementById("questionText").textContent = item.q;
+      document.getElementById("autoNextNote").textContent = "";
+
+      const optionsList = document.getElementById("optionsList");
+      optionsList.innerHTML = "";
+
+      item.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn";
+        btn.textContent = opt;
+        btn.addEventListener("click", () => handleAnswer(idx, btn));
+        optionsList.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(selectedIdx, clickedBtn) {
+      if (answered) return;
+      answered = true;
+
+      const correctIdx = questions[currentIndex].answer;
+      const allBtns = document.querySelectorAll(".option-btn");
+      allBtns.forEach((b) => (b.disabled = true));
+
+      if (selectedIdx === correctIdx) {
+        clickedBtn.classList.add("correct");
+        score++;
+        document.getElementById("scorePreview").textContent = `درست جوابات: ${score}`;
+        document.getElementById("autoNextNote").textContent = "درست جواب! نیکسٹ اٹو ہو رہا ہے...";
+      } else {
+        clickedBtn.classList.add("wrong");
+        allBtns[correctIdx].classList.add("correct");
+        wrongCount++;
+        document.getElementById("autoNextNote").textContent = "غلط جواب! درست آپشن سبز رنگ میں دکھایا گیا ہے، نیکسٹ اٹو ہو رہا ہے...";
+      }
+
+      autoNextTimer = setTimeout(() => {
+        if (currentIndex + 1 < questions.length) {
+          currentIndex++;
+          renderQuestion();
+        } else {
+          showResult();
+        }
+      }, 1150);
+    }
+
+    function showResult() {
+      clearInterval(countdownInterval);
+      clearTimeout(autoNextTimer);
+      document.getElementById("quizCard").style.display = "none";
+      document.getElementById("progressSection").style.display = "none";
+      document.getElementById("resultBox").style.display = "block";
+
+      const attempted = score + wrongCount;
+      const unanswered = Math.max(0, questions.length - attempted);
+      const percentage = ((score / questions.length) * 100).toFixed(1);
+
+      document.getElementById("finalScoreText").textContent = `کل نمبر: ${score} / ${questions.length}`;
+      document.getElementById("percentageText").textContent = `فیصد (پرسنٹیج): ${percentage}%`;
+      document.getElementById("correctCountBox").textContent = `درست: ${score}`;
+      document.getElementById("wrongCountBox").textContent = `غلط: ${wrongCount}`;
+      document.getElementById("unansweredCountBox").textContent = `باقی: ${unanswered}`;
+    }
+
+    function restartTest() {
+      currentIndex = 0;
+      score = 0;
+      wrongCount = 0;
+      totalSeconds = 15 * 60;
+      document.getElementById("quizCard").style.display = "block";
+      document.getElementById("progressSection").style.display = "block";
+      document.getElementById("resultBox").style.display = "none";
+      startCountdown();
+      renderQuestion();
+    }
+
+    startCountdown();
+    renderQuestion();
+  </script>
+</body>
+</html>
