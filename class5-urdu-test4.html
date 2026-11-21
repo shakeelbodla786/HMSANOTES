@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMSA Learning Academy - Class 5 Urdu Test 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    @font-face { font-family: 'Jameel Noori Nastaleeq'; src: local('Jameel Noori Nastaleeq'), local('Noto Nastaliq Urdu'); }
+    body { font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', Tahoma, sans-serif; background-color: #e9eef2; margin: 0; padding: 15px; display: flex; justify-content: center; }
+    .app-container { width: 100%; max-width: 550px; background: #ffffff; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); overflow: hidden; position: relative; }
+    .header { background: linear-gradient(135deg, #0c2340 0%, #087c59 100%); color: white; text-align: center; padding: 15px 50px; border-bottom: 4px solid #d4af37; position: relative; }
+    .header h1 { margin: 0; font-size: 20px; font-family: Arial, sans-serif; }
+    .header h2 { margin: 5px 0 0 0; font-size: 18px; color: #f3e5ab; font-weight: normal; }
+    .back-home-btn { position: absolute; top: 15px; left: 10px; background: #d4af37; color: #0c2340; text-decoration: none; padding: 5px 10px; border-radius: 5px; font-family: Arial, sans-serif; font-weight: bold; font-size: 12px; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; background: #f4f7f9; padding: 10px 15px; border-bottom: 1px solid #ccc; font-weight: bold; color: #0c2340; font-size: 16px; font-family: Arial, sans-serif; }
+    .timer { background: #e74c3c; color: white; padding: 5px 10px; border-radius: 5px; font-size: 15px; }
+    .quiz-container { padding: 20px; }
+    .urdu-question { font-size: 22px; color: #333; font-weight: 600; line-height: 1.8; text-align: right; margin-bottom: 20px; }
+    .options-container { display: flex; flex-direction: column; gap: 12px; }
+    .option-btn { background: #fff; border: 2px solid #b0c4de; padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; color: #333; display: flex; align-items: flex-start; }
+    .option-btn:hover { background: #f0f8ff; border-color: #087c59; }
+    .option-btn .option-letter { font-weight: bold; color: #0c2340; font-family: Arial, sans-serif; margin-left: 15px; margin-top: 5px; font-size: 18px; }
+    .option-urdu { font-size: 20px; direction: rtl; text-align: right; line-height: 1.6; width: 100%; }
+    .option-btn.correct { background-color: #d4edda; border-color: #28a745; }
+    .option-btn.wrong { background-color: #f8d7da; border-color: #dc3545; }
+    .option-btn.disabled { pointer-events: none; opacity: 0.8; }
+    .next-btn { background: #087c59; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; display: none; }
+    .next-btn:hover { background: #0c2340; }
+    /* نیا ہوم بٹن جو ہر سوال کے ساتھ نظر آئے گا */
+    .home-btn-quiz { background: #d4af37; color: #0c2340; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 16px; font-weight: bold; display: block; margin-top: 10px; text-align: center; font-family: Arial, sans-serif; width: 100%; box-sizing: border-box; border: 2px solid #0c2340; }
+    .result-container { display: none; text-align: center; padding: 30px 20px; }
+    .result-container h2 { color: #0c2340; margin-bottom: 20px; font-size: 24px; }
+    .score-box { background: #f4f7f9; border: 2px solid #d4af37; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+    .score-box p { font-size: 20px; margin: 12px 0; color: #333; font-family: Arial, sans-serif; }
+    .score-box span { font-weight: bold; color: #087c59; font-size: 24px; }
+</style>
+</head>
+<body>
+<div class="app-container">
+    <div class="header">
+        <a href="index.html" class="back-home-btn">Home / ہوم</a> 
+        <h1>HMSA Learning Academy</h1>
+        <h2>Class 5 - Urdu Test 4</h2>
+    </div>
+    <div class="top-bar">
+        <div id="question-progress">سوال 1 / 20</div>
+        <div class="timer" id="timer">05:00</div>
+    </div>
+    <div class="quiz-container" id="quiz-section">
+        <div class="urdu-question" id="question-text">لوڈ ہو رہا ہے...</div>
+        <div class="options-container" id="options-container"></div>
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">اگلا سوال ➔</button>
+        <a href="index.html" class="home-btn-quiz">واپس ہوم پیج پر جائیں</a>
+    </div>
+    <div class="result-container" id="result-section">
+        <h2>ٹیسٹ مکمل ہو گیا! 🎉</h2>
+        <div class="score-box">
+            <p>کل سوالات: <span>20</span></p>
+            <p>درست جوابات: <span id="correct-count">0</span></p>
+            <p>غلط جوابات: <span id="wrong-count">0</span></p>
+            <p>پرسنٹیج: <span id="percentage">0%</span></p>
+        </div>
+        <button class="next-btn" style="display:block;" onclick="location.reload()">دوبارہ ٹیسٹ دیں 🔄</button>
+        <a href="index.html" class="home-btn-quiz" style="margin-top:15px;">واپس ہوم پیج پر جائیں</a>
+    </div>
+</div>
+<script>
+    const questions = [
+        { q: "لفظ 'پُرجوش' کا مترادف لفظ کیا ہے؟", options: ["پُراُمید", "بے حس", "خوش مزاج", "سنگدل"], correct: 0 },
+        { q: "کلمہ 'شجاع' کا متضاد لفظ کیا ہے؟", options: ["بہادر", "بزدل", "دلیر", "جرأت مند"], correct: 1 },
+        { q: "لفظ 'درخت' کی جمع کیا ہے؟", options: ["درختے", "درختیاں", "درختوں", "درختان"], correct: 2 },
+        { q: "'مرغی' کا مذکر کیا ہے؟", options: ["مرغا", "مرغی", "مرغے", "مرغیاں"], correct: 0 },
+        { q: "درج ذیل میں سے 'اسمِ نکرہ' کون سا ہے؟", options: ["کراچی", "پاکستان", "لڑکی", "قائد اعظم"], correct: 2 },
+        { q: "فعل ماضی کی پہچان کریں: 'استاد نے سبق پڑھایا'", options: ["استاد", "نے", "سبق", "پڑھایا"], correct: 3 },
+        { q: "فعل مستقبل کی پہچان کریں: 'ہم کل پارک جائیں گے'", options: ["ہم", "کل", "پارک", "جائیں گے"], correct: 3 },
+        { q: "درج ذیل میں سے کون سا 'حرفِ جار' ہے؟", options: ["اور", "میں", "کیونکہ", "یا"], correct: 1 },
+        { q: "جملے کی قسم پہچانیں: 'کیا تم نے کھانا کھا لیا؟'", options: ["فجائیہ", "استفہامیہ", "ندائیہ", "خبریہ"], correct: 1 },
+        { q: "جملے کی قسم پہچانیں: 'اف! تم نے یہ کیا کر دیا۔'", options: ["استفہامیہ", "فجائیہ", "ندائیہ", "خبریہ"], correct: 1 },
+        { q: "محاورہ 'نو دو گیارہ ہونا' کا مطلب کیا ہے؟", options: ["بھاگ جانا", "خوش ہونا", "لڑنا جھگڑنا", "جیت جانا"], correct: 0 },
+        { q: "محاورہ 'آنکھیں بچھانا' کا مطلب کیا ہے؟", options: ["بہت عزت کرنا", "نیند آنا", "غصہ کرنا", "روٹھ جانا"], correct: 0 },
+        { q: "لفظ 'خوشحال' کا مترادف لفظ کیا ہے؟", options: ["دولت مند", "غریب", "مفلس", "پریشان"], correct: 0 },
+        { q: "کلمہ 'اندھیرا' کا متضاد کیا ہے؟", options: ["تاریک", "اجالا", "رات", "سیاہ"], correct: 1 },
+        { q: "لفظ 'پھول' کی جمع کیا ہے؟", options: ["پھولیں", "پھولوں", "پھولے", "پھولیے"], correct: 1 }, // تبدیل شدہ لفظ
+        { q: "لفظ 'بکری' کا مذکر کیا ہے؟", options: ["بکرا", "بکری", "بکرے", "بکریاں"], correct: 0 },
+        { q: "'سورج' کی مونث کیا ہے؟", options: ["سورجنی", "سورجی", "سورجیا", "مذکر و مونث نہیں"], correct: 3 },
+        { q: "درج ذیل میں سے کون سا 'اسمِ معرفہ' ہے؟", options: ["شہر", "دریا", "ملتان", "پہاڑ"], correct: 2 },
+        { q: "'بچے میدان میں کھیل رہے ہیں' میں فعل کون سا ہے؟", options: ["بچے", "میدان", "میں", "کھیل رہے ہیں"], correct: 3 },
+        { q: "درج ذیل میں سے کون سا 'حرفِ عطف' ہے؟", options: ["پر", "اور", "میں", "سے"], correct: 1 }
+    ];
+    let currentQuestionIndex = 0; let score = 0; let wrongAnswers = 0; let timerInterval; let timeLeft = 300;
+    const questionText = document.getElementById('question-text'); const optionsContainer = document.getElementById('options-container'); const nextBtn = document.getElementById('next-btn'); const progressText = document.getElementById('question-progress'); const timerDisplay = document.getElementById('timer'); const quizSection = document.getElementById('quiz-section'); const resultSection = document.getElementById('result-section'); const urduNumbers = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۱۰", "۱۱", "۱۲", "۱۳", "۱۴", "۱۵", "۱۶", "۱۷", "۱۸", "۱۹", "۲۰"];
+    function startTimer() { timerInterval = setInterval(() => { timeLeft--; let minutes = Math.floor(timeLeft / 60); let seconds = timeLeft % 60; timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; if (timeLeft <= 0) { clearInterval(timerInterval); endQuiz(); } }, 1000); }
+    function loadQuestion() {
+        nextBtn.style.display = 'none'; const q = questions[currentQuestionIndex];
+        questionText.textContent = `${urduNumbers[currentQuestionIndex]}. ${q.q}`; progressText.textContent = `سوال ${urduNumbers[currentQuestionIndex]} / ۲۰`;
+        optionsContainer.innerHTML = '';
+        let optionsWithFlags = q.options.map((opt, index) => { return { text: opt, isCorrect: (index === q.correct) }; }); optionsWithFlags.sort(() => Math.random() - 0.5);
+        const letters = ['الف', 'ب', 'ج', 'د'];
+        optionsWithFlags.forEach((opt, i) => {
+            const btn = document.createElement('button'); btn.className = 'option-btn';
+            btn.innerHTML = `<span class="option-letter">${letters[i]}.</span><div class="option-urdu">${opt.text}</div>`;
+            btn.onclick = () => selectOption(btn, opt.isCorrect); optionsContainer.appendChild(btn);
+        });
+    }
+    function selectOption(selectedBtn, isCorrect) {
+        const allBtns = document.querySelectorAll('.option-btn'); allBtns.forEach(btn => btn.classList.add('disabled'));
+        if (isCorrect) { selectedBtn.classList.add('correct'); score++; } else { selectedBtn.classList.add('wrong'); wrongAnswers++; let correctText = questions[currentQuestionIndex].options[questions[currentQuestionIndex].correct]; allBtns.forEach(btn => { if (btn.querySelector('.option-urdu').textContent === correctText) { btn.classList.add('correct'); } }); }
+        nextBtn.style.display = 'block';
+    }
+    function nextQuestion() { currentQuestionIndex++; if (currentQuestionIndex < questions.length) { loadQuestion(); } else { endQuiz(); } }
+    function endQuiz() { clearInterval(timerInterval); quizSection.style.display = 'none'; resultSection.style.display = 'block'; document.getElementById('correct-count').textContent = score; document.getElementById('wrong-count').textContent = wrongAnswers; let percentage = (score / questions.length) * 100; document.getElementById('percentage').textContent = percentage.toFixed(1) + '%'; }
+    window.onload = () => { startTimer(); loadQuestion(); };
+</script>
+</body>
+</html>
