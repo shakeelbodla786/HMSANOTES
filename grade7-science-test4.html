@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 7 General Science Test 4 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#102b4c;
+  --green:#087c59;
+  --emerald:#1f8a4c;
+  --gold:#e8c66b;
+  --light:#f2f6f7;
+  --red:#d90429;
+  --border:#d7e5df;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:16px;
+  font-family:'Noto Nastaliq Urdu',Tahoma,Arial,sans-serif;
+  background:linear-gradient(135deg,#eef4f6,#e3efe9);
+  color:#263746;
+  line-height:1.9;
+}
+.container{
+  max-width:820px;
+  margin:auto;
+  background:white;
+  padding:26px;
+  border-radius:15px;
+  box-shadow:0 8px 24px rgba(16,43,76,.1);
+  border-top:6px solid var(--green);
+}
+.header-banner{
+  text-align:center;
+  border-bottom:2px solid var(--border);
+  padding-bottom:14px;
+  margin-bottom:18px;
+}
+.badge{
+  display:inline-block;
+  background:#e5f3ec;
+  color:var(--green);
+  font:bold 13px Arial,sans-serif;
+  padding:4px 12px;
+  border-radius:20px;
+}
+h1{
+  margin:8px 0;
+  color:var(--navy);
+  font-size:24px;
+}
+.subtitle{
+  margin:0;
+  color:#5b6b7a;
+  font:14px Arial,sans-serif;
+}
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#e5f3ec;
+  padding:11px 16px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font:bold 15px Arial,sans-serif;
+  color:var(--navy);
+}
+.timer{
+  background:var(--red);
+  color:white;
+  padding:4px 12px;
+  border-radius:6px;
+  font-size:16px;
+}
+.question-card{
+  background:#f8fcfa;
+  border:1px solid var(--border);
+  border-left:5px solid var(--green);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.q-num-badge{
+  display:inline-block;
+  background:var(--navy);
+  color:white;
+  font: bold 12px Arial,sans-serif;
+  padding:4px 10px;
+  border-radius:5px;
+  margin-bottom:10px;
+}
+.eng-stmt{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font: bold 17px Arial,sans-serif;
+  color:var(--navy);
+  line-height:1.6;
+  margin-bottom:10px;
+}
+.urdu-stmt{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-size:16px;
+  line-height:2.1;
+}
+.options{
+  display:grid;
+  gap:11px;
+  margin-bottom:14px;
+}
+.opt-btn{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  background:white;
+  border:2px solid var(--border);
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.2s;
+  color:#263746;
+}
+.opt-btn:hover:not(:disabled){
+  background:#e5f3ec;
+  border-color:var(--green);
+}
+.opt-btn:disabled{cursor:default}
+.opt-label{
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  line-height:28px;
+  text-align:center;
+  border-radius:50%;
+  background:#eef4f6;
+  color:var(--navy);
+  font:bold 13px Arial,sans-serif;
+}
+.opt-content{
+  flex:1;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+.opt-eng{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font:bold 15px Arial,sans-serif;
+  color:var(--navy);
+}
+.opt-urdu{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-size:14px;
+  color:#3b4d5c;
+}
+.correct-opt{
+  background:var(--emerald)!important;
+  border-color:var(--emerald)!important;
+}
+.correct-opt .opt-eng,
+.correct-opt .opt-urdu{color:white!important}
+.correct-opt .opt-label{
+  background:white;
+  color:var(--emerald);
+}
+.wrong-opt{
+  background:var(--red)!important;
+  border-color:var(--red)!important;
+}
+.wrong-opt .opt-eng,
+.wrong-opt .opt-urdu{color:white!important}
+.wrong-opt .opt-label{
+  background:white;
+  color:var(--red);
+}
+#feedback-box{
+  text-align:center;
+  margin:12px 0;
+  font-size:16px;
+  font-weight:bold;
+  min-height:36px;
+  padding:8px;
+  border-radius:8px;
+}
+.q-home-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:#f2f6f7;
+  color:var(--navy);
+  border:1.5px solid #c5d8d0;
+  padding:8px 18px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+}
+.home-btn:hover{
+  background:#e5f3ec;
+  border-color:var(--green);
+}
+.score-box{
+  text-align:center;
+  display:none;
+  padding:14px 0;
+}
+.score-box h2{
+  color:var(--navy);
+  font-size:24px;
+}
+.result-card{
+  background:#f8fcfa;
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin:16px auto;
+  max-width:460px;
+}
+.result-item{
+  font-size:16px;
+  margin:10px 0;
+  color:var(--navy);
+  font-weight:bold;
+}
+.restart-btn{
+  background:var(--navy);
+  color:white;
+  border:none;
+  padding:11px 24px;
+  font-size:15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  font-weight:bold;
+}
+.restart-btn:hover{background:var(--green)}
+.final-home-wrap{margin-top:18px}
+@media(max-width:600px){
+  .container{padding:16px}
+  h1{font-size:20px}
+  .opt-content{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .opt-urdu{width:100%}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="header-banner">
+    <div class="badge">HMSA LEARNING ACADEMY • GRADE 7</div>
+    <h1>جماعت ہفتم — جنرل سائنس آن لائن ٹیسٹ</h1>
+    <p class="subtitle">Grade 7 General Science Test 4 • 20 MCQs</p>
+  </div>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">Question 1 of 20</span>
+      <span class="timer" id="timer">05:00</span>
+    </div>
+
+    <div class="question-card">
+      <div id="q-topic-badge" class="q-num-badge">MCQ 1</div>
+      <div id="question-text"></div>
+    </div>
+
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+
+    <div class="q-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج</bdi>
+      </a>
+    </div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h2>
+      <bdi>Test Completed!</bdi> /
+      <bdi>ٹیسٹ مکمل ہو گیا!</bdi>
+    </h2>
+
+    <div class="result-card">
+      <div class="result-item" id="total-q"></div>
+      <div class="result-item" id="correct-q" style="color:#1f8a4c"></div>
+      <div class="result-item" id="wrong-q" style="color:#d90429"></div>
+      <div class="result-item" id="unanswered-q"></div>
+      <div class="result-item" id="obtained-marks"></div>
+      <div class="result-item" id="percentage-score" style="font-size:20px"></div>
+    </div>
+
+    <button type="button" class="restart-btn" onclick="startTest()">
+      <bdi>Test Again</bdi> /
+      <bdi>دوبارہ ٹیسٹ دیں</bdi>
+    </button>
+
+    <div class="final-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi> |
+        <bdi>مرکزی ہوم پیج پر واپس جائیں</bdi>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+const rawQuestions = [
+
+{
+topic:"Solutions & Solubility",
+eng:"Which of the following is insoluble in water?",
+urdu:"درج ذیل میں سے کون سی شے پانی میں حل نہیں ہوتی؟",
+options:[
+{eng:"Oil",urdu:"تیل"},
+{eng:"Sodium chloride",urdu:"سوڈیم کلورائیڈ"},
+{eng:"Glucose",urdu:"گلوکوز"},
+{eng:"Baking soda",urdu:"بیکنگ سوڈا"}
+],
+correctIndex:0
+},
+
+{
+topic:"Forces & Motion",
+eng:"Which of the following is an example of a contact force?",
+urdu:"درج ذیل میں سے کون سی قوت رابطے کی قوت (Contact Force) کی مثال ہے؟",
+options:[
+{eng:"Magnetic force",urdu:"مقناطیسی قوت"},
+{eng:"Muscular force",urdu:"عضلاتی قوت"},
+{eng:"Gravitational force",urdu:"کششِ ثقل"},
+{eng:"Electrostatic force",urdu:"برقی سکونی قوت"}
+],
+correctIndex:1
+},
+
+{
+topic:"Sound & Waves",
+eng:"Sound cannot pass through which of the following?",
+urdu:"آواز کس میں سے گزر نہیں سکتی؟",
+options:[
+{eng:"Solid",urdu:"ٹھوس"},
+{eng:"Liquid",urdu:"مایع"},
+{eng:"Vacuum",urdu:"خلا"},
+{eng:"Gases",urdu:"گیسیں"}
+],
+correctIndex:2
+},
+
+{
+topic:"Saturated Solutions",
+eng:"A solution to which no more solute can be dissolved at a particular temperature is called:",
+urdu:"ایسا محلول جس میں مخصوص درجہ حرارت پر مزید حل پذیر مادہ حل نہ ہو سکے، کیا کہلاتا ہے؟",
+options:[
+{eng:"Dilute solution",urdu:"رقیق محلول"},
+{eng:"Concentrated solution",urdu:"گاڑھا محلول"},
+{eng:"Unsaturated solution",urdu:"غیر سیر شدہ محلول"},
+{eng:"Saturated solution",urdu:"سیر شدہ محلول"}
+],
+correctIndex:3
+},
+
+{
+topic:"Gravity",
+eng:"The Earth's pull on objects is called:",
+urdu:"زمین کی اشیاء کو اپنی طرف کھینچنے والی قوت کیا کہلاتی ہے؟",
+options:[
+{eng:"Gravity",urdu:"کششِ ثقل"},
+{eng:"Frictional force",urdu:"رگڑ کی قوت"},
+{eng:"Electrostatic force",urdu:"برقی سکونی قوت"},
+{eng:"Magnetic force",urdu:"مقناطیسی قوت"}
+],
+correctIndex:0
+},
+
+{
+topic:"Wave Properties",
+eng:"Which feature of a wave is the maximum height from the rest position or midline?",
+urdu:"لہروں کی کون سی خاصیت درمیانی خط سے زیادہ سے زیادہ بلندی کو ظاہر کرتی ہے؟",
+options:[
+{eng:"Frequency",urdu:"تعدد"},
+{eng:"Amplitude",urdu:"ایمپلی ٹیوڈ"},
+{eng:"Pitch",urdu:"آواز کی زیر و بمی"},
+{eng:"Wavelength",urdu:"طولِ موج"}
+],
+correctIndex:1
+},
+
+{
+topic:"Solubility",
+eng:"The amount of solute required to saturate 100 g of solvent at a particular temperature is called:",
+urdu:"مخصوص درجہ حرارت پر 100 گرام محلل کو سیر کرنے کے لیے درکار حل پذیر مادے کی مقدار کیا کہلاتی ہے؟",
+options:[
+{eng:"Molarity",urdu:"مولیریٹی"},
+{eng:"Normality",urdu:"نارملٹی"},
+{eng:"Solubility",urdu:"حل پذیری"},
+{eng:"Dilution",urdu:"رقت"}
+],
+correctIndex:2
+},
+
+{
+topic:"Electrostatic Force",
+eng:"The force between two negatively charged particles is:",
+urdu:"دو منفی چارج شدہ ذرات کے درمیان کون سی قوت عمل کرتی ہے؟",
+options:[
+{eng:"Gravitational",urdu:"کششِ ثقل"},
+{eng:"Frictional",urdu:"رگڑ کی قوت"},
+{eng:"Attraction",urdu:"کشش"},
+{eng:"Repulsion",urdu:"دفع"}
+],
+correctIndex:3
+},
+
+{
+topic:"Speed of Sound",
+eng:"What is the approximate speed of sound in air?",
+urdu:"ہوا میں آواز کی رفتار تقریباً کتنی ہوتی ہے؟",
+options:[
+{eng:"340 m/s",urdu:"340 میٹر فی سیکنڈ"},
+{eng:"100 m/s",urdu:"100 میٹر فی سیکنڈ"},
+{eng:"1000 m/s",urdu:"1000 میٹر فی سیکنڈ"},
+{eng:"330 km/s",urdu:"330 کلومیٹر فی سیکنڈ"}
+],
+correctIndex:0
+},
+
+{
+topic:"Dilute Solutions",
+eng:"A solution having a relatively small amount of solute dissolved in it is called:",
+urdu:"ایسا محلول جس میں نسبتاً کم مقدار میں حل پذیر مادہ موجود ہو، کیا کہلاتا ہے؟",
+options:[
+{eng:"Concentrated solution",urdu:"گاڑھا محلول"},
+{eng:"Dilute solution",urdu:"رقیق محلول"},
+{eng:"Saturated solution",urdu:"سیر شدہ محلول"},
+{eng:"Binary solution",urdu:"ثنائی محلول"}
+],
+correctIndex:1
+},
+
+{
+topic:"Effects of Force",
+eng:"A batsman hits the ball back towards the bowler. Which effect of force is seen?",
+urdu:"بلے باز گیند کو واپس باؤلر کی طرف مارتا ہے۔ اس میں قوت کا کون سا اثر نظر آتا ہے؟",
+options:[
+{eng:"Change of shape",urdu:"شکل میں تبدیلی"},
+{eng:"Rest to motion",urdu:"سکون سے حرکت"},
+{eng:"Change of direction",urdu:"سمت میں تبدیلی"},
+{eng:"Motion to rest",urdu:"حرکت سے سکون"}
+],
+correctIndex:2
+},
+
+{
+topic:"Wave Transfer",
+eng:"What is transferred from one place to another by the movement of waves?",
+urdu:"لہروں کی حرکت سے ایک جگہ سے دوسری جگہ کیا منتقل ہوتا ہے؟",
+options:[
+{eng:"Matter",urdu:"مادہ"},
+{eng:"Nothing",urdu:"کچھ بھی نہیں"},
+{eng:"Both matter and energy",urdu:"مادہ اور توانائی دونوں"},
+{eng:"Energy",urdu:"توانائی"}
+],
+correctIndex:3
+},
+
+{
+topic:"Electromagnetic Waves",
+eng:"What type of wave does not need a material medium to travel through?",
+urdu:"کس قسم کی لہر کو سفر کرنے کے لیے مادی واسطے کی ضرورت نہیں ہوتی؟",
+options:[
+{eng:"Electromagnetic wave",urdu:"برقناطیسی لہر"},
+{eng:"Mechanical wave",urdu:"میکانی لہر"},
+{eng:"Sound wave",urdu:"صوتی لہر"},
+{eng:"Transverse wave",urdu:"عرضی لہر"}
+],
+correctIndex:0
+},
+
+{
+topic:"SI Units",
+eng:"Which of the following statements about units is correct?",
+urdu:"اکائیوں کے بارے میں درج ذیل میں سے کون سا بیان درست ہے؟",
+options:[
+{eng:"1 m = 1000 km",urdu:"ایک میٹر برابر 1000 کلومیٹر"},
+{eng:"N is the SI unit of force",urdu:"نیوٹن قوت کی SI اکائی ہے"},
+{eng:"1 hr = 60 s",urdu:"ایک گھنٹہ برابر 60 سیکنڈ"},
+{eng:"m/s is the unit of displacement",urdu:"میٹر فی سیکنڈ نقل مکانی کی اکائی ہے"}
+],
+correctIndex:1
+},
+
+{
+topic:"Aqueous Solutions",
+eng:"A solution in which water is used as a solvent is called:",
+urdu:"ایسا محلول جس میں پانی بطور محلل استعمال ہو، کیا کہلاتا ہے؟",
+options:[
+{eng:"Binary solid",urdu:"ٹھوس ثنائی"},
+{eng:"Non-aqueous mixture",urdu:"غیر آبی آمیزہ"},
+{eng:"Aqueous solution",urdu:"آبی محلول"},
+{eng:"Saturated alloy",urdu:"سیر شدہ بھرت"}
+],
+correctIndex:2
+},
+
+{
+topic:"Hearing Range",
+eng:"Which of the following animals can respond to the lowest frequency?",
+urdu:"درج ذیل میں سے کون سا جانور سب سے کم فریکوئنسی کی آواز محسوس کر سکتا ہے؟",
+options:[
+{eng:"Cat",urdu:"بلی"},
+{eng:"Dog",urdu:"کتا"},
+{eng:"Dolphin",urdu:"ڈولفن"},
+{eng:"Elephant",urdu:"ہاتھی"}
+],
+correctIndex:3
+},
+
+{
+topic:"High Frequency Hearing",
+eng:"Which of the following animals can respond to the highest frequency?",
+urdu:"درج ذیل میں سے کون سا جانور سب سے زیادہ فریکوئنسی کی آواز محسوس کر سکتا ہے؟",
+options:[
+{eng:"Bat",urdu:"چمگادڑ"},
+{eng:"Cow",urdu:"گائے"},
+{eng:"Frog",urdu:"مینڈک"},
+{eng:"Elephant",urdu:"ہاتھی"}
+],
+correctIndex:0
+},
+
+{
+topic:"Frequency Definition",
+eng:"The number of waves or vibrations passing through a point in one second is called:",
+urdu:"ایک سیکنڈ میں کسی نقطے سے گزرنے والی لہروں یا ارتعاشات کی تعداد کیا کہلاتی ہے؟",
+options:[
+{eng:"Loudness",urdu:"آواز کی بلندی"},
+{eng:"Frequency",urdu:"تعدد"},
+{eng:"Amplitude",urdu:"ایمپلی ٹیوڈ"},
+{eng:"Wavelength",urdu:"طولِ موج"}
+],
+correctIndex:1
+},
+
+{
+topic:"Newton's Third Law",
+eng:"Which statement is true regarding action and reaction forces?",
+urdu:"فعل اور ردِ عمل کی قوتوں کے بارے میں کون سا بیان درست ہے؟",
+options:[
+{eng:"Reaction is smaller and opposite",urdu:"ردِ عمل چھوٹا اور مخالف سمت میں ہوتا ہے"},
+{eng:"Reaction is smaller and in the same direction",urdu:"ردِ عمل چھوٹا اور اسی سمت میں ہوتا ہے"},
+{eng:"Reaction is equal and opposite",urdu:"ردِ عمل برابر اور مخالف سمت میں ہوتا ہے"},
+{eng:"Reaction is equal and in the same direction",urdu:"ردِ عمل برابر اور اسی سمت میں ہوتا ہے"}
+],
+correctIndex:2
+},
+
+{
+topic:"Visible Spectrum",
+eng:"Which sequence of visible colours is from longest wavelength to shortest wavelength?",
+urdu:"مرئی روشنی کے رنگوں کی کون سی ترتیب طویل ترین طولِ موج سے مختصر ترین طولِ موج تک درست ہے؟",
+options:[
+{eng:"Violet, indigo, blue, green, yellow, orange, red",urdu:"بنفشی سے سرخ تک"},
+{eng:"Red, yellow, green, orange, violet, blue",urdu:"غلط ترتیب"},
+{eng:"Red, yellow, green, orange, violet, indigo, blue",urdu:"غلط ترتیب"},
+{eng:"Red, orange, yellow, green, blue, indigo, violet",urdu:"سرخ سے بنفشی تک"}
+],
+correctIndex:3
+}
+
+];
+
+const labels=["A","B","C","D"];
+let activeQuestions=[];
+let idx=0;
+let score=0;
+let wrong=0;
+let answeredCount=0;
+let answeredCurrent=false;
+let autoNextTimeout=null;
+let timerInterval=null;
+let timeLeft=300;
+let testFinished=false;
+
+function shuffleArray(arr){
+  const copy=arr.slice();
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function buildShuffledQuiz(){
+  return shuffleArray(rawQuestions).map(item=>{
+    const tagged=item.options.map((opt,i)=>({
+      eng:opt.eng,
+      urdu:opt.urdu,
+      isCorrect:i===item.correctIndex
+    }));
+
+    const shuffled=shuffleArray(tagged);
+
+    return {
+      topic:item.topic,
+      eng:item.eng,
+      urdu:item.urdu,
+      options:shuffled,
+      answer:shuffled.findIndex(o=>o.isCorrect)
+    };
+  });
+}
+
+function startTest(){
+  clearInterval(timerInterval);
+  clearTimeout(autoNextTimeout);
+
+  activeQuestions=buildShuffledQuiz();
+  idx=0;
+  score=0;
+  wrong=0;
+  answeredCount=0;
+  answeredCurrent=false;
+  testFinished=false;
+  timeLeft=300;
+
+  document.getElementById("score-screen").style.display="none";
+  document.getElementById("quiz-screen").style.display="block";
+
+  startTimer();
+  loadQuestion();
+}
+
+function startTimer(){
+  updateTimerDisplay();
+
+  timerInterval=setInterval(()=>{
+    if(testFinished)return;
+
+    timeLeft--;
+    updateTimerDisplay();
+
+    if(timeLeft<=0){
+      clearInterval(timerInterval);
+      clearTimeout(autoNextTimeout);
+      showResult();
+    }
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const m=Math.floor(timeLeft/60);
+  const s=timeLeft%60;
+  document.getElementById("timer").innerText=
+    `${m}:${s<10?"0":""}${s}`;
+}
+
+function loadQuestion(){
+  if(testFinished)return;
+
+  answeredCurrent=false;
+  const q=activeQuestions[idx];
+
+  document.getElementById("q-topic-badge").innerText=
+    `MCQ ${idx+1} • ${q.topic}`;
+
+  document.getElementById("question-text").innerHTML=`
+    <div class="eng-stmt"><bdi>${idx+1}. ${q.eng}</bdi></div>
+    <div class="urdu-stmt"><bdi>${idx+1}. ${q.urdu}</bdi></div>
+  `;
+
+  const box=document.getElementById("options-box");
+  box.innerHTML="";
+
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="opt-btn";
+
+    btn.innerHTML=`
+      <span class="opt-label">${labels[i]}</span>
+      <span class="opt-content">
+        <span class="opt-eng"><bdi>${opt.eng}</bdi></span>
+        <span class="opt-urdu"><bdi>${opt.urdu}</bdi></span>
+      </span>
+    `;
+
+    btn.onclick=()=>checkAnswer(i,btn);
+    box.appendChild(btn);
+  });
+
+  document.getElementById("progress-text").innerText=
+    `Question ${idx+1} of ${activeQuestions.length}`;
+
+  const fb=document.getElementById("feedback-box");
+  fb.innerHTML="";
+  fb.style.background="transparent";
+}
+
+function checkAnswer(selectedIdx,btn){
+  if(answeredCurrent || testFinished)return;
+
+  answeredCurrent=true;
+  answeredCount++;
+
+  const q=activeQuestions[idx];
+  const btns=document.querySelectorAll(".opt-btn");
+  btns.forEach(b=>b.disabled=true);
+
+  const fb=document.getElementById("feedback-box");
+  const correctOpt=q.options[q.answer];
+  const correctLetter=labels[q.answer];
+
+  if(selectedIdx===q.answer){
+    score++;
+    btn.classList.add("correct-opt");
+
+    fb.style.background="#e5f7ed";
+    fb.innerHTML=`
+      <span style="color:#1f8a4c">
+        ✅ <bdi>Correct! (${correctLetter})</bdi> |
+        <bdi>درست جواب!</bdi>
+      </span>
+    `;
+  }else{
+    wrong++;
+    btn.classList.add("wrong-opt");
+    btns[q.answer].classList.add("correct-opt");
+
+    fb.style.background="#fdecef";
+    fb.innerHTML=`
+      <span style="color:#d90429">
+        ❌ <bdi>Wrong! Correct: ${correctLetter} (${correctOpt.eng})</bdi>
+        <br>
+        <bdi>غلط جواب! درست آپشن: ${correctLetter} — ${correctOpt.urdu}</bdi>
+      </span>
+    `;
+  }
+
+  clearTimeout(autoNextTimeout);
+
+  autoNextTimeout=setTimeout(()=>{
+    if(testFinished)return;
+
+    idx++;
+
+    if(idx<activeQuestions.length){
+      loadQuestion();
+    }else{
+      showResult();
+    }
+  },1500);
+}
+
+function showResult(){
+  if(testFinished)return;
+
+  testFinished=true;
+  clearInterval(timerInterval);
+  clearTimeout(autoNextTimeout);
+
+  const total=activeQuestions.length;
+  const unanswered=total-answeredCount;
+  const perc=Math.round((score/total)*100);
+
+  document.getElementById("quiz-screen").style.display="none";
+  document.getElementById("score-screen").style.display="block";
+
+  document.getElementById("total-q").innerHTML=
+    `<bdi>Total Questions: ${total}</bdi> | <bdi>کل سوالات: ${total}</bdi>`;
+
+  document.getElementById("correct-q").innerHTML=
+    `<bdi>Correct Answers: ${score}</bdi> | <bdi>درست جوابات: ${score}</bdi>`;
+
+  document.getElementById("wrong-q").innerHTML=
+    `<bdi>Wrong Answers: ${wrong}</bdi> | <bdi>غلط جوابات: ${wrong}</bdi>`;
+
+  document.getElementById("unanswered-q").innerHTML=
+    `<bdi>Unanswered: ${unanswered}</bdi> | <bdi>بغیر جواب سوالات: ${unanswered}</bdi>`;
+
+  document.getElementById("obtained-marks").innerHTML=
+    `<bdi>Obtained Marks: ${score} / ${total}</bdi> | <bdi>حاصل کردہ نمبر: ${score} / ${total}</bdi>`;
+
+  document.getElementById("percentage-score").innerHTML=
+    `<bdi>Percentage: ${perc}%</bdi> | <bdi>فیصد: ${perc}%</bdi>`;
+}
+
+window.onload=startTest;
+</script>
+</body>
+</html>
