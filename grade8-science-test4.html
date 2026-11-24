@@ -1,0 +1,797 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 General Science Test 4 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#102b4c;
+  --green:#087c59;
+  --emerald:#1f8a4c;
+  --red:#d90429;
+  --border:#d7e5df;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:16px;
+  font-family:'Noto Nastaliq Urdu',Tahoma,Arial,sans-serif;
+  background:linear-gradient(135deg,#eef4f6,#e3efe9);
+  color:#263746;
+  line-height:1.9;
+}
+.container{
+  max-width:820px;
+  margin:auto;
+  background:white;
+  padding:26px;
+  border-radius:15px;
+  box-shadow:0 8px 24px rgba(16,43,76,.1);
+  border-top:6px solid var(--green);
+}
+.header-banner{
+  text-align:center;
+  border-bottom:2px solid var(--border);
+  padding-bottom:14px;
+  margin-bottom:18px;
+}
+.badge{
+  display:inline-block;
+  background:#e5f3ec;
+  color:var(--green);
+  font:bold 13px Arial,sans-serif;
+  padding:4px 12px;
+  border-radius:20px;
+}
+h1{margin:8px 0;color:var(--navy);font-size:24px}
+.subtitle{margin:0;color:#5b6b7a;font:14px Arial,sans-serif}
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#e5f3ec;
+  padding:11px 16px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font:bold 15px Arial,sans-serif;
+  color:var(--navy);
+}
+.timer{
+  background:var(--red);
+  color:white;
+  padding:4px 12px;
+  border-radius:6px;
+  font-size:16px;
+}
+.question-card{
+  background:#f8fcfa;
+  border:1px solid var(--border);
+  border-left:5px solid var(--green);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.q-num-badge{
+  display:inline-block;
+  background:var(--navy);
+  color:white;
+  font:bold 12px Arial,sans-serif;
+  padding:4px 10px;
+  border-radius:5px;
+  margin-bottom:10px;
+}
+.eng-stmt{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font:bold 17px Arial,sans-serif;
+  color:var(--navy);
+  line-height:1.6;
+  margin-bottom:10px;
+}
+.urdu-stmt{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-size:16px;
+  line-height:2.1;
+}
+.options{display:grid;gap:11px;margin-bottom:14px}
+.opt-btn{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  background:white;
+  border:2px solid var(--border);
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.2s;
+  color:#263746;
+}
+.opt-btn:hover:not(:disabled){
+  background:#e5f3ec;
+  border-color:var(--green);
+  transform:translateY(-1px);
+}
+.opt-btn:disabled{cursor:default}
+.opt-label{
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  line-height:28px;
+  text-align:center;
+  border-radius:50%;
+  background:#eef4f6;
+  color:var(--navy);
+  font:bold 13px Arial,sans-serif;
+}
+.opt-content{
+  flex:1;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+.opt-eng{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font:bold 15px Arial,sans-serif;
+  color:var(--navy);
+}
+.opt-urdu{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-size:14px;
+  color:#3b4d5c;
+}
+.correct-opt{
+  background:var(--emerald)!important;
+  border-color:var(--emerald)!important;
+}
+.correct-opt .opt-eng,
+.correct-opt .opt-urdu{color:white!important}
+.correct-opt .opt-label{background:white;color:var(--emerald)}
+.wrong-opt{
+  background:var(--red)!important;
+  border-color:var(--red)!important;
+}
+.wrong-opt .opt-eng,
+.wrong-opt .opt-urdu{color:white!important}
+.wrong-opt .opt-label{background:white;color:var(--red)}
+#feedback-box{
+  text-align:center;
+  margin:12px 0;
+  font-size:16px;
+  font-weight:bold;
+  min-height:36px;
+  padding:8px;
+  border-radius:8px;
+}
+.q-home-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:#f2f6f7;
+  color:var(--navy);
+  border:1.5px solid #c5d8d0;
+  padding:8px 18px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+}
+.home-btn:hover{
+  background:#e5f3ec;
+  border-color:var(--green);
+}
+.score-box{
+  text-align:center;
+  display:none;
+  padding:14px 0;
+}
+.score-box h2{color:var(--navy);font-size:24px}
+.result-card{
+  background:#f8fcfa;
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin:16px auto;
+  max-width:460px;
+}
+.result-item{
+  font-size:16px;
+  margin:10px 0;
+  color:var(--navy);
+  font-weight:bold;
+}
+.restart-btn{
+  background:var(--navy);
+  color:white;
+  border:none;
+  padding:11px 24px;
+  font-size:15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  font-weight:bold;
+}
+.restart-btn:hover{background:var(--green)}
+.final-home-wrap{margin-top:18px}
+@media(max-width:600px){
+  .container{padding:16px}
+  h1{font-size:20px}
+  .opt-content{flex-direction:column;align-items:flex-start}
+  .opt-urdu{width:100%}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="header-banner">
+    <div class="badge">HMSA LEARNING ACADEMY • GRADE 8</div>
+    <h1>جماعت ہشتم — جنرل سائنس آن لائن ٹیسٹ</h1>
+    <p class="subtitle">Grade 8 General Science Test 4 • 20 MCQs</p>
+  </div>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">Question 1 of 20</span>
+      <span class="timer" id="timer">05:00</span>
+    </div>
+
+    <div class="question-card">
+      <div id="q-topic-badge" class="q-num-badge">MCQ 1</div>
+      <div id="question-text"></div>
+    </div>
+
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+
+    <div class="q-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi> |
+        <bdi>مرکزی ہوم پیج</bdi>
+      </a>
+    </div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h2>
+      <bdi>Test Completed!</bdi> /
+      <bdi>ٹیسٹ مکمل ہو گیا!</bdi>
+    </h2>
+
+    <div class="result-card">
+      <div class="result-item" id="total-q"></div>
+      <div class="result-item" id="correct-q" style="color:#1f8a4c"></div>
+      <div class="result-item" id="wrong-q" style="color:#d90429"></div>
+      <div class="result-item" id="unanswered-q"></div>
+      <div class="result-item" id="obtained-marks"></div>
+      <div class="result-item" id="percentage-score" style="font-size:20px"></div>
+    </div>
+
+    <button type="button" class="restart-btn" onclick="startTest()">
+      <bdi>Test Again</bdi> /
+      <bdi>دوبارہ ٹیسٹ دیں</bdi>
+    </button>
+
+    <div class="final-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi> |
+        <bdi>مرکزی ہوم پیج پر واپس جائیں</bdi>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+const rawQuestions = [
+
+{
+topic:"Acids & Chemicals",
+eng:"Which acid is commonly known as the 'King of Chemicals'?",
+urdu:"درج ذیل میں سے کس تیزاب کو 'کیمیکلز کا بادشاہ' کہا جاتا ہے؟",
+options:[
+{eng:"H2SO4",urdu:"سلفیورک ایسڈ"},
+{eng:"KOH",urdu:"پوٹاشیم ہائیڈرو آکسائیڈ"},
+{eng:"HCl",urdu:"ہائیڈروکلورک ایسڈ"},
+{eng:"NaCl",urdu:"سوڈیم کلورائیڈ"}
+],
+correctIndex:0
+},
+
+{
+topic:"pH Scale",
+eng:"What is the pH value of a neutral solution such as pure water?",
+urdu:"معتدل محلول جیسے خالص پانی کی pH قدر کتنی ہوتی ہے؟",
+options:[
+{eng:"pH = 0",urdu:"پی ایچ صفر"},
+{eng:"pH = 7",urdu:"پی ایچ 7"},
+{eng:"pH = 14",urdu:"پی ایچ 14"},
+{eng:"pH = 2",urdu:"پی ایچ 2"}
+],
+correctIndex:1
+},
+
+{
+topic:"Chemical Reactions",
+eng:"The products of the reaction between zinc and dilute sulphuric acid are:",
+urdu:"زنک اور ڈائیلیوٹ سلفیورک ایسڈ کے تعامل سے حاصل ہونے والی مصنوعات کیا ہیں؟",
+options:[
+{eng:"Zinc oxide and water",urdu:"زنک آکسائیڈ اور پانی"},
+{eng:"Zinc sulphide and water",urdu:"زنک سلفائیڈ اور پانی"},
+{eng:"Zinc sulphate and hydrogen",urdu:"زنک سلفیٹ اور ہائیڈروجن"},
+{eng:"Zinc sulphide and hydrogen",urdu:"زنک سلفائیڈ اور ہائیڈروجن"}
+],
+correctIndex:2
+},
+
+{
+topic:"Chemical Bonding",
+eng:"An ionic bond is formed between atoms by the:",
+urdu:"آیونک بانڈ ایٹموں کے درمیان کس عمل سے بنتا ہے؟",
+options:[
+{eng:"Mutual sharing of protons",urdu:"پروٹانز کی باہمی شراکت"},
+{eng:"Sharing of neutrons",urdu:"نیوٹرانز کی شراکت"},
+{eng:"Formation of covalent pair",urdu:"کوویلنٹ جوڑے کی تشکیل"},
+{eng:"Transfer of electrons",urdu:"الیکٹرانز کی منتقلی"}
+],
+correctIndex:3
+},
+
+{
+topic:"Acids in Daily Life",
+eng:"Lactic acid is naturally found in:",
+urdu:"لیکٹک ایسڈ قدرتی طور پر کس چیز میں پایا جاتا ہے؟",
+options:[
+{eng:"Yogurt",urdu:"دہی میں"},
+{eng:"Grapes",urdu:"انگور میں"},
+{eng:"Tomatoes",urdu:"ٹماٹر میں"},
+{eng:"Ant's sting",urdu:"چیونٹی کے ڈنک میں"}
+],
+correctIndex:0
+},
+
+{
+topic:"Exothermic Reactions",
+eng:"Which of the following is an exothermic reaction?",
+urdu:"درج ذیل میں سے کون سا ایک حرارت خارج کرنے والا تعامل ہے؟",
+options:[
+{eng:"Decomposition of CaCO3",urdu:"کیلشیم کاربونیٹ کا ٹوٹنا"},
+{eng:"Burning of fuel",urdu:"ایندھن کا جلنا"},
+{eng:"Formation of nitric oxide",urdu:"نائٹرک آکسائیڈ کا بننا"},
+{eng:"Formation of hydrogen iodide",urdu:"ہائیڈروجن آئیوڈائیڈ کا بننا"}
+],
+correctIndex:1
+},
+
+{
+topic:"Salts",
+eng:"A salt is a compound formed by the neutralization of an acid with a:",
+urdu:"نمک ایک ایسا مرکب ہے جو تیزاب اور کس کے تعادل سے بنتا ہے؟",
+options:[
+{eng:"Non-metal gas",urdu:"غیر دھاتی گیس"},
+{eng:"Indicator dye",urdu:"اشاری رنگ"},
+{eng:"Base",urdu:"اساس"},
+{eng:"Noble gas",urdu:"نوبل گیس"}
+],
+correctIndex:2
+},
+
+{
+topic:"Balanced Equations",
+eng:"Which of the following is a balanced chemical equation?",
+urdu:"درج ذیل میں سے متوازن کیمیائی مساوات کون سی ہے؟",
+options:[
+{eng:"Fe + 3Cl2 -> 2FeCl3",urdu:"غیر متوازن مساوات"},
+{eng:"Na + Cl2 -> NaCl",urdu:"غیر متوازن مساوات"},
+{eng:"C + Cu2O -> CO + 2Cu",urdu:"غیر متوازن مساوات"},
+{eng:"2Fe + 3Cl2 -> 2FeCl3",urdu:"متوازن مساوات"}
+],
+correctIndex:3
+},
+
+{
+topic:"Covalent Bonds",
+eng:"A triple covalent bond is formed by the mutual sharing of:",
+urdu:"ٹرپل کوویلنٹ بانڈ ایٹموں کے درمیان کس کے اشتراک سے بنتا ہے؟",
+options:[
+{eng:"Three pairs of electrons",urdu:"الیکٹرانز کے تین جوڑے"},
+{eng:"One pair of electrons",urdu:"الیکٹرانز کا ایک جوڑا"},
+{eng:"Two pairs of electrons",urdu:"الیکٹرانز کے دو جوڑے"},
+{eng:"Four single electrons",urdu:"چار الگ الیکٹران"}
+],
+correctIndex:0
+},
+
+{
+topic:"Indicators & Bases",
+eng:"Sodium hydroxide solution in water will:",
+urdu:"پانی میں سوڈیم ہائیڈرو آکسائیڈ کا محلول کیا اثر دکھائے گا؟",
+options:[
+{eng:"Turn blue litmus red",urdu:"نیلے لٹمس کو سرخ کر دے گا"},
+{eng:"Give pink colour with phenolphthalein",urdu:"فینولفتھلین کے ساتھ گلابی رنگ دے گا"},
+{eng:"Give red colour with methyl orange",urdu:"میتھائل اورنج سے سرخ رنگ دے گا"},
+{eng:"Have pH less than 3",urdu:"پی ایچ 3 سے کم ہوگی"}
+],
+correctIndex:1
+},
+
+{
+topic:"Law of Conservation",
+eng:"According to the law of conservation of mass, during a chemical reaction:",
+urdu:"قانونِ بقائے مادہ کے مطابق کیمیائی تعامل کے دوران:",
+options:[
+{eng:"Mass is created",urdu:"کمیت پیدا ہوتی ہے"},
+{eng:"Mass is destroyed",urdu:"کمیت ضائع ہوتی ہے"},
+{eng:"Total mass of products equals total mass of reactants",urdu:"مصنوعات کی کل کمیت متعاملات کی کل کمیت کے برابر ہوتی ہے"},
+{eng:"Atoms disappear",urdu:"ایٹم غائب ہو جاتے ہیں"}
+],
+correctIndex:2
+},
+
+{
+topic:"Decomposition",
+eng:"Heating of solid potassium chlorate produces which gas?",
+urdu:"ٹھوس پوٹاشیم کلوریٹ کو گرم کرنے سے کون سی گیس پیدا ہوتی ہے؟",
+options:[
+{eng:"Chlorine",urdu:"کلورین گیس"},
+{eng:"Carbon dioxide",urdu:"کاربن ڈائی آکسائیڈ"},
+{eng:"Carbon monoxide",urdu:"کاربن مونو آکسائیڈ"},
+{eng:"Oxygen",urdu:"آکسیجن گیس"}
+],
+correctIndex:3
+},
+
+{
+topic:"pH Range",
+eng:"Strong acids on the pH scale typically have a pH value of:",
+urdu:"پی ایچ اسکیل پر طاقتور تیزابوں کی قدر عام طور پر ہوتی ہے:",
+options:[
+{eng:"0 to 2",urdu:"صفر سے 2 تک"},
+{eng:"8 to 11",urdu:"8 سے 11 تک"},
+{eng:"12 to 14",urdu:"12 سے 14 تک"},
+{eng:"Exactly 7",urdu:"بالکل 7"}
+],
+correctIndex:0
+},
+
+{
+topic:"Chemical Reactions",
+eng:"When carbon dioxide gas is passed through lime water, milkiness is due to:",
+urdu:"جب کاربن ڈائی آکسائیڈ گیس کو چونے کے پانی سے گزارا جائے تو دودھیا پن کس مرکب سے پیدا ہوتا ہے؟",
+options:[
+{eng:"Ca(HCO3)2",urdu:"کیلشیم بائی کاربونیٹ"},
+{eng:"CaCO3",urdu:"کیلشیم کاربونیٹ"},
+{eng:"H2CO3",urdu:"کاربونک ایسڈ"},
+{eng:"NaCl",urdu:"سوڈیم کلورائیڈ"}
+],
+correctIndex:1
+},
+
+{
+topic:"Types of Reactions",
+eng:"The chemical combination of two or more substances to form one compound is called:",
+urdu:"دو یا دو سے زیادہ مادوں کے کیمیائی ملاپ سے ایک مرکب بننے کا عمل کہلاتا ہے:",
+options:[
+{eng:"Decomposition",urdu:"تحلیل"},
+{eng:"Neutralization",urdu:"تعدیل"},
+{eng:"Combination reaction",urdu:"امتزاجی تعامل"},
+{eng:"Hydrolysis",urdu:"ہائیڈرولیسس"}
+],
+correctIndex:2
+},
+
+{
+topic:"Salts Formulae",
+eng:"What is the chemical formula of sodium hydrogen carbonate (baking soda)?",
+urdu:"سوڈیم ہائیڈروجن کاربونیٹ (بیکنگ سوڈا) کا کیمیائی فارمولا کیا ہے؟",
+options:[
+{eng:"Na2CO3",urdu:"سوڈیم کاربونیٹ"},
+{eng:"CaSO4",urdu:"کیلشیم سلفیٹ"},
+{eng:"KNO3",urdu:"پوٹاشیم نائٹریٹ"},
+{eng:"NaHCO3",urdu:"سوڈیم ہائیڈروجن کاربونیٹ"}
+],
+correctIndex:3
+},
+
+{
+topic:"Chemical Equations",
+eng:"In a chemical equation, reactants are written on which side of the arrow?",
+urdu:"کیمیائی مساوات میں متعاملات تیر کے کس جانب لکھے جاتے ہیں؟",
+options:[
+{eng:"Left-hand side",urdu:"بائیں جانب"},
+{eng:"Right-hand side",urdu:"دائیں جانب"},
+{eng:"Above the arrow",urdu:"تیر کے اوپر"},
+{eng:"Below the arrow",urdu:"تیر کے نیچے"}
+],
+correctIndex:0
+},
+
+{
+topic:"Alkalis & pH",
+eng:"Strong alkalis commonly have pH values in the range of:",
+urdu:"طاقتور الکلیز کی pH قدر عام طور پر کس حد میں ہوتی ہے؟",
+options:[
+{eng:"0 to 2",urdu:"صفر سے 2 تک"},
+{eng:"12 to 14",urdu:"12 سے 14 تک"},
+{eng:"3 to 6",urdu:"3 سے 6 تک"},
+{eng:"5 to 7",urdu:"5 سے 7 تک"}
+],
+correctIndex:1
+},
+
+{
+topic:"Atoms & Oxygen",
+eng:"How many oxygen atoms are present in one molecule of Mg(HCO3)2?",
+urdu:"Mg(HCO3)2 کے ایک مالیکیول میں آکسیجن کے کتنے ایٹم موجود ہیں؟",
+options:[
+{eng:"2 atoms",urdu:"2 ایٹم"},
+{eng:"3 atoms",urdu:"3 ایٹم"},
+{eng:"6 atoms",urdu:"6 ایٹم"},
+{eng:"4 atoms",urdu:"4 ایٹم"}
+],
+correctIndex:2
+},
+
+{
+topic:"Reaction Types",
+eng:"The reaction between calcium oxide and carbon dioxide to form calcium carbonate is a:",
+urdu:"کیلشیم آکسائیڈ اور کاربن ڈائی آکسائیڈ کے تعامل سے کیلشیم کاربونیٹ بننے کا عمل کس قسم کا تعامل ہے؟",
+options:[
+{eng:"Decomposition reaction",urdu:"تحلیلی تعامل"},
+{eng:"Neutralization reaction",urdu:"تعدیلی تعامل"},
+{eng:"Electrolysis",urdu:"برقی پاشیدگی"},
+{eng:"Combination reaction",urdu:"امتزاجی تعامل"}
+],
+correctIndex:3
+}
+
+];
+
+const labels=["A","B","C","D"];
+
+let activeQuestions=[];
+let idx=0;
+let score=0;
+let wrong=0;
+let answeredCount=0;
+let answeredCurrent=false;
+let autoNextTimeout=null;
+let timerInterval=null;
+let timeLeft=300;
+let testFinished=false;
+
+function shuffleArray(arr){
+  const copy=arr.slice();
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function buildShuffledQuiz(){
+  return shuffleArray(rawQuestions).map(item=>{
+    const taggedOptions=item.options.map((opt,i)=>({
+      eng:opt.eng,
+      urdu:opt.urdu,
+      isCorrect:i===item.correctIndex
+    }));
+
+    const shuffledOptions=shuffleArray(taggedOptions);
+
+    return {
+      topic:item.topic,
+      eng:item.eng,
+      urdu:item.urdu,
+      options:shuffledOptions,
+      answer:shuffledOptions.findIndex(o=>o.isCorrect)
+    };
+  });
+}
+
+function startTest(){
+  clearInterval(timerInterval);
+  clearTimeout(autoNextTimeout);
+
+  activeQuestions=buildShuffledQuiz();
+  idx=0;
+  score=0;
+  wrong=0;
+  answeredCount=0;
+  answeredCurrent=false;
+  testFinished=false;
+  timeLeft=300;
+
+  document.getElementById("score-screen").style.display="none";
+  document.getElementById("quiz-screen").style.display="block";
+
+  startTimer();
+  loadQuestion();
+}
+
+function startTimer(){
+  updateTimerDisplay();
+
+  timerInterval=setInterval(()=>{
+    if(testFinished)return;
+
+    timeLeft--;
+    updateTimerDisplay();
+
+    if(timeLeft<=0){
+      clearInterval(timerInterval);
+      clearTimeout(autoNextTimeout);
+      showResult();
+    }
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const m=Math.floor(timeLeft/60);
+  const s=timeLeft%60;
+
+  document.getElementById("timer").innerText=
+    `${m}:${s<10?"0":""}${s}`;
+}
+
+function loadQuestion(){
+  if(testFinished)return;
+
+  answeredCurrent=false;
+
+  const q=activeQuestions[idx];
+
+  document.getElementById("q-topic-badge").innerText=
+    `MCQ ${idx+1} • ${q.topic}`;
+
+  document.getElementById("question-text").innerHTML=`
+    <div class="eng-stmt"><bdi>${idx+1}. ${q.eng}</bdi></div>
+    <div class="urdu-stmt"><bdi>${idx+1}. ${q.urdu}</bdi></div>
+  `;
+
+  const box=document.getElementById("options-box");
+  box.innerHTML="";
+
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="opt-btn";
+
+    btn.innerHTML=`
+      <span class="opt-label">${labels[i]}</span>
+      <span class="opt-content">
+        <span class="opt-eng"><bdi>${opt.eng}</bdi></span>
+        <span class="opt-urdu"><bdi>${opt.urdu}</bdi></span>
+      </span>
+    `;
+
+    btn.onclick=()=>checkAnswer(i,btn);
+    box.appendChild(btn);
+  });
+
+  document.getElementById("progress-text").innerText=
+    `Question ${idx+1} of ${activeQuestions.length}`;
+
+  const fb=document.getElementById("feedback-box");
+  fb.innerHTML="";
+  fb.style.background="transparent";
+}
+
+function checkAnswer(selectedIdx,btn){
+  if(answeredCurrent || testFinished)return;
+
+  answeredCurrent=true;
+  answeredCount++;
+
+  const q=activeQuestions[idx];
+  const btns=document.querySelectorAll(".opt-btn");
+
+  btns.forEach(b=>b.disabled=true);
+
+  const fb=document.getElementById("feedback-box");
+  const correctOpt=q.options[q.answer];
+  const correctLetter=labels[q.answer];
+
+  if(selectedIdx===q.answer){
+    score++;
+    btn.classList.add("correct-opt");
+
+    fb.style.background="#e5f7ed";
+    fb.innerHTML=`
+      <span style="color:#1f8a4c">
+        ✅ <bdi>Correct! (${correctLetter})</bdi> |
+        <bdi>درست جواب!</bdi>
+      </span>
+    `;
+  }else{
+    wrong++;
+    btn.classList.add("wrong-opt");
+    btns[q.answer].classList.add("correct-opt");
+
+    fb.style.background="#fdecef";
+    fb.innerHTML=`
+      <span style="color:#d90429">
+        ❌ <bdi>Wrong! Correct: ${correctLetter} (${correctOpt.eng})</bdi>
+        <br>
+        <bdi>غلط جواب! درست آپشن: ${correctLetter} — ${correctOpt.urdu}</bdi>
+      </span>
+    `;
+  }
+
+  clearTimeout(autoNextTimeout);
+
+  autoNextTimeout=setTimeout(()=>{
+    if(testFinished)return;
+
+    idx++;
+
+    if(idx<activeQuestions.length){
+      loadQuestion();
+    }else{
+      showResult();
+    }
+  },1500);
+}
+
+function showResult(){
+  if(testFinished)return;
+
+  testFinished=true;
+
+  clearInterval(timerInterval);
+  clearTimeout(autoNextTimeout);
+
+  const total=activeQuestions.length;
+  const unanswered=total-answeredCount;
+  const percentage=Math.round((score/total)*100);
+
+  document.getElementById("quiz-screen").style.display="none";
+  document.getElementById("score-screen").style.display="block";
+
+  document.getElementById("total-q").innerHTML=
+    `<bdi>Total Questions: ${total}</bdi> | <bdi>کل سوالات: ${total}</bdi>`;
+
+  document.getElementById("correct-q").innerHTML=
+    `<bdi>Correct Answers: ${score}</bdi> | <bdi>درست جوابات: ${score}</bdi>`;
+
+  document.getElementById("wrong-q").innerHTML=
+    `<bdi>Wrong Answers: ${wrong}</bdi> | <bdi>غلط جوابات: ${wrong}</bdi>`;
+
+  document.getElementById("unanswered-q").innerHTML=
+    `<bdi>Unanswered: ${unanswered}</bdi> | <bdi>بغیر جواب سوالات: ${unanswered}</bdi>`;
+
+  document.getElementById("obtained-marks").innerHTML=
+    `<bdi>Obtained Marks: ${score} / ${total}</bdi> | <bdi>حاصل کردہ نمبر: ${score} / ${total}</bdi>`;
+
+  document.getElementById("percentage-score").innerHTML=
+    `<bdi>Percentage: ${percentage}%</bdi> | <bdi>فیصد: ${percentage}%</bdi>`;
+}
+
+window.onload=startTest;
+</script>
+</body>
+</html>
