@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 Mathematics Test 4 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#102b4c;
+  --green:#087c59;
+  --emerald:#1f8a4c;
+  --gold:#e8c66b;
+  --light:#f2f6f7;
+  --red:#d90429;
+  --border:#d7e5df;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Noto Nastaliq Urdu',Tahoma,Arial,sans-serif;
+  background:linear-gradient(135deg,#eef4f6 0%,#e3efe9 100%);
+  color:#263746;
+  padding:16px;
+  line-height:1.9;
+}
+.container{
+  max-width:820px;
+  margin:auto;
+  background:#fff;
+  padding:26px;
+  border-radius:15px;
+  box-shadow:0 8px 24px rgba(16,43,76,.1);
+  border-top:6px solid var(--green);
+}
+.header-banner{
+  text-align:center;
+  border-bottom:2px solid var(--border);
+  padding-bottom:14px;
+  margin-bottom:18px;
+}
+.badge{
+  display:inline-block;
+  background:#e5f3ec;
+  color:var(--green);
+  font-weight:bold;
+  font-size:13px;
+  padding:4px 12px;
+  border-radius:20px;
+  margin-bottom:6px;
+  font-family:Arial,sans-serif;
+}
+h1{
+  margin:4px 0;
+  color:var(--navy);
+  font-size:24px;
+}
+.subtitle{
+  margin:0;
+  color:#5b6b7a;
+  font-size:14px;
+  font-family:Arial,sans-serif;
+}
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#e5f3ec;
+  padding:11px 16px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font-weight:bold;
+  color:var(--navy);
+  font-family:Arial,sans-serif;
+}
+.timer{
+  background:var(--red);
+  color:#fff;
+  padding:4px 12px;
+  border-radius:6px;
+  font-size:15px;
+  letter-spacing:.5px;
+}
+.question-card{
+  background:#f8fcfa;
+  border:1px solid var(--border);
+  border-left:5px solid var(--green);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.q-num-badge{
+  display:inline-block;
+  background:var(--navy);
+  color:#fff;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  font-weight:bold;
+  padding:2px 9px;
+  border-radius:5px;
+  margin-bottom:8px;
+}
+.eng-stmt{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--navy);
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.5;
+  margin-bottom:8px;
+}
+.urdu-stmt{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  color:#263746;
+  font-size:16px;
+  line-height:2.1;
+}
+.options{
+  display:grid;
+  gap:11px;
+  margin-bottom:14px;
+}
+.opt-btn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  background:#fff;
+  border:2px solid var(--border);
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:all .2s ease;
+  color:#263746;
+}
+.opt-btn:hover:not(:disabled){
+  background:#e5f3ec;
+  border-color:var(--green);
+  transform:translateY(-1px);
+}
+.opt-btn:disabled{cursor:default}
+.opt-label{
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  line-height:26px;
+  text-align:center;
+  border-radius:50%;
+  background:#eef4f6;
+  color:var(--navy);
+  font-family:Arial,sans-serif;
+  font-weight:bold;
+  font-size:13px;
+}
+.opt-content{
+  flex:1;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.opt-eng{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:bold;
+  font-size:15px;
+  color:var(--navy);
+}
+.opt-urdu{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  font-size:14px;
+  color:#3b4d5c;
+}
+.correct-opt{
+  background:var(--emerald)!important;
+  border-color:var(--emerald)!important;
+  color:#fff!important;
+}
+.correct-opt .opt-eng,.correct-opt .opt-urdu{color:#fff!important}
+.correct-opt .opt-label{background:#fff;color:var(--emerald)}
+.wrong-opt{
+  background:var(--red)!important;
+  border-color:var(--red)!important;
+  color:#fff!important;
+}
+.wrong-opt .opt-eng,.wrong-opt .opt-urdu{color:#fff!important}
+.wrong-opt .opt-label{background:#fff;color:var(--red)}
+#feedback-box{
+  text-align:center;
+  margin:12px 0;
+  font-size:16px;
+  font-weight:bold;
+  min-height:36px;
+  padding:6px 10px;
+  border-radius:8px;
+}
+.q-home-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:#f2f6f7;
+  color:var(--navy);
+  border:1.5px solid #c5d8d0;
+  padding:8px 18px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  transition:.2s;
+}
+.home-btn:hover{
+  background:#e5f3ec;
+  border-color:var(--green);
+  color:var(--green);
+}
+.score-box{
+  text-align:center;
+  display:none;
+  padding:14px 0;
+}
+.score-box h2{
+  color:var(--navy);
+  font-size:24px;
+  margin-bottom:12px;
+}
+.result-card{
+  background:#f8fcfa;
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin:16px auto;
+  max-width:440px;
+}
+.result-item{
+  font-size:16px;
+  margin:10px 0;
+  color:var(--navy);
+  font-weight:bold;
+}
+.restart-btn{
+  background:var(--navy);
+  color:#fff;
+  border:none;
+  padding:11px 24px;
+  font-size:15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  font-weight:bold;
+}
+.restart-btn:hover{background:var(--green)}
+.final-home-wrap{margin-top:18px}
+@media(max-width:600px){
+  .container{padding:16px}
+  h1{font-size:20px}
+  .opt-content{flex-direction:column;align-items:flex-start}
+  .opt-urdu{width:100%}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="header-banner">
+    <div class="badge">HMSA LEARNING ACADEMY • GRADE 8</div>
+    <h1>جماعت ہشتم — ریاضی آن لائن ٹیسٹ 4</h1>
+    <p class="subtitle">Grade 8 Mathematics Online Test 4 (Bilingual • 20 MCQs)</p>
+  </div>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">Question 1 of 20</span>
+      <span class="timer" id="timer">05:00</span>
+    </div>
+
+    <div id="question-card" class="question-card">
+      <div id="q-topic-badge" class="q-num-badge">MCQ</div>
+      <div id="question-text"></div>
+    </div>
+
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+
+    <div class="q-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج</bdi>
+      </a>
+    </div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h2>
+      <bdi>Test 4 Completed!</bdi>
+      <span> / </span>
+      <bdi>ٹیسٹ 4 مکمل ہو گیا!</bdi>
+    </h2>
+
+    <div class="result-card">
+      <div class="result-item" id="total-q"></div>
+      <div class="result-item" id="correct-q" style="color:#1f8a4c;"></div>
+      <div class="result-item" id="wrong-q" style="color:#d90429;"></div>
+      <div class="result-item" id="unanswered-q"></div>
+      <div class="result-item" id="obtained-marks"></div>
+      <div class="result-item" id="percentage-score" style="color:#102b4c;font-size:20px;"></div>
+    </div>
+
+    <button type="button" class="restart-btn" onclick="startTest()">
+      <bdi>Test Again</bdi>
+      <span> / </span>
+      <bdi>دوبارہ ٹیسٹ دیں</bdi>
+    </button>
+
+    <div class="final-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج پر واپس جائیں</bdi>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Grade 8 Mathematics Test 4
+// 20 MCQs | 5 minutes | Random questions and options
+
+const rawQuestions = [
+{
+topic:"Decimal Fractions",
+eng:"In a terminating decimal fraction, the number of digits after the decimal point is:",
+urdu:"مختتم اعشاری کسر (Terminating decimal) میں اعشاریے کے بعد ہندسوں کی تعداد ہوتی ہے:",
+options:[
+{eng:"Finite",urdu:"محدود"},
+{eng:"Infinite repeating",urdu:"لامحدود مکرر"},
+{eng:"Always zero",urdu:"ہمیشہ صفر"},
+{eng:"Negative",urdu:"منفی"}
+],
+correctIndex:0
+},
+{
+topic:"Real Number Properties",
+eng:"For any real number 'a', what is '0' called in the relation a + 0 = a?",
+urdu:"کسی حقیقی عدد 'a' کے لیے تعلق a + 0 = a میں عدد '0' کہلاتا ہے:",
+options:[
+{eng:"Multiplicative identity",urdu:"ضربی شناخت"},
+{eng:"Additive identity",urdu:"جمعی شناخت"},
+{eng:"Additive inverse",urdu:"جمعی معکوس"},
+{eng:"Irrational number",urdu:"غیر ناطق عدد"}
+],
+correctIndex:1
+},
+{
+topic:"Polynomials",
+eng:"What is the degree of the term 2x^3y^4?",
+urdu:"رقم 2x^3y^4 کا درجہ (Degree) کیا ہے؟",
+options:[
+{eng:"3",urdu:"درجہ 3"},
+{eng:"4",urdu:"درجہ 4"},
+{eng:"7",urdu:"درجہ 7"},
+{eng:"12",urdu:"درجہ 12"}
+],
+correctIndex:2
+},
+{
+topic:"Volume of Pyramid",
+eng:"The volume of a pyramid is always ___ of the volume of a prism with the same base area and height.",
+urdu:"ایک اہرام (Pyramid) کا حجم اسی قاعدے کے رقبے اور اونچائی والے منشور (Prism) کے حجم کا کتنا ہوتا ہے؟",
+options:[
+{eng:"Two-third",urdu:"دو تہائی"},
+{eng:"One-fourth",urdu:"ایک چوتھائی"},
+{eng:"Equal to prism",urdu:"منشور کے برابر"},
+{eng:"One-third",urdu:"ایک تہائی"}
+],
+correctIndex:3
+},
+{
+topic:"Irrational Numbers",
+eng:"Which of the following is an irrational number?",
+urdu:"درج ذیل میں سے کون سا ایک غیر ناطق عدد (Irrational number) ہے؟",
+options:[
+{eng:"sqrt(5)",urdu:"جذر 5"},
+{eng:"sqrt(25)",urdu:"جذر 25"},
+{eng:"2.751",urdu:"اعشاری عدد 2.751"},
+{eng:"1/7",urdu:"کسر 1/7"}
+],
+correctIndex:0
+},
+{
+topic:"Laws of Exponents",
+eng:"Using the laws of exponents, what is the simplified form of a^m × a^n?",
+urdu:"قوت نما کے قوانین کے مطابق a^m × a^n کی سادہ صورت کیا ہے؟",
+options:[
+{eng:"a^(m-n)",urdu:"طاقتوں کا فرق"},
+{eng:"a^(m+n)",urdu:"طاقتوں کا مجموعہ"},
+{eng:"a^(mn)",urdu:"طاقتوں کا حاصل ضرب"},
+{eng:"2a^(m+n)",urdu:"دوگنا مجموعہ"}
+],
+correctIndex:1
+},
+{
+topic:"Right Triangle",
+eng:"In a right-angled triangle, the side opposite to the right angle (90 degrees) is called:",
+urdu:"قائم الزاویہ مثلث میں زاویہ قائمہ (90 درجے) کے سامنے والا ضلع کہلاتا ہے:",
+options:[
+{eng:"Perpendicular",urdu:"عمود"},
+{eng:"Base",urdu:"قاعدہ"},
+{eng:"Hypotenuse",urdu:"وتر"},
+{eng:"Altitude",urdu:"ارتفاع"}
+],
+correctIndex:2
+},
+{
+topic:"Absolute Value",
+eng:"What is the absolute value |-21| of -21?",
+urdu:"عدد -21 کی مطلق قدر (Absolute value) |-21| کتنی ہے؟",
+options:[
+{eng:"-21",urdu:"منفی 21"},
+{eng:"0",urdu:"صفر"},
+{eng:"-1/21",urdu:"منفی کسر"},
+{eng:"21",urdu:"مثبت 21"}
+],
+correctIndex:3
+},
+{
+topic:"Factorization",
+eng:"Factorize x^2 + 14x + 49 using an algebraic identity.",
+urdu:"الجبری کلیے کی مدد سے x^2 + 14x + 49 کا تجزی کریں:",
+options:[
+{eng:"(x + 7)^2",urdu:"ایکس جمع 7 کا مربع"},
+{eng:"(x - 7)^2",urdu:"ایکس منفی 7 کا مربع"},
+{eng:"(x - 7)(x + 7)",urdu:"مربعوں کا فرق"},
+{eng:"(x + 14)(x + 3)",urdu:"ایکس جمع 14 اور 3"}
+],
+correctIndex:0
+},
+{
+topic:"Circle Tangent",
+eng:"A straight line that touches a circle at exactly one point is called:",
+urdu:"وہ سیدھا خط جو دائرے کو صرف ایک نقطے پر چھوتا ہے کہلاتا ہے:",
+options:[
+{eng:"Chord",urdu:"وترِ دائرہ"},
+{eng:"Tangent",urdu:"مماس"},
+{eng:"Sector",urdu:"قطاعِ دائرہ"},
+{eng:"Diameter",urdu:"قطرِ دائرہ"}
+],
+correctIndex:1
+},
+{
+topic:"Significant Figures",
+eng:"How many significant figures are in the number 25901?",
+urdu:"عدد 25901 میں نمایاں ہندسوں (Significant Figures) کی تعداد کتنی ہے؟",
+options:[
+{eng:"3 s.f.",urdu:"تین نمایاں ہندسے"},
+{eng:"4 s.f.",urdu:"چار نمایاں ہندسے"},
+{eng:"5 s.f.",urdu:"پانچ نمایاں ہندسے"},
+{eng:"2 s.f.",urdu:"دو نمایاں ہندسے"}
+],
+correctIndex:2
+},
+{
+topic:"Surface Area of Sphere",
+eng:"What is the formula for the surface area of a sphere of radius r?",
+urdu:"رداس r والے کرہ (Sphere) کے سطحی رقبے کا درست کلیہ کون سا ہے؟",
+options:[
+{eng:"(4/3) × pi × r^3",urdu:"کرہ کے حجم کا کلیہ"},
+{eng:"2 × pi × r × h",urdu:"سلنڈر کا خمیدہ رقبہ"},
+{eng:"pi × r^2",urdu:"دائرے کا رقبہ"},
+{eng:"4 × pi × r^2",urdu:"چار ضرب پائی ضرب رداس کا مربع"}
+],
+correctIndex:3
+},
+{
+topic:"Algebraic Expressions",
+eng:"An algebraic expression in which the exponents of variables are non-negative integers is called:",
+urdu:"ایسا الجبری جملہ جس میں متغیرات کے قوت نما غیر منفی صحیح اعداد ہوں، کہلاتا ہے:",
+options:[
+{eng:"Polynomial",urdu:"کثیر رقمی"},
+{eng:"Inequality",urdu:"غیر مساوات"},
+{eng:"Closed sentence",urdu:"بند جملہ"},
+{eng:"Irrational term",urdu:"غیر ناطق رقم"}
+],
+correctIndex:0
+},
+{
+topic:"Concentric Circles",
+eng:"Circles having a common centre and different radii are known as:",
+urdu:"ایسے دائرے جن کا مرکز مشترک ہو مگر رداس مختلف ہوں، کہلاتے ہیں:",
+options:[
+{eng:"Minor arcs",urdu:"قوسِ اصغر"},
+{eng:"Concentric circles",urdu:"ہم مرکز دائرے"},
+{eng:"Tangent lines",urdu:"مماسی خطوط"},
+{eng:"Right sectors",urdu:"قائمہ قطاع"}
+],
+correctIndex:1
+},
+{
+topic:"Difference of Squares",
+eng:"What are the factors of 25x^2 - 64?",
+urdu:"عبارت 25x^2 - 64 کے اجزائے ضربی (Factors) کیا ہیں؟",
+options:[
+{eng:"(5x - 8)^2",urdu:"مربع مکمل"},
+{eng:"(5x + 8)^2",urdu:"جمع کا مربع"},
+{eng:"(5x + 8)(5x - 8)",urdu:"(پانچ ایکس جمع آٹھ) ضرب (پانچ ایکس منفی آٹھ)"},
+{eng:"(25x - 1)(x + 64)",urdu:"دیگر اجزاء"}
+],
+correctIndex:2
+},
+{
+topic:"Standard Form",
+eng:"Express 3.52 × 10^6 in ordinary decimal form.",
+urdu:"عدد 3.52 × 10^6 کو عام اعشاری صورت میں لکھیں:",
+options:[
+{eng:"352000",urdu:"352000"},
+{eng:"0.00000352",urdu:"0.00000352"},
+{eng:"35200",urdu:"35200"},
+{eng:"3520000",urdu:"3520000"}
+],
+correctIndex:3
+},
+{
+topic:"Volume of Cone",
+eng:"What is the formula for the volume of a right circular cone?",
+urdu:"قائم دائرہ نما مخروط (Cone) کے حجم کا کلیہ کیا ہے؟",
+options:[
+{eng:"(1/3) × pi × r^2 × h",urdu:"ایک تہائی ضرب پائی ضرب رداس مربع ضرب اونچائی"},
+{eng:"4 × pi × r^2",urdu:"کرہ کا سطحی رقبہ"},
+{eng:"2 × pi × r × (r + h)",urdu:"کل سطحی رقبے کا کلیہ"},
+{eng:"(2/3) × pi × r^3",urdu:"نصف کرہ کا حجم"}
+],
+correctIndex:0
+},
+{
+topic:"Additive Inverse",
+eng:"In pi + (-pi) = 0, -pi is the ___ of pi.",
+urdu:"تعلق pi + (-pi) = 0 میں -pi عدد pi کا کیا کہلاتا ہے؟",
+options:[
+{eng:"Multiplicative inverse",urdu:"ضربی معکوس"},
+{eng:"Additive inverse",urdu:"جمعی معکوس"},
+{eng:"Common factor",urdu:"مشترک جزو"},
+{eng:"Decimal form",urdu:"اعشاری صورت"}
+],
+correctIndex:1
+},
+{
+topic:"Minor Arc",
+eng:"An arc of a circle whose measure is less than 180 degrees is called a:",
+urdu:"دائرے کی وہ قوس جس کی پیمائش 180 درجے سے کم ہو، کہلاتی ہے:",
+options:[
+{eng:"Major arc",urdu:"قوسِ اکبر"},
+{eng:"Sector area",urdu:"رقبہ قطاع"},
+{eng:"Minor arc",urdu:"قوسِ اصغر"},
+{eng:"Chord segment",urdu:"قطعہ وتر"}
+],
+correctIndex:2
+},
+{
+topic:"Algebraic Formula",
+eng:"Using (a + b)(a - b) = a^2 - b^2, what is the value of 107 × 93?",
+urdu:"کلیہ (a + b)(a - b) = a^2 - b^2 کے مطابق 107 × 93 کی قیمت کیا ہوگی؟",
+options:[
+{eng:"10049",urdu:"10049"},
+{eng:"11449",urdu:"11449"},
+{eng:"7569",urdu:"7569"},
+{eng:"9951",urdu:"9951"}
+],
+correctIndex:3
+}
+];
+
+const labels = ["A","B","C","D"];
+
+let activeQuestions = [];
+let idx = 0;
+let score = 0;
+let wrong = 0;
+let answeredCount = 0;
+let answeredCurrent = false;
+let autoNextTimeout = null;
+let timerInterval = null;
+let timeLeft = 300;
+let testFinished = false;
+
+function shuffleArray(arr){
+  const copy = arr.slice();
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function buildShuffledQuiz(){
+  const shuffledQs = shuffleArray(rawQuestions);
+
+  return shuffledQs.map(item=>{
+    const taggedOptions = item.options.map((opt,originalIndex)=>({
+      eng:opt.eng,
+      urdu:opt.urdu,
+      isCorrect:originalIndex===item.correctIndex
+    }));
+
+    const shuffledOptions = shuffleArray(taggedOptions);
+    const newCorrectIndex = shuffledOptions.findIndex(o=>o.isCorrect);
+
+    return {
+      topic:item.topic,
+      eng:item.eng,
+      urdu:item.urdu,
+      options:shuffledOptions,
+      answer:newCorrectIndex
+    };
+  });
+}
+
+function startTest(){
+  clearTimeout(autoNextTimeout);
+  clearInterval(timerInterval);
+
+  testFinished = false;
+  activeQuestions = buildShuffledQuiz();
+  idx = 0;
+  score = 0;
+  wrong = 0;
+  answeredCount = 0;
+  answeredCurrent = false;
+  timeLeft = 300;
+
+  document.getElementById("score-screen").style.display="none";
+  document.getElementById("quiz-screen").style.display="block";
+
+  startTimer();
+  loadQuestion();
+}
+
+function startTimer(){
+  clearInterval(timerInterval);
+  updateTimerDisplay();
+
+  timerInterval = setInterval(()=>{
+    if(testFinished){
+      clearInterval(timerInterval);
+      return;
+    }
+
+    timeLeft--;
+
+    if(timeLeft<=0){
+      timeLeft=0;
+      updateTimerDisplay();
+      clearInterval(timerInterval);
+      clearTimeout(autoNextTimeout);
+      showResult();
+      return;
+    }
+
+    updateTimerDisplay();
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const minutes=Math.floor(timeLeft/60);
+  const seconds=timeLeft%60;
+
+  document.getElementById("timer").innerText =
+    `${minutes<10?"0":""}${minutes}:${seconds<10?"0":""}${seconds}`;
+}
+
+function loadQuestion(){
+  if(testFinished || idx>=activeQuestions.length){
+    showResult();
+    return;
+  }
+
+  answeredCurrent=false;
+
+  const q=activeQuestions[idx];
+
+  document.getElementById("q-topic-badge").innerText =
+    `MCQ ${idx+1} • ${q.topic}`;
+
+  document.getElementById("question-text").innerHTML=`
+    <div class="eng-stmt">
+      <bdi>${idx+1}. ${q.eng}</bdi>
+    </div>
+    <div class="urdu-stmt">
+      <bdi>${idx+1}. ${q.urdu}</bdi>
+    </div>
+  `;
+
+  const box=document.getElementById("options-box");
+  box.innerHTML="";
+
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="opt-btn";
+
+    btn.innerHTML=`
+      <span class="opt-label">${labels[i]}</span>
+      <span class="opt-content">
+        <span class="opt-eng"><bdi>${opt.eng}</bdi></span>
+        <span class="opt-urdu"><bdi>${opt.urdu}</bdi></span>
+      </span>
+    `;
+
+    btn.onclick=()=>checkAnswer(i,btn);
+    box.appendChild(btn);
+  });
+
+  document.getElementById("progress-text").innerText =
+    `Question ${idx+1} of ${activeQuestions.length}`;
+
+  const fb=document.getElementById("feedback-box");
+  fb.innerHTML="";
+  fb.style.background="transparent";
+}
+
+function checkAnswer(selectedIdx,btn){
+  if(testFinished || answeredCurrent) return;
+
+  answeredCurrent=true;
+  answeredCount++;
+
+  const btns=document.querySelectorAll(".opt-btn");
+  btns.forEach(b=>b.disabled=true);
+
+  const q=activeQuestions[idx];
+  const fb=document.getElementById("feedback-box");
+  const correctOpt=q.options[q.answer];
+  const correctLetter=labels[q.answer];
+
+  if(selectedIdx===q.answer){
+    score++;
+    btn.classList.add("correct-opt");
+
+    fb.style.background="#e5f7ed";
+    fb.innerHTML=`
+      <span style="color:#1f8a4c;">
+        ✅ <bdi>Correct! (${correctLetter})</bdi>
+        |
+        <bdi>درست جواب! (${correctLetter})</bdi>
+      </span>
+    `;
+  }else{
+    wrong++;
+    btn.classList.add("wrong-opt");
+    btns[q.answer].classList.add("correct-opt");
+
+    fb.style.background="#fdecef";
+    fb.innerHTML=`
+      <span style="color:#d90429;">
+        ❌ <bdi>Wrong! Correct: ${correctLetter} (${correctOpt.eng})</bdi>
+        <br>
+        <bdi>غلط جواب! درست آپشن: ${correctLetter} — ${correctOpt.urdu}</bdi>
+      </span>
+    `;
+  }
+
+  clearTimeout(autoNextTimeout);
+
+  autoNextTimeout=setTimeout(()=>{
+    if(testFinished) return;
+
+    idx++;
+
+    if(idx<activeQuestions.length){
+      loadQuestion();
+    }else{
+      showResult();
+    }
+  },1500);
+}
+
+function showResult(){
+  if(testFinished) return;
+
+  testFinished=true;
+
+  clearInterval(timerInterval);
+  clearTimeout(autoNextTimeout);
+
+  const total=activeQuestions.length;
+  const unanswered=total-answeredCount;
+  const percentage=Math.round((score/total)*100);
+
+  document.getElementById("quiz-screen").style.display="none";
+  document.getElementById("score-screen").style.display="block";
+
+  document.getElementById("total-q").innerHTML=
+    `<bdi>Total Questions: ${total}</bdi> | <bdi>کل سوالات: ${total}</bdi>`;
+
+  document.getElementById("correct-q").innerHTML=
+    `<bdi>Correct Answers: ${score}</bdi> | <bdi>درست جوابات: ${score}</bdi>`;
+
+  document.getElementById("wrong-q").innerHTML=
+    `<bdi>Wrong Answers: ${wrong}</bdi> | <bdi>غلط جوابات: ${wrong}</bdi>`;
+
+  document.getElementById("unanswered-q").innerHTML=
+    `<bdi>Unanswered: ${unanswered}</bdi> | <bdi>غیر حل شدہ: ${unanswered}</bdi>`;
+
+  document.getElementById("obtained-marks").innerHTML=
+    `<bdi>Obtained Marks: ${score} / ${total}</bdi> | <bdi>حاصل کردہ نمبر: ${score} / ${total}</bdi>`;
+
+  document.getElementById("percentage-score").innerHTML=
+    `<bdi>Percentage: ${percentage}%</bdi> | <bdi>فیصد: ${percentage}%</bdi>`;
+}
+
+window.onload=startTest;
+</script>
+</body>
+</html>
