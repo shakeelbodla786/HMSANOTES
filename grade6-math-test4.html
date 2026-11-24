@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 6 Mathematics Test 4 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#102b4c;
+  --green:#087c59;
+  --emerald:#1f8a4c;
+  --red:#d90429;
+  --border:#d7e5df;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:16px;
+  font-family:'Noto Nastaliq Urdu',Tahoma,Arial,sans-serif;
+  background:linear-gradient(135deg,#eef4f6,#e3efe9);
+  color:#263746;
+  line-height:1.9;
+}
+.container{
+  max-width:820px;
+  margin:auto;
+  background:#fff;
+  padding:26px;
+  border-radius:15px;
+  box-shadow:0 8px 24px rgba(16,43,76,.1);
+  border-top:6px solid var(--green);
+}
+.header-banner{
+  text-align:center;
+  border-bottom:2px solid var(--border);
+  padding-bottom:14px;
+  margin-bottom:18px;
+}
+.badge{
+  display:inline-block;
+  background:#e5f3ec;
+  color:var(--green);
+  font:bold 13px Arial,sans-serif;
+  padding:4px 12px;
+  border-radius:20px;
+}
+h1{color:var(--navy);font-size:24px;margin:8px 0}
+.subtitle{color:#5b6b7a;font:14px Arial,sans-serif}
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#e5f3ec;
+  padding:11px 16px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font:bold 15px Arial,sans-serif;
+  color:var(--navy);
+}
+.timer{
+  background:var(--red);
+  color:white;
+  padding:4px 12px;
+  border-radius:6px;
+  font-size:16px;
+}
+.question-card{
+  background:#f8fcfa;
+  border:1px solid var(--border);
+  border-left:5px solid var(--green);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.q-num-badge{
+  display:inline-block;
+  background:var(--navy);
+  color:white;
+  font: bold 12px Arial,sans-serif;
+  padding:3px 9px;
+  border-radius:5px;
+  margin-bottom:8px;
+}
+.eng-stmt{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font: bold 17px/1.5 Arial,sans-serif;
+  color:var(--navy);
+  margin-bottom:8px;
+}
+.urdu-stmt{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font:16px/2.1 'Noto Nastaliq Urdu',Tahoma,sans-serif;
+}
+.options{display:grid;gap:11px;margin-bottom:14px}
+.opt-btn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  background:#fff;
+  border:2px solid var(--border);
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  color:#263746;
+  transition:.2s;
+}
+.opt-btn:hover:not(:disabled){
+  background:#e5f3ec;
+  border-color:var(--green);
+}
+.opt-btn:disabled{cursor:default}
+.opt-label{
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  line-height:28px;
+  text-align:center;
+  border-radius:50%;
+  background:#eef4f6;
+  color:var(--navy);
+  font:bold 13px/28px Arial,sans-serif;
+}
+.opt-content{
+  flex:1;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.opt-eng{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font:bold 15px Arial,sans-serif;
+  color:var(--navy);
+}
+.opt-urdu{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font:14px 'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  color:#3b4d5c;
+}
+.correct-opt{
+  background:var(--emerald)!important;
+  border-color:var(--emerald)!important;
+}
+.correct-opt .opt-eng,.correct-opt .opt-urdu{color:white!important}
+.correct-opt .opt-label{background:white;color:var(--emerald)}
+.wrong-opt{
+  background:var(--red)!important;
+  border-color:var(--red)!important;
+}
+.wrong-opt .opt-eng,.wrong-opt .opt-urdu{color:white!important}
+.wrong-opt .opt-label{background:white;color:var(--red)}
+#feedback-box{
+  text-align:center;
+  margin:12px 0;
+  font-size:16px;
+  font-weight:bold;
+  min-height:36px;
+  padding:6px 10px;
+  border-radius:8px;
+}
+.q-nav-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+.home-btn,.next-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:8px 18px;
+  border-radius:8px;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+  text-decoration:none;
+}
+.home-btn{
+  background:#f2f6f7;
+  color:var(--navy);
+  border:1.5px solid #c5d8d0;
+}
+.home-btn:hover{
+  background:#e5f3ec;
+  border-color:var(--green);
+  color:var(--green);
+}
+.next-btn{
+  background:var(--navy);
+  color:white;
+  border:1.5px solid var(--navy);
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+}
+.next-btn:hover{background:var(--green)}
+.score-box{
+  text-align:center;
+  display:none;
+  padding:14px 0;
+}
+.score-box h2{color:var(--navy);font-size:24px}
+.result-card{
+  background:#f8fcfa;
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin:16px auto;
+  max-width:460px;
+}
+.result-item{
+  font-size:17px;
+  margin:10px 0;
+  color:var(--navy);
+  font-weight:bold;
+}
+.restart-btn{
+  background:var(--navy);
+  color:white;
+  border:none;
+  padding:11px 24px;
+  font-size:15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  font-weight:bold;
+}
+.restart-btn:hover{background:var(--green)}
+.final-home-wrap{margin-top:18px}
+@media(max-width:600px){
+  .container{padding:16px}
+  h1{font-size:20px}
+  .opt-content{flex-direction:column;align-items:flex-start}
+  .opt-urdu{width:100%}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="header-banner">
+    <div class="badge">HMSA LEARNING ACADEMY • GRADE 6</div>
+    <h1>جماعت ششم — ریاضی آن لائن ٹیسٹ 4</h1>
+    <p class="subtitle">Grade 6 Mathematics Online Test 4 (Bilingual • 20 MCQs)</p>
+  </div>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">Question 1 of 20</span>
+      <span class="timer" id="timer">05:00</span>
+    </div>
+
+    <div class="question-card">
+      <div id="q-topic-badge" class="q-num-badge">MCQ</div>
+      <div id="question-text"></div>
+    </div>
+
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+
+    <div class="q-nav-wrap">
+      <button type="button" class="next-btn" onclick="goNextManual()">
+        <bdi>Next</bdi> | <bdi>اگلا سوال</bdi>
+      </button>
+
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi> |
+        <bdi>مرکزی ہوم پیج</bdi>
+      </a>
+    </div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h2><bdi>Test Completed!</bdi> / <bdi>ٹیسٹ مکمل ہو گیا!</bdi></h2>
+
+    <div class="result-card">
+      <div class="result-item" id="total-q"></div>
+      <div class="result-item" id="correct-q" style="color:#1f8a4c"></div>
+      <div class="result-item" id="wrong-q" style="color:#d90429"></div>
+      <div class="result-item" id="unanswered-q"></div>
+      <div class="result-item" id="obtained-marks"></div>
+      <div class="result-item" id="percentage-score" style="font-size:20px"></div>
+    </div>
+
+    <button type="button" class="restart-btn" onclick="startTest()">
+      <bdi>Test Again</bdi> / <bdi>دوبارہ ٹیسٹ دیں</bdi>
+    </button>
+
+    <div class="final-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi> |
+        <bdi>مرکزی ہوم پیج پر واپس جائیں</bdi>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const rawQuestions = [
+{
+topic:"Linear Equations",
+eng:"An equation shows that two mathematical expressions are:",
+urdu:"مساوات ظاہر کرتی ہے کہ دو ریاضیاتی جملے آپس میں ہوتے ہیں:",
+options:[
+{eng:"Equal",urdu:"برابر"},
+{eng:"Unequal",urdu:"غیر مساوی"},
+{eng:"Less than or equal to",urdu:"کم یا برابر"},
+{eng:"Greater than or equal to",urdu:"زیادہ یا برابر"}
+],
+correctIndex:0
+},
+{
+topic:"Exponents",
+eng:"In the expression 6x⁴, the number 4 is called:",
+urdu:"ریاضیاتی جملے 6x⁴ میں عدد 4 کیا کہلاتا ہے؟",
+options:[
+{eng:"Constant",urdu:"مستقل مقدار"},
+{eng:"Exponent",urdu:"قوت نما"},
+{eng:"Coefficient",urdu:"عددی سر"},
+{eng:"Base",urdu:"اساس"}
+],
+correctIndex:1
+},
+{
+topic:"Linear Equation Degree",
+eng:"The power of the variable in a linear equation is always:",
+urdu:"یک درجی (لکیری) مساوات میں متغیر کی طاقت ہمیشہ ہوتی ہے:",
+options:[
+{eng:"2",urdu:"عدد 2"},
+{eng:"3",urdu:"عدد 3"},
+{eng:"1",urdu:"عدد 1"},
+{eng:"4",urdu:"عدد 4"}
+],
+correctIndex:2
+},
+{
+topic:"Solution of Equation",
+eng:"x + 9 = 19 is true for x = ____:",
+urdu:"مساوات x + 9 = 19 کس قیمت کے لیے درست ہے؟",
+options:[
+{eng:"1",urdu:"عدد 1"},
+{eng:"2",urdu:"عدد 2"},
+{eng:"20",urdu:"عدد 20"},
+{eng:"10",urdu:"عدد 10"}
+],
+correctIndex:3
+},
+{
+topic:"Perimeter",
+eng:"The total length of the boundary of a closed figure is called:",
+urdu:"کسی بند شکل کی بیرونی سرحد کی کل لمبائی کیا کہلاتی ہے؟",
+options:[
+{eng:"Perimeter",urdu:"محیط"},
+{eng:"Area",urdu:"رقبہ"},
+{eng:"Volume",urdu:"حجم"},
+{eng:"Cube",urdu:"مکعب"}
+],
+correctIndex:0
+},
+{
+topic:"Area",
+eng:"The measurement of the region enclosed by a two-dimensional closed figure is called:",
+urdu:"کسی دو جہتی بند شکل کے اندرونی حصے کی پیمائش کیا کہلاتی ہے؟",
+options:[
+{eng:"Perimeter",urdu:"محیط"},
+{eng:"Area",urdu:"رقبہ"},
+{eng:"Volume",urdu:"حجم"},
+{eng:"Cuboid",urdu:"مکعب نما"}
+],
+correctIndex:1
+},
+{
+topic:"Altitude",
+eng:"The altitude of a triangle is also known as its:",
+urdu:"مثلث کے عمودی ارتفاع (Altitude) کو یہ بھی کہا جاتا ہے:",
+options:[
+{eng:"Hypotenuse",urdu:"وتر"},
+{eng:"Base",urdu:"قاعدہ"},
+{eng:"Perpendicular height",urdu:"عمودی اونچائی"},
+{eng:"Diagonal",urdu:"قطر"}
+],
+correctIndex:2
+},
+{
+topic:"Area of Triangle",
+eng:"The area of a triangle can be calculated by the formula:",
+urdu:"مثلث کا رقبہ معلوم کرنے کا درست کلیہ کون سا ہے؟",
+options:[
+{eng:"A = l × b",urdu:"طول ضرب چوڑائی"},
+{eng:"A = 2(l + b)",urdu:"دوگنا مجموعہ طول و عرض"},
+{eng:"A = (1/3)(b × h)",urdu:"ایک تہائی حاصل ضرب"},
+{eng:"A = (1/2)(b × h)",urdu:"نصف حاصل ضرب قاعدہ و ارتفاع"}
+],
+correctIndex:3
+},
+{
+topic:"Volume of Cube",
+eng:"If the length of an edge of a solid cube is 1 m, its volume is:",
+urdu:"اگر کسی ٹھوس مکعب کے کنارے کی لمبائی 1 میٹر ہو تو اس کا حجم کیا ہوگا؟",
+options:[
+{eng:"1 m³",urdu:"1 مکعب میٹر"},
+{eng:"2 m³",urdu:"2 مکعب میٹر"},
+{eng:"3 m³",urdu:"3 مکعب میٹر"},
+{eng:"4 m³",urdu:"4 مکعب میٹر"}
+],
+correctIndex:0
+},
+{
+topic:"Volume of Cuboid",
+eng:"The volume of a cuboid can be calculated by using the formula:",
+urdu:"مکعب نما (Cuboid) کا حجم معلوم کرنے کا کلیہ ہے:",
+options:[
+{eng:"V = 4l²",urdu:"چار ضرب مربع"},
+{eng:"V = l × b × h",urdu:"لمبائی ضرب چوڑائی ضرب اونچائی"},
+{eng:"V = l³",urdu:"لمبائی کا مکعب"},
+{eng:"V = 6l²",urdu:"چھ ضرب ضلع کا مربع"}
+],
+correctIndex:1
+},
+{
+topic:"Surface Area of Cube",
+eng:"The total surface area of a cube is calculated by:",
+urdu:"مکعب کا کل سطحی رقبہ معلوم کرنے کا کلیہ کون سا ہے؟",
+options:[
+{eng:"S = l × b × h",urdu:"طول ضرب عرض ضرب ارتفاع"},
+{eng:"S = 4(l + b)",urdu:"چار ضرب مجموعہ"},
+{eng:"S = 6l²",urdu:"چھ ضرب ضلع کا مربع"},
+{eng:"S = 2(l + b)",urdu:"دو ضرب مجموعہ"}
+],
+correctIndex:2
+},
+{
+topic:"Sphere",
+eng:"A sphere has:",
+urdu:"کرہ (Sphere) کی سطحوں، کناروں اور راس کی تعداد کیا ہے؟",
+options:[
+{eng:"6 flat faces and 12 edges",urdu:"6 ہموار سطحیں اور 12 کنارے"},
+{eng:"2 circular faces and 1 curved surface",urdu:"2 گول سطحیں اور 1 خمیدہ سطح"},
+{eng:"1 flat face and 1 edge",urdu:"1 ہموار سطح اور 1 کنارہ"},
+{eng:"1 curved surface, 0 edges and 0 vertices",urdu:"1 خمیدہ سطح، کوئی کنارہ یا راس نہیں"}
+],
+correctIndex:3
+},
+{
+topic:"Cuboid Faces",
+eng:"How many faces does a cuboid have?",
+urdu:"مکعب نما (Cuboid) کی کل کتنی سطحیں (Faces) ہوتی ہیں؟",
+options:[
+{eng:"6 faces",urdu:"6 سطحیں"},
+{eng:"4 faces",urdu:"4 سطحیں"},
+{eng:"12 faces",urdu:"12 سطحیں"},
+{eng:"8 faces",urdu:"8 سطحیں"}
+],
+correctIndex:0
+},
+{
+topic:"Parallel Lines",
+eng:"Two lines that never intersect each other are called:",
+urdu:"ایسی دو لکیریں جو ایک دوسرے کو کبھی قطع نہ کریں، کیا کہلاتی ہیں؟",
+options:[
+{eng:"Intersecting lines",urdu:"متقاطع خطوط"},
+{eng:"Parallel lines",urdu:"متوازی خطوط"},
+{eng:"Perpendicular lines",urdu:"عمودی خطوط"},
+{eng:"Transversal lines",urdu:"قاطع خطوط"}
+],
+correctIndex:1
+},
+{
+topic:"Perpendicular Lines",
+eng:"Perpendicular lines intersect each other at an angle of:",
+urdu:"عمودی خطوط (Perpendicular lines) ایک دوسرے کو کس زاویے پر قطع کرتے ہیں؟",
+options:[
+{eng:"45 degrees",urdu:"45 درجے"},
+{eng:"120 degrees",urdu:"120 درجے"},
+{eng:"90 degrees",urdu:"90 درجے"},
+{eng:"180 degrees",urdu:"180 درجے"}
+],
+correctIndex:2
+},
+{
+topic:"Point of Intersection",
+eng:"The point where two lines intersect each other is called:",
+urdu:"وہ نقطہ جہاں دو لکیریں ایک دوسرے کو کاٹتی ہیں، کیا کہلاتا ہے؟",
+options:[
+{eng:"Corner point",urdu:"کونے کا نقطہ"},
+{eng:"Centre point",urdu:"مرکزی نقطہ"},
+{eng:"Altitude point",urdu:"عمودی نقطہ"},
+{eng:"Point of intersection",urdu:"نقطۂ تقاطع"}
+],
+correctIndex:3
+},
+{
+topic:"Transversal Line",
+eng:"A line that intersects two or more lines at distinct points is called:",
+urdu:"وہ خط جو دو یا زیادہ خطوط کو مختلف نقاط پر قطع کرے، کیا کہلاتا ہے؟",
+options:[
+{eng:"Transversal",urdu:"خطِ قاطع"},
+{eng:"Perpendicular",urdu:"عمود"},
+{eng:"Altitude",urdu:"ارتفاع"},
+{eng:"Hypotenuse",urdu:"وتر"}
+],
+correctIndex:0
+},
+{
+topic:"Vertically Opposite Angles",
+eng:"If one angle formed by two intersecting lines is 120°, its vertically opposite angle is:",
+urdu:"اگر متقاطع خطوط سے بننے والے ایک زاویے کی مقدار 120 درجے ہو تو اس کا متقابل بالرأس زاویہ کتنا ہوگا؟",
+options:[
+{eng:"60 degrees",urdu:"60 درجے"},
+{eng:"120 degrees",urdu:"120 درجے"},
+{eng:"110 degrees",urdu:"110 درجے"},
+{eng:"90 degrees",urdu:"90 درجے"}
+],
+correctIndex:1
+},
+{
+topic:"Line of Symmetry",
+eng:"A line that divides a shape into two identical mirror-image halves is called:",
+urdu:"وہ لکیر جو کسی شکل کو دو بالکل یکساں آئینہ نما حصوں میں تقسیم کرے، کیا کہلاتی ہے؟",
+options:[
+{eng:"Ray",urdu:"شعاع"},
+{eng:"Line segment",urdu:"قطعۂ خط"},
+{eng:"Line of symmetry",urdu:"خطِ تقارن"},
+{eng:"Vertex",urdu:"راس"}
+],
+correctIndex:2
+},
+{
+topic:"Dimension-less Figure",
+eng:"Which is the only geometrical figure with no dimensions?",
+urdu:"درج ذیل میں سے کون سی ہندسی شکل بے جہت (Dimensionless) ہوتی ہے؟",
+options:[
+{eng:"Circle",urdu:"دائرہ"},
+{eng:"Triangle",urdu:"مثلث"},
+{eng:"Rectangle",urdu:"مستطیل"},
+{eng:"Point",urdu:"نقطہ"}
+],
+correctIndex:3
+}
+];
+
+const labels=["A","B","C","D"];
+let activeQuestions=[];
+let idx=0;
+let score=0;
+let wrong=0;
+let unanswered=0;
+let answeredCurrent=false;
+let finished=false;
+let autoNextTimeout=null;
+let timerInterval=null;
+let timeLeft=300;
+
+// Fisher-Yates shuffle
+function shuffleArray(arr){
+  const copy=arr.slice();
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+
+// سوالات اور آپشنز دونوں شفل ہوں گے
+// درست جواب کی شناخت ہر حال میں برقرار رہے گی
+function buildShuffledQuiz(){
+  return shuffleArray(rawQuestions).map(item=>{
+    const taggedOptions=item.options.map((opt,originalIndex)=>({
+      eng:opt.eng,
+      urdu:opt.urdu,
+      isCorrect:originalIndex===item.correctIndex
+    }));
+
+    const shuffledOptions=shuffleArray(taggedOptions);
+
+    return{
+      topic:item.topic,
+      eng:item.eng,
+      urdu:item.urdu,
+      options:shuffledOptions,
+      answer:shuffledOptions.findIndex(opt=>opt.isCorrect)
+    };
+  });
+}
+
+function startTest(){
+  clearInterval(timerInterval);
+  clearTimeout(autoNextTimeout);
+
+  activeQuestions=buildShuffledQuiz();
+  idx=0;
+  score=0;
+  wrong=0;
+  unanswered=0;
+  answeredCurrent=false;
+  finished=false;
+  timeLeft=300;
+
+  document.getElementById("score-screen").style.display="none";
+  document.getElementById("quiz-screen").style.display="block";
+
+  loadQuestion();
+  startTimer();
+}
+
+// ایک ہی پانچ منٹ کا ٹائمر پورے ٹیسٹ کے لیے
+function startTimer(){
+  clearInterval(timerInterval);
+  updateTimerDisplay();
+
+  timerInterval=setInterval(()=>{
+    if(finished)return;
+
+    timeLeft--;
+    updateTimerDisplay();
+
+    if(timeLeft<=0){
+      timeLeft=0;
+      updateTimerDisplay();
+      showResult();
+    }
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const m=Math.floor(timeLeft/60);
+  const s=timeLeft%60;
+  document.getElementById("timer").innerText=
+    `${m}:${s<10?"0":""}${s}`;
+}
+
+function loadQuestion(){
+  if(finished || idx>=activeQuestions.length)return;
+
+  answeredCurrent=false;
+  const q=activeQuestions[idx];
+
+  document.getElementById("q-topic-badge").innerText=
+    `MCQ ${idx+1} • ${q.topic}`;
+
+  document.getElementById("question-text").innerHTML=`
+    <div class="eng-stmt"><bdi>${idx+1}. ${q.eng}</bdi></div>
+    <div class="urdu-stmt"><bdi>${idx+1}. ${q.urdu}</bdi></div>
+  `;
+
+  const box=document.getElementById("options-box");
+  box.innerHTML="";
+
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="opt-btn";
+
+    btn.innerHTML=`
+      <span class="opt-label">${labels[i]}</span>
+      <span class="opt-content">
+        <span class="opt-eng"><bdi>${opt.eng}</bdi></span>
+        <span class="opt-urdu"><bdi>${opt.urdu}</bdi></span>
+      </span>
+    `;
+
+    btn.onclick=()=>checkAnswer(i,btn);
+    box.appendChild(btn);
+  });
+
+  document.getElementById("progress-text").innerText=
+    `Question ${idx+1} of ${activeQuestions.length}`;
+
+  const feedback=document.getElementById("feedback-box");
+  feedback.innerHTML="";
+  feedback.style.background="transparent";
+}
+
+function checkAnswer(selectedIdx,selectedButton){
+  if(finished || answeredCurrent)return;
+
+  answeredCurrent=true;
+
+  const buttons=document.querySelectorAll(".opt-btn");
+  buttons.forEach(btn=>btn.disabled=true);
+
+  const q=activeQuestions[idx];
+  const feedback=document.getElementById("feedback-box");
+  const correctOpt=q.options[q.answer];
+  const correctLetter=labels[q.answer];
+
+  if(selectedIdx===q.answer){
+    score++;
+    selectedButton.classList.add("correct-opt");
+
+    feedback.style.background="#e5f7ed";
+    feedback.innerHTML=`
+      <span style="color:#1f8a4c">
+        ✅ <bdi>Correct! (${correctLetter})</bdi>
+        |
+        <bdi>درست جواب! (${correctLetter})</bdi>
+      </span>
+    `;
+  }else{
+    wrong++;
+    selectedButton.classList.add("wrong-opt");
+    buttons[q.answer].classList.add("correct-opt");
+
+    feedback.style.background="#fdecef";
+    feedback.innerHTML=`
+      <span style="color:#d90429">
+        ❌ <bdi>Wrong! Correct: ${correctLetter} (${correctOpt.eng})</bdi>
+        <br>
+        <bdi>غلط جواب! درست آپشن: ${correctLetter} — ${correctOpt.urdu}</bdi>
+      </span>
+    `;
+  }
+
+  clearTimeout(autoNextTimeout);
+  autoNextTimeout=setTimeout(()=>{
+    if(!finished)advanceQuestion();
+  },1500);
+}
+
+// Next بٹن دبانے پر اگر سوال حل نہ کیا ہو تو اسے غیر حل شدہ شمار کریں
+function goNextManual(){
+  if(finished)return;
+
+  clearTimeout(autoNextTimeout);
+
+  if(!answeredCurrent){
+    unanswered++;
+  }
+
+  advanceQuestion();
+}
+
+function advanceQuestion(){
+  if(finished)return;
+
+  idx++;
+
+  if(idx<activeQuestions.length){
+    loadQuestion();
+  }else{
+    showResult();
+  }
+}
+
+function showResult(){
+  if(finished)return;
+
+  finished=true;
+  clearInterval(timerInterval);
+  clearTimeout(autoNextTimeout);
+
+  // موجودہ سوال بھی غیر حل شدہ شمار ہو گا اگر وقت ختم ہو جائے
+  if(idx<activeQuestions.length && !answeredCurrent){
+    unanswered++;
+  }
+
+  // باقی تمام سوالات جو وقت ختم ہونے پر رہ گئے ہوں
+  const completed=score+wrong+unanswered;
+  unanswered+=Math.max(0,activeQuestions.length-completed);
+
+  document.getElementById("quiz-screen").style.display="none";
+  document.getElementById("score-screen").style.display="block";
+
+  const total=activeQuestions.length;
+  const percentage=Math.round((score/total)*100);
+
+  document.getElementById("total-q").innerHTML=
+    `<bdi>Total Questions: ${total}</bdi> | <bdi>کل سوالات: ${total}</bdi>`;
+
+  document.getElementById("correct-q").innerHTML=
+    `<bdi>Correct Answers: ${score}</bdi> | <bdi>درست جوابات: ${score}</bdi>`;
+
+  document.getElementById("wrong-q").innerHTML=
+    `<bdi>Wrong Answers: ${wrong}</bdi> | <bdi>غلط جوابات: ${wrong}</bdi>`;
+
+  document.getElementById("unanswered-q").innerHTML=
+    `<bdi>Unanswered: ${unanswered}</bdi> | <bdi>غیر حل شدہ: ${unanswered}</bdi>`;
+
+  document.getElementById("obtained-marks").innerHTML=
+    `<bdi>Obtained Marks: ${score} / ${total}</bdi> | <bdi>حاصل کردہ نمبر: ${score} / ${total}</bdi>`;
+
+  document.getElementById("percentage-score").innerHTML=
+    `<bdi>Percentage: ${percentage}%</bdi> | <bdi>فیصد: ${percentage}%</bdi>`;
+}
+
+window.onload=startTest;
+</script>
+</body>
+</html>
