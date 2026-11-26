@@ -1,0 +1,812 @@
+
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 5 Math Test 5 | HMSA Learning Academy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0f5132;
+  --green:#198754;
+  --accent:#b45309;
+  --text:#15221b;
+  --muted:#56685f;
+  --border:#d5e2db;
+  --correct:#15803d;
+  --wrong:#dc2626;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:18px 12px 40px;
+  background:linear-gradient(180deg,#e6f0ea,#f2f7f4);
+  color:var(--text);
+  font-family:Poppins,Arial,sans-serif;
+  line-height:1.7;
+}
+.container{max-width:820px;margin:auto}
+.header-box{
+  background:linear-gradient(135deg,#0f5132,#1d6f48);
+  color:white;
+  border-radius:18px;
+  padding:22px 16px;
+  text-align:center;
+  margin-bottom:16px;
+  box-shadow:0 8px 22px #0f513222;
+}
+.main-title{margin:0 0 7px;font-size:1.55rem}
+.sub-title{margin:0;font-size:.9rem}
+.urdu-title{
+  font-family:'Noto Nastaliq Urdu',serif;
+  font-size:1.1rem;
+  margin:8px 0 0;
+}
+.top-bar,.progress-wrap,.quiz-card,.result-box{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px 18px;
+  margin-bottom:16px;
+  box-shadow:0 4px 14px #00000008;
+}
+.top-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.timer-box{
+  background:#fffbeb;
+  border:1.5px solid #f59e0b;
+  color:var(--accent);
+  padding:6px 14px;
+  border-radius:10px;
+  font-weight:700;
+}
+.btn{
+  font-family:Poppins,Arial,sans-serif;
+  border:none;
+  border-radius:9px;
+  padding:9px 16px;
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-home{
+  background:#eef5f0;
+  color:var(--primary);
+  border:1.5px solid var(--primary);
+}
+.btn-home:hover{background:var(--primary);color:white}
+.btn-primary{background:var(--green);color:white}
+.progress-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+  font-size:.88rem;
+  font-weight:600;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+.progress-track{
+  height:9px;
+  background:#e4ede8;
+  border-radius:20px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#198754,#22c55e);
+  transition:width .3s;
+}
+.question-topic{
+  display:inline-block;
+  background:#e5f3ec;
+  color:var(--primary);
+  border-radius:7px;
+  padding:3px 10px;
+  font-size:.78rem;
+  font-weight:700;
+  margin-bottom:12px;
+}
+.question-eng{
+  direction:ltr;
+  text-align:left;
+  font-family:Poppins,Arial,sans-serif;
+  font-size:1.04rem;
+  font-weight:700;
+  line-height:1.6;
+  margin-bottom:12px;
+}
+.question-urdu{
+  direction:rtl;
+  text-align:right;
+  font-family:'Noto Nastaliq Urdu',serif;
+  font-size:1rem;
+  line-height:2.2;
+  border-bottom:1px dashed var(--border);
+  padding-bottom:12px;
+  margin-bottom:16px;
+}
+.options-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:11px;
+  margin-bottom:14px;
+}
+.option-btn{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  text-align:left;
+  background:#f8fbf9;
+  color:var(--text);
+  border:1.8px solid #c9d8d0;
+  border-radius:11px;
+  padding:11px 13px;
+  cursor:pointer;
+  transition:.2s;
+}
+.option-btn:hover:not(:disabled){
+  border-color:var(--green);
+  background:#edf7f1;
+}
+.option-btn:disabled{cursor:default}
+.option-label{
+  flex-shrink:0;
+  width:29px;
+  height:29px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#e4ede8;
+  color:var(--primary);
+  font-weight:700;
+  font-family:Arial,sans-serif;
+}
+.option-content{flex:1;min-width:0}
+.option-eng{
+  display:block;
+  direction:ltr;
+  text-align:left;
+  font-family:Poppins,Arial,sans-serif;
+  font-size:.94rem;
+  font-weight:600;
+}
+.option-urdu{
+  display:block;
+  direction:rtl;
+  text-align:right;
+  font-family:'Noto Nastaliq Urdu',serif;
+  font-size:.88rem;
+  line-height:2.1;
+  margin-top:3px;
+}
+.option-btn.correct{
+  background:var(--correct);
+  border-color:var(--correct);
+  color:white;
+}
+.option-btn.wrong{
+  background:var(--wrong);
+  border-color:var(--wrong);
+  color:white;
+}
+.auto-next-note{
+  min-height:30px;
+  text-align:center;
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--primary);
+  margin:8px 0;
+}
+.card-footer-actions{
+  display:flex;
+  justify-content:center;
+  padding-top:13px;
+  border-top:1px solid var(--border);
+}
+.result-box{
+  display:none;
+  padding:25px 18px;
+  text-align:center;
+}
+.result-box h2{
+  color:var(--primary);
+  margin:0;
+  font-size:1.5rem;
+}
+.result-score{
+  font-size:1.8rem;
+  font-weight:700;
+  color:var(--primary);
+  margin:12px 0;
+}
+.percentage-badge{
+  display:inline-block;
+  background:#dcfce7;
+  color:#15803d;
+  border:1px solid #15803d;
+  padding:6px 18px;
+  border-radius:30px;
+  font-size:1.1rem;
+  font-weight:700;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:20px 0;
+}
+.stat-card{
+  background:#f6faf8;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:13px 8px;
+  font-weight:700;
+}
+.result-buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.urdu-result{
+  font-family:'Noto Nastaliq Urdu',serif;
+  line-height:2.2;
+  margin-top:14px;
+}
+@media(max-width:600px){
+  .main-title{font-size:1.25rem}
+  .sub-title{font-size:.78rem}
+  .stats-grid{grid-template-columns:1fr}
+  .question-eng{font-size:.96rem}
+  .option-eng{font-size:.88rem}
+  .top-bar{justify-content:center}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="header-box">
+  <h1 class="main-title">Grade 5 Mathematics Test 5</h1>
+  <p class="sub-title">HMSA Learning Academy • Bilingual Online Test • 20 MCQs</p>
+  <p class="urdu-title">جماعت پنجم — ریاضی آن لائن ٹیسٹ 5</p>
+</header>
+
+<div class="top-bar">
+  <div class="timer-box" id="timerDisplay">Time: 05:00</div>
+  <button type="button" class="btn btn-home" onclick="goHomePage()">
+    Home Page / ہوم پیج
+  </button>
+</div>
+
+<div class="progress-wrap" id="progressSection">
+  <div class="progress-meta">
+    <span id="questionCounter">Question 1 of 20</span>
+    <span id="scorePreview">Score: 0</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<main class="quiz-card" id="quizCard">
+  <div class="question-topic" id="topicText">Mathematics</div>
+  <div class="question-eng" id="questionEnglish"></div>
+  <div class="question-urdu" id="questionUrdu"></div>
+  <div class="options-list" id="optionsList"></div>
+  <div class="auto-next-note" id="autoNextNote"></div>
+
+  <div class="card-footer-actions">
+    <button type="button" class="btn btn-home" onclick="goHomePage()">
+      ← Back to Home Page / ہوم پیج
+    </button>
+  </div>
+</main>
+
+<section class="result-box" id="resultBox">
+  <h2>Test Completed!</h2>
+  <div class="urdu-result">ٹیسٹ مکمل ہو گیا!</div>
+
+  <div class="result-score" id="finalScoreText"></div>
+  <div class="percentage-badge" id="percentageText"></div>
+
+  <div class="stats-grid">
+    <div class="stat-card" style="color:#15803d" id="correctCountBox"></div>
+    <div class="stat-card" style="color:#dc2626" id="wrongCountBox"></div>
+    <div class="stat-card" style="color:#56685f" id="unansweredCountBox"></div>
+  </div>
+
+  <div class="result-buttons">
+    <button type="button" class="btn btn-primary" onclick="restartTest()">
+      Restart Test / دوبارہ ٹیسٹ
+    </button>
+    <button type="button" class="btn btn-home" onclick="goHomePage()">
+      Back to Home Page / ہوم پیج
+    </button>
+  </div>
+</section>
+
+</div>
+
+<script>
+const HOME_URL = "index.html";
+
+const rawQuestions = [
+{
+q:"There are ______ metres in 2 kilometres.",
+u:"2 کلومیٹر میں کتنے میٹر ہوتے ہیں؟",
+options:[
+["500","500"],
+["1 000","1,000"],
+["200","200"],
+["2 000","2,000"]
+],
+answer:3
+},
+{
+q:"To measure ______, hours, minutes and seconds are used.",
+u:"گھنٹے، منٹ اور سیکنڈ کس چیز کو ناپنے کے لیے استعمال ہوتے ہیں؟",
+options:[
+["Time","وقت"],
+["Distance","فاصلہ"],
+["Area","رقبہ"],
+["Length","لمبائی"]
+],
+answer:0
+},
+{
+q:"There are ______ months in 1/2 year.",
+u:"آدھے سال میں کتنے مہینے ہوتے ہیں؟",
+options:[
+["6","6"],
+["12","12"],
+["9","9"],
+["5","5"]
+],
+answer:0
+},
+{
+q:"According to the exercise, taking 30 days in each month, there are ______ days in 10 months.",
+u:"مشق کے مطابق اگر ہر مہینہ 30 دن کا ہو تو 10 مہینوں میں کتنے دن ہوں گے؟",
+options:[
+["300","300"],
+["30","30"],
+["15","15"],
+["45","45"]
+],
+answer:0
+},
+{
+q:"There are ______ minutes in 5 hours.",
+u:"5 گھنٹوں میں کتنے منٹ ہوتے ہیں؟",
+options:[
+["60","60"],
+["300","300"],
+["200","200"],
+["50","50"]
+],
+answer:1
+},
+{
+q:"There are ______ days in 7 weeks.",
+u:"7 ہفتوں میں کتنے دن ہوتے ہیں؟",
+options:[
+["49","49"],
+["42","42"],
+["7","7"],
+["14","14"]
+],
+answer:0
+},
+{
+q:"The price of a book is Rs 555. The price of 10 books will be Rs ______.",
+u:"ایک کتاب کی قیمت 555 روپے ہے۔ 10 کتابوں کی قیمت کتنی ہوگی؟",
+options:[
+["Rs 2,550","2,550 روپے"],
+["Rs 5,050","5,050 روپے"],
+["Rs 3,250","3,250 روپے"],
+["Rs 5,550","5,550 روپے"]
+],
+answer:3
+},
+{
+q:"The price of 6 oranges is Rs 48. The price of 72 oranges will be Rs ______.",
+u:"6 مالٹوں کی قیمت 48 روپے ہے۔ 72 مالٹوں کی قیمت کتنی ہوگی؟",
+options:[
+["Rs 567","567 روپے"],
+["Rs 96","96 روپے"],
+["Rs 112","112 روپے"],
+["Rs 576","576 روپے"]
+],
+answer:3
+},
+{
+q:"The price of 3 chairs is Rs 645. The price of 16 chairs will be Rs ______.",
+u:"3 کرسیوں کی قیمت 645 روپے ہے۔ 16 کرسیوں کی قیمت کتنی ہوگی؟",
+options:[
+["Rs 3,040","3,040 روپے"],
+["Rs 3,004","3,004 روپے"],
+["Rs 3,440","3,440 روپے"],
+["Rs 3,404","3,404 روپے"]
+],
+answer:2
+},
+{
+q:"Which of these is a reflex angle?",
+u:"درج ذیل میں سے کون سا زاویہ منعکسہ (Reflex Angle) ہے؟",
+options:[
+["375°","375 درجے"],
+["215°","215 درجے"],
+["180°","180 درجے"],
+["90°","90 درجے"]
+],
+answer:1
+},
+{
+q:"The supplement of 20° is:",
+u:"20 درجے کا زاویہ مکمل (Supplement) کرنے والا زاویہ کتنا ہے؟",
+options:[
+["160°","160 درجے"],
+["40°","40 درجے"],
+["70°","70 درجے"],
+["80°","80 درجے"]
+],
+answer:0
+},
+{
+q:"The sum of two right angles is equal to:",
+u:"دو قائمہ زاویوں کا مجموعہ کس زاویے کے برابر ہوتا ہے؟",
+options:[
+["Reflex angle","زاویہ منعکسہ"],
+["Straight angle","سیدھا زاویہ"],
+["Acute angle","حاد زاویہ"],
+["Obtuse angle","منفرجہ زاویہ"]
+],
+answer:1
+},
+{
+q:"Two angles are called supplementary angles if their sum is equal to:",
+u:"دو زاویے اس وقت تکمیلی زاویے کہلاتے ہیں جب ان کا مجموعہ کتنا ہو؟",
+options:[
+["180°","180 درجے"],
+["90°","90 درجے"],
+["360°","360 درجے"],
+["100°","100 درجے"]
+],
+answer:0
+},
+{
+q:"A triangle in which two sides are equal is called an isosceles triangle.",
+u:"وہ مثلث جس کے دو ضلع برابر ہوں، کیا کہلاتا ہے؟",
+options:[
+["Scalene triangle","مختلف الاضلاع مثلث"],
+["Isosceles triangle","متساوی الساقین مثلث"],
+["Equilateral triangle","متساوی الاضلاع مثلث"],
+["Right-angled triangle","قائم الزاویہ مثلث"]
+],
+answer:1
+},
+{
+q:"The formula to find the perimeter of a square is:",
+u:"مربع کا محیط معلوم کرنے کا کلیہ کیا ہے؟",
+options:[
+["4 + l","4 جمع لمبائی"],
+["4 - l","4 منفی لمبائی"],
+["4l","4 ضرب ضلع"],
+["l × l","ضلع ضرب ضلع"]
+],
+answer:2
+},
+{
+q:"The formula to find the perimeter of a rectangle is:",
+u:"مستطیل کا محیط معلوم کرنے کا کلیہ کیا ہے؟",
+options:[
+["2(l + w)","2 ضرب (لمبائی جمع چوڑائی)"],
+["2l + w","2 ضرب لمبائی جمع چوڑائی"],
+["l + 2w","لمبائی جمع 2 ضرب چوڑائی"],
+["l + w","لمبائی جمع چوڑائی"]
+],
+answer:0
+},
+{
+q:"The area of a rectangle is 45 m². If its length is 15 m, its width is:",
+u:"ایک مستطیل کا رقبہ 45 مربع میٹر ہے۔ اگر اس کی لمبائی 15 میٹر ہو تو چوڑائی کتنی ہوگی؟",
+options:[
+["6 m","6 میٹر"],
+["3 m","3 میٹر"],
+["5 m","5 میٹر"],
+["15 m","15 میٹر"]
+],
+answer:1
+},
+{
+q:"The formula to find the area of a square is:",
+u:"مربع کا رقبہ معلوم کرنے کا کلیہ کیا ہے؟",
+options:[
+["l × l","ضلع ضرب ضلع"],
+["2(l + w)","2 ضرب (لمبائی جمع چوڑائی)"],
+["l + 2w","لمبائی جمع 2 ضرب چوڑائی"],
+["4l","4 ضرب ضلع"]
+],
+answer:0
+},
+{
+q:"The average of a number of items can be found by:",
+u:"چند اشیاء کی اوسط معلوم کرنے کے لیے کیا کرنا چاہیے؟",
+options:[
+["Dividing the sum by the number of items","اشیاء کے مجموعے کو اشیاء کی تعداد پر تقسیم کرنا"],
+["Adding the sum and the number of items","مجموعے اور اشیاء کی تعداد کو جمع کرنا"],
+["Multiplying the sum by the number of items","مجموعے کو اشیاء کی تعداد سے ضرب دینا"],
+["Subtracting the sum from the number of items","اشیاء کی تعداد میں سے مجموعہ منفی کرنا"]
+],
+answer:0
+},
+{
+q:"A student got 19, 21, 22, 24 and 19 marks in different subjects. His average marks are:",
+u:"ایک طالب علم نے مختلف مضامین میں 19، 21، 22، 24 اور 19 نمبر حاصل کیے۔ اس کے اوسط نمبر کتنے ہیں؟",
+options:[
+["19","19"],
+["21","21"],
+["22","22"],
+["25","25"]
+],
+answer:1
+}
+];
+
+const labels=["A","B","C","D"];
+
+let questions=[];
+let currentIndex=0;
+let score=0;
+let wrongCount=0;
+let answeredCount=0;
+let answered=false;
+let testFinished=false;
+let autoNextTimer=null;
+let countdownInterval=null;
+let totalSeconds=300;
+
+function goHomePage(){
+  window.location.href=HOME_URL;
+}
+
+function shuffleArray(array){
+  const copy=array.slice();
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function buildQuiz(){
+  return shuffleArray(rawQuestions).map(item=>{
+    const taggedOptions=item.options.map((option,index)=>({
+      eng:option[0],
+      urdu:option[1],
+      isCorrect:index===item.answer
+    }));
+
+    const shuffledOptions=shuffleArray(taggedOptions);
+
+    return {
+      q:item.q,
+      u:item.u,
+      options:shuffledOptions,
+      answer:shuffledOptions.findIndex(option=>option.isCorrect)
+    };
+  });
+}
+
+function formatTime(seconds){
+  const minutes=Math.floor(seconds/60);
+  const secs=seconds%60;
+  return `Time: ${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+}
+
+function startTest(){
+  clearInterval(countdownInterval);
+  clearTimeout(autoNextTimer);
+
+  testFinished=false;
+  questions=buildQuiz();
+  currentIndex=0;
+  score=0;
+  wrongCount=0;
+  answeredCount=0;
+  answered=false;
+  totalSeconds=300;
+
+  document.getElementById("quizCard").style.display="block";
+  document.getElementById("progressSection").style.display="block";
+  document.getElementById("resultBox").style.display="none";
+
+  renderQuestion();
+  startCountdown();
+}
+
+function startCountdown(){
+  clearInterval(countdownInterval);
+  document.getElementById("timerDisplay").textContent=formatTime(totalSeconds);
+
+  countdownInterval=setInterval(()=>{
+    if(testFinished){
+      clearInterval(countdownInterval);
+      return;
+    }
+
+    totalSeconds--;
+
+    document.getElementById("timerDisplay").textContent=
+      formatTime(Math.max(0,totalSeconds));
+
+    if(totalSeconds<=0){
+      totalSeconds=0;
+      clearInterval(countdownInterval);
+      clearTimeout(autoNextTimer);
+      showResult();
+    }
+  },1000);
+}
+
+function renderQuestion(){
+  if(testFinished || currentIndex>=questions.length){
+    showResult();
+    return;
+  }
+
+  answered=false;
+  const item=questions[currentIndex];
+
+  document.getElementById("topicText").textContent=
+    `Mathematics • MCQ ${currentIndex+1}`;
+
+  document.getElementById("questionEnglish").textContent=
+    `${currentIndex+1}. ${item.q}`;
+
+  document.getElementById("questionUrdu").textContent=
+    `${currentIndex+1}. ${item.u}`;
+
+  document.getElementById("questionCounter").textContent=
+    `Question ${currentIndex+1} of ${questions.length}`;
+
+  document.getElementById("scorePreview").textContent=
+    `Score: ${score}`;
+
+  document.getElementById("progressFill").style.width=
+    `${((currentIndex+1)/questions.length)*100}%`;
+
+  document.getElementById("autoNextNote").textContent="";
+
+  const list=document.getElementById("optionsList");
+  list.innerHTML="";
+
+  item.options.forEach((option,index)=>{
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="option-btn";
+
+    const label=document.createElement("span");
+    label.className="option-label";
+    label.textContent=labels[index];
+
+    const content=document.createElement("span");
+    content.className="option-content";
+
+    const eng=document.createElement("span");
+    eng.className="option-eng";
+    eng.textContent=option.eng;
+
+    const urdu=document.createElement("span");
+    urdu.className="option-urdu";
+    urdu.textContent=option.urdu;
+
+    content.appendChild(eng);
+    content.appendChild(urdu);
+    button.appendChild(label);
+    button.appendChild(content);
+
+    button.addEventListener("click",()=>handleAnswer(index,button));
+    list.appendChild(button);
+  });
+}
+
+function handleAnswer(selectedIndex,clickedButton){
+  if(answered || testFinished) return;
+
+  answered=true;
+  answeredCount++;
+
+  const item=questions[currentIndex];
+  const correctIndex=item.answer;
+  const allButtons=document.querySelectorAll(".option-btn");
+
+  allButtons.forEach(button=>button.disabled=true);
+
+  const note=document.getElementById("autoNextNote");
+
+  if(selectedIndex===correctIndex){
+    score++;
+    clickedButton.classList.add("correct");
+    note.textContent="Correct! درست جواب۔ اگلا سوال آ رہا ہے...";
+  }else{
+    wrongCount++;
+    clickedButton.classList.add("wrong");
+    allButtons[correctIndex].classList.add("correct");
+    note.textContent="Incorrect! درست جواب سبز رنگ میں ہے۔ اگلا سوال آ رہا ہے...";
+  }
+
+  document.getElementById("scorePreview").textContent=`Score: ${score}`;
+
+  clearTimeout(autoNextTimer);
+
+  autoNextTimer=setTimeout(()=>{
+    if(testFinished) return;
+
+    currentIndex++;
+
+    if(currentIndex<questions.length){
+      renderQuestion();
+    }else{
+      showResult();
+    }
+  },1500);
+}
+
+function showResult(){
+  if(testFinished) return;
+
+  testFinished=true;
+  clearInterval(countdownInterval);
+  clearTimeout(autoNextTimer);
+
+  const total=questions.length;
+  const unanswered=total-answeredCount;
+  const percentage=((score/total)*100).toFixed(1);
+
+  document.getElementById("quizCard").style.display="none";
+  document.getElementById("progressSection").style.display="none";
+  document.getElementById("resultBox").style.display="block";
+
+  document.getElementById("finalScoreText").textContent=
+    `Total Score: ${score} / ${total}`;
+
+  document.getElementById("percentageText").textContent=
+    `Percentage: ${percentage}%`;
+
+  document.getElementById("correctCountBox").textContent=
+    `Correct: ${score} | درست: ${score}`;
+
+  document.getElementById("wrongCountBox").textContent=
+    `Wrong: ${wrongCount} | غلط: ${wrongCount}`;
+
+  document.getElementById("unansweredCountBox").textContent=
+    `Unanswered: ${unanswered} | غیر حل شدہ: ${unanswered}`;
+}
+
+function restartTest(){
+  startTest();
+}
+
+window.onload=startTest;
+</script>
+</body>
+</html>
