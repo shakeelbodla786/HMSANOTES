@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Grade 7 Science Test 5 - HMSA Learning Academy, bilingual online MCQ test.">
+<title>Grade 7 Science Test 5 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#102b4c;
+  --green:#087c59;
+  --emerald:#1f8a4c;
+  --gold:#e8c66b;
+  --light:#f2f6f7;
+  --red:#d90429;
+  --border:#d7e5df;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Noto Nastaliq Urdu', Tahoma, Arial, sans-serif;
+  background:linear-gradient(135deg, #eef4f6 0%, #e3efe9 100%);
+  color:#263746;
+  padding:16px;
+  line-height:1.9;
+}
+.container{
+  max-width:820px;
+  margin:auto;
+  background:#ffffff;
+  padding:26px;
+  border-radius:15px;
+  box-shadow:0 8px 24px rgba(16,43,76,0.1);
+  border-top:6px solid var(--green);
+}
+.header-banner{
+  text-align:center;
+  border-bottom:2px solid var(--border);
+  padding-bottom:14px;
+  margin-bottom:18px;
+}
+.badge{
+  display:inline-block;
+  background:#e5f3ec;
+  color:var(--green);
+  font-weight:bold;
+  font-size:13px;
+  padding:4px 12px;
+  border-radius:20px;
+  margin-bottom:6px;
+  font-family:Arial, sans-serif;
+}
+h1{
+  margin:4px 0;
+  color:var(--navy);
+  font-size:24px;
+}
+.subtitle{
+  margin:0;
+  color:#5b6b7a;
+  font-size:14px;
+  font-family:Arial, sans-serif;
+}
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#e5f3ec;
+  padding:11px 16px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font-weight:bold;
+  color:var(--navy);
+  font-family:Arial, sans-serif;
+}
+.timer{
+  background:var(--red);
+  color:#ffffff;
+  padding:4px 12px;
+  border-radius:6px;
+  font-size:15px;
+  letter-spacing:0.5px;
+}
+.question-card{
+  background:#f8fcfa;
+  border:1px solid var(--border);
+  border-left:5px solid var(--green);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.q-num-badge{
+  display:inline-block;
+  background:var(--navy);
+  color:#ffffff;
+  font-family:Arial, sans-serif;
+  font-size:12px;
+  font-weight:bold;
+  padding:2px 9px;
+  border-radius:5px;
+  margin-bottom:8px;
+}
+.eng-stmt{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font-family:Arial, Helvetica, sans-serif;
+  color:var(--navy);
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.5;
+  margin-bottom:8px;
+}
+.urdu-stmt{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;
+  color:#263746;
+  font-size:16px;
+  line-height:2.1;
+}
+.options{
+  display:grid;
+  gap:11px;
+  margin-bottom:14px;
+}
+.opt-btn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  background:#ffffff;
+  border:2px solid var(--border);
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  color:#263746;
+}
+.opt-btn:hover:not(:disabled){
+  background:#e5f3ec;
+  border-color:var(--green);
+  transform:translateY(-1px);
+}
+.opt-label{
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  line-height:26px;
+  text-align:center;
+  border-radius:50%;
+  background:#eef4f6;
+  color:var(--navy);
+  font-family:Arial, sans-serif;
+  font-weight:bold;
+  font-size:13px;
+}
+.opt-content{
+  flex:1;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.opt-eng{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:bold;
+  font-size:15px;
+  color:var(--navy);
+}
+.opt-urdu{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;
+  font-size:14px;
+  color:#3b4d5c;
+}
+.correct-opt{
+  background:var(--emerald) !important;
+  border-color:var(--emerald) !important;
+  color:#ffffff !important;
+}
+.correct-opt .opt-eng,
+.correct-opt .opt-urdu{
+  color:#ffffff !important;
+}
+.correct-opt .opt-label{
+  background:#ffffff;
+  color:var(--emerald);
+}
+.wrong-opt{
+  background:var(--red) !important;
+  border-color:var(--red) !important;
+  color:#ffffff !important;
+}
+.wrong-opt .opt-eng,
+.wrong-opt .opt-urdu{
+  color:#ffffff !important;
+}
+.wrong-opt .opt-label{
+  background:#ffffff;
+  color:var(--red);
+}
+#feedback-box{
+  text-align:center;
+  margin:12px 0;
+  font-size:16px;
+  font-weight:bold;
+  min-height:36px;
+  padding:6px 10px;
+  border-radius:8px;
+}
+.q-home-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:#f2f6f7;
+  color:var(--navy);
+  border:1.5px solid #c5d8d0;
+  padding:8px 18px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  transition:0.2s;
+}
+.home-btn:hover{
+  background:#e5f3ec;
+  border-color:var(--green);
+  color:var(--green);
+}
+.score-box{
+  text-align:center;
+  display:none;
+  padding:14px 0;
+}
+.score-box h2{
+  color:var(--navy);
+  font-size:24px;
+  margin-bottom:12px;
+}
+.result-card{
+  background:#f8fcfa;
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin:16px auto;
+  max-width:440px;
+}
+.result-item{
+  font-size:17px;
+  margin:10px 0;
+  color:var(--navy);
+  font-weight:bold;
+}
+.restart-btn{
+  background:var(--navy);
+  color:#ffffff;
+  border:none;
+  padding:11px 24px;
+  font-size:15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;
+  font-weight:bold;
+}
+.restart-btn:hover{
+  background:var(--green);
+}
+.final-home-wrap{
+  margin-top:18px;
+}
+@media (max-width:600px){
+  .container{padding:16px}
+  h1{font-size:20px}
+  .opt-content{flex-direction:column; align-items:flex-start;}
+  .opt-urdu{width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header-banner">
+    <div class="badge">HMSA LEARNING ACADEMY • GRADE 7</div>
+    <h1>جماعت ہفتم — سائنس آن لائن ٹیسٹ 5</h1>
+    <p class="subtitle">Grade 7 Science Online Test 5 (Bilingual • 20 MCQs)</p>
+  </div>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">Question 1 of 20</span>
+      <span class="timer" id="timer">05:00</span>
+    </div>
+
+    <div id="question-card" class="question-card">
+      <div id="q-topic-badge" class="q-num-badge">MCQ</div>
+      <div id="question-text"></div>
+    </div>
+
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+
+    <div class="q-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج</bdi>
+      </a>
+    </div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h2>
+      <bdi>Test 5 Completed!</bdi>
+      <span> / </span>
+      <bdi>ٹیسٹ 5 مکمل ہو گیا!</bdi>
+    </h2>
+
+    <div class="result-card">
+      <div class="result-item" id="total-q">Total Questions: 20 | کل سوالات: 20</div>
+      <div class="result-item" id="correct-q" style="color:#1f8a4c;">Correct Answers: 0 | درست جوابات: 0</div>
+      <div class="result-item" id="wrong-q" style="color:#d90429;">Wrong Answers: 0 | غلط جوابات: 0</div>
+      <div class="result-item" id="unanswered-q">Unanswered: 0 | بغیر جواب سوالات: 0</div>
+      <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20 | حاصل کردہ نمبر: 0 / 20</div>
+      <div class="result-item" id="percentage-score" style="color:#102b4c; font-size:20px;">Percentage: 0% | فیصد: 0%</div>
+    </div>
+
+    <button type="button" class="restart-btn" onclick="startTest()">
+      <bdi>Test Again</bdi>
+      <span> / </span>
+      <bdi>دوبارہ ٹیسٹ دیں</bdi>
+    </button>
+
+    <div class="final-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج پر واپس جائیں</bdi>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+// 20 bilingual MCQs for Grade 7 Science Test 5
+const rawQuestions = [
+  {
+    topic: "Binary Solutions",
+    eng: "A homogeneous mixture prepared by mixing only two substances is called a:",
+    urdu: "صرف دو اشیاء کو ملانے سے بننے والا یکساں آمیزہ (Homogeneous mixture) کہلاتا ہے:",
+    options: [
+      {eng: "Binary solution", urdu: "ثنائی محلول (Binary solution)"},
+      {eng: "Suspension", urdu: "سسپنشن"},
+      {eng: "Alloy", urdu: "بھرت"},
+      {eng: "Colloid", urdu: "کولائیڈ"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Weight & Gravity",
+    eng: "What is the formula used to calculate weight (w) of an object of mass 'm'?",
+    urdu: "کمیت 'm' والے جسم کا وزن (w) معلوم کرنے کا درست فارمولا کیا ہے؟",
+    options: [
+      {eng: "w = m / g", urdu: "کمیت تقسیم کششِ ثقل"},
+      {eng: "w = m * g", urdu: "کمیت ضرب کششِ ثقل"},
+      {eng: "w = s / t", urdu: "فاصلہ تقسیم وقت"},
+      {eng: "w = m + g", urdu: "کمیت جمع کششِ ثقل"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Transverse Waves",
+    eng: "In a transverse wave, the highest point of the wave is called the:",
+    urdu: "عرضی لہر (Transverse wave) کے سب سے بلند نقطے کو کیا کہتے ہیں؟",
+    options: [
+      {eng: "Trough", urdu: "قعر / نشیب"},
+      {eng: "Compression", urdu: "کمپریشن"},
+      {eng: "Crest", urdu: "فراز / چوٹی"},
+      {eng: "Rarefaction", urdu: "ریریفیکشن"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Solute & Solvent",
+    eng: "In a 5% sugar solution in water, the substance present in smaller quantity that dissolves is:",
+    urdu: "پانی میں چینی کے 5 فیصد محلول میں کم مقدار میں موجود حل ہونے والی شے کہلاتی ہے:",
+    options: [
+      {eng: "Solvent", urdu: "سالوینٹ"},
+      {eng: "Indicator", urdu: "اشاریہ"},
+      {eng: "Residue", urdu: "بچا ہوا حصہ"},
+      {eng: "Solute", urdu: "سولیوٹ"}
+    ],
+    correctIndex: 3
+  },
+  {
+    topic: "Speed Formula",
+    eng: "Speed of a moving object is defined as distance travelled per:",
+    urdu: "متحرک جسم کی اسپیڈ (Speed) فی اکائی وقت میں طے کردہ کیا ہوتی ہے؟",
+    options: [
+      {eng: "Unit time", urdu: "اکائی وقت (Unit time)"},
+      {eng: "Unit mass", urdu: "اکائی کمیت"},
+      {eng: "Unit volume", urdu: "اکائی حجم"},
+      {eng: "Unit force", urdu: "اکائی قوت"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Echo & Reflection",
+    eng: "When sound waves are reflected back from a hard surface, what is heard?",
+    urdu: "جب صوتی لہریں کسی سخت سطح سے ٹکرا کر واپس منعکس ہوتی ہیں تو کیا سنائی دیتا ہے؟",
+    options: [
+      {eng: "Vacuum", urdu: "خلا"},
+      {eng: "Echo", urdu: "گونج (Echo)"},
+      {eng: "Refraction", urdu: "انکسار"},
+      {eng: "Dispersion", urdu: "انتشار"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Concentrated Solution",
+    eng: "A solution containing relatively large amount of solute in a given solvent is called:",
+    urdu: "دیے گئے سالوینٹ میں نسبتاً زیادہ مقدار میں سولیوٹ رکھنے والا محلول کہلاتا ہے:",
+    options: [
+      {eng: "Dilute solution", urdu: "رقیق محلول"},
+      {eng: "Weak solution", urdu: "کمزور محلول"},
+      {eng: "Concentrated solution", urdu: "گاڑھا محلول"},
+      {eng: "Pure water", urdu: "خالص پانی"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Measuring Force",
+    eng: "Force is measured by using an instrument called a force meter or:",
+    urdu: "قوت کی پیمائش کرنے والے آلے کو فورس میٹر یا کیا کہتے ہیں؟",
+    options: [
+      {eng: "Thermometer", urdu: "تھرمامیٹر"},
+      {eng: "Barometer", urdu: "بیرومیٹر"},
+      {eng: "Stopwatch", urdu: "اسٹاپ واچ"},
+      {eng: "Spring balance", urdu: "اسپرنگ بیلنس"}
+    ],
+    correctIndex: 3
+  },
+  {
+    topic: "Longitudinal Waves",
+    eng: "In a longitudinal wave, particles of the medium vibrate:",
+    urdu: "طولی لہر (Longitudinal wave) میں واسطے کے ذرات وائبریٹ کرتے ہیں:",
+    options: [
+      {eng: "Parallel to direction of wave", urdu: "لہر کی حرکت کے متوازی"},
+      {eng: "Perpendicular only", urdu: "صرف عموداً"},
+      {eng: "In circular rings", urdu: "دائروی حلقوں میں"},
+      {eng: "Without any motion", urdu: "بغیر کسی حرکت کے"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Accelerating Dissolving",
+    eng: "Which of the following helps to accelerate the process of dissolving materials?",
+    urdu: "درج ذیل میں سے کون سا عمل اشیاء کے حل ہونے کی رفتار تیز کرتا ہے؟",
+    options: [
+      {eng: "Freezing the liquid", urdu: "مایع کو جمانا"},
+      {eng: "Stirring and increasing temperature", urdu: "ہلانا اور درجہ حرارت بڑھانا"},
+      {eng: "Using larger lumps only", urdu: "صرف بڑے ڈھیلے استعمال کرنا"},
+      {eng: "Stopping motion", urdu: "حرکت روک دینا"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Non-Contact Forces",
+    eng: "Which force acts through space without physical contact between objects?",
+    urdu: "کون سی قوت اجسام کے جسمانی رابطے کے بغیر خلا کے ذریعے عمل کرتی ہے؟",
+    options: [
+      {eng: "Frictional force", urdu: "رگڑ کی قوت"},
+      {eng: "Muscular force", urdu: "عضلاتی قوت"},
+      {eng: "Gravitational force", urdu: "کششِ ثقل"},
+      {eng: "Mechanical crane force", urdu: "میکانی قوت"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Unit of Frequency",
+    eng: "The SI unit of frequency (cycles per second) is called:",
+    urdu: "فریکوئنسی (فی سیکنڈ چکروں کی تعداد) کی اکائی کہلاتی ہے:",
+    options: [
+      {eng: "Newton", urdu: "نیوٹن"},
+      {eng: "Metre", urdu: "میٹر"},
+      {eng: "Kilogram", urdu: "کلوگرام"},
+      {eng: "Hertz (Hz)", urdu: "ہرٹز (Hz)"}
+    ],
+    correctIndex: 3
+  },
+  {
+    topic: "Types of Solutions",
+    eng: "Fizzy drinks are an example of a gas dissolved in a:",
+    urdu: "فزی ڈرنکس (Fizzy drinks) کس حالت میں گیس کے حل ہونے کی مثال ہیں؟",
+    options: [
+      {eng: "Liquid solvent", urdu: "مایع سالوینٹ میں"},
+      {eng: "Solid metal", urdu: "ٹھوس دھات میں"},
+      {eng: "Gaseous air", urdu: "گیسی ہوا میں"},
+      {eng: "Dry powder", urdu: "خشک پاؤڈر میں"}
+    ],
+    correctIndex: 0
+  },
+    {
+    topic: "Uniform Speed",
+    eng: "If an object travels equal distances in equal intervals of time, its speed is:",
+    urdu: "اگر کوئی جسم برابر وقت کے وقفوں میں برابر فاصلہ طے کرے تو اس کی اسپیڈ کہلاتی ہے:",
+    options: [
+      {eng: "Variable speed", urdu: "متغیر اسپیڈ"},
+      {eng: "Uniform speed", urdu: "یکساں اسپیڈ (Uniform speed)"},
+      {eng: "Zero weight", urdu: "صفر وزن"},
+      {eng: "Negative force", urdu: "منفی قوت"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Trough of Wave",
+    eng: "The lowest point of a wave below the rest line is called the:",
+    urdu: "درمیانی خط سے نیچے لہر کے سب سے نچلے نقطے کو کیا کہتے ہیں؟",
+    options: [
+      {eng: "Crest", urdu: "فراز"},
+      {eng: "Wavelength", urdu: "طولِ موج"},
+      {eng: "Trough", urdu: "قعر (Trough)"},
+      {eng: "Time period", urdu: "مدتِ وقت"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Weight of 100g Mass",
+    eng: "Taking gravitational field strength as 10 N/kg, the weight of a 100 g mass on Earth is approximately:",
+    urdu: "اگر زمین پر کششِ ثقل کی شدت 10 نیوٹن فی کلوگرام فرض کریں تو 100 گرام کمیت والے جسم کا وزن تقریباً کتنا ہوگا؟",
+    options: [
+      {eng: "100 N", urdu: "100 نیوٹن"},
+      {eng: "10 N", urdu: "10 نیوٹن"},
+      {eng: "0.1 N", urdu: "0.1 نیوٹن"},
+      {eng: "1 N", urdu: "تقریباً 1 نیوٹن"}
+    ],
+    correctIndex: 3
+  },
+  {
+    topic: "Displacement",
+    eng: "The shortest straight-line change in position from the starting point to the ending point is called:",
+    urdu: "ابتدائی مقام سے آخری مقام تک سمت کے ساتھ سیدھی لکیر میں مقام کی تبدیلی کو کیا کہتے ہیں؟",
+    options: [
+      {eng: "Displacement", urdu: "ڈسپلیسمنٹ (Displacement)"},
+      {eng: "Frequency", urdu: "فریکوئنسی"},
+      {eng: "Amplitude", urdu: "ایمپلی ٹیوڈ"},
+      {eng: "Solubility", urdu: "حل پذیری"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Sound Wave Type",
+    eng: "Sound wave traveling through air is an example of a:",
+    urdu: "ہوا میں سفر کرنے والی صوتی لہر (Sound wave) کس کی مثال ہے؟",
+    options: [
+      {eng: "Electromagnetic wave", urdu: "برقناطیسی لہر"},
+      {eng: "Longitudinal mechanical wave", urdu: "طولی میکانی لہر"},
+      {eng: "Light wave", urdu: "روشنی کی لہر"},
+      {eng: "Non-mechanical wave", urdu: "غیر میکانی لہر"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Solid-Solid Solution",
+    eng: "Brass (zinc dissolved in copper) is an example of a solution with:",
+    urdu: "پیتل / براس (تانبے میں زنک کا حل) کس قسم کے محلول کی مثال ہے؟",
+    options: [
+      {eng: "Gas in liquid", urdu: "مایع میں گیس"},
+      {eng: "Liquid in gas", urdu: "گیس میں مائع"},
+      {eng: "Solid solute in solid solvent", urdu: "ٹھوس سالوینٹ میں ٹھوس سولیوٹ"},
+      {eng: "Water aqueous solution", urdu: "آبی محلول"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Opposite Force Effect",
+    eng: "If a force is applied opposite to the direction of motion of a moving object, its speed:",
+    urdu: "اگر متحرک جسم کی حرکت کی مخالف سمت میں قوت لگائی جائے تو اس کی اسپیڈ:",
+    options: [
+      {eng: "Increases rapidly", urdu: "تیزی سے بڑھتی ہے"},
+      {eng: "Becomes infinite", urdu: "لامحدود ہو جاتی ہے"},
+      {eng: "Changes into mass", urdu: "کمیت میں بدلتی ہے"},
+      {eng: "Decreases", urdu: "کم ہو جاتی ہے"}
+    ],
+    correctIndex: 3
+  }
+];
+
+const labels = ["A", "B", "C", "D"];
+let activeQuestions = [];
+let idx = 0;
+let score = 0;
+let answeredCount = 0;
+let testFinished = false;
+let answeredCurrent = false;
+let autoNextTimeout;
+let timerInterval;
+let timeLeft = 300;
+
+function shuffleArray(arr) {
+  const copy = arr.slice();
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function buildShuffledQuiz() {
+  const shuffledQs = shuffleArray(rawQuestions);
+  return shuffledQs.map((item) => {
+    const taggedOptions = item.options.map((opt, origIdx) => ({
+      eng: opt.eng,
+      urdu: opt.urdu,
+      isCorrect: origIdx === item.correctIndex
+    }));
+    const shuffledOpts = shuffleArray(taggedOptions);
+    const newCorrectIdx = shuffledOpts.findIndex((o) => o.isCorrect);
+    return {
+      topic: item.topic,
+      eng: item.eng,
+      urdu: item.urdu,
+      options: shuffledOpts,
+      answer: newCorrectIdx
+    };
+  });
+}
+
+function startTest() {
+  clearTimeout(autoNextTimeout);
+  activeQuestions = buildShuffledQuiz();
+  idx = 0;
+  score = 0;
+  answeredCount = 0;
+  testFinished = false;
+  timeLeft = 300;
+  document.getElementById("score-screen").style.display = "none";
+  document.getElementById("quiz-screen").style.display = "block";
+  startTimer();
+  loadQuestion();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      timeLeft = 0;
+      updateTimerDisplay();
+      clearInterval(timerInterval);
+      clearTimeout(autoNextTimeout);
+      showResult();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+  document.getElementById("timer").innerText = `${m}:${s < 10 ? "0" : ""}${s}`;
+}
+
+function loadQuestion() {
+  answeredCurrent = false;
+  const q = activeQuestions[idx];
+  document.getElementById("q-topic-badge").innerText = `MCQ ${idx + 1} • ${q.topic}`;
+  document.getElementById("question-text").innerHTML = `
+    <div class="eng-stmt"><bdi>${idx + 1}. ${q.eng}</bdi></div>
+    <div class="urdu-stmt"><bdi>${idx + 1}. ${q.urdu}</bdi></div>
+  `;
+
+  const box = document.getElementById("options-box");
+  box.innerHTML = "";
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "opt-btn";
+    btn.innerHTML = `
+      <span class="opt-label">${labels[i]}</span>
+      <span class="opt-content">
+        <span class="opt-eng"><bdi>${opt.eng}</bdi></span>
+        <span class="opt-urdu"><bdi>${opt.urdu}</bdi></span>
+      </span>
+    `;
+    btn.onclick = () => checkAnswer(i, btn);
+    box.appendChild(btn);
+  });
+
+  document.getElementById("progress-text").innerText =
+    `Question ${idx + 1} of ${activeQuestions.length}`;
+  const fb = document.getElementById("feedback-box");
+  fb.innerHTML = "";
+  fb.style.background = "transparent";
+}function checkAnswer(selectedIdx, btn) {
+  if (answeredCurrent || testFinished || timeLeft <= 0) return;
+  answeredCurrent = true;
+  answeredCount++;
+
+  const btns = document.querySelectorAll(".opt-btn");
+  btns.forEach((b) => (b.disabled = true));
+
+  const q = activeQuestions[idx];
+  const fb = document.getElementById("feedback-box");
+  const correctOpt = q.options[q.answer];
+  const correctLetter = labels[q.answer];
+
+  if (selectedIdx === q.answer) {
+    score++;
+    btn.classList.add("correct-opt");
+    fb.style.background = "#e5f7ed";
+    fb.innerHTML = `
+      <span style="color:#1f8a4c;">
+        ✅ <bdi>Correct! (${correctLetter})</bdi> | <bdi>درست جواب! (${correctLetter})</bdi>
+      </span>
+    `;
+  } else {
+    btn.classList.add("wrong-opt");
+    btns[q.answer].classList.add("correct-opt");
+    fb.style.background = "#fdecef";
+    fb.innerHTML = `
+      <span style="color:#d90429;">
+        ❌ <bdi>Wrong! Correct: ${correctLetter} (${correctOpt.eng})</bdi>
+        <br>
+        <bdi>غلط جواب! درست آپشن: ${correctLetter} — ${correctOpt.urdu}</bdi>
+      </span>
+    `;
+  }
+
+  clearTimeout(autoNextTimeout);
+  autoNextTimeout = setTimeout(() => {
+    if (testFinished) return;
+    idx++;
+    if (idx < activeQuestions.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  }, 1500);
+}
+
+function showResult() {
+  if (testFinished) return;
+  testFinished = true;
+  clearInterval(timerInterval);
+  clearTimeout(autoNextTimeout);
+  document.getElementById("quiz-screen").style.display = "none";
+  document.getElementById("score-screen").style.display = "block";
+
+  const total = activeQuestions.length;
+  const wrong = answeredCount - score;
+  const unanswered = total - answeredCount;
+  const perc = Math.round((score / total) * 100);
+
+  document.getElementById("total-q").innerHTML =
+    `<bdi>Total Questions: ${total}</bdi> | <bdi>کل سوالات: ${total}</bdi>`;
+  document.getElementById("correct-q").innerHTML =
+    `<bdi>Correct Answers: ${score}</bdi> | <bdi>درست جوابات: ${score}</bdi>`;
+  document.getElementById("wrong-q").innerHTML =
+    `<bdi>Wrong Answers: ${wrong}</bdi> | <bdi>غلط جوابات: ${wrong}</bdi>`;
+  document.getElementById("unanswered-q").innerHTML =
+    `<bdi>Unanswered: ${unanswered}</bdi> | <bdi>بغیر جواب سوالات: ${unanswered}</bdi>`;
+  document.getElementById("obtained-marks").innerHTML =
+    `<bdi>Obtained Marks: ${score} / ${total}</bdi> | <bdi>حاصل کردہ نمبر: ${score} / ${total}</bdi>`;
+  document.getElementById("percentage-score").innerHTML =
+    `<bdi>Percentage: ${perc}%</bdi> | <bdi>فیصد: ${perc}%</bdi>`;
+}
+
+window.onload = startTest;
+</script>
+</body>
+</html>
