@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 6 Mathematics Test 5 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#102b4c;
+  --green:#087c59;
+  --emerald:#1f8a4c;
+  --gold:#e8c66b;
+  --light:#f2f6f7;
+  --red:#d90429;
+  --border:#d7e5df;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Noto Nastaliq Urdu',Tahoma,Arial,sans-serif;
+  background:linear-gradient(135deg,#eef4f6 0%,#e4efe9 100%);
+  color:#263746;
+  padding:16px;
+  line-height:1.9;
+}
+.container{
+  max-width:820px;
+  margin:auto;
+  background:#fff;
+  padding:26px;
+  border-radius:15px;
+  box-shadow:0 8px 24px rgba(16,43,76,.1);
+  border-top:6px solid var(--green);
+}
+.header-banner{
+  text-align:center;
+  border-bottom:2px solid var(--border);
+  padding-bottom:14px;
+  margin-bottom:18px;
+}
+.badge{
+  display:inline-block;
+  background:#e5f3ec;
+  color:var(--green);
+  font-weight:bold;
+  font-size:13px;
+  padding:4px 12px;
+  border-radius:20px;
+  margin-bottom:6px;
+  font-family:Arial,sans-serif;
+}
+h1{
+  margin:4px 0;
+  color:var(--navy);
+  font-size:24px;
+}
+.subtitle{
+  margin:0;
+  color:#5b6b7a;
+  font-size:14px;
+  font-family:Arial,sans-serif;
+}
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#e5f3ec;
+  padding:11px 16px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font-weight:bold;
+  color:var(--navy);
+  font-family:Arial,sans-serif;
+}
+.timer{
+  background:var(--red);
+  color:#fff;
+  padding:4px 12px;
+  border-radius:6px;
+  font-size:15px;
+  letter-spacing:.5px;
+  min-width:75px;
+  text-align:center;
+}
+.question-card{
+  background:#f8fcfa;
+  border:1px solid var(--border);
+  border-left:5px solid var(--green);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.q-num-badge{
+  display:inline-block;
+  background:var(--navy);
+  color:#fff;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  font-weight:bold;
+  padding:2px 9px;
+  border-radius:5px;
+  margin-bottom:8px;
+}
+.eng-stmt{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--navy);
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.5;
+  margin-bottom:8px;
+}
+.urdu-stmt{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  color:#263746;
+  font-size:16px;
+  line-height:2.1;
+}
+.options{
+  display:grid;
+  gap:11px;
+  margin-bottom:14px;
+}
+.opt-btn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  background:#fff;
+  border:2px solid var(--border);
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:all .2s ease;
+  color:#263746;
+}
+.opt-btn:hover:not(:disabled){
+  background:#e5f3ec;
+  border-color:var(--green);
+  transform:translateY(-1px);
+}
+.opt-btn:disabled{cursor:default;opacity:1}
+.opt-label{
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  line-height:26px;
+  text-align:center;
+  border-radius:50%;
+  background:#eef4f6;
+  color:var(--navy);
+  font-family:Arial,sans-serif;
+  font-weight:bold;
+  font-size:13px;
+}
+.opt-content{
+  flex:1;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.opt-eng{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:bold;
+  font-size:15px;
+  color:var(--navy);
+}
+.opt-urdu{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  font-size:14px;
+  color:#3b4d5c;
+}
+.correct-opt{
+  background:var(--emerald)!important;
+  border-color:var(--emerald)!important;
+  color:#fff!important;
+}
+.correct-opt .opt-eng,
+.correct-opt .opt-urdu{color:#fff!important}
+.correct-opt .opt-label{
+  background:#fff;
+  color:var(--emerald);
+}
+.wrong-opt{
+  background:var(--red)!important;
+  border-color:var(--red)!important;
+  color:#fff!important;
+}
+.wrong-opt .opt-eng,
+.wrong-opt .opt-urdu{color:#fff!important}
+.wrong-opt .opt-label{
+  background:#fff;
+  color:var(--red);
+}
+#feedback-box{
+  text-align:center;
+  margin:12px 0;
+  font-size:16px;
+  font-weight:bold;
+  min-height:36px;
+  padding:6px 10px;
+  border-radius:8px;
+}
+.q-home-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:#f2f6f7;
+  color:var(--navy);
+  border:1.5px solid #c5d8d0;
+  padding:8px 18px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  transition:.2s;
+}
+.home-btn:hover{
+  background:#e5f3ec;
+  border-color:var(--green);
+  color:var(--green);
+}
+.score-box{
+  text-align:center;
+  display:none;
+  padding:14px 0;
+}
+.score-box h2{
+  color:var(--navy);
+  font-size:24px;
+  margin-bottom:12px;
+}
+.result-card{
+  background:#f8fcfa;
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin:16px auto;
+  max-width:440px;
+}
+.result-item{
+  font-size:17px;
+  margin:10px 0;
+  color:var(--navy);
+  font-weight:bold;
+}
+.restart-btn{
+  background:var(--navy);
+  color:#fff;
+  border:none;
+  padding:11px 24px;
+  font-size:15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  font-family:'Noto Nastaliq Urdu',Tahoma,sans-serif;
+  font-weight:bold;
+}
+.restart-btn:hover{background:var(--green)}
+.final-home-wrap{margin-top:18px}
+@media(max-width:600px){
+  .container{padding:16px}
+  h1{font-size:20px}
+  .opt-content{flex-direction:column;align-items:flex-start}
+  .opt-urdu{width:100%}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="header-banner">
+    <div class="badge">HMSA LEARNING ACADEMY • GRADE 6</div>
+    <h1>جماعت ششم — ریاضی آن لائن ٹیسٹ 5</h1>
+    <p class="subtitle">Grade 6 Mathematics Online Test 5 (Bilingual • 20 MCQs)</p>
+  </div>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">Question 1 of 20</span>
+      <span class="timer" id="timer">05:00</span>
+    </div>
+
+    <div id="question-card" class="question-card">
+      <div id="q-topic-badge" class="q-num-badge">MCQ</div>
+      <div id="question-text"></div>
+    </div>
+
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+
+    <div class="q-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج</bdi>
+      </a>
+    </div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h2>
+      <bdi>Test 5 Completed!</bdi>
+      <span> / </span>
+      <bdi>ٹیسٹ 5 مکمل ہو گیا!</bdi>
+    </h2>
+
+    <div class="result-card">
+      <div class="result-item" id="total-q"></div>
+      <div class="result-item" id="correct-q" style="color:#1f8a4c;"></div>
+      <div class="result-item" id="wrong-q" style="color:#d90429;"></div>
+      <div class="result-item" id="unanswered-q" style="color:#b7791f;"></div>
+      <div class="result-item" id="obtained-marks"></div>
+      <div class="result-item" id="percentage-score" style="color:#102b4c;font-size:20px;"></div>
+    </div>
+
+    <button class="restart-btn" onclick="startTest()">
+      <bdi>Test Again</bdi>
+      <span> / </span>
+      <bdi>دوبارہ ٹیسٹ دیں</bdi>
+    </button>
+
+    <div class="final-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج پر واپس جائیں</bdi>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Grade 6 Mathematics Test 5
+// 20 bilingual MCQs
+
+const rawQuestions = [
+  {
+    topic:"Perimeter & Area",
+    eng:"Find the perimeter of a square whose side length is 5 cm.",
+    urdu:"ایک مربع کا محیط معلوم کریں جس کے ہر ضلع کی لمبائی 5 سینٹی میٹر ہے۔",
+    options:[
+      {eng:"20 cm",urdu:"20 سینٹی میٹر"},
+      {eng:"25 cm",urdu:"25 سینٹی میٹر"},
+      {eng:"10 cm",urdu:"10 سینٹی میٹر"},
+      {eng:"15 cm",urdu:"15 سینٹی میٹر"}
+    ],
+    correctIndex:0
+  },
+  {
+    topic:"Algebraic Expressions",
+    eng:"In the expression 6x⁴, the number 4 is called the:",
+    urdu:"جبری عبارت 6x⁴ میں عدد 4 کیا کہلاتا ہے؟",
+    options:[
+      {eng:"Constant",urdu:"مستقل مقدار"},
+      {eng:"Exponent",urdu:"قوت نما (Exponent)"},
+      {eng:"Coefficient",urdu:"عددی سر"},
+      {eng:"Base",urdu:"اساس (Base)"}
+    ],
+    correctIndex:1
+  },
+  {
+    topic:"Lines & Angles",
+    eng:"Two lines that never intersect each other at any point are called:",
+    urdu:"ایسے دو خطوط جو کسی بھی نقطے پر ایک دوسرے کو قطع نہ کریں، کیا کہلاتے ہیں؟",
+    options:[
+      {eng:"Perpendicular lines",urdu:"عمودی خطوط"},
+      {eng:"Intersecting lines",urdu:"متقاطع خطوط"},
+      {eng:"Parallel lines",urdu:"متوازی خطوط"},
+      {eng:"Transversal lines",urdu:"قاطع خطوط"}
+    ],
+    correctIndex:2
+  },
+  {
+    topic:"3-D Figures",
+    eng:"How many faces (surfaces) does a cuboid have?",
+    urdu:"ایک مکعب نما (Cuboid) کی کتنی سطحیں (Faces) ہوتی ہیں؟",
+    options:[
+      {eng:"4 faces",urdu:"4 سطحیں"},
+      {eng:"12 faces",urdu:"12 سطحیں"},
+      {eng:"8 faces",urdu:"8 سطحیں"},
+      {eng:"6 faces",urdu:"6 سطحیں"}
+    ],
+    correctIndex:3
+  },
+  {
+    topic:"Area of Triangle",
+    eng:"Find the area of a triangle with base 12 cm and height 8 cm.",
+    urdu:"اس مثلث کا رقبہ معلوم کریں جس کا قاعدہ 12 سینٹی میٹر اور بلندی 8 سینٹی میٹر ہو۔",
+    options:[
+      {eng:"48 sq cm",urdu:"48 مربع سینٹی میٹر"},
+      {eng:"96 sq cm",urdu:"96 مربع سینٹی میٹر"},
+      {eng:"20 sq cm",urdu:"20 مربع سینٹی میٹر"},
+      {eng:"24 sq cm",urdu:"24 مربع سینٹی میٹر"}
+    ],
+    correctIndex:0
+  },
+  {
+    topic:"Equations",
+    eng:"Which sign is used to write an equation?",
+    urdu:"مساوات (Equation) لکھنے کے لیے کون سی علامت استعمال ہوتی ہے؟",
+    options:[
+      {eng:"+ (Plus)",urdu:"جمع کی علامت (+)"},
+      {eng:"= (Equal)",urdu:"مساوی کی علامت (=)"},
+      {eng:"- (Minus)",urdu:"منفی کی علامت (-)"},
+      {eng:"/ (Divide)",urdu:"تقسیم کی علامت (/)"}
+    ],
+    correctIndex:1
+  },
+  {
+    topic:"Lines & Angles",
+    eng:"If the largest angle formed by intersecting lines is 120 degrees, what is its vertically opposite angle?",
+    urdu:"اگر متقاطع خطوط سے بننے والا سب سے بڑا زاویہ 120 درجے ہو، تو اس کا عمودی متقابل زاویہ کیا ہوگا؟",
+    options:[
+      {eng:"60 degrees",urdu:"60 درجے"},
+      {eng:"180 degrees",urdu:"180 درجے"},
+      {eng:"120 degrees",urdu:"120 درجے"},
+      {eng:"90 degrees",urdu:"90 درجے"}
+    ],
+    correctIndex:2
+  },
+  {
+    topic:"Volume of Cube",
+    eng:"If the edge length of a solid cube is 1 m, what is its volume?",
+    urdu:"اگر ایک ٹھوس مکعب کے کنارے کی لمبائی 1 میٹر ہو تو اس کا حجم کیا ہوگا؟",
+    options:[
+      {eng:"2 cubic m",urdu:"2 مکعب میٹر"},
+      {eng:"3 cubic m",urdu:"3 مکعب میٹر"},
+      {eng:"4 cubic m",urdu:"4 مکعب میٹر"},
+      {eng:"1 cubic m",urdu:"1 مکعب میٹر"}
+    ],
+    correctIndex:3
+  },
+  {
+    topic:"Area of Trapezium",
+    eng:"Find the area of a trapezium with parallel sides 10 cm and 12 cm, and height 8 cm.",
+    urdu:"اس ٹریپیزیم کا رقبہ معلوم کریں جس کے متوازی اضلاع 10 سینٹی میٹر اور 12 سینٹی میٹر اور عمودی اونچائی 8 سینٹی میٹر ہو۔",
+    options:[
+      {eng:"88 sq cm",urdu:"88 مربع سینٹی میٹر"},
+      {eng:"176 sq cm",urdu:"176 مربع سینٹی میٹر"},
+      {eng:"44 sq cm",urdu:"44 مربع سینٹی میٹر"},
+      {eng:"30 sq cm",urdu:"30 مربع سینٹی میٹر"}
+    ],
+    correctIndex:0
+  },
+  {
+    topic:"Linear Equations",
+    eng:"The power (exponent) of a variable in a linear equation is always:",
+    urdu:"لکیری مساوات میں متغیر (Variable) کی قوت نما ہمیشہ ہوتی ہے:",
+    options:[
+      {eng:"2",urdu:"قوت نما 2"},
+      {eng:"1",urdu:"قوت نما 1"},
+      {eng:"3",urdu:"قوت نما 3"},
+      {eng:"4",urdu:"قوت نما 4"}
+    ],
+    correctIndex:1
+  },
+  {
+    topic:"Lines & Angles",
+    eng:"A line that passes through two or more lines at distinct points is called a:",
+    urdu:"وہ خط جو دو یا دو سے زیادہ خطوط کو مختلف نقاط پر قطع کرتا ہے، کیا کہلاتا ہے؟",
+    options:[
+      {eng:"Perpendicular",urdu:"عمود"},
+      {eng:"Altitude",urdu:"ارتفاع"},
+      {eng:"Transversal",urdu:"خطِ قاطع (Transversal)"},
+      {eng:"Hypotenuse",urdu:"وتر"}
+    ],
+    correctIndex:2
+  },
+  {
+    topic:"Surface Area",
+    eng:"What is the formula for the total surface area of a cube of side length l?",
+    urdu:"ضلع کی لمبائی l والے مکعب کی کل سطحی رقبہ کا کلیہ کیا ہے؟",
+    options:[
+      {eng:"S = 4 × l²",urdu:"کلیہ S = 4 × l²"},
+      {eng:"S = l³",urdu:"کلیہ S = l³"},
+      {eng:"S = l × b × h",urdu:"کلیہ S = l × b × h"},
+      {eng:"S = 6 × l²",urdu:"کلیہ S = 6 × l²"}
+    ],
+    correctIndex:3
+  },
+  {
+    topic:"Area of Rectangle",
+    eng:"Find the area of a rectangle having length 5 cm and breadth 4 cm.",
+    urdu:"اس مستطیل کا رقبہ معلوم کریں جس کی لمبائی 5 سینٹی میٹر اور چوڑائی 4 سینٹی میٹر ہو۔",
+    options:[
+      {eng:"20 sq cm",urdu:"20 مربع سینٹی میٹر"},
+      {eng:"9 sq cm",urdu:"9 مربع سینٹی میٹر"},
+      {eng:"18 sq cm",urdu:"18 مربع سینٹی میٹر"},
+      {eng:"25 sq cm",urdu:"25 مربع سینٹی میٹر"}
+    ],
+    correctIndex:0
+  },
+  {
+    topic:"Solution of Equation",
+    eng:"For which value of x is x + 9 = 19 true?",
+    urdu:"مساوات x + 9 = 19 کس قیمت کے لیے درست ہے؟",
+    options:[
+      {eng:"1",urdu:"عدد 1"},
+      {eng:"10",urdu:"عدد 10"},
+      {eng:"2",urdu:"عدد 2"},
+      {eng:"20",urdu:"عدد 20"}
+    ],
+    correctIndex:1
+  },
+  {
+    topic:"3-D Solids",
+    eng:"How many edges does a hemisphere have?",
+    urdu:"ایک نصف کرہ (Hemisphere) کے کتنے کنارے (Edges) ہوتے ہیں؟",
+    options:[
+      {eng:"0 edges",urdu:"0 کنارے"},
+      {eng:"2 edges",urdu:"2 کنارے"},
+      {eng:"1 edge",urdu:"1 کنارا"},
+      {eng:"4 edges",urdu:"4 کنارے"}
+    ],
+    correctIndex:2
+  },
+  {
+    topic:"Measurement Terms",
+    eng:"The length of the boundary of a closed figure is called its:",
+    urdu:"کسی بند شکل کی بیرونی سرحد کی لمبائی کو کیا کہتے ہیں؟",
+    options:[
+      {eng:"Volume",urdu:"حجم"},
+      {eng:"Area",urdu:"رقبہ"},
+      {eng:"Cube",urdu:"مکعب"},
+      {eng:"Perimeter",urdu:"محیط (Perimeter)"}
+    ],
+    correctIndex:3
+  },
+  {
+    topic:"Perpendicular Lines",
+    eng:"Perpendicular lines always intersect each other at an angle of:",
+    urdu:"عمودی خطوط ہمیشہ ایک دوسرے کو کس زاویے پر قطع کرتے ہیں؟",
+    options:[
+      {eng:"90 degrees",urdu:"90 درجے"},
+      {eng:"45 degrees",urdu:"45 درجے"},
+      {eng:"60 degrees",urdu:"60 درجے"},
+      {eng:"120 degrees",urdu:"120 درجے"}
+    ],
+    correctIndex:0
+  },
+  {
+    topic:"Algebraic Expressions",
+    eng:"The expression 4x + 5 is an example of:",
+    urdu:"عبارت 4x + 5 کس کی مثال ہے؟",
+    options:[
+      {eng:"Linear equation",urdu:"لکیری مساوات"},
+      {eng:"Algebraic expression",urdu:"جبری عبارت (Expression)"},
+      {eng:"Arithmetic equation",urdu:"حسابی مساوات"},
+      {eng:"Constant number",urdu:"مستقل عدد"}
+    ],
+    correctIndex:1
+  },
+  {
+    topic:"Volume Formula",
+    eng:"What is the formula for the volume of a cuboid?",
+    urdu:"مکعب نما (Cuboid) کا حجم معلوم کرنے کا کلیہ کیا ہے؟",
+    options:[
+      {eng:"V = 4 × l²",urdu:"کلیہ V = 4 × l²"},
+      {eng:"V = l³",urdu:"کلیہ V = l³"},
+      {eng:"V = l × b × h",urdu:"کلیہ V = l × b × h"},
+      {eng:"V = 6 × l²",urdu:"کلیہ V = 6 × l²"}
+    ],
+    correctIndex:2
+  },
+  {
+    topic:"Dimensions",
+    eng:"Which geometric figure is the only dimension-less figure?",
+    urdu:"کون سی ہندسی شکل واحد غیر بُعدی (Dimension-less) شکل ہے؟",
+    options:[
+      {eng:"Circle",urdu:"دائرہ"},
+      {eng:"Triangle",urdu:"مثلث"},
+      {eng:"Rectangle",urdu:"مستطیل"},
+      {eng:"Point",urdu:"نقطہ (Point)"}
+    ],
+    correctIndex:3
+  }
+];
+
+const labels=["A","B","C","D"];
+
+let activeQuestions=[];
+let idx=0;
+let score=0;
+let answered=0;
+let timeLeft=300;
+let timerInterval=null;
+let nextQuestionTimeout=null;
+let testFinished=false;
+let questionLocked=false;
+
+function shuffleArray(arr){
+  const copy=arr.slice();
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function buildShuffledQuiz(){
+  const shuffledQs=shuffleArray(rawQuestions);
+
+  return shuffledQs.map(item=>{
+    const taggedOptions=item.options.map((opt,origIdx)=>({
+      eng:opt.eng,
+      urdu:opt.urdu,
+      isCorrect:origIdx===item.correctIndex
+    }));
+
+    const shuffledOpts=shuffleArray(taggedOptions);
+    const newCorrectIdx=shuffledOpts.findIndex(o=>o.isCorrect);
+
+    return{
+      topic:item.topic,
+      eng:item.eng,
+      urdu:item.urdu,
+      options:shuffledOpts,
+      answer:newCorrectIdx
+    };
+  });
+}
+
+function startTest(){
+  clearInterval(timerInterval);
+  clearTimeout(nextQuestionTimeout);
+
+  activeQuestions=buildShuffledQuiz();
+  idx=0;
+  score=0;
+  answered=0;
+  timeLeft=300;
+  testFinished=false;
+  questionLocked=false;
+
+  document.getElementById("score-screen").style.display="none";
+  document.getElementById("quiz-screen").style.display="block";
+
+  updateTimerDisplay();
+  loadQuestion();
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(timerInterval);
+
+  timerInterval=setInterval(()=>{
+    if(testFinished)return;
+
+    timeLeft--;
+    updateTimerDisplay();
+
+    if(timeLeft<=0){
+      timeLeft=0;
+      updateTimerDisplay();
+      showResult();
+    }
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const m=Math.floor(timeLeft/60);
+  const s=timeLeft%60;
+
+  document.getElementById("timer").innerText=
+    `${m}:${s<10?"0":""}${s}`;
+}
+
+function loadQuestion(){
+  if(testFinished)return;
+
+  if(idx>=activeQuestions.length){
+    showResult();
+    return;
+  }
+
+  questionLocked=false;
+
+  const q=activeQuestions[idx];
+
+  document.getElementById("q-topic-badge").innerText=
+    `MCQ ${idx+1} • ${q.topic}`;
+
+  document.getElementById("question-text").innerHTML=`
+    <div class="eng-stmt">
+      <bdi>${idx+1}. ${q.eng}</bdi>
+    </div>
+    <div class="urdu-stmt">
+      <bdi>${idx+1}. ${q.urdu}</bdi>
+    </div>
+  `;
+
+  const box=document.getElementById("options-box");
+  box.innerHTML="";
+
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement("button");
+
+    btn.type="button";
+    btn.className="opt-btn";
+
+    btn.innerHTML=`
+      <span class="opt-label">${labels[i]}</span>
+      <span class="opt-content">
+        <span class="opt-eng"><bdi>${opt.eng}</bdi></span>
+        <span class="opt-urdu"><bdi>${opt.urdu}</bdi></span>
+      </span>
+    `;
+
+    btn.onclick=()=>checkAnswer(i,btn);
+    box.appendChild(btn);
+  });
+
+  document.getElementById("progress-text").innerText=
+    `Question ${idx+1} of ${activeQuestions.length}`;
+
+  const fb=document.getElementById("feedback-box");
+  fb.innerHTML="";
+  fb.style.background="transparent";
+}
+
+function checkAnswer(selectedIdx,btn){
+  if(testFinished||questionLocked)return;
+
+  questionLocked=true;
+  answered++;
+
+  const btns=document.querySelectorAll(".opt-btn");
+
+  btns.forEach(b=>b.disabled=true);
+
+  const q=activeQuestions[idx];
+  const fb=document.getElementById("feedback-box");
+  const correctOpt=q.options[q.answer];
+  const correctLetter=labels[q.answer];
+
+  if(selectedIdx===q.answer){
+    score++;
+    btn.classList.add("correct-opt");
+
+    fb.style.background="#e5f7ed";
+    fb.innerHTML=`
+      <span style="color:#1f8a4c;">
+        ✅ <bdi>Correct! (${correctLetter})</bdi>
+        |
+        <bdi>درست جواب! (${correctLetter})</bdi>
+      </span>
+    `;
+  }else{
+    btn.classList.add("wrong-opt");
+    btns[q.answer].classList.add("correct-opt");
+
+    fb.style.background="#fdecef";
+    fb.innerHTML=`
+      <span style="color:#d90429;">
+        ❌ <bdi>Wrong! Correct: ${correctLetter} (${correctOpt.eng})</bdi>
+        <br>
+        <bdi>غلط جواب! درست آپشن: ${correctLetter} — ${correctOpt.urdu}</bdi>
+      </span>
+    `;
+  }
+
+  idx++;
+
+  // Timer keeps running during the answer feedback delay.
+  nextQuestionTimeout=setTimeout(()=>{
+    if(testFinished)return;
+
+    if(timeLeft<=0){
+      showResult();
+      return;
+    }
+
+    if(idx<activeQuestions.length){
+      loadQuestion();
+    }else{
+      showResult();
+    }
+  },1200);
+}
+
+function showResult(){
+  if(testFinished)return;
+
+  testFinished=true;
+
+  clearInterval(timerInterval);
+  clearTimeout(nextQuestionTimeout);
+
+  const total=activeQuestions.length;
+  const wrong=answered-score;
+  const unanswered=total-answered;
+  const percentage=Math.round((score/total)*100);
+
+  document.getElementById("quiz-screen").style.display="none";
+  document.getElementById("score-screen").style.display="block";
+
+  document.getElementById("total-q").innerHTML=
+    `<bdi>Total Questions: ${total}</bdi> | <bdi>کل سوالات: ${total}</bdi>`;
+
+  document.getElementById("correct-q").innerHTML=
+    `<bdi>Correct Answers: ${score}</bdi> | <bdi>درست جوابات: ${score}</bdi>`;
+
+  document.getElementById("wrong-q").innerHTML=
+    `<bdi>Wrong Answers: ${wrong}</bdi> | <bdi>غلط جوابات: ${wrong}</bdi>`;
+
+  document.getElementById("unanswered-q").innerHTML=
+    `<bdi>Unanswered: ${unanswered}</bdi> | <bdi>بغیر حل شدہ سوالات: ${unanswered}</bdi>`;
+
+  document.getElementById("obtained-marks").innerHTML=
+    `<bdi>Obtained Marks: ${score} / ${total}</bdi> | <bdi>حاصل کردہ نمبر: ${score} / ${total}</bdi>`;
+
+  document.getElementById("percentage-score").innerHTML=
+    `<bdi>Percentage: ${percentage}%</bdi> | <bdi>فیصد: ${percentage}%</bdi>`;
+}
+
+window.onload=startTest;
+</script>
+</body>
+</html>
