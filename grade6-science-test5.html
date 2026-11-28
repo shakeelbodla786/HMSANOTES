@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 6 General Science Test 5 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#102b4c;
+  --green:#087c59;
+  --emerald:#1f8a4c;
+  --gold:#e8c66b;
+  --light:#f2f6f7;
+  --red:#d90429;
+  --border:#d7e5df;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Noto Nastaliq Urdu', Tahoma, Arial, sans-serif;
+  background:linear-gradient(135deg, #eef4f6 0%, #e4efe9 100%);
+  color:#263746;
+  padding:16px;
+  line-height:1.9;
+}
+.container{
+  max-width:820px;
+  margin:auto;
+  background:#ffffff;
+  padding:26px;
+  border-radius:15px;
+  box-shadow:0 8px 24px rgba(16,43,76,0.1);
+  border-top:6px solid var(--green);
+}
+.header-banner{
+  text-align:center;
+  border-bottom:2px solid var(--border);
+  padding-bottom:14px;
+  margin-bottom:18px;
+}
+.badge{
+  display:inline-block;
+  background:#e5f3ec;
+  color:var(--green);
+  font-weight:bold;
+  font-size:13px;
+  padding:4px 12px;
+  border-radius:20px;
+  margin-bottom:6px;
+  font-family:Arial, sans-serif;
+}
+h1{
+  margin:4px 0;
+  color:var(--navy);
+  font-size:24px;
+}
+.subtitle{
+  margin:0;
+  color:#5b6b7a;
+  font-size:14px;
+  font-family:Arial, sans-serif;
+}
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#e5f3ec;
+  padding:11px 16px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font-weight:bold;
+  color:var(--navy);
+  font-family:Arial, sans-serif;
+}
+.timer{
+  background:var(--red);
+  color:#ffffff;
+  padding:4px 12px;
+  border-radius:6px;
+  font-size:15px;
+  letter-spacing:0.5px;
+}
+.question-card{
+  background:#f8fcfa;
+  border:1px solid var(--border);
+  border-left:5px solid var(--green);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-bottom:16px;
+}
+.q-num-badge{
+  display:inline-block;
+  background:var(--navy);
+  color:#ffffff;
+  font-family:Arial, sans-serif;
+  font-size:12px;
+  font-weight:bold;
+  padding:2px 9px;
+  border-radius:5px;
+  margin-bottom:8px;
+}
+.eng-stmt{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font-family:Arial, Helvetica, sans-serif;
+  color:var(--navy);
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.5;
+  margin-bottom:8px;
+}
+.urdu-stmt{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;
+  color:#263746;
+  font-size:16px;
+  line-height:2.1;
+}
+.options{
+  display:grid;
+  gap:11px;
+  margin-bottom:14px;
+}
+.opt-btn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  background:#ffffff;
+  border:2px solid var(--border);
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  color:#263746;
+}
+.opt-btn:hover:not(:disabled){
+  background:#e5f3ec;
+  border-color:var(--green);
+  transform:translateY(-1px);
+}
+.opt-label{
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  line-height:26px;
+  text-align:center;
+  border-radius:50%;
+  background:#eef4f6;
+  color:var(--navy);
+  font-family:Arial, sans-serif;
+  font-weight:bold;
+  font-size:13px;
+}
+.opt-content{
+  flex:1;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.opt-eng{
+  direction:ltr;
+  text-align:left;
+  unicode-bidi:isolate;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:bold;
+  font-size:15px;
+  color:var(--navy);
+}
+.opt-urdu{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+  font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;
+  font-size:14px;
+  color:#3b4d5c;
+}
+.correct-opt{
+  background:var(--emerald) !important;
+  border-color:var(--emerald) !important;
+  color:#ffffff !important;
+}
+.correct-opt .opt-eng,
+.correct-opt .opt-urdu{
+  color:#ffffff !important;
+}
+.correct-opt .opt-label{
+  background:#ffffff;
+  color:var(--emerald);
+}
+.wrong-opt{
+  background:var(--red) !important;
+  border-color:var(--red) !important;
+  color:#ffffff !important;
+}
+.wrong-opt .opt-eng,
+.wrong-opt .opt-urdu{
+  color:#ffffff !important;
+}
+.wrong-opt .opt-label{
+  background:#ffffff;
+  color:var(--red);
+}
+#feedback-box{
+  text-align:center;
+  margin:12px 0;
+  font-size:16px;
+  font-weight:bold;
+  min-height:36px;
+  padding:6px 10px;
+  border-radius:8px;
+}
+.q-home-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:#f2f6f7;
+  color:var(--navy);
+  border:1.5px solid #c5d8d0;
+  padding:8px 18px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  transition:0.2s;
+}
+.home-btn:hover{
+  background:#e5f3ec;
+  border-color:var(--green);
+  color:var(--green);
+}
+.score-box{
+  text-align:center;
+  display:none;
+  padding:14px 0;
+}
+.score-box h2{
+  color:var(--navy);
+  font-size:24px;
+  margin-bottom:12px;
+}
+.result-card{
+  background:#f8fcfa;
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin:16px auto;
+  max-width:440px;
+}
+.result-item{
+  font-size:17px;
+  margin:10px 0;
+  color:var(--navy);
+  font-weight:bold;
+}
+.restart-btn{
+  background:var(--navy);
+  color:#ffffff;
+  border:none;
+  padding:11px 24px;
+  font-size:15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;
+  font-weight:bold;
+}
+.restart-btn:hover{
+  background:var(--green);
+}
+.final-home-wrap{
+  margin-top:18px;
+}
+@media (max-width:600px){
+  .container{padding:16px}
+  h1{font-size:20px}
+  .opt-content{flex-direction:column; align-items:flex-start;}
+  .opt-urdu{width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header-banner">
+    <div class="badge">HMSA LEARNING ACADEMY • GRADE 6</div>
+    <h1>جماعت ششم — جنرل سائنس آن لائن ٹیسٹ 5</h1>
+    <p class="subtitle">Grade 6 General Science Online Test 5 (Bilingual • 20 MCQs)</p>
+  </div>
+
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <span id="progress-text">Question 1 of 20</span>
+      <span class="timer" id="timer">05:00</span>
+    </div>
+
+    <div id="question-card" class="question-card">
+      <div id="q-topic-badge" class="q-num-badge">MCQ</div>
+      <div id="question-text"></div>
+    </div>
+
+    <div id="options-box" class="options"></div>
+    <div id="feedback-box"></div>
+
+    <div class="q-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج</bdi>
+      </a>
+    </div>
+  </div>
+
+  <div id="score-screen" class="score-box">
+    <h2>
+      <bdi>Test 5 Completed!</bdi>
+      <span> / </span>
+      <bdi>ٹیسٹ 5 مکمل ہو گیا!</bdi>
+    </h2>
+
+    <div class="result-card">
+      <div class="result-item" id="total-q">Total Questions: 20 | کل سوالات: 20</div>
+      <div class="result-item" id="correct-q" style="color:#1f8a4c;">Correct Answers: 0 | درست جوابات: 0</div>
+      <div class="result-item" id="obtained-marks">Obtained Marks: 0 / 20 | حاصل کردہ نمبر: 0 / 20</div>
+      <div class="result-item" id="percentage-score" style="color:#102b4c; font-size:20px;">Percentage: 0% | فیصد: 0%</div>
+    </div>
+
+    <button class="restart-btn" onclick="startTest()">
+      <bdi>Test Again</bdi>
+      <span> / </span>
+      <bdi>دوبارہ ٹیسٹ دیں</bdi>
+    </button>
+
+    <div class="final-home-wrap">
+      <a class="home-btn" href="index.html">
+        <bdi>← Back to Home Page</bdi>
+        <span>|</span>
+        <bdi>مرکزی ہوم پیج پر واپس جائیں</bdi>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// 20 Grade 6 General Science MCQs
+// Topics: Mixtures, Solutions, Alloys, Energy and Electricity
+
+const rawQuestions = [
+  {
+    topic: "Electricity",
+    eng: "What is a positively charged subatomic particle called?",
+    urdu: "مثبت چارج رکھنے والے ذرے کو کیا کہتے ہیں؟",
+    options: [
+      {eng: "Proton", urdu: "پروٹون"},
+      {eng: "Electron", urdu: "الیکٹرون"},
+      {eng: "Neutron", urdu: "نیوٹرون"},
+      {eng: "Atom", urdu: "ایٹم"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Mixtures & Matter",
+    eng: "A mixture whose composition and properties are uniform throughout is called:",
+    urdu: "ایسا مکسچر جس کی ساخت اور خصوصیات پورے نمونے میں یکساں ہوں کیا کہلاتا ہے؟",
+    options: [
+      {eng: "Heterogeneous mixture", urdu: "ہیٹروجینیئس مکسچر"},
+      {eng: "Homogeneous mixture", urdu: "ہوموجینیئس مکسچر"},
+      {eng: "Pure element", urdu: "خالص عنصر"},
+      {eng: "Insoluble solid", urdu: "نا حل پذیر ٹھوس"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Energy",
+    eng: "The energy stored in an object due to its position or mechanical/chemical state is:",
+    urdu: "کسی جسم میں اس کی پوزیشن یا کیمیائی/میکانی حالت کی وجہ سے ذخیرہ توانائی کیا کہلاتی ہے؟",
+    options: [
+      {eng: "Kinetic energy", urdu: "حرکی توانائی"},
+      {eng: "Sound energy", urdu: "صوتی توانائی"},
+      {eng: "Potential energy", urdu: "مخفی توانائی"},
+      {eng: "Light energy", urdu: "روشنی کی توانائی"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Solutions",
+    eng: "In a 5% sugar solution in water, which component is the solvent?",
+    urdu: "پانی میں 5% چینی کے محلول میں محلل (Solvent) کون سا جزو ہے؟",
+    options: [
+      {eng: "Sugar", urdu: "چینی"},
+      {eng: "Salt", urdu: "نمک"},
+      {eng: "Air", urdu: "ہوا"},
+      {eng: "Water", urdu: "پانی"}
+    ],
+    correctIndex: 3
+  },
+  {
+    topic: "Current Electricity",
+    eng: "Which circuit provides multiple paths for electric current to flow?",
+    urdu: "کون سا سرکٹ برقی رو کے بہاؤ کے لیے ایک سے زیادہ راستے فراہم کرتا ہے؟",
+    options: [
+      {eng: "Parallel circuit", urdu: "متوازی سرکٹ"},
+      {eng: "Series circuit", urdu: "سلسلہ وار سرکٹ"},
+      {eng: "Open circuit", urdu: "کھلا سرکٹ"},
+      {eng: "Short circuit", urdu: "شارٹ سرکٹ"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Energy Sources",
+    eng: "Which of the following is a renewable source of energy?",
+    urdu: "درج ذیل میں سے توانائی کا قابلِ تجدید ذریعہ کون سا ہے؟",
+    options: [
+      {eng: "Coal", urdu: "کوئلہ"},
+      {eng: "Wind", urdu: "ہوا"},
+      {eng: "Natural gas", urdu: "قدرتی گیس"},
+      {eng: "Petrol", urdu: "پیٹرول"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Alloys",
+    eng: "Brass is a homogeneous alloy made by mixing:",
+    urdu: "پتل (Brass) کن دھاتوں کو ملا کر بننے والا ہم جنس بھرت ہے؟",
+    options: [
+      {eng: "Iron and carbon", urdu: "لوہا اور کاربن"},
+      {eng: "Gold and silver", urdu: "سونا اور چاندی"},
+      {eng: "Copper and zinc", urdu: "تانبا اور زنک"},
+      {eng: "Lead and tin", urdu: "سیسہ اور قلعی"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Energy Conversion",
+    eng: "According to the law of conservation of energy, during energy conversion total energy:",
+    urdu: "قانونِ بقائے توانائی کے مطابق توانائی کی تبدیلی کے دوران کل توانائی:",
+    options: [
+      {eng: "Gets destroyed", urdu: "تباہ ہو جاتی ہے"},
+      {eng: "Always decreases", urdu: "ہمیشہ کم ہوتی ہے"},
+      {eng: "Disappears as heat", urdu: "ختم ہو جاتی ہے"},
+      {eng: "Remains the same", urdu: "یکساں رہتی ہے"}
+    ],
+    correctIndex: 3
+  },
+  {
+    topic: "Static Electricity",
+    eng: "Lightning in clouds is a natural example of:",
+    urdu: "بادلوں میں آسمانی بجلی چمکنا کس کی قدرتی مثال ہے؟",
+    options: [
+      {eng: "Static electricity", urdu: "اسٹیٹک الیکٹرسٹی"},
+      {eng: "Parallel circuit", urdu: "متوازی سرکٹ"},
+      {eng: "Magnetic field", urdu: "مقناطیسی میدان"},
+      {eng: "Solar panel", urdu: "سولر پینل"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Solutions",
+    eng: "A solution containing a relatively small amount of solute in a large amount of solvent is:",
+    urdu: "زیادہ محلل میں نسبتاً کم مقدار میں حل شدہ شے والا محلول کیا کہلاتا ہے؟",
+    options: [
+      {eng: "Concentrated solution", urdu: "گاڑھا محلول"},
+      {eng: "Dilute solution", urdu: "پتلا محلول"},
+      {eng: "Alloy mixture", urdu: "بھرت آمیزہ"},
+      {eng: "Solid residue", urdu: "ٹھوس باقیات"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Kinetic Energy",
+    eng: "Which object possesses kinetic energy due to motion?",
+    urdu: "حرکت کی وجہ سے کس جسم میں حرکی توانائی موجود ہوتی ہے؟",
+    options: [
+      {eng: "Brick resting on floor", urdu: "فرش پر رکھی اینٹ"},
+      {eng: "Stretched rubber band", urdu: "کھنچی ہوئی ربڑ بینڈ"},
+      {eng: "Moving car", urdu: "چلتی ہوئی کار"},
+      {eng: "Stored coal", urdu: "رکھا ہوا کوئلہ"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Domestic Circuits",
+    eng: "Which type of electric circuit is commonly used in domestic house wiring?",
+    urdu: "گھروں کی وائرنگ میں عام طور پر کس قسم کا برقی سرکٹ استعمال ہوتا ہے؟",
+    options: [
+      {eng: "Series circuit", urdu: "سلسلہ وار سرکٹ"},
+      {eng: "Open circuit", urdu: "کھلا سرکٹ"},
+      {eng: "Broken circuit", urdu: "ٹوٹا ہوا سرکٹ"},
+      {eng: "Parallel circuit", urdu: "متوازی سرکٹ"}
+    ],
+    correctIndex: 3
+  },
+  {
+    topic: "Compounds & Mixtures",
+    eng: "Which of the following is a chemical compound?",
+    urdu: "درج ذیل میں سے کون سا کیمیائی مرکب (Compound) ہے؟",
+    options: [
+      {eng: "Water", urdu: "پانی"},
+      {eng: "Soil", urdu: "مٹی"},
+      {eng: "Salad", urdu: "سلاد"},
+      {eng: "Air", urdu: "ہوا"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Energy Converters",
+    eng: "Which of the following is NOT an energy converter?",
+    urdu: "درج ذیل میں سے کون سی چیز توانائی تبدیل کرنے والا آلہ نہیں ہے؟",
+    options: [
+      {eng: "Electric fan", urdu: "برقی پنکھا"},
+      {eng: "Wooden table", urdu: "لکڑی کی میز"},
+      {eng: "Solar panel", urdu: "سولر پینل"},
+      {eng: "Room heater", urdu: "روم ہیٹر"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Separation of Mixtures",
+    eng: "Which method is used to separate coloured components of a mixture?",
+    urdu: "آمیزے کے رنگین اجزاء کو الگ کرنے کا طریقہ کیا کہلاتا ہے؟",
+    options: [
+      {eng: "Distillation", urdu: "کشید کاری"},
+      {eng: "Sublimation", urdu: "تصعید"},
+      {eng: "Chromatography", urdu: "کرومیٹوگرافی"},
+      {eng: "Decantation", urdu: "نتھارنا"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Electric Circuit",
+    eng: "What is the device used to open or close an electric circuit called?",
+    urdu: "برقی سرکٹ کو کھولنے یا بند کرنے کے لیے استعمال ہونے والے آلے کو کیا کہتے ہیں؟",
+    options: [
+      {eng: "Battery", urdu: "بیٹری"},
+      {eng: "Bulb", urdu: "بلب"},
+      {eng: "Copper wire", urdu: "تانبے کی تار"},
+      {eng: "Switch", urdu: "سوئچ"}
+    ],
+    correctIndex: 3
+  },
+  {
+    topic: "Energy Forms",
+    eng: "Our food is primarily a source of:",
+    urdu: "ہماری خوراک بنیادی طور پر کس توانائی کا ذریعہ ہے؟",
+    options: [
+      {eng: "Chemical energy", urdu: "کیمیائی توانائی"},
+      {eng: "Electrical energy", urdu: "برقی توانائی"},
+      {eng: "Sound energy", urdu: "صوتی توانائی"},
+      {eng: "Elastic energy", urdu: "لچکدار توانائی"}
+    ],
+    correctIndex: 0
+  },
+  {
+    topic: "Solutions",
+    eng: "A solution made by mixing only two substances is called a:",
+    urdu: "صرف دو اجزاء کو ملا کر بنایا جانے والا محلول کیا کہلاتا ہے؟",
+    options: [
+      {eng: "Heterogeneous mix", urdu: "غیر یکساں آمیزہ"},
+      {eng: "Binary solution", urdu: "ثنائی محلول"},
+      {eng: "Pure element", urdu: "خالص عنصر"},
+      {eng: "Colloid suspension", urdu: "سسپنشن"}
+    ],
+    correctIndex: 1
+  },
+  {
+    topic: "Energy Dissipation",
+    eng: "Unwanted spreading of energy into less useful forms is called:",
+    urdu: "توانائی کا غیر مفید شکلوں میں پھیل کر ضائع ہو جانا کیا کہلاتا ہے؟",
+    options: [
+      {eng: "Conduction", urdu: "ایصال"},
+      {eng: "Absorption", urdu: "انجذاب"},
+      {eng: "Dissipation of energy", urdu: "توانائی کا ضیاع"},
+      {eng: "Reflection", urdu: "انعکاس"}
+    ],
+    correctIndex: 2
+  },
+  {
+    topic: "Series Circuit",
+    eng: "In a series circuit, increasing the number of batteries generally:",
+    urdu: "سلسلہ وار سرکٹ میں بیٹریوں کی تعداد بڑھانے سے عام طور پر:",
+    options: [
+      {eng: "Stops current flow", urdu: "کرنٹ رک جاتا ہے"},
+      {eng: "Decreases bulb brightness", urdu: "بلب کی روشنی کم ہوتی ہے"},
+      {eng: "Turns it into parallel", urdu: "متوازی سرکٹ بن جاتا ہے"},
+      {eng: "Increases bulb brightness", urdu: "بلب کی روشنی بڑھتی ہے"}
+    ],
+    correctIndex: 3
+  }
+];
+
+const labels = ["A", "B", "C", "D"];
+let activeQuestions = [];
+let idx = 0;
+let score = 0;
+let timerInterval;
+let nextQuestionTimeout;
+let testFinished = false;
+let timeLeft = 300; // 5 minutes
+
+function shuffleArray(arr) {
+  const copy = arr.slice();
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function buildShuffledQuiz() {
+  const shuffledQs = shuffleArray(rawQuestions);
+
+  return shuffledQs.map((item) => {
+    const taggedOptions = item.options.map((opt, origIdx) => ({
+      eng: opt.eng,
+      urdu: opt.urdu,
+      isCorrect: origIdx === item.correctIndex
+    }));
+
+    const shuffledOpts = shuffleArray(taggedOptions);
+    const newCorrectIdx = shuffledOpts.findIndex((o) => o.isCorrect);
+
+    return {
+      topic: item.topic,
+      eng: item.eng,
+      urdu: item.urdu,
+      options: shuffledOpts,
+      answer: newCorrectIdx
+    };
+  });
+}
+
+function startTest() {
+  clearInterval(timerInterval);
+  clearTimeout(nextQuestionTimeout);
+  testFinished = false;
+
+  activeQuestions = buildShuffledQuiz();
+  idx = 0;
+  score = 0;
+  timeLeft = 300;
+
+  document.getElementById("score-screen").style.display = "none";
+  document.getElementById("quiz-screen").style.display = "block";
+
+  loadQuestion();
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  updateTimerDisplay();
+
+  timerInterval = setInterval(() => {
+    if (testFinished) {
+      clearInterval(timerInterval);
+      return;
+    }
+
+    timeLeft--;
+    updateTimerDisplay();
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      showResult();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+
+  document.getElementById("timer").innerText =
+    `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+function loadQuestion() {
+  if (testFinished || idx >= activeQuestions.length) return;
+
+  const q = activeQuestions[idx];
+
+  document.getElementById("q-topic-badge").innerText =
+    `MCQ ${idx + 1} • ${q.topic}`;
+
+  document.getElementById("question-text").innerHTML = `
+    <div class="eng-stmt"><bdi>${idx + 1}. ${q.eng}</bdi></div>
+    <div class="urdu-stmt"><bdi>${idx + 1}. ${q.urdu}</bdi></div>
+  `;
+
+  const box = document.getElementById("options-box");
+  box.innerHTML = "";
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "opt-btn";
+
+    btn.innerHTML = `
+      <span class="opt-label">${labels[i]}</span>
+      <span class="opt-content">
+        <span class="opt-eng"><bdi>${opt.eng}</bdi></span>
+        <span class="opt-urdu"><bdi>${opt.urdu}</bdi></span>
+      </span>
+    `;
+
+    btn.onclick = () => checkAnswer(i, btn);
+    box.appendChild(btn);
+  });
+
+  document.getElementById("progress-text").innerText =
+    `Question ${idx + 1} of ${activeQuestions.length}`;
+
+  const fb = document.getElementById("feedback-box");
+  fb.innerHTML = "";
+  fb.style.background = "transparent";
+}
+
+function checkAnswer(selectedIdx, btn) {
+  if (testFinished) return;
+
+  const btns = document.querySelectorAll(".opt-btn");
+
+  // Prevent selecting more than one answer
+  if (btns.length === 0 || btns[0].disabled) return;
+
+  btns.forEach((b) => (b.disabled = true));
+
+  const q = activeQuestions[idx];
+  const fb = document.getElementById("feedback-box");
+  const correctOpt = q.options[q.answer];
+  const correctLetter = labels[q.answer];
+
+  if (selectedIdx === q.answer) {
+    score++;
+    btn.classList.add("correct-opt");
+
+    fb.style.background = "#e5f7ed";
+    fb.innerHTML = `
+      <span style="color:#1f8a4c;">
+        ✅ <bdi>Correct! (${correctLetter})</bdi> |
+        <bdi>درست جواب! (${correctLetter})</bdi>
+      </span>
+    `;
+  } else {
+    btn.classList.add("wrong-opt");
+    btns[q.answer].classList.add("correct-opt");
+
+    fb.style.background = "#fdecef";
+    fb.innerHTML = `
+      <span style="color:#d90429;">
+        ❌ <bdi>Wrong! Correct: ${correctLetter} (${correctOpt.eng})</bdi>
+        <br>
+        <bdi>غلط جواب! درست آپشن: ${correctLetter} — ${correctOpt.urdu}</bdi>
+      </span>
+    `;
+  }
+
+  idx++;
+
+  // Timer keeps running during the 1.6-second feedback period
+  nextQuestionTimeout = setTimeout(() => {
+    if (testFinished) return;
+
+    if (idx < activeQuestions.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  }, 1600);
+}
+
+function showResult() {
+  if (testFinished) return;
+
+  testFinished = true;
+
+  clearInterval(timerInterval);
+  clearTimeout(nextQuestionTimeout);
+
+  document.getElementById("quiz-screen").style.display = "none";
+  document.getElementById("score-screen").style.display = "block";
+
+  const total = activeQuestions.length;
+  const perc = Math.round((score / total) * 100);
+
+  document.getElementById("total-q").innerHTML =
+    `<bdi>Total Questions: ${total}</bdi> | <bdi>کل سوالات: ${total}</bdi>`;
+
+  document.getElementById("correct-q").innerHTML =
+    `<bdi>Correct Answers: ${score}</bdi> | <bdi>درست جوابات: ${score}</bdi>`;
+
+  document.getElementById("obtained-marks").innerHTML =
+    `<bdi>Obtained Marks: ${score} / ${total}</bdi> | <bdi>حاصل کردہ نمبر: ${score} / ${total}</bdi>`;
+
+  document.getElementById("percentage-score").innerHTML =
+    `<bdi>Percentage: ${perc}%</bdi> | <bdi>فیصد: ${perc}%</bdi>`;
+}
+
+window.onload = startTest;
+</script>
+</body>
+</html>
