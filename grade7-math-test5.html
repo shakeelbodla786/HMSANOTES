@@ -1,0 +1,507 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 7 Math Test 5 | HMSA Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#102b4c;--green:#087c59;--gold:#e8c66b;--light:#f2f6f7;--red:#d90429}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;background:var(--light);color:#263746;padding:15px;line-height:2.1}
+.container{max-width:800px;margin:auto;background:white;padding:24px;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,0.09);border-top:5px solid var(--green)}
+h2{text-align:center;color:var(--navy);margin:0 0 4px 0;font-size:24px}
+.subtitle{text-align:center;color:#526373;font-size:14px;margin-bottom:18px;font-family:Arial, sans-serif}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;background:#e5f3ec;padding:10px 15px;border-radius:9px;margin-bottom:16px;font-weight:bold;color:var(--navy)}
+.timer{background:var(--red);color:#fff;padding:4px 12px;border-radius:6px;font-family:Arial, sans-serif;direction:ltr;unicode-bidi:isolate}
+.question-card{background:#f8fcfa;border:1px solid #d7e5df;border-right:5px solid var(--green);border-radius:10px;padding:16px;margin-bottom:16px}
+.q-urdu{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.q-eng{direction:ltr;text-align:left;font-family:Arial, sans-serif;font-size:16px;font-weight:700;color:#1b365d;line-height:1.5}
+.options{display:grid;gap:10px;margin-bottom:14px}
+.opt-btn{background:#fff;border:2px solid #d7e5df;padding:11px 15px;border-radius:9px;cursor:pointer;transition:0.2s;color:#263746;display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%}
+.opt-btn:hover:not(:disabled){background:#e5f3ec;border-color:var(--green)}
+.opt-btn:disabled{cursor:default;opacity:1}
+.opt-eng{direction:ltr;text-align:left;font-family:Arial, sans-serif;font-size:15px;font-weight:600;color:#102b4c}
+.opt-urdu{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif;font-size:15px;color:#394b59}
+#feedback-box{text-align:center;margin:10px 0 14px 0;font-size:17px;font-weight:700;min-height:36px}
+.inline-home-wrap{display:flex;justify-content:center;margin-top:8px}
+.home-btn{display:inline-block;background:#eef5f2;color:var(--navy);border:1.5px solid var(--green);padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;transition:0.2s}
+.home-btn:hover{background:var(--green);color:#fff}
+.score-box{text-align:center;display:none;padding:15px 0}
+.score-box h3{color:var(--navy);font-size:25px;margin-bottom:10px}
+.result-card{background:#f8fcfa;border:2px solid #d7e5df;border-radius:12px;padding:20px;margin:15px auto;max-width:430px}
+.result-item{font-size:18px;margin:8px 0;color:var(--navy);font-weight:700}
+.restart-btn{background:var(--navy);color:#fff;border:none;padding:11px 24px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:12px;font-family:'Noto Nastaliq Urdu', Tahoma, sans-serif}
+.restart-btn:hover{background:var(--green)}
+.footer-home{text-align:center;margin-top:22px;padding-top:14px;border-top:1px solid #e2ece8}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>جماعت ہفتم — ریاضی آن لائن ٹیسٹ 5</h2>
+    <p class="subtitle">Grade 7 Mathematics Online Test 5 — HMSA Learning Academy</p>
+
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <span id="progress-text"><bdi>سوال 1 از 20</bdi></span>
+            <span class="timer" id="timer">05:00</span>
+        </div>
+
+        <div class="question-card">
+            <div id="q-urdu" class="q-urdu"></div>
+            <div id="q-eng" class="q-eng"></div>
+        </div>
+
+        <div id="options-box" class="options"></div>
+        <div id="feedback-box"></div>
+
+        <div class="inline-home-wrap">
+            <a class="home-btn" href="index.html">Back to Home Page / ہوم پیج</a>
+        </div>
+    </div>
+
+    <div id="score-screen" class="score-box">
+        <h3>ٹیسٹ 5 مکمل ہو گیا! / Test 5 Completed!</h3>
+        <div class="result-card">
+            <div class="result-item" id="total-q"></div>
+            <div class="result-item" id="correct-q" style="color:var(--green);"></div>
+            <div class="result-item" id="obtained-marks"></div>
+            <div class="result-item" id="percentage-score" style="color:var(--navy);font-size:21px;"></div>
+        </div>
+        <button class="restart-btn" onclick="startTest()">دوبارہ ٹیسٹ شروع کریں / Restart Test</button>
+    </div>
+
+    <div class="footer-home">
+        <a class="home-btn" href="index.html">← Back to Home Page / مرکزی ہوم پیج پر واپس جائیں</a>
+    </div>
+</div>
+
+<script>
+const rawQuestions = [
+    {
+        urdu: "مساوات 7x - 60 = 2x میں متغیر x کا حل کیا ہوگا؟",
+        eng: "Solve the linear equation 7x - 60 = 2x for x.",
+        options: [
+            {eng: "12", urdu: "12"},
+            {eng: "10", urdu: "10"},
+            {eng: "15", urdu: "15"},
+            {eng: "8", urdu: "8"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "مساوات 5(2x - 5) = 21 میں 2x کی قیمت کیا نکلتی ہے؟",
+        eng: "In the equation 5(2x - 5) = 21, what is the value of 2x?",
+        options: [
+            {eng: "46/5", urdu: "46/5"},
+            {eng: "21/5", urdu: "21/5"},
+            {eng: "26/5", urdu: "26/5"},
+            {eng: "9", urdu: "9"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "کسی عدد کے دو گنا میں سے 4 گھٹانے پر جواب 10 آتا ہے۔ وہ عدد معلوم کریں۔",
+        eng: "If 4 is subtracted from twice a certain number, the result is 10. Find the number.",
+        options: [
+            {eng: "7", urdu: "7"},
+            {eng: "6", urdu: "6"},
+            {eng: "5", urdu: "5"},
+            {eng: "14", urdu: "14"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "عبدالہادی اور عبداللہ کی عمروں کا مجموعہ 32 سال ہے۔ اگر عبداللہ کی عمر x ہو تو دو سال بعد ان کی عمروں کا مجموعہ کیا ہوگا؟",
+        eng: "Sum of ages of Abdul Hadi and Abdullah is 32. If Abdullah is x now, what is their combined age 2 years later?",
+        options: [
+            {eng: "36", urdu: "36"},
+            {eng: "34", urdu: "34"},
+            {eng: "32", urdu: "32"},
+            {eng: "30", urdu: "30"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "خطی مساوات 11x + 3y = 7 میں y کا عددی سر (Coefficient) کون سا عدد ہے؟",
+        eng: "In the linear equation 11x + 3y = 7, what is the coefficient of y?",
+        options: [
+            {eng: "3", urdu: "3"},
+            {eng: "11", urdu: "11"},
+            {eng: "7", urdu: "7"},
+            {eng: "1", urdu: "1"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "ایک کتاب اور 2 پنسلوں کی قیمت 90 روپے ہے۔ کتاب کی قیمت x اور پنسل کی قیمت y ہو تو مساوات کیا ہوگی؟",
+        eng: "The price of 1 book (x) and 2 pencils (y) is Rs. 90. Which equation shows this?",
+        options: [
+            {eng: "x + 2y = 90", urdu: "x + 2y = 90"},
+            {eng: "2x + y = 90", urdu: "2x + y = 90"},
+            {eng: "x - 2y = 90", urdu: "x - 2y = 90"},
+            {eng: "3(x + y) = 90", urdu: "3(x + y) = 90"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "ہانیہ اور کاہف کی عمروں کا مجموعہ 26 سال ہے۔ اگر عمریں x اور y ہوں تو درست مساوات چنیں۔",
+        eng: "Sum of ages of Hania (x) and Kahaf (y) is 26 years. Choose the correct equation.",
+        options: [
+            {eng: "x + y = 26", urdu: "x + y = 26"},
+            {eng: "x - y = 26", urdu: "x - y = 26"},
+            {eng: "x + 2y = 26", urdu: "x + 2y = 26"},
+            {eng: "2x - y = 26", urdu: "2x - y = 26"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "کارٹیشین کوآرڈینیٹ سسٹم کو کس ریاضی دان کے نام سے منسوب کیا جاتا ہے؟",
+        eng: "After which mathematician and philosopher is the Cartesian coordinate system named?",
+        options: [
+            {eng: "Rene Descartes", urdu: "رینی ڈیکارٹ"},
+            {eng: "Al-Khwarizmi", urdu: "الخوارزمی"},
+            {eng: "Euclid", urdu: "اقلیدس"},
+            {eng: "Pythagoras", urdu: "فیثا غورث"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "مرتب جوڑے (x, y) میں دوسرا عدد (y-coordinate) کیا کہلاتا ہے؟",
+        eng: "In an ordered pair (x, y), what is the second number (y-coordinate) called?",
+        options: [
+            {eng: "Ordinate", urdu: "آرڈینیٹ (Ordinate)"},
+            {eng: "Abscissa", urdu: "ایبسیسا (Abscissa)"},
+            {eng: "Origin", urdu: "اوریجن (Origin)"},
+            {eng: "Axis", urdu: "محور (Axis)"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "نقطہ (4, 1) کارٹیشین پلین کے کس ربع (Quadrant) میں آتا ہے؟",
+        eng: "In which quadrant does the point (4, 1) lie?",
+        options: [
+            {eng: "Quadrant I", urdu: "پہلا ربع"},
+            {eng: "Quadrant II", urdu: "دوسرا ربع"},
+            {eng: "Quadrant III", urdu: "تیسرا ربع"},
+            {eng: "Quadrant IV", urdu: "چوتھا ربع"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "نقطہ (-4, 0) کارٹیشین پلین میں کہاں واقع ہوتا ہے؟",
+        eng: "Where is the point (-4, 0) located on the Cartesian plane?",
+        options: [
+            {eng: "On x-axis", urdu: "ایکس محور پر"},
+            {eng: "On y-axis", urdu: "وائی محور پر"},
+            {eng: "Quadrant II", urdu: "دوسرے ربع میں"},
+            {eng: "Quadrant III", urdu: "تیسرے ربع میں"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "مساوات y = 6 کا گراف کس محور کے متوازی خط ہوتا ہے؟",
+        eng: "The graph of y = 6 is a line parallel to which axis?",
+        options: [
+            {eng: "x-axis", urdu: "ایکس محور کے متوازی"},
+            {eng: "y-axis", urdu: "وائی محور کے متوازی"},
+            {eng: "Origin", urdu: "مبداء کے متوازی"},
+            {eng: "45-degree line", urdu: "45 درجے کے خط کے"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "ترتیب 30، 33، 36، ... میں اگلا عدد (Next term) کون سا ہوگا؟",
+        eng: "In the sequence 30, 33, 36, ..., what is the next term?",
+        options: [
+            {eng: "39", urdu: "39"},
+            {eng: "38", urdu: "38"},
+            {eng: "40", urdu: "40"},
+            {eng: "43", urdu: "43"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "کون سی ترتیب 36 سے شروع ہوتی ہے اور اس کا مشترک فرق 2 ہے؟",
+        eng: "Which sequence starts at 36 and has a common difference of 2?",
+        options: [
+            {eng: "36, 38, 40", urdu: "36، 38، 40"},
+            {eng: "34, 35, 36", urdu: "34، 35، 36"},
+            {eng: "36, 36, 36", urdu: "36، 36، 36"},
+            {eng: "36, 39, 42", urdu: "36، 39، 42"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "درج ذیل میں سے کثیر رقمی (Polynomial) کون سی ہے؟",
+        eng: "Which of the following is a polynomial?",
+        options: [
+            {eng: "8x^2 + 2", urdu: "8x^2 + 2"},
+            {eng: "9x^2 + 5x^-1", urdu: "9x^2 + 5x^-1"},
+            {eng: "5/x + 3", urdu: "5/x + 3"},
+            {eng: "7/x - 2", urdu: "7/x - 2"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "72 میٹر (m) کو سینٹی میٹر (cm) میں تبدیل کرنے پر کیا مقدار بنے گی؟",
+        eng: "Convert 72 m into centimeters (cm).",
+        options: [
+            {eng: "7200 cm", urdu: "7200 سینٹی میٹر"},
+            {eng: "720 cm", urdu: "720 سینٹی میٹر"},
+            {eng: "7.2 cm", urdu: "7.2 سینٹی میٹر"},
+            {eng: "72000 cm", urdu: "72000 سینٹی میٹر"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "8 میٹر اور 25 سینٹی میٹر کل کتنے میٹر (m) کے برابر ہوتا ہے؟",
+        eng: "Convert 8 m 25 cm into meters (m).",
+        options: [
+            {eng: "8.25 m", urdu: "8.25 میٹر"},
+            {eng: "825 m", urdu: "825 میٹر"},
+            {eng: "82.5 m", urdu: "82.5 میٹر"},
+            {eng: "0.825 m", urdu: "0.825 میٹر"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "صبح 5:45 a.m. کو 24 گھنٹے والے وقت میں کیسے لکھا جاتا ہے؟",
+        eng: "Convert 5:45 a.m. into 24-hour time format.",
+        options: [
+            {eng: "05:45", urdu: "05:45"},
+            {eng: "17:45", urdu: "17:45"},
+            {eng: "06:45", urdu: "06:45"},
+            {eng: "15:45", urdu: "15:45"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "1 سال اور 6 مہینے کل کتنے مہینوں کے برابر ہوتے ہیں؟",
+        eng: "How many total months are in 1 year and 6 months?",
+        options: [
+            {eng: "18 months", urdu: "18 مہینے"},
+            {eng: "12 months", urdu: "12 مہینے"},
+            {eng: "16 months", urdu: "16 مہینے"},
+            {eng: "24 months", urdu: "24 مہینے"}
+        ],
+        answer: 0
+    },
+    {
+        urdu: "اگر کوئی گاڑی 80 کلومیٹر فی گھنٹہ کی یکساں رفتار سے 12 گھنٹے چلے تو کتنا فاصلہ طے کرے گی؟",
+        eng: "If a car travels at a uniform speed of 80 km per hour for 12 hours, how much distance will it cover?",
+        options: [
+            {eng: "960 km", urdu: "960 کلومیٹر"},
+            {eng: "800 km", urdu: "800 کلومیٹر"},
+            {eng: "1080 km", urdu: "1080 کلومیٹر"},
+            {eng: "920 km", urdu: "920 کلومیٹر"}
+        ],
+        answer: 0
+    }
+];
+
+let sessionQuestions = [];
+let currentIdx = 0;
+let score = 0;
+let timerInterval = null;
+let nextTimeout = null;
+let timeLeft = 300;
+let isLocked = false;
+let testFinished = false;
+
+function shuffleArray(arr) {
+    const copy = arr.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+function buildShuffledSession() {
+    const qOrder = shuffleArray(rawQuestions);
+    return qOrder.map(item => {
+        const taggedOptions = item.options.map((opt, idx) => ({
+            eng: opt.eng,
+            urdu: opt.urdu,
+            isCorrect: idx === item.answer
+        }));
+        const shuffledOpts = shuffleArray(taggedOptions);
+        const newAnswerIndex = shuffledOpts.findIndex(o => o.isCorrect);
+        return {
+            urdu: item.urdu,
+            eng: item.eng,
+            options: shuffledOpts.map(o => ({ eng: o.eng, urdu: o.urdu })),
+            answer: newAnswerIndex
+        };
+    });
+}
+
+function startTest() {
+    clearInterval(timerInterval);
+    clearTimeout(nextTimeout);
+
+    sessionQuestions = buildShuffledSession();
+    currentIdx = 0;
+    score = 0;
+    timeLeft = 300;
+    isLocked = false;
+    testFinished = false;
+
+    document.getElementById('score-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+
+    updateTimerDisplay();
+    loadQuestion();
+    startTimer();
+}
+
+function updateTimerDisplay() {
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+    document.getElementById('timer').innerText =
+        `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+        if (testFinished) return;
+
+        timeLeft--;
+        updateTimerDisplay();
+
+        if (timeLeft <= 0) {
+            showResult();
+        }
+    }, 1000);
+}
+
+function loadQuestion() {
+    if (testFinished) return;
+
+    isLocked = false;
+
+    const q = sessionQuestions[currentIdx];
+
+    document.getElementById('progress-text').innerHTML =
+        `<bdi>سوال ${currentIdx + 1} از ${sessionQuestions.length}</bdi> <span style="font-family:Arial;font-size:13px;">(Q ${currentIdx + 1}/${sessionQuestions.length})</span>`;
+
+    document.getElementById('q-urdu').innerHTML = `<bdi>${q.urdu}</bdi>`;
+    document.getElementById('q-eng').innerHTML = `<bdi>${q.eng}</bdi>`;
+
+    const box = document.getElementById('options-box');
+    box.innerHTML = '';
+
+    q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'opt-btn';
+
+        btn.innerHTML =
+            `<span class="opt-eng"><bdi>${opt.eng}</bdi></span><span class="opt-urdu"><bdi>${opt.urdu}</bdi></span>`;
+
+        btn.onclick = () => checkAnswer(i, btn);
+        box.appendChild(btn);
+    });
+
+    document.getElementById('feedback-box').innerHTML = '';
+}
+
+function checkAnswer(selectedIdx, btn) {
+    if (isLocked || testFinished) return;
+
+    isLocked = true;
+
+    const btns = document.querySelectorAll('.opt-btn');
+    btns.forEach(b => {
+        b.disabled = true;
+    });
+
+    const q = sessionQuestions[currentIdx];
+    const fb = document.getElementById('feedback-box');
+    const correctOpt = q.options[q.answer];
+
+    if (selectedIdx === q.answer) {
+        score++;
+
+        btn.style.background = '#087c59';
+        btn.style.borderColor = '#087c59';
+        btn.style.color = '#fff';
+
+        btn.querySelectorAll('span').forEach(s => {
+            s.style.color = '#fff';
+        });
+
+        fb.innerHTML =
+            `<span style="color:#087c59;"><bdi>✅ درست جواب! / Correct Answer!</bdi></span>`;
+
+    } else {
+        btn.style.background = '#d90429';
+        btn.style.borderColor = '#d90429';
+        btn.style.color = '#fff';
+
+        btn.querySelectorAll('span').forEach(s => {
+            s.style.color = '#fff';
+        });
+
+        const rightBtn = btns[q.answer];
+
+        rightBtn.style.background = '#087c59';
+        rightBtn.style.borderColor = '#087c59';
+        rightBtn.style.color = '#fff';
+
+        rightBtn.querySelectorAll('span').forEach(s => {
+            s.style.color = '#fff';
+        });
+
+        fb.innerHTML =
+            `<span style="color:#d90429;"><bdi>❌ غلط جواب! درست جواب: ${correctOpt.urdu} (${correctOpt.eng})</bdi></span>`;
+    }
+
+    currentIdx++;
+
+    nextTimeout = setTimeout(() => {
+        if (testFinished) return;
+
+        if (currentIdx < sessionQuestions.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 1500);
+}
+
+function showResult() {
+    if (testFinished) return;
+
+    testFinished = true;
+
+    clearInterval(timerInterval);
+    clearTimeout(nextTimeout);
+
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('score-screen').style.display = 'block';
+
+    const total = sessionQuestions.length;
+    const pct = Math.round((score / total) * 100);
+
+    document.getElementById('total-q').innerHTML =
+        `<bdi>کل سوالات / Total Questions: ${total}</bdi>`;
+
+    document.getElementById('correct-q').innerHTML =
+        `<bdi>درست جوابات / Correct Answers: ${score}</bdi>`;
+
+    document.getElementById('obtained-marks').innerHTML =
+        `<bdi>حاصل کردہ نمبر / Obtained Marks: ${score} / ${total}</bdi>`;
+
+    document.getElementById('percentage-score').innerHTML =
+        `<bdi>فیصد نتیجہ / Percentage: ${pct}%</bdi>`;
+}
+
+window.onload = startTest;
+</script>
+</body>
+</html>
